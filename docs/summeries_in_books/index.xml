@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Summeries_in_Books on YangZhangYuuki</title>
-    <link>https://example.com/summeries_in_books/</link>
+    <link>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/</link>
     <description>Recent content in Summeries_in_Books on YangZhangYuuki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 Aug 2018 12:22:28 +1000</lastBuildDate>
     
-	<atom:link href="https://example.com/summeries_in_books/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Number_Theory</title>
-      <link>https://example.com/summeries_in_books/number_theory/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/number_theory/</link>
       <pubDate>Sat, 04 Aug 2018 12:22:28 +1000</pubDate>
       
-      <guid>https://example.com/summeries_in_books/number_theory/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/number_theory/</guid>
       <description> Chapter 1-3 The beginning of number theory : Pythagorean triples.
 The Pythagorean triple, one of the ordest mathematical construction, satifies the equation a^2 + b^2 = c^2. One of the giants in the history of number theory is Pierre de Fermat.
  Fermat showed that  </description>
@@ -24,19 +24,19 @@ The Pythagorean triple, one of the ordest mathematical construction, satifies th
     
     <item>
       <title>Advanced_JAVA</title>
-      <link>https://example.com/summeries_in_books/advanced_java/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/advanced_java/</link>
       <pubDate>Sat, 04 Aug 2018 12:22:16 +1000</pubDate>
       
-      <guid>https://example.com/summeries_in_books/advanced_java/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/advanced_java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Crypotography</title>
-      <link>https://example.com/summeries_in_books/crypotography/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/crypotography/</link>
       <pubDate>Sat, 04 Aug 2018 12:21:54 +1000</pubDate>
       
-      <guid>https://example.com/summeries_in_books/crypotography/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/crypotography/</guid>
       <description></description>
     </item>
     
