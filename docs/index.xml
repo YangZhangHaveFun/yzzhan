@@ -35,7 +35,8 @@
       <pubDate>Sat, 04 Aug 2018 12:23:55 +1000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_courses/cryptography/</guid>
-      <description></description>
+      <description>Introduction of Cryptography Cryptographic algorithms and protocols can be grouped into four main areas:
+ Symmetric encryption: Used to conceal the contents of blocks or streams of data of any size, including messages, files, encryption keys, and passwords. Asymmetric encryption: Used to conceal small blocks of data, such as encryption keys and hash function values, which are used in digital signatures. Data integrity algorithms: Used to protect blocks of data, such as messages, from alteration.</description>
     </item>
     
     <item>
