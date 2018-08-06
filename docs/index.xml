@@ -17,7 +17,11 @@
       <pubDate>Sat, 04 Aug 2018 12:25:05 +1000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_courses/knowledge_tech/</guid>
-      <description>####Regular Expression</description>
+      <description>Regular Expression Probability of theory Probability
+Joint probability : P(A,B) means the probability of both A and B occurring.
+Conditional probability : P(A|B) means the probability of A occurring given the occurrance of B $ $
+Multiplication rule: P(A ∩ B) = P(A|B)P(B) = P(B|A)P(A).
+In the view of KT, there&amp;rsquo;s more information related to P(A) and P(A|B). - P(A|B), the posterior, is the degree of belief having accounted for B.</description>
     </item>
     
     <item>
@@ -26,8 +30,7 @@
       <pubDate>Sat, 04 Aug 2018 12:24:46 +1000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_courses/distributed_system/</guid>
-      <description>####Introduction of Distributed System
-#####Simple Server and Client coded by JAVA</description>
+      <description>Introduction of Distributed System Simple Server and Client coded by JAVA  Ports : the port numebr is used to contact the server on for that protocol. &amp;gt; Once you know the name of the name of the server you want, and the port number that the server offers that server over, you&amp;rsquo;re ready to contact the server. Socket : socket is simply a connection to a specific port number.</description>
     </item>
     
     <item>
@@ -46,7 +49,7 @@
       <pubDate>Sat, 04 Aug 2018 12:23:14 +1000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_courses/software/</guid>
-      <description>####Introduction of Software</description>
+      <description> Introduction of Software </description>
     </item>
     
     <item>
@@ -66,7 +69,7 @@ The Pythagorean triple, one of the ordest mathematical construction, satifies th
       <pubDate>Sat, 04 Aug 2018 12:22:16 +1000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/summeries_in_books/advanced_java/</guid>
-      <description>####Event listener, Event Listener Registration, Event Objects</description>
+      <description> Event listener, Event Listener Registration, Event Objects </description>
     </item>
     
     <item>

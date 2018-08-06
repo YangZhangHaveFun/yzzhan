@@ -159,7 +159,76 @@
     
     
     
-    <p>####Regular Expression</p>
+    
+
+<h4 id="regular-expression">Regular Expression</h4>
+
+<h4 id="probability-of-theory">Probability of theory</h4>
+
+<p><strong>Probability</strong></p>
+
+<p>Joint probability : P(A,B) means the probability of both A and B occurring.</p>
+
+<p>Conditional probability : P(A|B) means the probability of A occurring given the occurrance of B $ $</p>
+
+<p>Multiplication rule: P(A ∩ B) = P(A|B)P(B) = P(B|A)P(A).</p>
+
+<p>In the view of KT, there&rsquo;s more information related to P(A) and P(A|B).
+- P(A|B), the posterior, is the degree of belief having accounted for B.</p>
+
+<pre><code>&gt; the probability of A occurring, given no additional knowledge about A
+</code></pre>
+
+<ul>
+<li><p>P(A), the prior, is the initial degree of belief in A.</p>
+
+<blockquote>
+<dl>
+<dd>the probability of A occurring, given background knowledge about event(s) B leading up to A</dd>
+</dl>
+</blockquote></li>
+</ul>
+
+<hr />
+
+<p><strong>Distribution</strong></p>
+
+<ul>
+<li><p>Bionomial distribution : results from a series of indenpendent trials with only two outcomes. The probability of an event with probability p occurring exactly m out of n times is given by :
+$$
+P(m,n,q) = (n m)p^m(1-p)^n
+P(m,n,q) = (p^m(1-p)^n)*n!/(n-m)!m!
+$$</p></li>
+
+<li><p>multinomial distribution : n results from a series of independent trials with more than two outcomes.
+$$
+P(X1= x1, X2 = x2,&hellip;, Xn = xn) = (sum<em>{i}{xi})! multi</em>{i}{p<em>{i}^{x</em>{i}}/x_{i}!}
+$$</p></li>
+</ul>
+
+<h4 id="information-theory">Information Theory</h4>
+
+<p>Consider a message M composed of distinct symbols w1,&hellip;,wn, where each symbol wi has a frequency fi. The total length of the message is |M| = \sum<em>{i}{f</em>{i}}.
+    &gt; The Information Theory indicates the minimum length encoding of the message is to allcoate <strong>log2(fi/|M|)</strong></p>
+
+<p><strong>Entropy</strong> -&gt; A measure of unpredictablity/information content
+            -&gt; the theoretical minimum length of the message in the context of the provided information.</p>
+
+<pre><code>        -&gt; Measures the average missing information on a random source, or the unevenness of a probability distribution.
+</code></pre>
+
+<p>$$
+    H(x) = -\sum<em>{i=1}^{n}P(i)\log</em>{2}P(i)
+$$</p>
+
+<ul>
+<li>The range is determined by the possible number of outcomes.</li>
+<li>0 ≤ Entropy ≤ log(n), where n is number of outcomes.</li>
+<li>Entropy=0 (minimum entropy) when one probability is 1, others 0.</li>
+<li>Entropy=log(n) (maximum entropy): when all probabilities have equal values of 1/n.</li>
+</ul>
+
+<h4 id="extended-euclid-s-algorithm">Extended Euclid&rsquo;s algorithm</h4>
 
 
     
