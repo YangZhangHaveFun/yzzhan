@@ -163,6 +163,83 @@
 
 <h4 id="introduction-of-distributed-system">Introduction of Distributed System</h4>
 
+<h5 id="challenges">Challenges</h5>
+
+<ul>
+<li><strong>Heterogeneity</strong>
+Heterogeneity applies to all of the following；
+&gt; networks
+&gt; computer hardware
+&gt; operating systems
+&gt; programming languages
+&gt; implementations by different developers</li>
+</ul>
+
+<blockquote>
+<p>The term middleware applies to a software layer that provides a programming abstraction as well as masking the heterogeneity of the underlying networks, hardware, operating systems and programming languages.
+    &gt; All middleware deals with the differences in operating systems and hardware.</p>
+
+<p>The term mobile code is used to refer to program code that can be transferred from one computer to another and run at the destination.</p>
+</blockquote>
+
+<ul>
+<li><p><strong>Openness</strong>
+Openness of a computer system is the characteristic that determines whether the system can be extended and reimplemented in various way.</p>
+
+<blockquote>
+<p>Open systems are characterized by the fact that their key interfaces are published.
+Open distributed systems are based on the provision of a uniform communication mechanism and published interfaces for access to shared resources.
+Open distributed systems can be constructed for heterogeneous hardware and software, possibly from different vendors. But the conformance of each component to the published standard must be carefully tested and verified if the system is to work correctly.</p>
+</blockquote></li>
+
+<li><p><strong>Security</strong>
+&gt;</p></li>
+
+<li><p><strong>Scalability</strong>
+A system is described as scalable if it will remain effective when there is a significant increase in the number of resources and the numebr of users.</p>
+
+<p>However there are some challenges when dealing with scalability problems. Here shows the top 4 challenges.</p>
+
+<pre><code>-&gt; controlling the cost of physical resources.
+
+-&gt; controlling the performance loss. Hierarchic structure performs better than linear structure but there will always be performance loss because of preparing the potential increase of users and resources. 
+
+-&gt; controlling the preventing software resources running out. eg: IP addresses.
+
+-&gt; Avoiding performance bottlenecks. In general, the algorithm should be decentralized to avoid having performance bottlenecks.
+</code></pre></li>
+
+<li><p><strong>Failure handling</strong>
+There are bunch of methods to deal with the failures.
+    &gt; Detecting the failures.
+    &gt; Masking the failures.
+    &gt; Tolerating failures.
+    &gt; Recovery from the failures.
+    &gt; Redundancy</p></li>
+
+<li><p><strong>Concurrency</strong></p></li>
+
+<li><p><strong>Transparency</strong>
+Transparency is defined as the concealment from the user and the application programmer of the seperation of components in a distributed system, so that the system is perceived as a whole rather than as a collection of independent components. There are various aspects of Transparency.</p>
+
+<pre><code>&gt; *Access transparency* -&gt; enables local and remote resources to be accessed using identical operations.
+
+&gt; *Location transparency* -&gt; enables resources to be accessed without knowledge of their physical or network location.
+
+&gt; Concurrency transparency -&gt; enables several processes to operate concurrently using shared resources without interference between them.
+
+&gt; Replication transparency -&gt; enables multiple instances of resources to be used to increase reliability and performance without knowledge of replicas by users or applicaiton programmers.
+
+&gt; Failure transparency -&gt; enables the concealment of faults, allowing users and application programs to complete their tasks despite the failure of hardware or software components.
+
+&gt; Mobility transparency -&gt; allows the movement of resources and clients within a system without affecting the operation of users or programs.
+
+&gt; Performance transparency -&gt; allows the system to be reconfigured to improve performance as loads vary.
+
+&gt; Scaling transparency -&gt; allows the system and applications to expand in scale without change to the system structure or the application algorithms.
+</code></pre></li>
+</ul>
+
 <h5 id="simple-server-and-client-coded-by-java">Simple Server and Client coded by JAVA</h5>
 
 <ul>
