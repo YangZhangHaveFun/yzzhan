@@ -4,7 +4,7 @@ author = "Yang Zhang"
 copyright = "Copyright (c) 2017 - 2018, Yang Zhang; all rights reserved."
 canonifyurls = true
 paginate = 3
-theme = "hugo-theme-learn"
+theme = "hugo-code-editor-theme"
 publishDir = "docs"
 
 [params]
