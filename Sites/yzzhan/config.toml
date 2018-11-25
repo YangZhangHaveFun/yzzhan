@@ -1,0 +1,11 @@
+baseurl = "http://hugo.spf13.com/"
+title = "Yzzhan--Personal recording area"
+author = "Yang Zhang"
+copyright = "Copyright (c) 2017 - 2018, Yang Zhang; all rights reserved."
+canonifyurls = true
+paginate = 3
+theme = "hugo-code-editor-theme"
+
+[params]
+    author = "John Doe"
+    locale = "en-US"

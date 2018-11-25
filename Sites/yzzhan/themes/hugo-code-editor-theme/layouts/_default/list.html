@@ -1,0 +1,12 @@
+{{ partial "top.html" . }}
+{{ $paginator := .Paginate .Data.Pages.ByPublishDate }}
+<div class="articles-list">
+    {{ range $paginator.Pages }}
+    <article>
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a> - {{ dateFormat "2006-01-02 15:04:05" .Date }}</h3>
+        {{ .Summary }}
+    </article>
+    {{ end }}
+</div>
+{{ template "_internal/pagination.html" . }}
+{{ partial "bottom.html" . }}
