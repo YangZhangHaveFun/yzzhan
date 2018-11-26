@@ -3,27 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/post/creating-a-new-theme/</loc>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/2014/09/28/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/</loc>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/2014/03/10/migrate-to-hugo-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/about/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/note/2017/06/14/another-note/</loc>
+    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/</loc>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/note/2017/06/13/a-quick-note/</loc>
+    <lastmod>2017-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/2016/02/14/a-plain-markdown-post/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/2015/07/23/lorem-ipsum/</loc>
+    <lastmod>2015-07-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/2014/04/02/hugo-template-primer/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/</loc>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/2014/04/02/getting-started-with-hugo/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -33,8 +48,18 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/about/</loc>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/blogdown/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -74,6 +99,12 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/example/</loc>
+    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/go/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -92,8 +123,37 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/</loc>
+    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/hugo/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/markdown/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/mathjax/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/note/</loc>
+    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -104,8 +164,20 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/pandoc/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/post/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/rstudio/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -128,8 +200,8 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/tutorial/</loc>
+    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

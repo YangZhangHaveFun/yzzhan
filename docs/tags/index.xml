@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Yzzhan--Personal Tech Deposit</title>
+    <title>Tags on Yzzhan--Tech Deposit</title>
     <link>https://yangzhanghavefun.github.io/yzzhan/tags/</link>
-    <description>Recent content in Tags on Yzzhan--Personal Tech Deposit</description>
+    <description>Recent content in Tags on Yzzhan--Tech Deposit</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>Copyright (c) 2017 - 2018, Yang Zhang; all rights reserved.</copyright>
+    <language>en-us</language>
     <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -17,6 +17,15 @@
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Blogdown</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/blogdown/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/blogdown/</guid>
       <description></description>
     </item>
     
@@ -66,11 +75,47 @@
     </item>
     
     <item>
+      <title>Markdown</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/markdown/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MathJax</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/mathjax/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/mathjax/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Overview</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/tags/overview/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/overview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pandoc</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/pandoc/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/pandoc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RStudio</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/rstudio/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/rstudio/</guid>
       <description></description>
     </item>
     
@@ -89,6 +134,15 @@
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/themes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/tutorial/</link>
+      <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/tutorial/</guid>
       <description></description>
     </item>
     
