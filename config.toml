@@ -4,6 +4,7 @@ title = "Yzzhan--Tech Deposit"
 theme = "hugo-xmin"
 googleAnalytics = ""
 disqusShortname = ""
+publishDir = "docs"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 preserveTaxonomyNames = true
 footnotereturnlinkcontents = "↩"
