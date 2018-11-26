@@ -1,6 +1,6 @@
-baseURL = "https://yangzhanghavefun.github.io/"
+baseURL = "https://yangzhanghavefun.github.io/yzzhan/"
 languageCode = "en"
-publicDir = "docs"
+publishDir = "docs"
 defaultContentLanguage = "en"                             # en / zh-cn / ... (This field determines which i18n file to use)
 title = "Even - A super concise theme for Hugo"
 preserveTaxonomyNames = true
