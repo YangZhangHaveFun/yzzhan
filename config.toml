@@ -1,6 +1,6 @@
-baseurl = "/"
+baseurl = "https://yangzhanghavefun.github.io/yzzhan/"
 languageCode = "en-us"
-title = "A minimal Hugo website"
+title = "Yzzhan--Tech Deposit"
 theme = "hugo-xmin"
 googleAnalytics = ""
 disqusShortname = ""

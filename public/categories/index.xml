@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on A minimal Hugo website</title>
-    <link>/categories/</link>
-    <description>Recent content in Categories on A minimal Hugo website</description>
+    <title>Categories on Yzzhan--Tech Deposit</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/categories/</link>
+    <description>Recent content in Categories on Yzzhan--Tech Deposit</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Cryptography</title>
-      <link>/categories/cryptography/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/categories/cryptography/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Development</title>
-      <link>/categories/development/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/categories/development/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/categories/development/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Example</title>
-      <link>/categories/example/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/categories/example/</link>
       <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/categories/example/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/example/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Golang</title>
-      <link>/categories/golang/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/categories/golang/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/categories/golang/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>/categories/hugo/</link>
+      <link>https://yangzhanghavefun.github.io/yzzhan/categories/hugo/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>/categories/hugo/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/hugo/</guid>
       <description></description>
     </item>
     
