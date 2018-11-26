@@ -1,148 +1,256 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Yzzhan--Tech Deposit</title>
-    <link>https://yangzhanghavefun.github.io/yzzhan/tags/</link>
-    <description>Recent content in Tags on Yzzhan--Tech Deposit</description>
+    <title>Tags on Even - A super concise theme for Hugo</title>
+    <link>https://yangzhanghavefun.github.io/tags/</link>
+    <description>Recent content in Tags on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yangzhanghavefun.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Algorithm</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Blogdown</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/blogdown/</link>
-      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/blogdown/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/</link>
+      <link>https://yangzhanghavefun.github.io/tags/cryptography/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/cryptography/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Development</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/development/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>English</title>
+      <link>https://yangzhanghavefun.github.io/tags/english/</link>
+      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/development/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/go/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/golang/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/english/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Markdown</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/markdown/</link>
+      <link>https://yangzhanghavefun.github.io/tags/markdown/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/markdown/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/markdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MathJax</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/mathjax/</link>
+      <link>https://yangzhanghavefun.github.io/tags/mathjax/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/mathjax/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Overview</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/overview/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/overview/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/mathjax/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Pandoc</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/pandoc/</link>
+      <link>https://yangzhanghavefun.github.io/tags/pandoc/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/pandoc/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/pandoc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RStudio</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/rstudio/</link>
+      <link>https://yangzhanghavefun.github.io/tags/rstudio/</link>
       <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/rstudio/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/rstudio/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Templates</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/templates/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Syntax Highlighting</title>
+      <link>https://yangzhanghavefun.github.io/tags/syntax-highlighting/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/templates/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/syntax-highlighting/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Themes</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/themes/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Theme preview</title>
+      <link>https://yangzhanghavefun.github.io/tags/theme-preview/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/themes/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/theme-preview/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tutorial</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/tutorial/</link>
+      <link>https://yangzhanghavefun.github.io/tags/tutorial/</link>
       <pubDate>Wed, 14 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/tutorial/</guid>
+      <guid>https://yangzhanghavefun.github.io/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algorithm</title>
+      <link>https://yangzhanghavefun.github.io/tags/algorithm/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blogdown</title>
+      <link>https://yangzhanghavefun.github.io/tags/blogdown/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/blogdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>development</title>
+      <link>https://yangzhanghavefun.github.io/tags/development/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://yangzhanghavefun.github.io/tags/go/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>https://yangzhanghavefun.github.io/tags/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://yangzhanghavefun.github.io/tags/hugo/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>overview</title>
+      <link>https://yangzhanghavefun.github.io/tags/overview/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/overview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>preview</title>
+      <link>https://yangzhanghavefun.github.io/tags/preview/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/preview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shortcodes</title>
+      <link>https://yangzhanghavefun.github.io/tags/shortcodes/</link>
+      <pubDate>Tue, 30 Aug 2016 16:01:23 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/shortcodes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag-1</title>
+      <link>https://yangzhanghavefun.github.io/tags/tag-1/</link>
+      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/tag-1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag-2</title>
+      <link>https://yangzhanghavefun.github.io/tags/tag-2/</link>
+      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/tag-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag-3</title>
+      <link>https://yangzhanghavefun.github.io/tags/tag-3/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/tag-3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag-4</title>
+      <link>https://yangzhanghavefun.github.io/tags/tag-4/</link>
+      <pubDate>Wed, 30 Aug 2017 01:53:34 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/tag-4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag-5</title>
+      <link>https://yangzhanghavefun.github.io/tags/tag-5/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/tag-5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>templates</title>
+      <link>https://yangzhanghavefun.github.io/tags/templates/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/templates/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>themes</title>
+      <link>https://yangzhanghavefun.github.io/tags/themes/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/themes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>中文</title>
+      <link>https://yangzhanghavefun.github.io/tags/%E4%B8%AD%E6%96%87/</link>
+      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/%E4%B8%AD%E6%96%87/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>日本語</title>
+      <link>https://yangzhanghavefun.github.io/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</link>
+      <pubDate>Wed, 30 Aug 2017 01:53:34 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</guid>
       <description></description>
     </item>
     
