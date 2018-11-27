@@ -54,7 +54,26 @@
 		<h1>JS Flowchart Diagrams</h1>
 		<div class="content">
 			<h2 id="usage">Usage</h2>
-<div class="highlight"><pre class="chroma"><code class="language-flowchart" data-lang="flowchart">st=&gt;start: Start|past:&gt;http://www.google.com[blank]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-flowchart" data-lang="flowchart"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-flowchart" data-lang="flowchart">st=&gt;start: Start|past:&gt;http://www.google.com[blank]
 e=&gt;end: End:&gt;http://www.google.com
 op1=&gt;operation: My Operation|past
 op2=&gt;operation: Stuff|current
@@ -68,8 +87,39 @@ st-&gt;op1(right)-&gt;cond
 cond(yes, right)-&gt;c2
 cond(no)-&gt;sub1(left)-&gt;op1
 c2(yes)-&gt;io-&gt;e
-c2(no)-&gt;op2-&gt;e</code></pre></div>
-<div class="highlight"><pre class="chroma"><code class="language-flowchart" data-lang="flowchart">    st=&gt;start: Start|past:&gt;http://www.google.com[blank]
+c2(no)-&gt;op2-&gt;e</code></pre></td></tr></table>
+</div>
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-flowchart" data-lang="flowchart"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-flowchart" data-lang="flowchart">    st=&gt;start: Start|past:&gt;http://www.google.com[blank]
     e=&gt;end: End:&gt;http://www.google.com
     op1=&gt;operation: My Operation|past
     op2=&gt;operation: Stuff|current
@@ -93,9 +143,49 @@ Configure for all home and regular pages:
 ```toml
 [params.flowchartDiagrams]
   enable = true
-  options = &#34;&#34;</code></pre></div>
+  options = &#34;&#34;</code></pre></td></tr></table>
+</div>
+</div>
 <p>Configure for a single post in the front matter (<strong>Params in front matter have higher precedence</strong>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml">flowchartDiagrams<span class="p">:</span><span class="w">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">flowchartDiagrams<span class="p">:</span><span class="w">
 </span><span class="w">  </span>enable<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="w">  </span>options<span class="p">:</span><span class="w"> </span><span class="s2">&#34;{
 </span><span class="s2">              &#39;x&#39;: 0,
@@ -128,7 +218,9 @@ Configure for all home and regular pages:
 </span><span class="s2">              &#39;flowstate&#39;: {
 </span><span class="s2">                &#39;request&#39;: {&#39;fill&#39;: &#39;blue&#39;}
 </span><span class="s2">              }
-</span><span class="s2">            }&#34;</span></code></pre></div>
+</span><span class="s2">            }&#34;</span></code></pre></td></tr></table>
+</div>
+</div>
 <p>See more information from <a href="https://github.com/adrai/flowchart.js" target="_blank">https://github.com/adrai/flowchart.js</a>.</p>
 		</div>
 	</main>

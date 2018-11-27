@@ -29,8 +29,8 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/</guid>
       <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+1 2 3  ▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png   should become
+1 2 3 4  ▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png   Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
     </item>
     
     <item>
@@ -67,7 +67,8 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/posts/post-with-featured-image/</guid>
       <description>Just define the image URL in the content’s front matter, the featured image will be displayed as the background.
-For example:</description>
+For example:
+1  featuredImg:&amp;#34;https://picsum.photos/1024/768/?random&amp;#34;  </description>
     </item>
     
     <item>

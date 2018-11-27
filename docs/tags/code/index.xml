@@ -28,8 +28,8 @@
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/posts/code-poetry/</guid>
       <description>Pseudo code poem.
-if (this === that): try write_new_poem() except not_a_poet as e: return  Or just one long line&amp;hellip;
-console.log(&amp;#39;Sometimes lines are waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay toooooooooooooooooooo looooooooooooooooooooooooooooooong&amp;#39;)  An embedded gist using shortcode:
+1 2 3 4 5 6  if (this === that): try write_new_poem() except not_a_poet as e: return    Or just one long line&amp;hellip;
+1 2  console.log(&amp;#39;Sometimes lines are waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay toooooooooooooooooooo looooooooooooooooooooooooooooooong&amp;#39;)    An embedded gist using shortcode:
  </description>
     </item>
     

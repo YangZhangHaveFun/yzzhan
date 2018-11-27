@@ -3,9 +3,13 @@ languageCode = "en"
 publishDir = "docs"
 title = "Yzzhan Tech Repo"
 theme = "hermit"
+
 # enableGitInfo = true
-pygmentsCodefences  = true
-pygmentsUseClasses  = true
+pygmentsOptions = "linenos=table"
+pygmentsCodefences = true
+pygmentsUseClasses = true
+pygmentsCodefencesGuessSyntax = true
+
 hasCJKLanguage = true  # If there're Chinese/Japanese/Korean Languages in the content, enable this.
 rssLimit = 10  # Maximum number of items in the RSS feed.
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This is only used by RSS template.
@@ -35,7 +39,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   justifyContent = false  # Set "text-align: justify" to .content
   # bgImg = ""  #  Homepage background-image URL
 
-  
+
   toc = true 
 
   # mathjax

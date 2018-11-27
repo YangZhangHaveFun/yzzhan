@@ -19,7 +19,8 @@
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/posts/post-with-featured-image/</guid>
       <description>Just define the image URL in the content’s front matter, the featured image will be displayed as the background.
-For example:</description>
+For example:
+1  featuredImg:&amp;#34;https://picsum.photos/1024/768/?random&amp;#34;  </description>
     </item>
     
     <item>
