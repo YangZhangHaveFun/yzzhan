@@ -1,71 +1,60 @@
-baseURL                 = "https://yangzhanghavefun.github.io/yzzhan/"
-publishDir              = "docs"
-languageCode            = "en-us"
-defaultContentLanguage  = "en"
-isMultilingual          = false
-title                   = "Yzzhan Tech Repo"
-theme                   = "hugo-theme-sam"
-pygmentsStyle           = "monokai"                     # https://help.farbox.com/pygments.html
-pygmentsCodefences      = true
-# googleAnalytics         = ""             # Tracking code, eg. "UA-111111111-1"
+baseURL = "https://yangzhanghavefun.github.io/yzzhan/"
+languageCode = "en"
+publishDir = "docs"
+title = "Yzzhan Tech Repo"
+theme = "hermit"
+# enableGitInfo = true
+pygmentsCodefences  = true
+pygmentsUseClasses  = true
+hasCJKLanguage = true  # If there're Chinese/Japanese/Korean Languages in the content, enable this.
+rssLimit = 10  # Maximum number of items in the RSS feed.
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This is only used by RSS template.
+# googleAnalytics = "UA-123-45"
+# disqusShortname = "yourdiscussshortname"
+
+[author]
+  name = "John Doe"
+
+[blackfriday]
+  hrefTargetBlank = true
+
+[taxonomies]
+  tag = "tags"
+  category = ""  # Categories are disabled by default.
 
 [params]
-    dateform            = "Mon Jan 02, 2006"
-    dateformfull        = "Mon Jan 2 2006 15:04:05 EST"
-    favicon             = "sam.ico"
-    homepage            = "main"                        # What to call the home page link
-    galleryFolder       = "images/"                     # Where you've put your images, after "/content/gallery/"
-    clickablePhotos     = false                          # Allow links to the full size images
-    smallPreviewImages   = true                         # Show small images from the subfolder instead of the big versions in the gallery
-                                                         # Note: This will only become active if clickablePhotos is also true.
-    smallImagesSubfolder = "small/"                      # The subfolder for the small versions of the images under the gallery (with trailing slash)
-                                                         # For each image the small version has to have the same filename as the big version.
-    footerText          = "Call me Sam, a theme for Hugo."
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
 
-# Metadata
-    description         = "A new Hugo site."            # Max 160 characters show in search results
-    twitterCard         = "summary_large_image"         # Card value “summary”, “summary_large_image”, “app”, or “player”
-    primaryImage        = "tn.png"                     # Image that shows on Twitter cards and OpenGraph links
+  # themeColor = "#494f5c"  # Theme color in meta tags.
+  homeSubtitle = "A minimal and fast theme for Hugo."
+  footerCopyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+  # gitUrl = "https://github.com/Someone/SomeRepo/commit/" # Prefix of link to you git commit detail page. GitInfo must be enabled. 
+  justifyContent = false  # Set "text-align: justify" to .content
+  # bgImg = ""  #  Homepage background-image URL
 
-[[params.mainMenu]]
-    link = "/posts"
-    text = "posts"
+  [[params.social]]
+    name = "twitter"
+    url = "https://twitter.com/"
 
-[[params.mainMenu]]
-    link = "/gallery"
-    text = "gallery"
+  [[params.social]]
+    name = "instagram"
+    url = "https://instagram.com/"
 
-[[params.mainMenu]]
-    link = "/about"
-    text = "who am I?"
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/"
 
-# 一些全局开关，你也可以在每一篇内容的 front matter 中针对单篇内容关闭或开启某些功能，在 archetypes/default.md 查看更多信息。
-  # Some global options, you can also close or open something in front matter for a single post, see more information from `archetypes/default.md`.
-  toc = true                                                                            # 是否开启目录
-  autoCollapseToc = false
+[menu]
 
-# mathjax
-  mathjax = false           # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）
-  mathjaxEnableSingleDollar = false                                                     # 是否使用 $...$ 即可進行inline latex渲染
-  mathjaxEnableAutoNumber = false 
-  
-  [params.social]                                         # 社交链接
-    a-email = "yzzhan@student.unimelb.edu.au"
-    b-stack-overflow = "http://localhost:1313"
-    e-linkedin = "http://localhost:1313"
-    g-github = "http://localhost:1313"
-    m-instagram = "http://localhost:1313"
-    n-gitlab = "http://localhost:1313"
-    o-bilibili = "http://localhost:1313"
-  
-  [params.publicCDN]        # load these files from public cdn                          # 启用公共CDN，需自行定义
-    enable = true
-    jquery = '<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>'
-    slideout = '<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>'
-    fancyboxJS = '<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>'
-    fancyboxCSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">'
-    timeagoJS = '<script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>'
-    timeagoLocalesJS = '<script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>'
-    flowchartDiagramsJS = '<script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script>'
-    sequenceDiagramsCSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.css" integrity="sha384-6QbLKJMz5dS3adWSeINZe74uSydBGFbnzaAYmp+tKyq60S7H2p6V7g1TysM5lAaF" crossorigin="anonymous">'
-    sequenceDiagramsJS = '<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.js" integrity="sha256-4O4pS1SH31ZqrSO2A/2QJTVjTPqVe+jnYgOWUVr7EEc=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg-min.js" integrity="sha256-oI+elz+sIm+jpn8F/qEspKoKveTc5uKeFHNNVexe6d8=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/underscore@1.8.3/underscore-min.js" integrity="sha256-obZACiHd7gkOk9iIL/pimWMTJ4W/pBsKu+oZnSeBIek=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/gh/bramp/js-sequence-diagrams@2.0.1/dist/sequence-diagram-min.js" integrity="sha384-8748Vn52gHJYJI0XEuPB2QlPVNUkJlJn9tHqKec6J3q2r9l8fvRxrgn/E5ZHV0sP" crossorigin="anonymous"></script>'
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+
+  [[menu.main]]
+    name = "About"
+    url = "/about-hugo/"
+    weight = 20
