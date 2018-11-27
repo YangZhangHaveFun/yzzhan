@@ -128,16 +128,6 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/posts/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
@@ -195,18 +185,6 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/development/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/development/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/english/</loc>
     <lastmod>2017-08-31T15:43:48+08:00</lastmod>
     <priority>0</priority>
@@ -221,30 +199,6 @@
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/categories/example/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/go/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/golang/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/golang/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -353,18 +307,6 @@
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/</loc>
     <lastmod>2018-03-16T20:18:53-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/templates/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/themes/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
