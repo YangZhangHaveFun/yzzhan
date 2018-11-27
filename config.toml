@@ -20,7 +20,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 
 [taxonomies]
   tag = "tags"
-  category = ""  # Categories are disabled by default.
+  category = "Categories"  # Categories are disabled by default.
 
 [params]
   dateform        = "Jan 2, 2006"
@@ -68,4 +68,3 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
     name = "About"
     url = "/about-hugo/"
     weight = 20
-
