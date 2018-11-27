@@ -68,3 +68,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
     name = "About"
     url = "/about-hugo/"
     weight = 20
+  [[menu.main]]
+    name = "tutorials"
+    url = "/Tutorial/"
+    weight = 20
