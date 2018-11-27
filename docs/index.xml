@@ -34,6 +34,15 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     </item>
     
     <item>
+      <title>Overview</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tutorial/overview/</link>
+      <pubDate>Tue, 27 Nov 2018 21:41:36 +1100</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tutorial/overview/</guid>
+      <description>###This is the tempo tutorial.</description>
+    </item>
+    
+    <item>
       <title>Overview for Amazon</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/amazon/overview/</link>
       <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
@@ -95,15 +104,6 @@ For example:</description>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/hidden-post/</guid>
       <description>&lt;p&gt;This post is hidden from the home page.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Image post</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/posts/image-post/</link>
-      <pubDate>Mon, 19 Feb 2018 12:41:46 -0500</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/posts/image-post/</guid>
-      <description>Hello! I&amp;rsquo;m a blog post with an image.</description>
     </item>
     
   </channel>

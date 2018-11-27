@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tutorial/overview/</loc>
+    <lastmod>2018-11-27T21:41:36+11:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/amazon/overview/</loc>
     <lastmod>2018-11-27T19:12:35+11:00</lastmod>
   </url>
@@ -313,6 +318,12 @@
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/tutorial/</loc>
     <lastmod>2017-06-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tutorial/</loc>
+    <lastmod>2018-11-27T21:41:36+11:00</lastmod>
     <priority>0</priority>
   </url>
   
