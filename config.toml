@@ -13,7 +13,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 # disqusShortname = "yourdiscussshortname"
 
 [author]
-  name = "John Doe"
+  name = "Yang Zhang"
 
 [blackfriday]
   hrefTargetBlank = true
@@ -29,7 +29,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # themeColor = "#494f5c"  # Theme color in meta tags.
-  homeSubtitle = "A minimal and fast theme for Hugo."
+  homeSubtitle = "My personal tech recording."
   footerCopyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
   # gitUrl = "https://github.com/Someone/SomeRepo/commit/" # Prefix of link to you git commit detail page. GitInfo must be enabled. 
   justifyContent = false  # Set "text-align: justify" to .content
@@ -55,6 +55,17 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
     weight = 10
 
   [[menu.main]]
+    name = "Cryptography and Security"
+    url = "/Cryptography and Security/"
+    weight = 10
+
+  [[menu.main]]
+    name = "Amazon"
+    url = "/Amazon/"
+    weight = 10 
+
+  [[menu.main]]
     name = "About"
     url = "/about-hugo/"
     weight = 20
+
