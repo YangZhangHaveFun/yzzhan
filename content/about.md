@@ -1,21 +1,14 @@
 ---
 title: "About"
-date: 2017-08-20T21:38:52+08:00
-lastmod: 2017-08-28T21:41:52+08:00
-menu: "main"
-weight: 50
-
+date: 2018-02-13T13:42:49-05:00
 ---
 
-Hugo is a static site engine written in Go.
+Hello, I'm Sam. I'm a theme for [Hugo](https://gohugo.io/). I'm an extremely customizable, content-focused theme that lets you showcase your work your way.
 
+I have slick minimalist templates for list pages (such as a list of blog posts) and single pages (a page to read one blog post). You can use tags on your content, and view content by tags.
 
-It makes use of a variety of open source projects including:
+I also have a simple responsive gallery built with CSS grid. It'll look great on any screen, and all you have to do is provide a folder of images.
 
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
+I'm built and maintained by [Vicky Lai](https://vickylai.com). Here's her [GitHub](https://github.com/vickylai).
 
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
-
+This page uses the default `single.html` template.
