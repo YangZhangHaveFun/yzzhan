@@ -35,6 +35,19 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   justifyContent = false  # Set "text-align: justify" to .content
   # bgImg = ""  #  Homepage background-image URL
 
+  
+  toc = true 
+
+  # mathjax
+  mathjax = false           # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）
+  mathjaxEnableSingleDollar = false                                                     # 是否使用 $...$ 即可進行inline latex渲染
+  mathjaxEnableAutoNumber = false                                                       # 是否使用公式自动编号
+  mathjaxUseLocalFiles = false  # You should install mathjax in `yout-site/static/lib/mathjax`
+
+  postMetaInFooter = true
+
+  since = "26/11/2018"            # Site creation time   
+
   [[params.social]]
     name = "twitter"
     url = "https://twitter.com/"
