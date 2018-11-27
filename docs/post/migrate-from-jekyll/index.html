@@ -1,50 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="A new Hugo site.">
-
-<meta name="twitter:card" content="summary">
-<meta name="twitter:domain" content="https://yangzhanghavefun.github.io/yzzhan/">
-
-<meta name="twitter:image" content="https://yangzhanghavefun.github.io/yzzhan/tn.png">
-<meta name="twitter:title" property="og:title" itemprop="title name" content="Yzzhan Tech Repo">
-<meta name="twitter:description" property="og:description" itemprop="description" content="A new Hugo site.">
-<meta name="og:type" content="website">
-<meta name="og:url" content="https://yangzhanghavefun.github.io/yzzhan/">
-<meta name="og:image" itemprop="image primaryImageOfPage" content="https://yangzhanghavefun.github.io/yzzhan/tn.png">
-
-<link rel="shortcut icon" href="https://yangzhanghavefun.github.io/yzzhan/sam.ico" id="favicon">
-<link rel="stylesheet" href="https://yangzhanghavefun.github.io/yzzhan/css/style.css">
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
-
-
-    
-
-    
-    
-    
-    <title>
-        
-        Migrate to Hugo from Jekyll
-        
-    </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="apple-touch-icon" sizes="180x180" href="/yzzhan/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/yzzhan/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/yzzhan/favicon-16x16.png">
+	<link rel="manifest" href="/yzzhan/site.webmanifest">
+	<link rel="mask-icon" href="/yzzhan/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/yzzhan/favicon.ico">
+	<title>Migrate to Hugo from Jekyll</title>
+	<link rel="stylesheet" href="/yzzhan/css/style.min.bde2f5cd3b77a52d8db26f638dfed4b52085d3ea252fdf5746658b9883382220.css" integrity="sha256-veL1zTt3pS2Nsm9jjf7UtSCF0+olL99XRmWLmIM4IiA=">
+	
 </head>
 
-<body>
-    <div class="wrap">
-        <div class="section" id="title">Migrate to Hugo from Jekyll</div>
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://yangzhanghavefun.github.io/yzzhan/">Yzzhan Tech Repo</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					<a href="/yzzhan/posts/">Posts</a>
+					<a href="/yzzhan/about-hugo/">About</a>
+					<a href="/yzzhan/post/goisforlovers/">(Hu)go Template Primer</a>
+					<a href="/yzzhan/post/hugoisforlovers/">Getting Started with Hugo</a>
+					<a href="/yzzhan/cryptography_and_security/abstract/">Overview for the Cryptography</a>
+					<a href="">tutorials</a>
+				</nav>
+			</div>
+			<div class="hdr-right">
+				<div class="hdr-icons">
+					<span class="hide-in-mobile"><a href="https://twitter.com/" target="_blank" rel="noopener"><span class="screen-reader-text">twitter</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a><a href="https://instagram.com/" target="_blank" rel="noopener"><span class="screen-reader-text">instagram</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a><a href="https://github.com/" target="_blank" rel="noopener"><span class="screen-reader-text">github</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span>
+					<button id="menu-btn" class="hdr-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast" style="display: none;">
+		<ul>
+			<li><a href="/yzzhan/posts/">Posts</a></li>
+			<li><a href="/yzzhan/about-hugo/">About</a></li>
+			<li><a href="/yzzhan/post/goisforlovers/">(Hu)go Template Primer</a></li>
+			<li><a href="/yzzhan/post/hugoisforlovers/">Getting Started with Hugo</a></li>
+			<li><a href="/yzzhan/cryptography_and_security/abstract/">Overview for the Cryptography</a></li>
+			<li><a href="">tutorials</a></li>
+		</ul>
+	</div>
 
-        <div class="section" id="content">
+	<main class="site-main section-inner thin animated fadeIn faster">
+		<h1>Migrate to Hugo from Jekyll</h1>
+		<div class="content">
+			
 
 <h2 id="move-static-content-to-static">Move static content to <code>static</code></h2>
 
@@ -72,7 +83,7 @@ With Jekyll, something that looked like</p>
 
 <h2 id="set-your-configuration-publish-folder-to-site">Set your configuration publish folder to <code>_site</code></h2>
 
-<p>The default is for Jekyll to publish to <code>_site</code> and for Hugo to publish to <code>public</code>. If, like me, you have <a href="http://blog.blindgaenger.net/generate_github_pages_in_a_submodule.html"><code>_site</code> mapped to a git submodule on the <code>gh-pages</code> branch</a>, you&rsquo;ll want to do one of two alternatives:</p>
+<p>The default is for Jekyll to publish to <code>_site</code> and for Hugo to publish to <code>public</code>. If, like me, you have <a href="http://blog.blindgaenger.net/generate_github_pages_in_a_submodule.html" target="_blank"><code>_site</code> mapped to a git submodule on the <code>gh-pages</code> branch</a>, you&rsquo;ll want to do one of two alternatives:</p>
 
 <ol>
 <li><p>Change your submodule to point to map <code>gh-pages</code> to public instead of <code>_site</code> (recommended).</p>
@@ -94,17 +105,17 @@ git submodule add -b gh-pages git@github.com:your-username/your-repo.git public
 
 <h2 id="convert-jekyll-templates-to-hugo-templates">Convert Jekyll templates to Hugo templates</h2>
 
-<p>That&rsquo;s the bulk of the work right here. The documentation is your friend. You should refer to <a href="http://jekyllrb.com/docs/templates/">Jekyll&rsquo;s template documentation</a> if you need to refresh your memory on how you built your blog and <a href="/layout/templates/">Hugo&rsquo;s template</a> to learn Hugo&rsquo;s way.</p>
+<p>That&rsquo;s the bulk of the work right here. The documentation is your friend. You should refer to <a href="http://jekyllrb.com/docs/templates/" target="_blank">Jekyll&rsquo;s template documentation</a> if you need to refresh your memory on how you built your blog and <a href="/layout/templates/">Hugo&rsquo;s template</a> to learn Hugo&rsquo;s way.</p>
 
-<p>As a single reference data point, converting my templates for <a href="http://heyitsalex.net/">heyitsalex.net</a> took me no more than a few hours.</p>
+<p>As a single reference data point, converting my templates for <a href="http://heyitsalex.net/" target="_blank">heyitsalex.net</a> took me no more than a few hours.</p>
 
 <h2 id="convert-jekyll-plugins-to-hugo-shortcodes">Convert Jekyll plugins to Hugo shortcodes</h2>
 
-<p>Jekyll has <a href="http://jekyllrb.com/docs/plugins/">plugins</a>; Hugo has <a href="/doc/shortcodes/">shortcodes</a>. It&rsquo;s fairly trivial to do a port.</p>
+<p>Jekyll has <a href="http://jekyllrb.com/docs/plugins/" target="_blank">plugins</a>; Hugo has <a href="/doc/shortcodes/">shortcodes</a>. It&rsquo;s fairly trivial to do a port.</p>
 
 <h3 id="implementation">Implementation</h3>
 
-<p>As an example, I was using a custom <a href="https://github.com/alexandre-normand/alexandre-normand/blob/74bb12036a71334fdb7dba84e073382fc06908ec/_plugins/image_tag.rb"><code>image_tag</code></a> plugin to generate figures with caption when running Jekyll. As I read about shortcodes, I found Hugo had a nice built-in shortcode that does exactly the same thing.</p>
+<p>As an example, I was using a custom <a href="https://github.com/alexandre-normand/alexandre-normand/blob/74bb12036a71334fdb7dba84e073382fc06908ec/_plugins/image_tag.rb" target="_blank"><code>image_tag</code></a> plugin to generate figures with caption when running Jekyll. As I read about shortcodes, I found Hugo had a nice built-in shortcode that does exactly the same thing.</p>
 
 <p>Jekyll&rsquo;s plugin:</p>
 
@@ -211,47 +222,19 @@ Liquid::Template.register_tag('image', Jekyll::ImageTag)
 
 <h2 id="a-practical-example-in-a-diff">A practical example in a diff</h2>
 
-<p><a href="http://heyitsalex.net/">Hey, it&rsquo;s Alex</a> was migrated in less than a <em>father-with-kids day</em> from Jekyll to Hugo. You can see all the changes (and screw-ups) by looking at this <a href="https://github.com/alexandre-normand/alexandre-normand/compare/869d69435bd2665c3fbf5b5c78d4c22759d7613a...b7f6605b1265e83b4b81495423294208cc74d610">diff</a>.</p>
-</div>
+<p><a href="http://heyitsalex.net/" target="_blank">Hey, it&rsquo;s Alex</a> was migrated in less than a <em>father-with-kids day</em> from Jekyll to Hugo. You can see all the changes (and screw-ups) by looking at this <a href="https://github.com/alexandre-normand/alexandre-normand/compare/869d69435bd2665c3fbf5b5c78d4c22759d7613a...b7f6605b1265e83b4b81495423294208cc74d610" target="_blank">diff</a>.</p>
 
-        
-        <div class="section bottom-menu">
-<hr />
-<p>
+		</div>
+	</main>
 
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2018 <a href="https://yangzhanghavefun.github.io/yzzhan/">John Doe</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://yangzhanghavefun.github.io/yzzhan/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
+	</footer>
+	<script>let haveHeader = true;</script>
 
-    
-
-    
-        
-            <a href="/posts">
-                posts
-            </a>
-        
-    
-    
-        
-            &#183; 
-            <a href="/gallery">
-                gallery
-            </a>
-        
-            &#183; 
-            <a href="/about">
-                who am I?
-            </a>
-        
-    
-    &#183; 
-    <a href="https://yangzhanghavefun.github.io/yzzhan/">
-        main
-    </a>
-
-</p></div>
-        
-
-        <div class="section footer">Call me Sam, a theme for Hugo.</div>
-    </div>
+	<script src="/yzzhan/js/main.min.00689ba18bbf9422fda222b02b555f01d54bfbb9b6d02f9bcffad67bdb2ff2cd.js" integrity="sha256-AGiboYu/lCL9oiKwK1VfAdVL+7m20C+bz/rWe9sv8s0="></script>
+	
 </body>
 
 </html>

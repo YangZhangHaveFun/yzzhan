@@ -5,7 +5,8 @@
     <link>https://yangzhanghavefun.github.io/yzzhan/post/</link>
     <description>Recent content in Posts on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/post/index.xml" rel="self" type="application/rss+xml" />
@@ -57,15 +58,7 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       <pubDate>Wed, 30 Aug 2017 01:53:34 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/japanese-preview/</guid>
-      <description>日本語の敬語体系は、一般に、大きく尊敬語・謙譲語・丁寧語に分類される。文化審議会国語分科会は、2007年2月に「敬語の指針」を答申し、これに丁重語および美化語を含めた5分類を示している。
- 尊敬語 尊敬語は、動作の主体を高めることで、主体への敬意を表す言い方である。動詞に「お（ご）～になる」を付けた形、また、助動詞「（ら）れる」を付けた形などが用いられる。たとえば、動詞「取る」の尊敬形として、「（先生が）お取りになる」「（先生が）取られる」などが用いられる。
-語によっては、特定の尊敬語が対応するものもある。たとえば、「言う」の尊敬語は「おっしゃる」、「食べる」の尊敬語は「召し上がる」、「行く・来る・いる」の尊敬語は「いらっしゃる」である。
-謙譲語 謙譲語は、古代から基本的に動作の客体への敬意を表す言い方であり、現代では「動作の主体を低める」と解釈するほうがよい場合がある。動詞に「お～する」「お～いたします」（謙譲語＋丁寧語）をつけた形などが用いられる。たとえば、「取る」の謙譲形として、「お取りする」などが用いられる。
-語によっては、特定の謙譲語が対応するものもある。たとえば、「言う」の謙譲語は「申し上げる」、「食べる」の謙譲語は「いただく」、「（相手の所に）行く」の謙譲語は「伺う」「参上する」「まいる」である。
-なお、「夜も更けてまいりました」の「まいり」など、謙譲表現のようでありながら、誰かを低めているわけではない表現がある。これは、「夜も更けてきた」という話題を丁重に表現することによって、聞き手への敬意を表すものである。宮地裕は、この表現に使われる語を、特に「丁重語」と称している[104][105]。丁重語にはほかに「いたし（マス）」「申し（マス）」「存じ（マス）」「小生」「小社」「弊社」などがある。文化審議会の「敬語の指針」でも、「明日から海外へまいります」の「まいり」のように、相手とは関りのない自分側の動作を表現する言い方を丁重語としている。
-丁寧語 丁寧語は、文末を丁寧にすることで、聞き手への敬意を表すものである。動詞・形容詞の終止形で終わる常体に対して、名詞・形容動詞語幹などに「です」を付けた形（「学生です」「きれいです」）や、動詞に「ます」をつけた形（「行きます」「分かりました」）等の丁寧語を用いた文体を敬体という。
-一般に、目上の人には丁寧語を用い、同等・目下の人には丁寧語を用いないといわれる。しかし、実際の言語生活に照らして考えれば、これは事実ではない。母が子を叱るとき、「お母さんはもう知りませんよ」と丁寧語を用いる場合ももある。丁寧語が用いられる多くの場合は、敬意や謝意の表現とされるが、、稀に一歩引いた心理的な距離をとろうとする場合もある。
-「お弁当」「ご飯」などの「お」「ご」も、広い意味では丁寧語に含まれるが、宮地裕は特に「美化語」と称して区別する[104][105]。相手への丁寧の意を示すというよりは、話し手が自分の言葉遣いに配慮した表現である。したがって、「お弁当食べようよ。」のように、丁寧体でない文でも美化語を用いることがある。文化審議会の「敬語の指針」でも「美化語」を設けている。</description>
+      <description>日本語の敬語体系は、一般に、大きく尊敬語・謙譲語・丁寧語に分類される。文化審議会国語分科会は、2007年2月に「敬語の指針」を答申し、これに</description>
     </item>
     
     <item>
@@ -74,38 +67,7 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/chinese-preview/</guid>
-      <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。
- 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。
-天生丽质难自弃，一朝选在君王侧。回眸一笑百媚生，六宫粉黛无颜色。
-春寒赐浴华清池，温泉水滑洗凝脂。侍儿扶起娇无力，始是新承恩泽时。
-云鬓花颜金步摇，芙蓉帐暖度春宵。春宵苦短日高起，从此君王不早朝。
-承欢侍宴无闲暇，春从春游夜专夜。后宫佳丽三千人，三千宠爱在一身。
-金屋妆成娇侍夜，玉楼宴罢醉和春。姊妹弟兄皆列士，可怜光彩生门户。
-遂令天下父母心，不重生男重生女。骊宫高处入青云，仙乐风飘处处闻。
-缓歌慢舞凝丝竹，尽日君王看不足。渔阳鼙鼓动地来，惊破霓裳羽衣曲。
-第二段：马嵬惊变 九重城阙烟尘生，千乘万骑西南行。翠华摇摇行复止，西出都门百余里。
-六军不发无奈何，宛转蛾眉马前死。花钿委地无人收，翠翘金雀玉搔头。
-君王掩面救不得，回看血泪相和流。黄埃散漫风萧索，云栈萦纡登剑阁。
-峨嵋山下少人行，旌旗无光日色薄。蜀江水碧蜀山青，圣主朝朝暮暮情。
-行宫见月伤心色，夜雨闻铃肠断声。
-第三段：玄宗皇帝思念 天旋地转回龙驭，到此踌躇不能去。马嵬坡下泥土中，不见玉颜空死处。
-君臣相顾尽霑衣，东望都门信马归。归来池苑皆依旧，太液芙蓉未央柳。
-芙蓉如面柳如眉，对此如何不泪垂。春风桃李花开日，秋雨梧桐叶落时。
-西宫南内多秋草，落叶满阶红不扫。梨园弟子白发新，椒房阿监青娥老。
-夕殿萤飞思悄然，孤灯挑尽未成眠。迟迟钟鼓初长夜，耿耿星河欲曙天。
-鸳鸯瓦冷霜华重，翡翠衾寒谁与共。悠悠生死别经年，魂魄不曾来入梦。
-第四段：仙界寻妃 临邛道士鸿都客，能以精诚致魂魄。为感君王辗转思，遂教方士殷勤觅。
-排空驭气奔如电，升天入地求之遍。上穷碧落下黄泉，两处茫茫皆不见。
-忽闻海上有仙山，山在虚无缥缈间。楼阁玲珑五云起，其中绰约多仙子。
-中有一人字太真，雪肤花貌参差是。金阙西厢叩玉扃，转教小玉报双成。
-闻道汉家天子使，九华帐里梦魂惊。揽衣推枕起徘徊，珠箔银屏迤逦开。
-云髻(鬓?)半偏新睡觉，花冠不整下堂来。风吹仙袂飘飘(飖)举，犹似霓裳羽衣舞。
-玉容寂寞泪阑干，梨花一枝春带雨。含情凝睇谢君王，一别音容两渺茫。
-昭阳殿里恩爱绝，蓬莱宫中日月长。回头下望人寰处，不见长安见尘雾。
-唯将旧物表深情，钿合金钗寄将去。钗留一股合一扇，钗擘黄金合分钿。
-但教心似金钿坚，天上人间会相见。临别殷勤重寄词，词中有誓两心知。
-七月七日长生殿，夜半无人私语时。在天愿作比翼鸟，在地愿为连理枝。
-天长地久有时尽，此恨绵绵无绝期。</description>
+      <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难</description>
     </item>
     
     <item>
@@ -136,7 +98,7 @@ Quisque mattis volutpat lorem vitae feugiat.</description>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/js-flowchart-diagrams/</guid>
       <description>&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-flowchart&#34; data-lang=&#34;flowchart&#34;&gt;st=&amp;gt;start: Start|past:&amp;gt;http://www.google.com[blank]
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-flowchart&#34; data-lang=&#34;flowchart&#34;&gt;st=&amp;gt;start: Start|past:&amp;gt;http://www.google.com[blank]
 e=&amp;gt;end: End:&amp;gt;http://www.google.com
 op1=&amp;gt;operation: My Operation|past
 op2=&amp;gt;operation: Stuff|current
@@ -160,46 +122,10 @@ c2(no)-&amp;gt;op2-&amp;gt;e&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/js-sequence-diagrams/</guid>
       <description>&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sequence&#34; data-lang=&#34;sequence&#34;&gt;Andrew-&amp;gt;China: Says Hello
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sequence&#34; data-lang=&#34;sequence&#34;&gt;Andrew-&amp;gt;China: Says Hello
 Note right of China: China thinks\nabout it
 China--&amp;gt;Andrew: How are you?
 Andrew-&amp;gt;&amp;gt;China: I am good thanks!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Hugo</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/</guid>
-      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
-    </item>
-    
-    <item>
-      <title>Syntax Highlighting</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/syntax-highlighting/</link>
-      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/syntax-highlighting/</guid>
-      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;helloWorld&lt;/span&gt; () {
-  &lt;span style=&#34;color:#a6e22e&#34;&gt;alert&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;)
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>
