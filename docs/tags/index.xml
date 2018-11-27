@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Mar 2018 20:18:53 -0500</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Algorithm</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Blog</title>
@@ -58,15 +49,6 @@
     </item>
     
     <item>
-      <title>Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Demo</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/tags/demo/</link>
       <pubDate>Mon, 01 Oct 2018 16:15:09 +0800</pubDate>
@@ -99,6 +81,24 @@
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</guid>
       <description></description>
     </item>
     

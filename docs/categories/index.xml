@@ -5,19 +5,11 @@
     <link>https://yangzhanghavefun.github.io/yzzhan/categories/</link>
     <description>Recent content in Categories on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/categories/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Development</title>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home on Yzzhan Tech Repo</title>
+    <title>Yzzhan Tech Repo</title>
     <link>https://yangzhanghavefun.github.io/yzzhan/</link>
-    <description>Recent content in Home on Yzzhan Tech Repo</description>
+    <description>Recent content on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
@@ -31,6 +31,24 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
 ▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
 ▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+    </item>
+    
+    <item>
+      <title>Overview for Amazon</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/amazon/overview/</link>
+      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/amazon/overview/</guid>
+      <description> This is my personal notes for Amazon Certificate. There are different sections, which will be separated systematically. </description>
+    </item>
+    
+    <item>
+      <title>Overview for the Cryptography</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/cryptography-and-security/abstract/</link>
+      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/cryptography-and-security/abstract/</guid>
+      <description>This is the overview about what I have done related with Cryptography and Security.</description>
     </item>
     
     <item>
@@ -86,29 +104,6 @@ For example:</description>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/posts/image-post/</guid>
       <description>Hello! I&amp;rsquo;m a blog post with an image.</description>
-    </item>
-    
-    <item>
-      <title>Code Poetry</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/posts/code-poetry/</link>
-      <pubDate>Tue, 13 Feb 2018 13:56:12 -0500</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/posts/code-poetry/</guid>
-      <description>Pseudo code poem.
-if (this === that): try write_new_poem() except not_a_poet as e: return  Or just one long line&amp;hellip;
-console.log(&amp;#39;Sometimes lines are waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay toooooooooooooooooooo looooooooooooooooooooooooooooooong&amp;#39;)  An embedded gist using shortcode:
- </description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/about/</link>
-      <pubDate>Tue, 13 Feb 2018 13:42:49 -0500</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/about/</guid>
-      <description>Hello, I&amp;rsquo;m Sam. I&amp;rsquo;m a theme for Hugo. I&amp;rsquo;m an extremely customizable, content-focused theme that lets you showcase your work your way.
-I have slick minimalist templates for list pages (such as a list of blog posts) and single pages (a page to read one blog post). You can use tags on your content, and view content by tags.
-I also have a simple responsive gallery built with CSS grid. It&amp;rsquo;ll look great on any screen, and all you have to do is provide a folder of images.</description>
     </item>
     
   </channel>

@@ -13,6 +13,16 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/amazon/overview/</loc>
+    <lastmod>2018-11-27T19:12:35+11:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/cryptography-and-security/abstract/</loc>
+    <lastmod>2018-11-27T19:12:35+11:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/posts/post-with-featured-image/</loc>
     <lastmod>2018-10-01T16:15:09+08:00</lastmod>
   </url>
@@ -45,11 +55,6 @@
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/posts/code-poetry/</loc>
     <lastmod>2018-02-13T13:56:12-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/about/</loc>
-    <lastmod>2018-02-13T13:42:49-05:00</lastmod>
   </url>
   
   <url>
@@ -123,11 +128,6 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/about-hugo/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
@@ -148,11 +148,6 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/cryptography_and_security/abstract/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/posts/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
@@ -163,13 +158,8 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/amazon/</loc>
+    <lastmod>2018-11-27T19:12:35+11:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -186,6 +176,11 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/classic/</loc>
     <lastmod>2018-02-11T12:34:41-05:00</lastmod>
     <priority>0</priority>
@@ -198,14 +193,8 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/cryptography_and_security/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/cryptography-and-security/</loc>
+    <lastmod>2018-11-27T19:12:35+11:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -222,8 +211,26 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/development/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/english/</loc>
     <lastmod>2017-08-31T15:43:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/english/</loc>
+    <lastmod>2017-08-31T15:43:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/example/</loc>
+    <lastmod>2017-06-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -240,13 +247,20 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/golang/</loc>
+    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/hugo/</loc>
+    <lastmod>2016-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -275,19 +289,9 @@
   </url>
   
   <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/overview/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/pandoc/</loc>
     <lastmod>2016-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/gallery/</loc>
   </url>
   
   <url>
@@ -327,6 +331,12 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/syntax-highlighting/</loc>
+    <lastmod>2018-11-05T16:01:23+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/tag-1/</loc>
     <lastmod>2017-08-30T01:37:56+08:00</lastmod>
     <priority>0</priority>
@@ -352,7 +362,7 @@
   
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-16T20:18:53-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -381,13 +391,31 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/</loc>
+    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/%E4%B8%AD%E6%96%87/</loc>
     <lastmod>2017-08-30T01:37:56+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/%E4%B8%AD%E6%96%87/</loc>
+    <lastmod>2017-08-30T01:37:56+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
+    <lastmod>2017-08-30T01:53:34+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/</loc>
     <lastmod>2017-08-30T01:53:34+08:00</lastmod>
     <priority>0</priority>
   </url>
