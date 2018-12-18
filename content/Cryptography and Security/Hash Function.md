@@ -22,10 +22,10 @@ There will be three topics related to **HASH FUNCTION** in this article. General
 
 The general idea for SHA-1 is to transfer the message with any length into 160 bits.
 
-
-                          --------     (160 bits)
- x(input)  ------------> |  SHA-1 | --------------> H(x)
-                          --------
+                                __________
+                                |        |   (160 bits)
+        x(input)  ------------> | SHA-1  |--------------> H(x)
+                                |________|
 
 ##### Internal Construction
 
@@ -46,8 +46,8 @@ Here we shows a more specific SHA-1 function diagram.
                 ____|______________________|________            |
                 \       Compression function      /             |
                  \_______________________________/              |
-                           |    |________________________________|
-                           |
+                           |    ^                               |
+                           |    |_______________________________|
                            |
                         H(x) (160bits)
 ##### SHA-1 Properties
@@ -62,7 +62,7 @@ Here we shows a more specific SHA-1 function diagram.
 
 
 
-#### Reference
+### Reference
 Finally, there are two ref videos introducing the algorithms of Hash Function perfectly. The firstly video introduced the SHA-1 while the second focused on SHA-3.
 
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/JIhZWgJA-9o/0.jpg)](http://www.youtube.com/watch?v=JIhZWgJA-9o)

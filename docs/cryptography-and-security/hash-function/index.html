@@ -81,14 +81,17 @@
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">                      --------     (160 bits)</pre></td></tr></table>
+<pre class="chroma">                            __________
+                            |        |   (160 bits)
+    x(input)  ------------&gt; | SHA-1  |--------------&gt; H(x)
+                            |________|</pre></td></tr></table>
 </div>
 </div>
-<p>x(input)  &mdash;&mdash;&mdash;&mdash;&gt; |  SHA-1 | &mdash;&mdash;&mdash;&mdash;&ndash;&gt; H(x)
-                          &mdash;&mdash;&ndash;</p>
-
 <h5 id="internal-construction">Internal Construction</h5>
 
 <p>SHA-1 uses the Merkle-Damard construction to implement HASH function(already broken).</p>
@@ -126,8 +129,8 @@
             ____|______________________|________            |
             \       Compression function      /             |
              \_______________________________/              |
-                       |    |________________________________|
-                       |
+                       |    ^                               |
+                       |    |_______________________________|
                        |
                     H(x) (160bits)</pre></td></tr></table>
 </div>
@@ -142,7 +145,7 @@
 
 <h4 id="sha-3">SHA-3</h4>
 
-<h4 id="reference">Reference</h4>
+<h3 id="reference">Reference</h3>
 
 <p>Finally, there are two ref videos introducing the algorithms of Hash Function perfectly. The firstly video introduced the SHA-1 while the second focused on SHA-3.</p>
 
