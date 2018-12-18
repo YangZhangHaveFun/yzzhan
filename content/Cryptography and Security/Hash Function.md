@@ -32,8 +32,11 @@ SHA-1 uses the Merkle-Damard construction to implement HASH function(already bro
 
 Here we shows a more specific SHA-1 function diagram. 
             x = (x_1,x_2,.....,x_n)
+
                     |
+
                     |
+                    
                 _________
                 |Padding|
                 |_______|
