@@ -19,8 +19,7 @@
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/cryptography-and-security/hash-function/</guid>
       <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
- MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview Internal Construction SHA-1 Properties Remaining Problem when implementing Insides of Rounds
-Message Schedule</description>
+ MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
     </item>
     
     <item>

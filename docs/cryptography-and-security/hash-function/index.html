@@ -55,7 +55,7 @@
 		<div class="content">
 			
 
-<h4 id="hash-function">Hash Function</h4>
+<h3 id="hash-function">Hash Function</h3>
 
 <p>There will be three topics related to <strong>HASH FUNCTION</strong> in this article. Generally, <strong>Hash Function</strong> could be divided into two part, <em>Block cipher construct</em> and <em>dedicated hash function</em>. Our focus is on dedicated function, which contains three aspects.</p>
 
@@ -71,26 +71,61 @@
 <li>Others</li>
 </ol>
 
-<h5 id="properties-of-hash-function">Properties of Hash Function</h5>
+<h4 id="properties-of-hash-function">Properties of Hash Function</h4>
 
-<h5 id="sha-1">SHA-1</h5>
+<h4 id="sha-1">SHA-1</h4>
 
-<h6 id="overview">Overview</h6>
+<h5 id="overview">Overview</h5>
 
-<h6 id="internal-construction">Internal Construction</h6>
+<p>The general idea for SHA-1 is to transfer the message with any length into 160 bits.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">                      --------     (160 bits)</pre></td></tr></table>
+</div>
+</div>
+<p>x(input)  &mdash;&mdash;&mdash;&mdash;&gt; |  SHA-1 | &mdash;&mdash;&mdash;&mdash;&ndash;&gt; H(x)
+                          &mdash;&mdash;&ndash;</p>
 
-<h6 id="sha-1-properties">SHA-1 Properties</h6>
+<h5 id="internal-construction">Internal Construction</h5>
 
-<h6 id="remaining-problem-when-implementing">Remaining Problem when implementing</h6>
+<p>SHA-1 uses the Merkle-Damard construction to implement HASH function(already broken).</p>
+
+<p>Here we shows a more specific SHA-1 function diagram.
+            x = (x_1,x_2,&hellip;..,x_n)
+                    |
+                    |
+                _________
+                |Padding|
+                |_______|
+                    |                      ______________________
+                    | X_A(512 bits)        |                    |
+                    |                      | H_A-1(160bits)     |
+                _<strong><em>|</em></strong>________________<strong><em>|</em></strong>_____            |
+                \       Compression function      /             |
+                 \____________________________<strong><em>/              |
+                           |    |</em></strong>_____________________________|
+                           |
+                           |
+                        H(x) (160bits)</p>
+
+<h5 id="sha-1-properties">SHA-1 Properties</h5>
+
+<h5 id="remaining-problem-when-implementing">Remaining Problem when implementing</h5>
 
 <p><strong><em>Insides of Rounds</em></strong></p>
 
 <p><strong><em>Message Schedule</em></strong></p>
 
-<h5 id="sha-3">SHA-3</h5>
+<h4 id="sha-3">SHA-3</h4>
 
-<p>Finally, there are two ref videos introducing the algorithms of Hash Function perfectly.
-<a href="http://www.youtube.com/watch?v=JIhZWgJA-9o" target="_blank"><img src="http://img.youtube.com/vi/JIhZWgJA-9o/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
+<h4 id="reference">Reference</h4>
+
+<p>Finally, there are two ref videos introducing the algorithms of Hash Function perfectly. The firstly video introduced the SHA-1 while the second focused on SHA-3.</p>
+
+<p><a href="http://www.youtube.com/watch?v=JIhZWgJA-9o" target="_blank"><img src="http://img.youtube.com/vi/JIhZWgJA-9o/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
 
 		</div>
 	</main>
