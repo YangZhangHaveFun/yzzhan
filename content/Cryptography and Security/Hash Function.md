@@ -22,6 +22,7 @@ There will be three topics related to **HASH FUNCTION** in this article. General
 
 The general idea for SHA-1 is to transfer the message with any length into 160 bits.
 
+
                           --------     (160 bits)
  x(input)  ------------> |  SHA-1 | --------------> H(x)
                           --------
@@ -31,13 +32,12 @@ The general idea for SHA-1 is to transfer the message with any length into 160 b
 SHA-1 uses the Merkle-Damard construction to implement HASH function(already broken).
 
 Here we shows a more specific SHA-1 function diagram. 
+
+
             x = (x_1,x_2,.....,x_n)
-
                     |
-
                     |
-                    
-                _________
+                ____|____
                 |Padding|
                 |_______|
                     |                      ______________________
@@ -45,7 +45,7 @@ Here we shows a more specific SHA-1 function diagram.
                     |                      | H_A-1(160bits)     |
                 ____|______________________|________            |
                 \       Compression function      /             |
-                 \\_______________________________/              |
+                 \_______________________________/              |
                            |    |________________________________|
                            |
                            |

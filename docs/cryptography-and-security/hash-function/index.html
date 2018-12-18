@@ -93,8 +93,7 @@
 
 <p>SHA-1 uses the Merkle-Damard construction to implement HASH function(already broken).</p>
 
-<p>Here we shows a more specific SHA-1 function diagram.
-            x = (x_1,x_2,&hellip;..,x_n)</p>
+<p>Here we shows a more specific SHA-1 function diagram.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -113,14 +112,12 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span><span class="lnt">17
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">                |
-
+<pre class="chroma">        x = (x_1,x_2,.....,x_n)
                 |
-
-            _________
+                |
+            ____|____
             |Padding|
             |_______|
                 |                      ______________________
@@ -128,7 +125,7 @@
                 |                      | H_A-1(160bits)     |
             ____|______________________|________            |
             \       Compression function      /             |
-             \\_______________________________/              |
+             \_______________________________/              |
                        |    |________________________________|
                        |
                        |
