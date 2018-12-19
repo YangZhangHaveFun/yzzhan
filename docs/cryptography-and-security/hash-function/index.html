@@ -55,7 +55,7 @@
 		<div class="content">
 			
 
-<h3 id="hash-function">Hash Function</h3>
+<h1 id="hash-function">Hash Function</h1>
 
 <p>There will be three topics related to <strong>HASH FUNCTION</strong> in this article. Generally, <strong>Hash Function</strong> could be divided into two part, <em>Block cipher construct</em> and <em>dedicated hash function</em>. Our focus is on dedicated function, which contains three aspects.</p>
 
@@ -71,11 +71,11 @@
 <li>Others</li>
 </ol>
 
-<h4 id="properties-of-hash-function">Properties of Hash Function</h4>
+<h2 id="properties-of-hash-function">Properties of Hash Function</h2>
 
-<h4 id="sha-1">SHA-1</h4>
+<h2 id="sha-1">SHA-1</h2>
 
-<h5 id="overview">Overview</h5>
+<h3 id="overview">Overview</h3>
 
 <p>The general idea for SHA-1 is to transfer the message with any length into 160 bits.</p>
 <div class="highlight"><div class="chroma">
@@ -92,7 +92,7 @@
                             |________|</pre></td></tr></table>
 </div>
 </div>
-<h5 id="internal-construction">Internal Construction</h5>
+<h3 id="internal-construction">Internal Construction</h3>
 
 <p>SHA-1 uses the Merkle-Damard construction to implement HASH function(already broken).</p>
 
@@ -135,17 +135,173 @@
                     H(x) (160bits)</pre></td></tr></table>
 </div>
 </div>
-<h5 id="sha-1-properties">SHA-1 Properties</h5>
+<p>Further more, the technical detailed construction of compression function is :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">         __________________
+        | Message schedule |
+        |__________________|                __________________
+                |                           | H_i-1(160 bits) |
+                |     W_0(32 bits)      ____|____             |
+                |---------------------&gt;| Round 0 |            |
+                |                      |_________|            |
+                |                           |                 |
+                |                           |                 |
+                |     W_1(32 bits)      ____|____             |
+                |---------------------&gt;| Round 1 |            |
+                |          .           |_________|            |
+                |          .                |                 |
+                |          .                |                 |
+                |                           |                 |
+                |     W_79(32 bits)     ____|_____            |
+                |---------------------&gt;| Round 79|            |
+                                       |_________|            |
+                                            |                 |
+                                            |                 |
+                                        ____|_____            |
+                                       |   EOR   |&lt;-----------|
+                                       |_________|</pre></td></tr></table>
+</div>
+</div>
+<h3 id="sha-1-properties">SHA-1 Properties</h3>
 
-<h5 id="remaining-problem-when-implementing">Remaining Problem when implementing</h5>
+<ol>
+<li>Num of Rounds : 20*4 = 80 rounds</li>
+<li>Num of Stages : 4
+Stage 1&mdash;&mdash;&gt; Round j = 0-19
+Stage 2&mdash;&mdash;&gt; Round j = 20-39
+Stage 3&mdash;&mdash;&gt; Round j = 40-59
+Stage 4&mdash;&mdash;&gt; Round j = 60-79</li>
 
-<p><strong><em>Insides of Rounds</em></strong></p>
+<li><p>Input of each Round:</p>
 
-<p><strong><em>Message Schedule</em></strong></p>
+<ol>
+<li>5*32 bits input(A,B,C,D,E)</li>
 
-<h4 id="sha-3">SHA-3</h4>
+<li><p>Message input W_j (32 bits)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">        A      B      C       D       E
+       _|______|______|_______|_______|_
+W_j--&gt;|             Round j             |
+      |_________________________________|</pre></td></tr></table>
+</div>
+</div></li>
+</ol></li>
+</ol>
 
-<h3 id="reference">Reference</h3>
+<h3 id="remaining-problem-when-implementing">Remaining Problem when implementing</h3>
+
+<ol>
+<li>Internal algorithm of rounds</li>
+<li>Construction of Message Schedule</li>
+</ol>
+
+<p><1> Round Function</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">         _________________________________________________
+        |    A    |    B    |    C    |    D    |    E    |
+        |_________|_________|_________|_________|_________|
+         |   |       | |        |         | |       |
+         |   |       | |        |         | |       |
+         |   |       | _\_______|        /  |       |
+         |   |       | | \ _____|______ /   |       |
+         |   |       | |  |     f_t    |----|-----&gt;EOR
+         |   |       | |  |____________|    |       |
+         |   |       | |                    |       |
+         |   |       | \                    |       |
+         |  _|___    |  \                   |       |
+         | |&lt;&lt;&lt;5 |---|---\------------------|-----&gt;EOR
+         | |_____|   |    \                 |       |
+         |           |     \                |       |
+         |         __|__    \               |       |
+         |        |&lt;&lt;&lt;30|    \              |      EOR&lt;-------W_j
+         |        |_____|     \             |       |
+          \          |         \_________   |       |
+           \         |                   |  |       |
+            \        |                   |  |      EOR&lt;-------k_t
+             \        \                  |  |       |
+              \        \                 |  |      /
+            ___\________\________________|__|_____/
+           |    \        \_______        |  |
+           |     \               |       |  |_________
+           |      \              |       |            |
+         __|_______\_____________|_______|____________|___
+        |    A    |    B    |    C    |    D    |    E    |
+        |_________|_________|_________|_________|_________|</pre></td></tr></table>
+</div>
+</div>
+<p>f_t(function) and k_t(constant) are constant given input according to the number of stage t.</p>
+
+<p><2>Message Schedule</p>
+
+<h2 id="sha-3">SHA-3</h2>
+
+<h1 id="reference">Reference</h1>
 
 <p>Finally, there are two ref videos introducing the algorithms of Hash Function perfectly. The firstly video introduced the SHA-1 while the second focused on SHA-3.</p>
 
