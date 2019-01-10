@@ -62,6 +62,16 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     </item>
     
     <item>
+      <title>Detailed Hash Function</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/hash-function/</link>
+      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/hash-function/</guid>
+      <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
+ MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
+    </item>
+    
+    <item>
       <title>Overview for Amazon</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/amazon/overview/</link>
       <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
@@ -97,15 +107,6 @@ For example:
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/posts/typography/</guid>
       <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
-    </item>
-    
-    <item>
-      <title>Video post</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/posts/video-post/</link>
-      <pubDate>Fri, 16 Mar 2018 20:18:53 -0500</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/posts/video-post/</guid>
-      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus eget nunc scelerisque viverra. Quam vulputate dignissim suspendisse in est ante in nibh mauris. Pharetra magna ac placerat vestibulum lectus mauris. Eget lorem dolor sed viverra ipsum. Elementum nisi quis eleifend quam adipiscing. Aliquet nec ullamcorper sit amet risus. Auctor neque vitae tempus quam pellentesque. Tincidunt lobortis feugiat vivamus at augue.</description>
     </item>
     
   </channel>
