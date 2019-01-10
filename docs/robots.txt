@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://yangzhanghavefun.github.io/yzzhan/sitemap.xml
+Allow: /
