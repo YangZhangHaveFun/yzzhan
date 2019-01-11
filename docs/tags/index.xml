@@ -7,46 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 16 Mar 2018 20:18:53 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 11 Jan 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Blog</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/blog/</link>
-      <pubDate>Fri, 16 Mar 2018 20:18:53 -0500</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/blog/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Blogdown</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/blogdown/</link>
-      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/blogdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Classic</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/classic/</link>
-      <pubDate>Sun, 11 Feb 2018 12:34:41 -0500</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/classic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Code</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/code/</link>
-      <pubDate>Thu, 08 Mar 2018 20:18:53 -0500</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/code/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Cryptography</title>
@@ -58,47 +22,20 @@
     </item>
     
     <item>
-      <title>Demo</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/demo/</link>
-      <pubDate>Mon, 01 Oct 2018 16:15:09 +0800</pubDate>
+      <title>Sha 1</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/sha-1/</link>
+      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/demo/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/sha-1/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>English</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/english/</link>
-      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
+      <title>Sha 3</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/sha-3/</link>
+      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/english/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Image</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/image/</link>
-      <pubDate>Mon, 01 Oct 2018 16:15:09 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/image/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Markdown</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/markdown/</link>
-      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mathjax</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/mathjax/</link>
-      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/mathjax/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/sha-3/</guid>
       <description></description>
     </item>
     
