@@ -34,22 +34,21 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     </item>
     
     <item>
+      <title>Amazon introduction</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</link>
+      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</guid>
+      <description>This is the intorduction page.</description>
+    </item>
+    
+    <item>
       <title>Notes for Certified Cloud Practitioner Final Exam</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/amazon/cloudpractitioner/</link>
       <pubDate>Sat, 29 Dec 2018 19:12:35 +1100</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/cloudpractitioner/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Detailed Hash Function</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/hash-function/</link>
-      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/hash-function/</guid>
-      <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
- MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
     </item>
     
     <item>
@@ -69,15 +68,6 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/overview/</guid>
       <description> This is my personal notes for Amazon Certificate. There are different sections, which will be separated systematically. </description>
-    </item>
-    
-    <item>
-      <title>Overview for the Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/abstract/</link>
-      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/abstract/</guid>
-      <description>This is the overview about what I have done related with Cryptography and Security.</description>
     </item>
     
     <item>
@@ -106,6 +96,15 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/japanese-preview/</guid>
       <description>日本語の敬語体系は、一般に、大きく尊敬語・謙譲語・丁寧語に分類される。文化審議会国語分科会は、2007年2月に「敬語の指針」を答申し、これに</description>
+    </item>
+    
+    <item>
+      <title>[中文] 《长恨歌》</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/chinese-preview/</link>
+      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/chinese-preview/</guid>
+      <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难</description>
     </item>
     
   </channel>

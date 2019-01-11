@@ -34,22 +34,21 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     </item>
     
     <item>
+      <title>Amazon introduction</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</link>
+      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</guid>
+      <description>This is the intorduction page.</description>
+    </item>
+    
+    <item>
       <title>Notes for Certified Cloud Practitioner Final Exam</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/amazon/cloudpractitioner/</link>
       <pubDate>Sat, 29 Dec 2018 19:12:35 +1100</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/cloudpractitioner/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Detailed Hash Function</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/hash-function/</link>
-      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/hash-function/</guid>
-      <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
- MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
     </item>
     
     <item>
@@ -69,15 +68,6 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/overview/</guid>
       <description> This is my personal notes for Amazon Certificate. There are different sections, which will be separated systematically. </description>
-    </item>
-    
-    <item>
-      <title>Overview for the Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/abstract/</link>
-      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/abstract/</guid>
-      <description>This is the overview about what I have done related with Cryptography and Security.</description>
     </item>
     
     <item>
@@ -106,6 +96,15 @@ For example:
       <pubDate>Fri, 16 Mar 2018 20:18:53 -0500</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/posts/video-post/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus eget nunc scelerisque viverra. Quam vulputate dignissim suspendisse in est ante in nibh mauris. Pharetra magna ac placerat vestibulum lectus mauris. Eget lorem dolor sed viverra ipsum. Elementum nisi quis eleifend quam adipiscing. Aliquet nec ullamcorper sit amet risus. Auctor neque vitae tempus quam pellentesque. Tincidunt lobortis feugiat vivamus at augue.</description>
+    </item>
+    
+    <item>
+      <title>Long Form Post</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/posts/long-form-post/</link>
+      <pubDate>Thu, 08 Mar 2018 20:18:53 -0500</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/posts/long-form-post/</guid>
       <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus eget nunc scelerisque viverra. Quam vulputate dignissim suspendisse in est ante in nibh mauris. Pharetra magna ac placerat vestibulum lectus mauris. Eget lorem dolor sed viverra ipsum. Elementum nisi quis eleifend quam adipiscing. Aliquet nec ullamcorper sit amet risus. Auctor neque vitae tempus quam pellentesque. Tincidunt lobortis feugiat vivamus at augue.</description>
     </item>
     
