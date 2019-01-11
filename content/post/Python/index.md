@@ -8,12 +8,13 @@ categories: ["Advanced Python Theory"]
 author: "Yang Zhang"
 
 ---
-This is the **Abstract Page** for Python relative knowledge, which could be separated into four part:
-    - Django :
-    - Advanced Python Understanding:
-    - Tornado:
-    - Search Engine Design: 
 
+This is the **Abstract Page** for Python relative knowledge, which could be separated into four part:
+
+    1. Django :
+    2. Advanced Python Understanding:
+    3. Tornado:
+    4. Search Engine Design:
 
 ## Concepts of Properties
 
@@ -21,8 +22,8 @@ Properties of class means its methods and variables. Properties of instance is s
 
 ## Search order of Properties
 
-The order should be bottom-up. 
+The order should be bottom-up.
 
-![Visual Form](/images/zRHzx.png)
+![Visual Form](static/img/zRHzx.png)
 
 ##Descriptor

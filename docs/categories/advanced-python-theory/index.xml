@@ -18,8 +18,8 @@
       <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/python/</guid>
-      <description>This is the Abstract Page for Python relative knowledge, which could be separated into four part: - Django : - Advanced Python Understanding: - Tornado: - Search Engine Design:
-Concepts of Properties Properties of class means its methods and variables. Properties of instance is similar, which will initialized by def init(self).
+      <description>This is the Abstract Page for Python relative knowledge, which could be separated into four part:
+1 2 3 4  1. Django : 2. Advanced Python Understanding: 3. Tornado: 4. Search Engine Design:   Concepts of Properties Properties of class means its methods and variables. Properties of instance is similar, which will initialized by def init(self).
 Search order of Properties The order should be bottom-up.
 ##Descriptor</description>
     </item>
