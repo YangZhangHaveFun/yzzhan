@@ -34,21 +34,13 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     </item>
     
     <item>
-      <title>Amazon introduction</title>
+      <title>Overview For Advanced Crypto Knowledge</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</link>
       <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</guid>
-      <description>This is the intorduction page.</description>
-    </item>
-    
-    <item>
-      <title>Notes for Certified Cloud Practitioner Final Exam</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/amazon/cloudpractitioner/</link>
-      <pubDate>Sat, 29 Dec 2018 19:12:35 +1100</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/cloudpractitioner/</guid>
-      <description></description>
+      <description>This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function</description>
     </item>
     
     <item>
@@ -59,15 +51,6 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/hash-function/</guid>
       <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
  MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
-    </item>
-    
-    <item>
-      <title>Overview for Amazon</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/amazon/overview/</link>
-      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/overview/</guid>
-      <description> This is my personal notes for Amazon Certificate. There are different sections, which will be separated systematically. </description>
     </item>
     
     <item>
@@ -105,6 +88,27 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/chinese-preview/</guid>
       <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难</description>
+    </item>
+    
+    <item>
+      <title>A Plain Markdown Post</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/2016-02-14-hello-markdown/</link>
+      <pubDate>Sun, 14 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/2016-02-14-hello-markdown/</guid>
+      <description>This sample post is mainly for blogdown users. If you do not use blogdown, you can skip the first section.
+1. Markdown or R Markdown This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
+ You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.</description>
+    </item>
+    
+    <item>
+      <title>Lorem Ipsum</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/2015-07-23-lorem-ipsum/</link>
+      <pubDate>Thu, 23 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/2015-07-23-lorem-ipsum/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Quisque mattis volutpat lorem vitae feugiat.</description>
     </item>
     
   </channel>

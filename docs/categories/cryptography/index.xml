@@ -5,19 +5,21 @@
     <link>https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/</link>
     <description>Recent content in Cryptography on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 11 Jan 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Overview for the Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/cryptography_and_security/abstract/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Overview For Advanced Crypto Knowledge</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</link>
+      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/cryptography_and_security/abstract/</guid>
-      <description>This is the overview about what I have done related with Cryptography and Security.</description>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography-and-security/</guid>
+      <description>This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function</description>
     </item>
     
   </channel>
