@@ -25,7 +25,9 @@
   
   <meta name="author" content="Yang">
   <meta name="description" content="This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
-The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function">
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
+title : &amp;ldquo;Detailed Hash Function&amp;rdquo; date: 2018-11-27T19:12:35&#43;11:00
+draft: false Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.">
 
   
   
@@ -33,7 +35,9 @@ The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="Overview For Advanced Crypto Knowledge">
     <meta name="twitter:description" content="This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
-The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function">
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
+title : &amp;ldquo;Detailed Hash Function&amp;rdquo; date: 2018-11-27T19:12:35&#43;11:00
+draft: false Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.">
     <meta name="twitter:image" content="/yzzhan/images/avatar.png">
   
 
@@ -41,7 +45,9 @@ The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
   <meta property="og:type" content="article">
   <meta property="og:title" content="Overview For Advanced Crypto Knowledge">
   <meta property="og:description" content="This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
-The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function">
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
+title : &amp;ldquo;Detailed Hash Function&amp;rdquo; date: 2018-11-27T19:12:35&#43;11:00
+draft: false Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/">
   <meta property="og:image" content="/yzzhan/images/avatar.png">
 
@@ -196,12 +202,354 @@ The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Overview For Advanced Crypto Knowledge</h1>
-      <p class="post-meta">@Yang · Jan 11, 2019 · 1 min read</p>
+      <p class="post-meta">@Yang · Jan 11, 2019 · 5 min read</p>
     </header>
-    <article class="post-content"><p>This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.</p>
+    <article class="post-content">
+
+<p>This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.</p>
 
 <p>The corresponding pages shows below.
-    -SHA-1/SHA-3 : <a href="../post/Cryptography and Security/Hash Function.md">Algorithms for Hash Function</a></p>
+    -SHA-1/SHA-3 : <a href="../Hash Function">Algorithms for Hash Function</a></p>
+
+<hr />
+
+<p>title : &ldquo;Detailed Hash Function&rdquo;
+date: 2018-11-27T19:12:35+11:00</p>
+
+<h2 id="draft-false">draft: false</h2>
+
+<h1 id="hash-function">Hash Function</h1>
+
+<p>There will be three topics related to <strong>HASH FUNCTION</strong> in this article. Generally, <strong>Hash Function</strong> could be divided into two part, <em>Block cipher construct</em> and <em>dedicated hash function</em>. Our focus is on dedicated function, which contains three aspects.</p>
+
+<ol>
+<li>MD4 Family
+
+<ol>
+<li>MD5</li>
+<li>SHA-1</li>
+<li>SHA-3</li>
+</ol></li>
+<li>SHA-3</li>
+<li>Others</li>
+</ol>
+
+<h2 id="properties-of-hash-function">Properties of Hash Function</h2>
+
+<h2 id="sha-1">SHA-1</h2>
+
+<h3 id="overview">Overview</h3>
+
+<p>The general idea for SHA-1 is to transfer the message with any length into 160 bits.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">                            __________
+                            |        |   (160 bits)
+    x(input)  ------------&gt; | SHA-1  |--------------&gt; H(x)
+                            |________|</pre></td></tr></table>
+</div>
+</div>
+<h3 id="internal-construction">Internal Construction</h3>
+
+<p>SHA-1 uses the Merkle-Damard construction to implement HASH function(already broken).</p>
+
+<p>Here we shows a more specific SHA-1 function diagram.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">        x = (x_1,x_2,.....,x_n)
+                |
+                |
+            ____|____
+            |Padding|
+            |_______|
+                |                      ______________________
+                | X_A(512 bits)        |                    |
+                |                      | H_A-1(160bits)     |
+            ____|______________________|________            |
+            \       Compression function      /             |
+             \_______________________________/              |
+                       |    ^                               |
+                       |    |_______________________________|
+                       |
+                    H(x) (160bits)</pre></td></tr></table>
+</div>
+</div>
+<p>Further more, the technical detailed construction of compression function is :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">         __________________
+        | Message schedule |
+        |__________________|                __________________
+                |                           | H_i-1(160 bits) |
+                |     W_0(32 bits)      ____|____             |
+                |---------------------&gt;| Round 0 |            |
+                |                      |_________|            |
+                |                           |                 |
+                |                           |                 |
+                |     W_1(32 bits)      ____|____             |
+                |---------------------&gt;| Round 1 |            |
+                |          .           |_________|            |
+                |          .                |                 |
+                |          .                |                 |
+                |                           |                 |
+                |     W_79(32 bits)     ____|_____            |
+                |---------------------&gt;| Round 79|            |
+                                       |_________|            |
+                                            |                 |
+                                            |                 |
+                                        ____|_____            |
+                                       |   EOR   |&lt;-----------|
+                                       |_________|</pre></td></tr></table>
+</div>
+</div>
+<h3 id="sha-1-properties">SHA-1 Properties</h3>
+
+<ol>
+<li>Num of Rounds : 20*4 = 80 rounds</li>
+<li>Num of Stages : 4
+Stage 1&mdash;&mdash;&gt; Round j = 0-19
+Stage 2&mdash;&mdash;&gt; Round j = 20-39
+Stage 3&mdash;&mdash;&gt; Round j = 40-59
+Stage 4&mdash;&mdash;&gt; Round j = 60-79</li>
+
+<li><p>Input of each Round:</p>
+
+<ol>
+<li>5*32 bits input(A,B,C,D,E)</li>
+
+<li><p>Message input W_j (32 bits)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">        A      B      C       D       E
+       _|______|______|_______|_______|_
+W_j--&gt;|             Round j             |
+      |_________________________________|</pre></td></tr></table>
+</div>
+</div></li>
+</ol></li>
+</ol>
+
+<h3 id="remaining-problem-when-implementing">Remaining Problem when implementing</h3>
+
+<ol>
+<li>Internal algorithm of rounds</li>
+<li>Construction of Message Schedule</li>
+</ol>
+
+<p><1> Round Function</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">         _________________________________________________
+        |    A    |    B    |    C    |    D    |    E    |
+        |_________|_________|_________|_________|_________|
+         |   |       | |        |         | |       |
+         |   |       | |        |         | |       |
+         |   |       | _\_______|        /  |       |
+         |   |       | | \ _____|______ /   |       |
+         |   |       | |  |     f_t    |----|-----&gt;EOR
+         |   |       | |  |____________|    |       |
+         |   |       | |                    |       |
+         |   |       | \                    |       |
+         |  _|___    |  \                   |       |
+         | |&lt;&lt;&lt;5 |---|---\------------------|-----&gt;EOR
+         | |_____|   |    \                 |       |
+         |           |     \                |       |
+         |         __|__    \               |       |
+         |        |&lt;&lt;&lt;30|    \              |      EOR&lt;-------W_j
+         |        |_____|     \             |       |
+          \          |         \_________   |       |
+           \         |                   |  |       |
+            \        |                   |  |      EOR&lt;-------k_t
+             \        \                  |  |       |
+              \        \                 |  |      /
+            ___\________\________________|__|_____/
+           |    \        \_______        |  |
+           |     \               |       |  |_________
+           |      \              |       |            |
+         __|_______\_____________|_______|____________|___
+        |    A    |    B    |    C    |    D    |    E    |
+        |_________|_________|_________|_________|_________|</pre></td></tr></table>
+</div>
+</div>
+<p>f_t(function) and k_t(constant) are constant given input according to the number of stage t.</p>
+
+<p><2>Message Schedule
+As we mentioned round function before, there is a kind of input named w_j, which is constant number. Here we show the calculation process for each round(there will be 80 different values of w as there are 80 rounds in SHA-1).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">         X_A
+          |
+          |--------512 bits
+          |
+          |---w_0
+          |
+          |---w_1
+          |
+          |    .
+          .    .
+          .    .
+          .    .
+          |____w_79
+
+                |&lt;-       512 = 32*16        -&gt;|
+          x_i = x_i^0, x_i^1, x_i^2,.....,x_i^15
+                  |      |      |           |
+                  |      |      |           |
+                 w_0    w_1    w_2   ...   w_15 .............w_79
+
+        w_j = w_j-16 XOR x_j-14 XOR x_j-8 XOR x_j-3  (16 &lt;= j &lt;= 79)</pre></td></tr></table>
+</div>
+</div>
+<h2 id="sha-3">SHA-3</h2>
+
+<p>The algorithm of SHA-3 is much more complex than  SHA-1. Here we only record the high level of it and it&rsquo;s totally different from the algorithm of SHA-1. The core algorithm is Keccark.</p>
+
+<p>The main thought of construction is kind of sponge construction.
+    -absorbing phase: input x_i is read-in and processed.
+    -squeezing phase: output is produced.</p>
+
+<p>The parameter of sponge construction:
+    -state:   b = 25*2^e,  e = 0, 1, 2, 3, 4, 5, 6(SHA-3).
+    -number of round:    n_r = 12 +2l &mdash;&mdash;&gt; 12 + 2*6 = 24</p>
+
+<p>Here we show the table of sponge construction.
+        ouput   |   b   |   r   |   c   |
+        &mdash;&mdash;&ndash;|&mdash;&mdash;-|&mdash;&mdash;-|&mdash;&mdash;-|&ndash;
+        224     | 1600  |  1152 |  448  |
+        &mdash;&mdash;&ndash;|&mdash;&mdash;-|&mdash;&mdash;-|&mdash;&mdash;-|&ndash;
+        256     | 1600  |  1088 |  512  |
+        &mdash;&mdash;&ndash;|&mdash;&mdash;-|&mdash;&mdash;-|&mdash;&mdash;-|&ndash;
+        384     | 1600  |  832  |  768  |
+        &mdash;&mdash;&ndash;|&mdash;&mdash;-|&mdash;&mdash;-|&mdash;&mdash;-|&ndash;
+        512     | 1600  |  576  |  1024 |
+        &mdash;&mdash;&ndash;|&mdash;&mdash;-|&mdash;&mdash;-|&mdash;&mdash;-|&ndash;</p>
+
+<p>The general idea of Kaccak algorithm is :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">    m ---------&gt; preprocessing --------&gt; Inner keccak --------&gt; y_2,y_1,y_0 = h(m)
+    padding ---&gt;</pre></td></tr></table>
+</div>
+</div>
+<h1 id="reference">Reference</h1>
+
+<p>Finally, there are two ref videos introducing the algorithms of Hash Function perfectly. The firstly video introduced the SHA-1 while the second focused on SHA-3.</p>
+
+<p><a href="http://www.youtube.com/watch?v=JIhZWgJA-9o" target="_blank"><img src="http://img.youtube.com/vi/JIhZWgJA-9o/0.jpg" alt="IMAGE ALT TEXT HERE" /></a></p>
 </article>
     <footer class="post-footer">
       
