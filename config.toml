@@ -93,4 +93,10 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
     identifier = "Amazon"
     name = "Amazon"
     url = "/post/Amazon/"
-    weight = 10 
+    weight = 30 
+
+  [[menu.main]]
+    identifier = "Python"
+    name = "Python"
+    url = "/post/Python/"
+    weight = 30 
