@@ -44,6 +44,16 @@ The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
     </item>
     
     <item>
+      <title>Overview For Advanced Crypto Knowledge</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/</link>
+      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/</guid>
+      <description>This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function</description>
+    </item>
+    
+    <item>
       <title>Advanced understanding of properties in Python</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/python/properties/</link>
       <pubDate>Thu, 10 Jan 2019 19:12:35 +1100</pubDate>
@@ -100,15 +110,6 @@ For example:
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/posts/long-form-post/</guid>
       <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus eget nunc scelerisque viverra. Quam vulputate dignissim suspendisse in est ante in nibh mauris. Pharetra magna ac placerat vestibulum lectus mauris. Eget lorem dolor sed viverra ipsum. Elementum nisi quis eleifend quam adipiscing. Aliquet nec ullamcorper sit amet risus. Auctor neque vitae tempus quam pellentesque. Tincidunt lobortis feugiat vivamus at augue.</description>
-    </item>
-    
-    <item>
-      <title>This is a hidden post.</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/hidden-post/</link>
-      <pubDate>Thu, 08 Mar 2018 17:40:19 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/hidden-post/</guid>
-      <description>&lt;p&gt;This post is hidden from the home page.&lt;/p&gt;</description>
     </item>
     
   </channel>
