@@ -13,15 +13,25 @@
     
     
     <item>
-      <title>Overview For Advanced Crypto Knowledge</title>
+      <title>Overview For Advanced Python Design Knowledge</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/</link>
       <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/</guid>
       <description>This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
-The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
-title : &amp;ldquo;Detailed Hash Function&amp;rdquo; date: 2018-11-27T19:12:35+11:00
-draft: false Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.</description>
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function</description>
+    </item>
+    
+    <item>
+      <title>Overview For Advanced Python Design Knowledge</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/python/</link>
+      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/python/</guid>
+      <description>This is the Abstract Page for Python relative knowledge, which could be separated into four part: - Django : - Advanced Python Understanding: - Tornado: - Search Engine Design:
+Concepts of Properties Properties of class means its methods and variables. Properties of instance is similar, which will initialized by def init(self).
+Search order of Properties The order should be bottom-up.
+##Descriptor</description>
     </item>
     
     <item>
@@ -49,15 +59,6 @@ draft: false Hash Function There will be three topics related to HASH FUNCTION i
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/python/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/python/</guid>
       <description></description>
     </item>
     
