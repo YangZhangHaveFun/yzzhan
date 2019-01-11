@@ -24,6 +24,6 @@ Properties of class means its methods and variables. Properties of instance is s
 
 The order should be bottom-up.
 
-![Visual Form](/zRHzx.png)
+![Visual Form](yzzhan/static/img/zRHzx.png)
 
 ##Descriptor
