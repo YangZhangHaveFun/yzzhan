@@ -1,7 +1,11 @@
 ---
-title : "Detailed Hash Function"
-date: 2018-11-27T19:12:35+11:00
+title: "Detailed algorithm For Hash Function"
+date: 2019-01-12T01:37:56+08:00
+lastmod: 2019-01-12T01:37:56+08:00
 draft: false
+tags: ["Hash function", "Algorithm","SHA-3"]
+categories: ["Cryptography"]
+author: "Yang Zhang"
 ---
 # Hash Function
 

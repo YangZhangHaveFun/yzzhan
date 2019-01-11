@@ -35,16 +35,6 @@ Search order of Properties The order should be bottom-up.
     </item>
     
     <item>
-      <title>Detailed Hash Function</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/hash_function/</link>
-      <pubDate>Tue, 27 Nov 2018 19:12:35 +1100</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/hash_function/</guid>
-      <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
- MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
-    </item>
-    
-    <item>
       <title></title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/ai_planing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
