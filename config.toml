@@ -80,10 +80,11 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 
   [[menu.main]]
     name = "Posts"
-    url = "/posts/"
+    url = "/post/"
     weight = 10
 
   [[menu.main]]
+    identifier = "Cryptography and Security"
     name = "Cryptography and Security"
     url = "/Cryptography and Security/"
     weight = 10
@@ -96,8 +97,4 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   [[menu.main]]
     name = "About"
     url = "/about-hugo/"
-    weight = 20
-  [[menu.main]]
-    name = "tutorials"
-    url = "/Tutorial/"
     weight = 20
