@@ -86,7 +86,7 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   [[menu.main]]
     identifier = "Cryptography and Security"
     name = "Cryptography and Security"
-    url = "/post/Cryptography and Security/"
+    url = "/post/Cryptography_and_Security/"
     weight = 20
 
   [[menu.main]]
