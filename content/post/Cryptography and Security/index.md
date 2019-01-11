@@ -12,4 +12,4 @@ author: "Yang"
 This is the intorduction page. Here I have introduced the algorithm for SHA-1 and SHA-3.
 
 The corresponding pages shows below.
-    -SHA-1/SHA-3 : [Algorithms for Hash Function](../Cryptography_and_Security/Hash_Function.md)
+    -SHA-1/SHA-3 : [Algorithms for Hash Function](content/post/Cryptography_and_Security/Hash_Function.md)
