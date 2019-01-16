@@ -5,11 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tag → python
-  
-   | Yzzhan Tech Repo
-</title>
+  <title>对生成器和协程的理解</title>
 
   
   
@@ -27,21 +23,23 @@
   
 
   
+  <meta name="author" content="Yang Zhang">
+  <meta name="description" content="">
+
   
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="对生成器和协程的理解">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="/yzzhan/images/avatar.png">
   
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@gohugoio">
-  <meta name="twitter:title" content="Yzzhan Tech Repo">
-  
-  <meta name="twitter:image" content="/yzzhan/images/avatar.png">
-
-  
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Yzzhan Tech Repo">
-  
-  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/tags/python/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="对生成器和协程的理解">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/generator/">
   <meta property="og:image" content="/yzzhan/images/avatar.png">
 
 
@@ -50,8 +48,7 @@
 <meta name="generator" content="Hugo 0.51">
 
 
-<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/tags/python/">
-<link rel="alternate" type="application/rss+xml" href="https://yangzhanghavefun.github.io/yzzhan/tags/python/index.xml" title="Yzzhan Tech Repo">
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/generator/">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -100,8 +97,12 @@
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
 
 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
 
 
 
@@ -123,6 +124,8 @@
     
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
       
     </div>
     
@@ -147,7 +150,7 @@
         <li class="menu-item
           
           
-          ">
+           is-active">
           <a href="/yzzhan/">Home</a>
         </li>
       
@@ -181,7 +184,7 @@
       
         <li class="menu-item
           
-           is-active
+          
           ">
           <a href="/yzzhan/tags/">Tags</a>
         </li>
@@ -194,69 +197,30 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">对生成器和协程的理解</h1>
+      <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 0 min read</p>
     </header>
+    <article class="post-content"></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/python"><span class="tag">Python</span></a></li>
+        
+          <li><a href="/tags/generator"><span class="tag">Generator</span></a></li>
+        
+          <li><a href="/tags/coroutine"><span class="tag">Coroutine</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
+      </p>
+    </footer>
     
-    
       
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/generator/" class="post-link">对生成器和协程的理解</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 0 min read</p>
-  </header>
-  
-  <p class="post-summary"></p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/generator/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/" class="post-link">对多线程的理解和深入理解Future源码</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 0 min read</p>
-  </header>
-  
-  <p class="post-summary"></p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/properties/" class="post-link">如果在python环境实现并发和一些对并发的理解</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 — 回调 &#43; 事件循环 &#43; select(poll,epoll) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/properties/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/python/" class="post-link">Overview For Advanced Python Design Knowledge</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 11, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">This is the Abstract Page for Python relative knowledge, which could be separated into four part:
-1 2 3 4  1. Django : 2. Advanced Python Understanding: 3. Tornado: 4. Search Engine Design:   Concepts of Properties Properties of class means its methods and variables. Properties of instance is similar, which will initialized by def init(self).
-Search order of Properties The order should be bottom-up.
-##Descriptor</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/python/">Read More →</a>
-  </footer>
-</article>
-
-      
-    
     
   </section>
   
@@ -271,8 +235,33 @@ Search order of Properties The order should be bottom-up.
 
 
 
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
 
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
 
 
 
