@@ -13,11 +13,11 @@
     
     
     <item>
-      <title>如果在python环境实现并发和一些对并发的理解</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/properties/</link>
+      <title>如何在python环境实现并发和一些对并发的理解</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/coroutine/</link>
       <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/properties/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/coroutine/</guid>
       <description>概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 &amp;mdash; 回调 + 事件循环 + select(poll,epoll) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34</description>
     </item>
     
@@ -66,7 +66,7 @@ The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/python/</guid>
       <description>This is the Abstract Page for Python relative knowledge, which could be separated into four part:
-1 2 3 4  1. Django : 2. Advanced Python Understanding: 3. Tornado: 4. Search Engine Design:   Concepts of Properties Properties of class means its methods and variables. Properties of instance is similar, which will initialized by def init(self).
+ Django : Advanced Python Understanding: Toroutine : Coroutine Tornado: Search Engine Design:  Concepts of Properties Properties of class means its methods and variables. Properties of instance is similar, which will initialized by def init(self).
 Search order of Properties The order should be bottom-up.
 ##Descriptor</description>
     </item>
