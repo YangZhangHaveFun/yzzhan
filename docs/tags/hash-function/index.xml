@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Algorithm on Yzzhan Tech Repo</title>
-    <link>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</link>
-    <description>Recent content in Algorithm on Yzzhan Tech Repo</description>
+    <title>Hash Function on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/hash-function/</link>
+    <description>Recent content in Hash Function on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sat, 12 Jan 2019 01:37:56 +0800</lastBuildDate>
     
-	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/hash-function/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
