@@ -9,22 +9,21 @@ author: "Yang Zhang"
 
 ---
 
-This is the **Abstract Page** for Python relative knowledge, which could be separated into four part:
+# This is the **Abstract Page** for Python relative knowledge, which could be separated into four part:
 
-1. Django :
-2. Advanced Python Understanding:
-    Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/Coroutine/)
-3. Tornado:
-4. Search Engine Design:
+1. ## Django :
+2. ## Advanced Python Understanding:
+    Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/)
 
-## Concepts of Properties
+    Asyncio :
 
-Properties of class means its methods and variables. Properties of instance is similar, which will initialized by **def __init__(self)**. 
+    Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/)
 
-## Search order of Properties
+    base class:
 
-The order should be bottom-up.
+    Properties:
 
-![Visual Form](/yzzhan/static/img/zRHzx.png)
+    iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)
 
-##Descriptor
+3. ## Tornado:
+4. ## Search Engine Design:
