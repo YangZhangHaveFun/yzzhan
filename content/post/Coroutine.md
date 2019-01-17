@@ -107,10 +107,11 @@ The order should be bottom-up.
 ![Visual Form](/images/zRHzx.png)
 
 ## 并发的优缺点
-    - advantages:
-        1. 可以有效提高单线程的运行效率
-      
-    - Disadvantages:
-        1. 可读性差
-        2. 共享状态管理困难
-        3. 异常处理困难
+
+- advantages:
+    1. 可以有效提高单线程的运行效率
+
+- Disadvantages:
+    1. 可读性差
+    2. 共享状态管理困难
+    3. 异常处理困难

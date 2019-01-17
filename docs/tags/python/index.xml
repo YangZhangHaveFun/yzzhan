@@ -22,6 +22,15 @@
     </item>
     
     <item>
+      <title>实现高并发并深入理解asyncio内置包</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/asyncio/</link>
+      <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/asyncio/</guid>
+      <description>Package Asynic 实现协程和io多路复用，python提供了一个内置包&amp;mdash;asyncio去简化 回调+事件循环(核心)+select(poll,e</description>
+    </item>
+    
+    <item>
       <title>对多线程的理解和深入理解Future源码</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/multithreads/</link>
       <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
@@ -45,13 +54,7 @@
       <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/python/</guid>
-      <description> This is the Abstract Page for Python relative knowledge, which could be separated into four part:  ## Django : Advanced Python Understanding: Toroutine : Coroutine
-Asyncio :
-Multithreading: Multithreading and Future object
-base class:
-Properties:
-iterator and generator: Iterator, Generator and Basic understanding of Coroutine
- Tornado: Search Engine Design:  </description>
+      <description>This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : 1 2 3 4 5 6 7 8 9 10 11  ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)   3.</description>
     </item>
     
   </channel>
