@@ -3,7 +3,7 @@ title : "实现高并发并深入理解asyncio内置包"
 date: 2019-01-16T01:37:56+08:00
 lastmod: 2019-01-16T01:37:56+08:00
 draft: false
-tags: ["Python", "Overview"]
+tags: ["Python", "async"]
 categories: ["Advanced Python Theory"]
 author: "Yang Zhang"
 
@@ -32,8 +32,8 @@ futures = [asyncio.ensure_future(get_html("www.baidu.com/{}".format(i))) for i i
 
 for future in futures:
     future.add_done_callback(callbakck)
-
 ```
+
 这个方法与线程池的实现方法和原理相同，在future object里存着返回的值，并用result()可以调出。并且，future object支持增加回调函数.当我们的回调函数需要输入参数时，我们需要用到包装函数partial ---- from functools import partial
 ```python
 for future in futures:
