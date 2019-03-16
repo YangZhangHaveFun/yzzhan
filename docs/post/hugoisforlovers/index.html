@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+    <base href="https://yangzhanghavefun.github.io/yzzhan/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="author" content="John Doe">
+
+<meta name="description" content="">
+
+<title>Getting Started with Hugo</title>
+<meta name="generator" content="Hugo 0.51" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/pojoaque.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700" rel="stylesheet" type="text/css">
+<link  href="https://yangzhanghavefun.github.io/yzzhan//css/theme.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="page-container container-fluid">
+<div class="col-md-3 menu">
+    <nav class="col-md-3">
+    
+    <h3 class="home-link"><a href="https://yangzhanghavefun.github.io/yzzhan/">Root</a></h3>
+    <div id="last-posts" class="open">
+        <h3 data-open="last-posts">Yzzhan Tech Repo - Most recent posts</h3>
+        <ul>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/post/creating-a-new-theme/">Creating a New Theme</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/">Migrate to Hugo from Jekyll</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/links/">Links</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/resume/">Resume</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/about/">About Hugo</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/">(Hu)go Template Primer</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/">Getting Started with Hugo</a></li>
+            
+        </ul>
+    </div>
+    
+
+    
+    <div id="tags" class="open">
+        <h3 data-open="tags">Tags</h3>
+        <ul class="tags">
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/development">development</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/go">go</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/golang">golang</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/hugo">hugo</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/templates">templates</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/themes">themes</a></li>
+            
+        </ul>
+    </div>
+    
+
+    
+    <div id="categories" class="open">
+        <h3 data-open="categories">Categories</h3>
+        <ul class="categories">
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/categories/development">development</a></li>
+            
+            <li><a href="https://yangzhanghavefun.github.io/yzzhan/categories/golang">golang</a></li>
+            
+        </ul>
+    </div>
+    
+</nav>
+
+</div>
+<div class="col-md-9 content">
+
+<h1>Getting Started with Hugo</h1>
+<h4>Published 04-02-2014 00:00:00</h4>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-via="kendo5731"></a>
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + '://platform.twitter.com/widgets.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, 'script', 'twitter-wjs');</script>
+
+<div class="fb-share-button" data-href="https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/" data-layout="button"></div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en-US/sdk.js#xfbml=1&version=v2.5";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<article>
+    
+
+<h2 id="step-1-install-hugo">Step 1. Install Hugo</h2>
+
+<p>Goto <a href="https://github.com/spf13/hugo/releases">hugo releases</a> and download the
+appropriate version for your os and architecture.</p>
+
+<p>Save it somewhere specific as we will be using it in the next step.</p>
+
+<p>More complete instructions are available at <a href="https://yangzhanghavefun.github.io/yzzhan/overview/installing/">installing hugo</a></p>
+
+<h2 id="step-2-build-the-docs">Step 2. Build the Docs</h2>
+
+<p>Hugo has its own example site which happens to also be the documentation site
+you are reading right now.</p>
+
+<p>Follow the following steps:</p>
+
+<ol>
+<li>Clone the <a href="http://github.com/spf13/hugo">hugo repository</a></li>
+<li>Go into the repo</li>
+<li>Run hugo in server mode and build the docs</li>
+<li>Open your browser to <a href="http://localhost:1313">http://localhost:1313</a></li>
+</ol>
+
+<p>Corresponding pseudo commands:</p>
+
+<pre><code>git clone https://github.com/spf13/hugo
+cd hugo
+/path/to/where/you/installed/hugo server --source=./docs
+&gt; 29 pages created
+&gt; 0 tags index created
+&gt; in 27 ms
+&gt; Web Server is available at http://localhost:1313
+&gt; Press ctrl+c to stop
+</code></pre>
+
+<p>Once you&rsquo;ve gotten here, follow along the rest of this page on your local build.</p>
+
+<h2 id="step-3-change-the-docs-site">Step 3. Change the docs site</h2>
+
+<p>Stop the Hugo process by hitting ctrl+c.</p>
+
+<p>Now we are going to run hugo again, but this time with hugo in watch mode.</p>
+
+<pre><code>/path/to/hugo/from/step/1/hugo server --source=./docs --watch
+&gt; 29 pages created
+&gt; 0 tags index created
+&gt; in 27 ms
+&gt; Web Server is available at http://localhost:1313
+&gt; Watching for changes in /Users/spf13/Code/hugo/docs/content
+&gt; Press ctrl+c to stop
+</code></pre>
+
+<p>Open your <a href="http://vim.spf13.com">favorite editor</a> and change one of the source
+content pages. How about changing this very file to <em>fix the typo</em>. How about changing this very file to <em>fix the typo</em>.</p>
+
+<p>Content files are found in <code>docs/content/</code>. Unless otherwise specified, files
+are located at the same relative location as the url, in our case
+<code>docs/content/overview/quickstart.md</code>.</p>
+
+<p>Change and save this file.. Notice what happened in your terminal.</p>
+
+<pre><code>&gt; Change detected, rebuilding site
+
+&gt; 29 pages created
+&gt; 0 tags index created
+&gt; in 26 ms
+</code></pre>
+
+<p>Refresh the browser and observe that the typo is now fixed.</p>
+
+<p>Notice how quick that was. Try to refresh the site before it&rsquo;s finished building.. I double dare you.
+Having nearly instant feedback enables you to have your creativity flow without waiting for long builds.</p>
+
+<h2 id="step-4-have-fun">Step 4. Have fun</h2>
+
+<p>The best way to learn something is to play with it.</p>
+
+</article>
+
+
+
+</div>
+</div>
+<script src="https://yangzhanghavefun.github.io/yzzhan//js/theme.min.js" type="text/javascript"></script>
+
+
+</body>
+</html>
+

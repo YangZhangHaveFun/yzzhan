@@ -6,125 +6,63 @@
     <description>Recent content in Tags on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 12 Jan 2019 01:37:56 +0800</lastBuildDate>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Algorithm</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</link>
-      <pubDate>Sat, 12 Jan 2019 01:37:56 +0800</pubDate>
+      <title>Development</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/development/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Async</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/async/</link>
-      <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
+      <title>Go</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/go/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/async/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Coroutine</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/coroutine/</link>
-      <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
+      <title>Golang</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/coroutine/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/</link>
-      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
+      <title>Hugo</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Generator</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/generator/</link>
-      <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
+      <title>Templates</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/templates/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/generator/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/templates/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Hash Function</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/hash-function/</link>
-      <pubDate>Sat, 12 Jan 2019 01:37:56 +0800</pubDate>
+      <title>Themes</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/themes/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/hash-function/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Interview</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/interview/</link>
-      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/interview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/java/</link>
-      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Overview</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/overview/</link>
-      <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/overview/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/python/</link>
-      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Search Engine</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/search-engine/</link>
-      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/search-engine/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sha 3</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/sha-3/</link>
-      <pubDate>Sat, 12 Jan 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/sha-3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Thread</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/tags/thread/</link>
-      <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/thread/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/themes/</guid>
       <description></description>
     </item>
     

@@ -6,26 +6,26 @@
     <description>Recent content in Categories on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 Mar 2019 01:37:56 +0800</lastBuildDate>
+    <copyright>Copyright (c) 2008 - 2014, Steve Francia; all rights reserved.</copyright>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Advanced Python Theory</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/categories/advanced-python-theory/</link>
-      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
+      <title>Development</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/categories/development/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/advanced-python-theory/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/development/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Cryptography</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/</link>
-      <pubDate>Sat, 12 Jan 2019 01:37:56 +0800</pubDate>
+      <title>Golang</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/categories/golang/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/cryptography/</guid>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/categories/golang/</guid>
       <description></description>
     </item>
     

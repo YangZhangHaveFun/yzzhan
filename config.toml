@@ -2,103 +2,11 @@ baseURL = "https://yangzhanghavefun.github.io/yzzhan/"
 languageCode = "en"
 publishDir = "docs"
 title = "Yzzhan Tech Repo"
-theme = "hugo-nuo"
-enableRobotsTXT = true
-PygmentsCodeFences = true
-canonifyurls = true  
+copyright = "Copyright (c) 2008 - 2014, Steve Francia; all rights reserved."
+canonifyurls = true
+paginate = 3
+theme = "hugo-code-editor-theme"
 
-[[menu.main]]
-  name = "Home"
-  weight = 10
-  identifier = "home"
-  url = "/"
-
-[[menu.main]]
-  identifier = "Cryptography and Security"
-  name = "Cryptography and Security"
-  url = "/post/Cryptography_and_Security/"
-  weight = 20
-
-[[menu.main]]
-  identifier = "Python"
-  name = "Python"
-  url = "/post/Python/"
-  weight = 15 
-
-[[menu.main]]
-  name = "Tags"
-  weight = 30
-  identifier = "tags"
-  url = "/tags/"
-
-# Add your own params here
 [params]
-  author = "Yang Zhang"
-  bg = "images/grey-prism.svg"
-  avatar = "images/avatar.png"
-  seotitle = "Hugo Blog (SEO Version)"
-  subtitle = "~ Keep It Simple & Stupid ~"
-  description = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."
-  paginate = 10
-
-  # Choose your social networks
-  email = "yangzhangyuuki@outlook.com"
-  github = "yangzhanghavefun"
-  # twitter = "twitter_username"
-  # linkedin = "linkedin_username"
-  # weibo = "weibo_username"
-  # wechat= "images/qrcode.jpg"  # Replace with your wechat qrcode image
-  # facebook = "facebook_username"
-  # google = "googlplus_id_number"
-  # instagram = "instagram_username"
-  # youtube = "youtube_username"
-  # vimeo = "vimeo_username"
-  # medium = "medium_username"
-  # quora = "quora_username"
-  # pinterest = "pinterest_username"
-  # dribbble = "dribbble_username"
-  # behance = "behance_username"
-  # jsfiddle = "jsfiddle_username"
-  # codepen = "codepen_username"
-  # zhihu = "zhihu_username"
-  # douban = "douban_username"
-  # bilibili = "bilibili_id_number"
-  # stackoverflow = "laozhu"
-  # codesandbox = "melaozhu"
-  # npm = "laozhu"
-  # reddit = "melaozhu"
-
-  # Overrid theme styles in this file
-  # customStyle = "styles/custom.scss"
-
-  # Changyan Comments (China Only)
-  changyan = false
-  changyanId = "cyt3toRiB"
-  changyanConf = "prod_0908b1cb9a581501753cce1ed074dbe3"
-
-  # Google Webmaster
-  # https://www.google.com/webmasters/
-  googleSiteVerification = "_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc"
-
-  # Bing Webmaster
-  # https://www.bing.com/toolbox/webmaster/
-  msValidate = "22596E34341DD1D17D6022C44647E587"
-
-  # Baidu Webmaster (China Only)
-  # https://zhanzhang.baidu.com/
-  # baiduSiteVerification = "MZ23SPxxfa"
-
-  # Sogou Webmaster (China Only)
-  # http://zhanzhang.sogou.com/
-  # sogouSiteVerification = "m2jktMQTZm"
-
-  # 360 Webmaster (China Only)
-  # http://zhanzhang.so.com/
-  # soSiteVerification = "b7ab3b4c2edbc856642004d1b8c27a91"
-
-  # Baidu Tongji (China Only)
-  # https://tongji.baidu.com/
-  # baiduTongji = "e21dc1e8a592188271b615159dc88af7"
-
-  # ICP Number (China Only)
-  # ICP = "苏ICP备16005986号-2"
+    author = "John Doe"
+    locale = "en-US"
