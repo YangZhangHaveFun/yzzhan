@@ -3,100 +3,114 @@ languageCode = "en"
 publishDir = "docs"
 title = "Yzzhan Tech Repo"
 theme = "hugo-nuo"
+enableRobotsTXT = true
+PygmentsCodeFences = true
+canonifyurls = true  
 
-# enableGitInfo = true
-pygmentsOptions = "linenos=table"
-pygmentsCodefences = true
-pygmentsUseClasses = true
-pygmentsCodefencesGuessSyntax = true
+[[menu.main]]
+  identifier = "Cryptography and Security"
+  name = "Cryptography and Security"
+  url = "/post/Cryptography_and_Security/"
+  weight = 20
 
-hasCJKLanguage = true  # If there're Chinese/Japanese/Korean Languages in the content, enable this.
-rssLimit = 10  # Maximum number of items in the RSS feed.
-copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This is only used by RSS template.
-# googleAnalytics = "UA-123-45"
-# disqusShortname = "yourdiscussshortname"
+[[menu.main]]
+  identifier = "Amazon"
+  name = "Amazon"
+  url = "/post/Amazon/"
+  weight = 30 
 
-[author]
-  name = "Yang Zhang"
+[[menu.main]]
+  identifier = "Python"
+  name = "Python"
+  url = "/post/Python/"
+  weight = 15 
 
-[blackfriday]
-  hrefTargetBlank = true
-
-[taxonomies]
-  tag = "tags"
-  category = "Categories"  # Categories are disabled by default.
-
-[params]
-  dateform        = "Jan 2, 2006"
-  dateformShort   = "Jan 2"
-  dateformNum     = "2006-01-02"
-  dateformNumTime = "2006-01-02 15:04 -0700"
-
-  # themeColor = "#494f5c"  # Theme color in meta tags.
-  homeSubtitle = "My personal tech recording."
-  footerCopyright = ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
-  # gitUrl = "https://github.com/Someone/SomeRepo/commit/" # Prefix of link to you git commit detail page. GitInfo must be enabled. 
-  justifyContent = false  # Set "text-align: justify" to .content
-  # bgImg = ""  #  Homepage background-image URL
-
-
-  toc = true 
-
-  # mathjax
-  mathjax = true          # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）
-  mathjaxEnableSingleDollar = true                                                    # 是否使用 $...$ 即可進行inline latex渲染
-  mathjaxEnableAutoNumber = false                                                       # 是否使用公式自动编号
-  mathjaxUseLocalFiles = false  # You should install mathjax in `yout-site/static/lib/mathjax`
-
-  postMetaInFooter = true
-
-  since = "26/11/2018"            # Site creation time   
-
-  [[params.social]]
-    name = "twitter"
-    url = "https://twitter.com/"
-
-  [[params.social]]
-    name = "instagram"
-    url = "https://instagram.com/"
-
-  [[params.social]]
-    name = "github"
-    url = "https://github.com/"
-
-[menu]
-
-  [[menu.main]]
+[[menu.main]]
   name = "Home"
   weight = 10
   identifier = "home"
   url = "/"
 
-  [[menu.main]]
+[[menu.main]]
+  name = "Works"
+  weight = 20
+  identifier = "works"
+  url = "https://github.com/laozhu"
+
+[[menu.main]]
   name = "Tags"
   weight = 30
   identifier = "tags"
   url = "/tags/"
 
-  [[menu.main]]
-    name = "Posts"
-    url = "/post/"
-    weight = 10
+# Add your own params here
+[params]
+  author = "Yang Zhang"
+  bg = "images/grey-prism.svg"
+  avatar = "images/avatar.png"
+  seotitle = "Hugo Blog (SEO Version)"
+  subtitle = "~ Keep It Simple & Stupid ~"
+  description = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."
+  paginate = 10
 
-  [[menu.main]]
-    identifier = "Cryptography and Security"
-    name = "Cryptography and Security"
-    url = "/post/Cryptography_and_Security/"
-    weight = 20
+  # Choose your social networks
+  email = "yangzhangyuuki@outlook.com"
+  github = "yangzhanghavefun"
+  # twitter = "twitter_username"
+  # linkedin = "linkedin_username"
+  # weibo = "weibo_username"
+  # wechat= "images/qrcode.jpg"  # Replace with your wechat qrcode image
+  # facebook = "facebook_username"
+  # google = "googlplus_id_number"
+  # instagram = "instagram_username"
+  # youtube = "youtube_username"
+  # vimeo = "vimeo_username"
+  # medium = "medium_username"
+  # quora = "quora_username"
+  # pinterest = "pinterest_username"
+  # dribbble = "dribbble_username"
+  # behance = "behance_username"
+  # jsfiddle = "jsfiddle_username"
+  # codepen = "codepen_username"
+  # zhihu = "zhihu_username"
+  # douban = "douban_username"
+  # bilibili = "bilibili_id_number"
+  # stackoverflow = "laozhu"
+  # codesandbox = "melaozhu"
+  # npm = "laozhu"
+  # reddit = "melaozhu"
 
-  [[menu.main]]
-    identifier = "Amazon"
-    name = "Amazon"
-    url = "/post/Amazon/"
-    weight = 30 
+  # Overrid theme styles in this file
+  # customStyle = "styles/custom.scss"
 
-  [[menu.main]]
-    identifier = "Python"
-    name = "Python"
-    url = "/post/Python/"
-    weight = 15 
+  # Changyan Comments (China Only)
+  changyan = false
+  changyanId = "cyt3toRiB"
+  changyanConf = "prod_0908b1cb9a581501753cce1ed074dbe3"
+
+  # Google Webmaster
+  # https://www.google.com/webmasters/
+  googleSiteVerification = "_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc"
+
+  # Bing Webmaster
+  # https://www.bing.com/toolbox/webmaster/
+  msValidate = "22596E34341DD1D17D6022C44647E587"
+
+  # Baidu Webmaster (China Only)
+  # https://zhanzhang.baidu.com/
+  # baiduSiteVerification = "MZ23SPxxfa"
+
+  # Sogou Webmaster (China Only)
+  # http://zhanzhang.sogou.com/
+  # sogouSiteVerification = "m2jktMQTZm"
+
+  # 360 Webmaster (China Only)
+  # http://zhanzhang.so.com/
+  # soSiteVerification = "b7ab3b4c2edbc856642004d1b8c27a91"
+
+  # Baidu Tongji (China Only)
+  # https://tongji.baidu.com/
+  # baiduTongji = "e21dc1e8a592188271b615159dc88af7"
+
+  # ICP Number (China Only)
+  # ICP = "苏ICP备16005986号-2"

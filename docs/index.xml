@@ -6,11 +6,51 @@
     <description>Recent content on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 16 Jan 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 09 Apr 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Links</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/links/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/links/</guid>
+      <description>Ritchie and his friends.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/about/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/about/</guid>
+      <description>Hugo is a static site engine written in Go.
+It makes use of a variety of open source projects including:
+ Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Java面试的知识储备</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/</link>
+      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/</guid>
+      <description>#Content 1. Difference between Hashtable and HashMap
+1.Difference between Hashtable and HashMap  作者不一样。。。 Hashtable阵容 ```Java
+ @author Arthur van Hoff @author Josh Bloch @author Neal Gafter  HashMap阵容 Java @author Arthur van Hoff @author Josh Bloch @author Neal Gafter @author Doug Lea ``` Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者  产生时间 HashMap 晚于 Hashtable, Hashtable一开始发布就提供的键值映射的数据结构，而HashMap产生于JDK1.</description>
+    </item>
+    
+    <item>
+      <title>对Elastic Search的实现和理解</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/search_engine/</link>
+      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/search_engine/</guid>
+      <description>Elastic Search Engine Specification  Coding Language : python FrameWork : django + scrapy Scrapied website: www.zhihu.com www.jobbole.com www.lagou.com  Knowledge Preparation 浏览器 driver 由于知乎等网站需要登录后才能访问所需要的内容，于是我们需要安装chrome driver 和 selenium去模拟登录
+下载链接 http://chromedriver.chromium.org/downloads 但是，直接使用还是凉凉， 因为服务器会从Chrome driver的某些js文件中检测出这是个driver不是正常浏览器，然后返回403.我们的解决方法是开启chrome remote debug 模式 配置 关闭所有chrome正在运行的实例 在Cmd里找到Chrome.exe所在的目录，输入chrome.exe &amp;ndash;remote-debugging-port=9222 然后访问127.0.0.1:9222/json</description>
+    </item>
     
     <item>
       <title>如何在python环境实现并发和一些对并发的理解</title>
@@ -18,7 +58,7 @@
       <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/coroutine/</guid>
-      <description>概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 &amp;mdash; 回调 + 事件循环 + select(poll,epoll) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34</description>
+      <description>概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 &amp;mdash; 回调 + 事件循环 + select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&amp;#34;https://www.baidu.com&amp;#34;, &amp;#34;https://www.baidu.com&amp;#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&amp;#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&amp;#34;.format(self.path, self.host).encode(&amp;#34;utf8&amp;#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data += d else: selector.unregister(key.fd) data = self.data.decode(&amp;#34;utf8&amp;#34;) html_data = data.split(&amp;#34;\r\n\r\n&amp;#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.</description>
     </item>
     
     <item>
@@ -27,7 +67,17 @@
       <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/asyncio/</guid>
-      <description>Package Asynic 实现协程和io多路复用，python提供了一个内置包&amp;mdash;asyncio去简化 回调+事件循环(核心)+select(poll,e</description>
+      <description>Package Asynic 实现协程和io多路复用，python提供了一个内置包&amp;mdash;asyncio去简化 回调+事件循环(核心)+select(poll,epoll)这个流程。
+在async包的内部，已经实现了事件循环，并且为了把generator和coroutine方法区分开，python引入了两个关键词 async和await
+-async用于方法开头，声明此方法为协程方法
+-await用于方法中，声明需要异步处理的地方，类似于生成器里的yield from
+-同时方法末尾可提供一个返回值。
+-在协程方法中不可以使用同步/阻塞的方法或函数(eg: time.sleep() &amp;mdash;&amp;gt; async.sleep())，否则会使异步编程无意义
+Adding tasks into loop  我们实例化loop &amp;mdash;&amp;gt; loop = asyncio.get_event_loop()
+ 然后列出需要异步实现的Tasks. 此时我们有两种实现方法。第一我们可以把我们的task转成Future object eg: ``python futures = [asyncio.ensure_future(get_html(&amp;quot;www.baidu.com/{}&amp;quot;.format(i))) for i in range(100)]
+  for future in futures: future.add_done_callback(callbakck)
+ 这个方法与线程池的实现方法和原理相同，在future object里存着返回的值，并用result()可以调出。并且，future object支持增加回调函数.当我们的回调函数需要输入参数时，我们需要用到包装函数partial ---- from functools import partial ```python for future in futures: future.add_done_callback(partial(callbakck, &amp;quot;www.baidu.com&amp;quot;))  或者用async.wait, async.gather包装
+task_group_1 = [get_html(&amp;#34;www.bilibili.com/{}&amp;#34;.format(i))for i in range(10)] task_group_2 = [get_html(&amp;#34;www.</description>
     </item>
     
     <item>
@@ -36,7 +86,7 @@
       <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/multithreads/</guid>
-      <description></description>
+      <description>Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum += 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.acquire() sum -= 1 lock.</description>
     </item>
     
     <item>
@@ -74,7 +124,16 @@ The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
       <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/python/</guid>
-      <description>This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : 1 2 3 4 5 6 7 8 9 10 11  ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)   3.</description>
+      <description> This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)  3. Tornado : 4. Search Engine Design : </description>
+    </item>
+    
+    <item>
+      <title>Resume</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/resume/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/resume/</guid>
+      <description>This is my resume.</description>
     </item>
     
     <item>
@@ -92,6 +151,15 @@ The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/amazon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/iteratorandgenerator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/iteratorandgenerator/</guid>
       <description></description>
     </item>
     
