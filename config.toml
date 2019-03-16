@@ -8,34 +8,22 @@ PygmentsCodeFences = true
 canonifyurls = true  
 
 [[menu.main]]
-  identifier = "Cryptography and Security"
-  name = "Cryptography and Security"
-  url = "/post/Cryptography_and_Security/"
-  weight = 20
-
-[[menu.main]]
-  identifier = "Amazon"
-  name = "Amazon"
-  url = "/post/Amazon/"
-  weight = 30 
-
-[[menu.main]]
-  identifier = "Python"
-  name = "Python"
-  url = "/post/Python/"
-  weight = 15 
-
-[[menu.main]]
   name = "Home"
   weight = 10
   identifier = "home"
   url = "/"
 
 [[menu.main]]
-  name = "Works"
+  identifier = "Cryptography and Security"
+  name = "Cryptography and Security"
+  url = "/post/Cryptography_and_Security/"
   weight = 20
-  identifier = "works"
-  url = "https://github.com/laozhu"
+
+[[menu.main]]
+  identifier = "Python"
+  name = "Python"
+  url = "/post/Python/"
+  weight = 15 
 
 [[menu.main]]
   name = "Tags"
