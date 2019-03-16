@@ -1,6 +1,7 @@
-baseURL = ""
+baseURL = "https://yangzhanghavefun.github.io/yzzhan/"
 languageCode = "en"
-title = "Hugo Blog"
+publishDir = "docs"
+title = "Yzzhan Tech Repo"
 theme = "hugo-nuo"
 enableRobotsTXT = true
 PygmentsCodeFences = true
