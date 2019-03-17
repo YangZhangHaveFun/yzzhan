@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Interview on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/interview/</link>
+    <description>Recent content in Interview on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Sat, 16 Mar 2019 01:37:56 +0800</lastBuildDate>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/interview/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java面试的知识储备</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/</link>
+      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/</guid>
+      <description>#Content 1. Difference between Hashtable and HashMap
+1.Difference between Hashtable and HashMap  作者不一样。。。 Hashtable阵容 ```Java
+ @author Arthur van Hoff @author Josh Bloch @author Neal Gafter  HashMap阵容 Java @author Arthur van Hoff @author Josh Bloch @author Neal Gafter @author Doug Lea ``` Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者  产生时间 HashMap 晚于 Hashtable, Hashtable一开始发布就提供的键值映射的数据结构，而HashMap产生于JDK1.</description>
+    </item>
+    
+  </channel>
+</rss>

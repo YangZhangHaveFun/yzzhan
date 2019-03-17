@@ -221,6 +221,139 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/search_engine/" class="post-link">对Elastic Search的实现和理解</a></h3>
+    <p class="post-meta">@Yang Zhang · Mar 16, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> Elastic Search Engine Specification  Coding Language : python FrameWork : django &#43; scrapy Scrapied website: www.zhihu.com www.jobbole.com www.lagou.com  Knowledge Preparation 浏览器 driver 由于知乎等网站需要登录后才能访问所需要的内容，于是我们需要安装chrome driver 和 selenium去模拟登录
+下载链接 http://chromedriver.chromium.org/downloads 但是，直接使用还是凉凉， 因为服务器会从Chrome driver的某些js文件中检测出这是个driver不是正常浏览器，然后返回403.我们的解决方法是开启chrome remote debug 模式 配置 关闭所有chrome正在运行的实例 在Cmd里找到Chrome.exe所在的目录，输入chrome.exe –remote-debugging-port=9222 然后访问127.0.0.1:9222/json
+ElasticSearch 概念  集群： 一个或多个节点组织在一起 节点： 一个节点是集群中的一个服务器，由一个名字来标识 分片： 将索引划分为多份的能力，允许水平分割和扩展容量，多个分片响应请求，提高性能和吞吐量 副本： 创建分片的一份或多份的能力，在一个节点失败是其余节点可以顶上     ElasticSearch Mysql     index(索引) 数据库   type(类型) 表   documents(文档) 行   Fields 列    </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/search_engine/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/" class="post-link">Java面试的知识储备</a></h3>
+    <p class="post-meta">@Yang Zhang · Mar 16, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">#Content 1. Difference between Hashtable and HashMap
+1.Difference between Hashtable and HashMap  作者不一样。。。 Hashtable阵容 ```Java
+ @author Arthur van Hoff @author Josh Bloch @author Neal Gafter  HashMap阵容 Java @author Arthur van Hoff @author Josh Bloch @author Neal Gafter @author Doug Lea ``` Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者  产生时间 HashMap 晚于 Hashtable, Hashtable一开始发布就提供的键值映射的数据结构，而HashMap产生于JDK1.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/generator/" class="post-link">对生成器和协程的理解</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 0 min read</p>
+  </header>
+  
+  <p class="post-summary"></p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/generator/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/" class="post-link">对多线程的理解和深入理解Future源码</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.acquire() sum -= 1 lock.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/" class="post-link">实现高并发并深入理解asyncio内置包</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">Package Asynic 实现协程和io多路复用，python提供了一个内置包—asyncio去简化 回调&#43;事件循环(核心)&#43;select(poll,epoll)这个流程。
+在async包的内部，已经实现了事件循环，并且为了把generator和coroutine方法区分开，python引入了两个关键词 async和await
+-async用于方法开头，声明此方法为协程方法
+-await用于方法中，声明需要异步处理的地方，类似于生成器里的yield from
+-同时方法末尾可提供一个返回值。
+-在协程方法中不可以使用同步/阻塞的方法或函数(eg: time.sleep() —&gt; async.sleep())，否则会使异步编程无意义
+Adding tasks into loop  我们实例化loop —&gt; loop = asyncio.get_event_loop()
+ 然后列出需要异步实现的Tasks. 此时我们有两种实现方法。第一我们可以把我们的task转成Future object eg: ``python futures = [asyncio.ensure_future(get_html(&#34;www.baidu.com/{}&#34;.format(i))) for i in range(100)]
+  for future in futures: future.add_done_callback(callbakck)
+ 这个方法与线程池的实现方法和原理相同，在future object里存着返回的值，并用result()可以调出。并且，future object支持增加回调函数.当我们的回调函数需要输入参数时，我们需要用到包装函数partial ---- from functools import partial ```python for future in futures: future.add_done_callback(partial(callbakck, &#34;www.baidu.com&#34;))  或者用async.wait, async.gather包装
+task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(10)] task_group_2 = [get_html(&#34;www.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/" class="post-link">如何在python环境实现并发和一些对并发的理解</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 — 回调 &#43; 事件循环 &#43; select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&#34;https://www.baidu.com&#34;, &#34;https://www.baidu.com&#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&#34;.format(self.path, self.host).encode(&#34;utf8&#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data &#43;= d else: selector.unregister(key.fd) data = self.data.decode(&#34;utf8&#34;) html_data = data.split(&#34;\r\n\r\n&#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/" class="post-link">Detailed algorithm For Hash Function</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 12, 2019 · 4 min read</p>
+  </header>
+  
+  <p class="post-summary">Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
+ MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/python/" class="post-link">Overview For Advanced Python Design Knowledge</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 11, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)  3. Tornado : 4. Search Engine Design : </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/python/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/" class="post-link">Overview For Advanced Cryptography A</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 11, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">This is the overview about what I have done related with Cryptography and Security. Here I have introduced the algorithm for SHA-1 and SHA-3.
+The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/creating-a-new-theme/" class="post-link">Creating a New Theme</a></h3>
     <p class="post-meta">@Michael Henderson · Sep 28, 2014 · 34 min read</p>
   </header>
@@ -233,70 +366,17 @@ We’ll start with creating a new site with a very basic template.</p>
 </article>
 
       
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/" class="post-link">(Hu)go Template Primer</a></h3>
-    <p class="post-meta">@Ritchie Zhu · Jul 28, 2014 · 7 min read</p>
-  </header>
-  
-  <p class="post-summary">Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/goisforlovers/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hugo-nuo-post-preview/" class="post-link">Hugo 主题 Nuo 文章样式预览</a></h3>
-    <p class="post-meta">@Ritchie Zhu · Jul 17, 2014 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">这篇文章集中说明本人博客主题所支持的 Markdown 语法和 Hugo Shortcodes 插件，你也可以在这里预览到他们的样子。如果你不喜欢某些部分的样式，可以去修改 content.scss 和 shortcodes.scss 这两个文件。预告一下，我所用的这个名为 Nuo 的 Hugo 也将于近期发布，敬请期待。
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hugo-nuo-post-preview/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/" class="post-link">Getting Started with Hugo</a></h3>
-    <p class="post-meta">@Ritchie Zhu · Apr 2, 2014 · 2 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://yangzhanghavefun.github.io/yzzhan/media/cover.jpg" alt="Getting Started with Hugo" lazyload="on">
-  
-  <p class="post-summary">Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/" class="post-link">Migrate to Hugo from Jekyll</a></h3>
-    <p class="post-meta">@Ritchie Zhu · Mar 10, 2014 · 4 min read</p>
-  </header>
-  
-  <p class="post-summary">Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &lt;root&gt;/ ▾ images/ logo.png  should become
-▾ &lt;root&gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you’ll want any files that should reside at the root (such as CNAME) to be moved to static.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/">Read More →</a>
-  </footer>
-</article>
-
-      
     
+    
+      <footer class="list-footer">
+        <nav class="pagination">
+          <h3 class="offscreen">Pagination</h3>
+          
+          
+            <a class="pagination-next" href="https://yangzhanghavefun.github.io/yzzhan/post/page/2/">Older Posts →</a>
+          
+        </nav>
+      </footer>
     
   </section>
   
