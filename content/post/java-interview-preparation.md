@@ -41,9 +41,8 @@ HashMap 晚于 Hashtable, Hashtable一开始发布就提供的键值映射的数
 
 3. 继承的父类不同
 HashMap是继承自AbstractMap类，而HashTable是继承自Dictionary类。不过它们都实现了同时实现了map、Cloneable（可复制）、Serializable（可序列化）这三个接口。
-![HashMap](hashmap.png)
-![HashMap](/media/hashmap.png)
-![Hashtable](/media/hashtable.png)
+![HashMap](/media/hashmap.PNG)
+![Hashtable](/media/hashtable.PNG)
 
 4. 对外提供的接口不同
 Hashtable比HashMap多提供了elments() 和contains() 两个方法。
