@@ -29,7 +29,7 @@
   
   
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@twitter_username">
+    <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="如何在python环境实现并发和一些对并发的理解">
     <meta name="twitter:description" content="概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 &amp;mdash; 回调 &#43; 事件循环 &#43; select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&amp;#34;https://www.baidu.com&amp;#34;, &amp;#34;https://www.baidu.com&amp;#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&amp;#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&amp;#34;.format(self.path, self.host).encode(&amp;#34;utf8&amp;#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data &#43;= d else: selector.unregister(key.fd) data = self.data.decode(&amp;#34;utf8&amp;#34;) html_data = data.split(&amp;#34;\r\n\r\n&amp;#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.">
     <meta name="twitter:image" content="/images/avatar.png">
@@ -162,7 +162,7 @@
           
           
           ">
-          <a href="https://github.com/laozhu">Works</a>
+          <a href="https://yangzhanghavefun.github.io/yzzhan/categories/">Categories</a>
         </li>
       
         <li class="menu-item
@@ -191,16 +191,12 @@
   <nav class="social-menu collapsed">
     <h2 class="offscreen">Social Networks</h2>
     <ul class="social-list"><li class="social-item">
-          <a href="mailto:name@domain.com" title="Email" aria-label="Email">
+          <a href="mailto:yzzhan@student.unimelb.edu.au" title="Email" aria-label="Email">
             <span class="icon icon-email" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//github.com/github_username" title="GitHub" aria-label="GitHub">
+          <a href="//github.com/YangZhangHaveFun" title="GitHub" aria-label="GitHub">
             <span class="icon icon-github" aria-hidden="true"></span>
-          </a>
-        </li><li class="social-item">
-          <a href="//twitter.com/twitter_username" title="Twitter" aria-label="Twitter">
-            <span class="icon icon-twitter" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
           <a href="//weibo.com/weibo_username" title="Weibo" aria-label="Weibo">
@@ -209,10 +205,6 @@
         </li><li class="social-item">
           <a href="https://yangzhanghavefun.github.io/yzzhan/images/qrcode.jpg" title="Wechat" aria-label="Wechat">
             <span class="icon icon-wechat" aria-hidden="true"></span>
-          </a>
-        </li><li class="social-item">
-          <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin" aria-label="Linkedin">
-            <span class="icon icon-linkedin" aria-hidden="true"></span>
           </a>
         </li></ul>
   </nav>

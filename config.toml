@@ -24,16 +24,16 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   url = "/"
 
 [[menu.main]]
-  name = "Works"
-  weight = 20
-  identifier = "works"
-  url = "https://github.com/laozhu"
-
-[[menu.main]]
   name = "Tags"
   weight = 30
   identifier = "tags"
   url = "/tags/"
+
+[[menu.main]]
+  name = "Categories"
+  weight = 30
+  identifier = "categories"
+  url = "/categories/"
 
 # Add your own params here
 [params]
@@ -46,10 +46,10 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   paginate = 10
 
   # Choose your social networks
-  email = "name@domain.com"
-  github = "github_username"
-  twitter = "twitter_username"
-  linkedin = "linkedin_username"
+  email = "yzzhan@student.unimelb.edu.au"
+  github = "YangZhangHaveFun"
+  # twitter = "twitter_username"
+  # linkedin = "linkedin_username"
   weibo = "weibo_username"
   wechat= "images/qrcode.jpg"  # Replace with your wechat qrcode image
   # facebook = "facebook_username"
