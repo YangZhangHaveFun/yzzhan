@@ -19,8 +19,9 @@
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/</guid>
       <description>#Content 1. Difference between Hashtable and HashMap
-1.Difference between Hashtable and HashMap  作者不一样。。。 Hashtable阵容 ```Java
- @author Arthur van Hoff @author Josh Bloch @author Neal Gafter  HashMap阵容 Java @author Arthur van Hoff @author Josh Bloch @author Neal Gafter @author Doug Lea ``` Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者  产生时间 HashMap 晚于 Hashtable, Hashtable一开始发布就提供的键值映射的数据结构，而HashMap产生于JDK1.</description>
+1.Difference between Hashtable and HashMap  作者不一样。。。  Hashtable阵容
+* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter HashMap阵容
+* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</description>
     </item>
     
     <item>
