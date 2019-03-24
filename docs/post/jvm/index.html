@@ -24,28 +24,40 @@
 
   
   
-  <meta name="description" content="">
+  <meta name="description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
+ Java虚拟机栈(Java Virtual Machine Stacks)
+ Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
+ 本地方法栈类似于Java虚拟机栈. 前者为Native Method服务,后者为Java方法(字节码)服务.  Java堆(Java Heap)
+ 对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建. 此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
+ Java虚拟机栈(Java Virtual Machine Stacks)
+ Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
+ 本地方法栈类似于Java虚拟机栈. 前者为Native Method服务,后者为Java方法(字节码)服务.  Java堆(Java Heap)
+ 对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建. 此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="">
-  <meta property="og:description" content="">
+  <meta property="og:description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
+ Java虚拟机栈(Java Virtual Machine Stacks)
+ Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
+ 本地方法栈类似于Java虚拟机栈. 前者为Native Method服务,后者为Java方法(字节码)服务.  Java堆(Java Heap)
+ 对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建. 此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
   <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
@@ -213,9 +225,142 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title"></h1>
-      <p class="post-meta">@Ritchie Zhu · Jan 1, 0001 · 0 min read</p>
+      <p class="post-meta">@Ritchie Zhu · Jan 1, 0001 · 1 min read</p>
     </header>
-    <article class="post-content"></article>
+    <article class="post-content">
+
+<h1 id="自动内存管理机制">自动内存管理机制</h1>
+
+<h2 id="java内存区域与内存溢出异常">Java内存区域与内存溢出异常</h2>
+
+<h3 id="运行时的数据区域">运行时的数据区域</h3>
+
+<p>Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/dataArea.PNG" alt="数据区" />
+1. <strong>程序计数器(Program Counter Register)</strong>
+    * 当前线程所执行的字节码的行号指示器
+    * 字节码解释器工作时通过<strong>程序计数器</strong>来选取下一条需要执行的字节码指令.
+    * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&rdquo;线程私有&rdquo;的内存
+    * 若线程正在执行java方法,则<strong>程序计数器</strong>记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined).
+    * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域.
+        &gt; Native方法
+        &gt; &ldquo;A native method is a Java method whose implementation is provided by non-java code.&rdquo;
+        &gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互</p>
+
+<ol>
+<li><p><strong>Java虚拟机栈(Java Virtual Machine Stacks)</strong></p>
+
+<ul>
+<li><strong>Java虚拟机栈</strong>也是线程私有的.</li>
+<li><strong>Java虚拟机栈</strong>描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程.</li>
+<li>局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的</li>
+<li>如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常.</li>
+<li>虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.</li>
+</ul></li>
+
+<li><p><strong>本地方法栈(Native Method Stack)</strong></p>
+
+<ul>
+<li><strong>本地方法栈</strong>类似于<strong>Java虚拟机栈</strong>. 前者为Native Method服务,后者为Java方法(字节码)服务.</li>
+</ul></li>
+
+<li><p><strong>Java堆(Java Heap)</strong></p>
+
+<ul>
+<li>对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建.</li>
+<li>此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.)</li>
+
+<li><p>JIT编译器的发展与逃逸分析技术逐渐成熟, 栈上分配,标量替换优化技术会导致一些微妙的变化.上述第二点描述变得并不绝对.
+&gt; Java程序最初是仅仅通过解释器解释执行的，即对字节码逐条解释执行，这种方式的执行速度相对会比较慢，尤其当某个方法或代码块运行的特别频繁时，这种方式的执行效率就显得很低。于是后来在虚拟机中引入了JIT编译器（即时编译器），当虚拟机发现某个方法或代码块运行特别频繁时，就会把这些代码认定为“Hot Spot Code”（热点代码），为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各层次的优化 (摘自<a href="https://blog.csdn.net/ns_code/article/details/18009455">https://blog.csdn.net/ns_code/article/details/18009455</a>)</p>
+
+<blockquote>
+<p><strong>逃逸分析(Escape Analysis)</strong>的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸。如果能证明一个对象不会逃逸到方法或线程外，则可能为这个变量进行一些高效的优化。如果能够通过逃逸分析确定某些对象不会逃出方法之外，那就可以让这个对象在栈上分配内存，这样该对象所占用的内存空间就可以随栈帧出栈而销毁，就减轻了垃圾回收的压力。在一般应用中，如果不会逃逸的局部对象所占的比例很大，如果能使用栈上分配，那大量的对象就会随着方法的结束而自动销毁了。</p>
+</blockquote></li>
+
+<li><p>Java堆是垃圾收集器管理的主要区域. 因此很多时候也被称为GC堆.</p></li>
+
+<li><p>Java堆可以处于物理上不连续的内存空间中,只要逻辑上连续的即可(//TODO: 是否与虚存相关?)</p></li>
+
+<li><p>如果在堆中没有内存完成实例分配, 并且堆也无法再扩展时, 将会抛出OutOfMemoryError.</p></li>
+</ul></li>
+
+<li><p><strong>方法区(Method Area)</strong></p>
+
+<ul>
+<li><strong>方法区</strong>与Java堆一样都是所有线程共享的内存区域.它用于存储已被虚拟机加载的类信息,常量,静态变量,即时编译器编译后的代码等数据.别名Non-Heap.</li>
+<li>这个区域的内存回收目标主要是针对常量池的回收和对类型的卸载.</li>
+</ul></li>
+
+<li><p><strong>运行时常量池(Runtime Constant Pool)</strong></p>
+
+<ul>
+<li><strong>运行时常量池</strong>是方法区中的一部分. Class文件中出了有类的版本,字段,方法,借口等描述信息外,还有一项信息是常量池.</li>
+</ul></li>
+
+<li><p><strong>直接内存(Direct Memory)</strong></p>
+
+<ul>
+<li><strong>直接内存</strong>并不是虚拟机运行时数据区的一部分,也不是Java虚拟机规范中定义的内存区域.但是这部分内存也被频繁的使用.而且也可能导致OutOfMemoryError异常出现.</li>
+<li>JDK1.4中新加入NIO(New Input/Output)类, 引入基于Channel与Buffer的I/O方式.这个类就用到<strong>直接内存</strong>避免数据在Java堆和Native堆中来回复制数据,让其在一些场景中显著提高性能.</li>
+</ul></li>
+</ol>
+
+<h3 id="对象的创建流程-new">对象的创建流程(new)</h3>
+
+<p>当虚拟机遇到一条new指令时,
+1. 检查这个指令的参数是否能在常量池中定位到一个类的符号引用.并检查这个符号引用代表的类是否已经被加载,解析和初始化过.如果没有,那必须先执行相应的类加载过程.</p>
+
+<ol>
+<li><p>在类加载检查通过后,接下来虚拟机将为新生对象分配内存. 对象所需内存的大小在类加载完成后便可完全确定,为对象分配空间的任务等同于把一块确定大小的内存从Java堆中划分出来.</p>
+
+<ul>
+<li><strong>指针碰撞(Bump the Pointer)</strong>把分界点的指针向空闲空间那边挪动一段与对象大小相等的距离        &mdash;Serial, ParNew</li>
+<li><strong>空闲列表(Free List)</strong> 更新记录可用内存块的列表  &mdash;CMS</li>
+</ul></li>
+
+<li><p>内存分配完成后,虚拟机需要将分配到的内存空间都初始化为零值(不包括对象头).这一步操作保证了对象的实例字段在Java代码中可以不赋初始值就直接使用,程序能访问到这些字段的数据类型所对应的零值.</p></li>
+
+<li><p>虚拟机对对象进行一些必要的设置</p>
+
+<ul>
+<li>这个对象是哪个类的实例</li>
+<li>如何才能找到类的元数据信息</li>
+<li>对象的hashcode</li>
+<li>对象的GC分代年龄等信息</li>
+</ul></li>
+
+<li><p>结束后以上工作后,从虚拟机的视角看,一个新的对象已经产生了,但从Java程序的视角看,对象的创建才刚刚开始&ndash;init方法还没有执行,所有字段依旧为零值</p></li>
+
+<li><p>接着执行init方法, 把对象按照程序员的意愿进行初始化,这样一个真正可用的对象才算完全产生出来.</p></li>
+</ol>
+
+<h3 id="对象的内存布局">对象的内存布局</h3>
+
+<p>对象在内存中存储的布局可以分为3块区域: 对象头(Header), 实例数据(Instance Data), 和对齐填充(Padding)
+1. <strong>对象头(Header)</strong>包括两部分
+   * 自身的运行时数据 -hashcode, GC分代年龄, 锁状态标志, 线程持有的锁, 偏向线程ID, 偏向时间戳
+   * 类型指针, 即对象指向它的类元数据的指针,虚拟机同过其来确定这个对象是哪个类的实例.
+2. <strong>实例数据</strong>是对象真正存储的有效信息,也是在程序代码中所定义的各种类型的字段内容
+3. <strong>对齐填充</strong>因对象的大小必须是8字节的整数倍,没对齐是用其来填充.</p>
+
+<h3 id="对象的访问定位">对象的访问定位</h3>
+
+<ol>
+<li><strong>句柄访问</strong>在对象移动时只需要改变句柄中的实例数据指针,reference本身无需修改
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/access_ref.PNG" alt="state access" /></li>
+
+<li><p><strong>直接指针访问</strong>速度更快,它节省了一次指针定位的开销
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/access_direct.PNG" alt="direct pointer access" /></p>
+
+<h2 id="垃圾收集器-gc-与内存分配策略">垃圾收集器(GC)与内存分配策略</h2>
+
+<h3 id="判断对象是否可以被回收的算法">判断对象是否可以被回收的算法</h3></li>
+
+<li><h2 id="虚拟机性能监控与故障处理工具">虚拟机性能监控与故障处理工具</h2>
+
+<h2 id="调优案例分析">调优案例分析</h2></li>
+</ol>
+</article>
     <footer class="post-footer">
       
       <p class="post-copyright">
