@@ -1,3 +1,13 @@
+---
+title : "对深入理解java虚拟机的读书总结"
+date: 2019-03-24T01:37:56+08:00
+lastmod: 2019-03-25T01:37:56+08:00
+draft: false
+tags: ["Java", "JVM"]
+categories: ["Java fundemental knowledge"]
+author: "Yang Zhang"
+---
+
 # 自动内存管理机制
 ## Java内存区域与内存溢出异常
 ### 运行时的数据区域

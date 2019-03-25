@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title></title>
+  <title>对深入理解java虚拟机的读书总结</title>
 
   
   
@@ -23,7 +23,7 @@
   
 
   
-  
+  <meta name="author" content="Yang Zhang">
   <meta name="description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
  Java虚拟机栈(Java Virtual Machine Stacks)
  Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
@@ -34,7 +34,7 @@
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
-    <meta name="twitter:title" content="">
+    <meta name="twitter:title" content="对深入理解java虚拟机的读书总结">
     <meta name="twitter:description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
  Java虚拟机栈(Java Virtual Machine Stacks)
  Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
@@ -45,7 +45,7 @@
 
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="">
+  <meta property="og:title" content="对深入理解java虚拟机的读书总结">
   <meta property="og:description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
  Java虚拟机栈(Java Virtual Machine Stacks)
  Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
@@ -57,7 +57,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.51">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
@@ -224,8 +224,8 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title"></h1>
-      <p class="post-meta">@Ritchie Zhu · Jan 1, 0001 · 1 min read</p>
+      <h1 class="post-title">对深入理解java虚拟机的读书总结</h1>
+      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 1 min read</p>
     </header>
     <article class="post-content">
 
@@ -365,8 +365,16 @@
 </article>
     <footer class="post-footer">
       
+      <ul class="post-tags">
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/java"><span class="tag">Java</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/jvm"><span class="tag">JVM</span></a></li>
+        
+      </ul>
+      
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>737141</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
       </p>
     </footer>
     

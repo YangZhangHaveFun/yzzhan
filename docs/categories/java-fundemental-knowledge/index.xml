@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java on Yzzhan Tech Repo</title>
-    <link>https://yangzhanghavefun.github.io/yzzhan/tags/java/</link>
-    <description>Recent content in Java on Yzzhan Tech Repo</description>
+    <title>Java Fundemental Knowledge on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/categories/java-fundemental-knowledge/</link>
+    <description>Recent content in Java Fundemental Knowledge on Yzzhan Tech Repo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Sun, 24 Mar 2019 01:37:56 +0800</lastBuildDate>
     
-	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/categories/java-fundemental-knowledge/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,18 +23,6 @@
  Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
  本地方法栈类似于Java虚拟机栈. 前者为Native Method服务,后者为Java方法(字节码)服务.  Java堆(Java Heap)
  对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建. 此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.</description>
-    </item>
-    
-    <item>
-      <title>Java面试的知识储备</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/</link>
-      <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/</guid>
-      <description>#Content 1. Difference between Hashtable and HashMap
-1.Difference between Hashtable and HashMap  ### 作者不一样。。。  Hashtable阵容
-* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter HashMap阵容
-* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</description>
     </item>
     
   </channel>
