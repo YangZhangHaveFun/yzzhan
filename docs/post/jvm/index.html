@@ -24,33 +24,36 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
- Java虚拟机栈(Java Virtual Machine Stacks)
- Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
- 本地方法栈类似于Java虚拟机栈. 前者为Native Method服务,后者为Java方法(字节码)服务.  Java堆(Java Heap)
- 对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建. 此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.">
+  <meta name="description" content="#Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
+JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
+Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
+#Part 2（自动内存管理机制）
+Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="对深入理解java虚拟机的读书总结">
-    <meta name="twitter:description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
- Java虚拟机栈(Java Virtual Machine Stacks)
- Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
- 本地方法栈类似于Java虚拟机栈. 前者为Native Method服务,后者为Java方法(字节码)服务.  Java堆(Java Heap)
- 对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建. 此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.">
+    <meta name="twitter:description" content="#Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
+JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
+Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
+#Part 2（自动内存管理机制）
+Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="对深入理解java虚拟机的读书总结">
-  <meta property="og:description" content="自动内存管理机制 Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.称这类内存区域为&amp;rdquo;线程私有&amp;rdquo;的内存 * 若线程正在执行java方法,则程序计数器记录正在执行的虚拟机字节码指令的地址.若执行的是Native方法,则这个计数器值为空(Undefined). * 此内存是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域. &amp;gt; Native方法 &amp;gt; &amp;ldquo;A native method is a Java method whose implementation is provided by non-java code.&amp;rdquo; &amp;gt; 使用Native Method的原因 1.需要与java环境外交互2.需要与操作系统交互
- Java虚拟机栈(Java Virtual Machine Stacks)
- Java虚拟机栈也是线程私有的. Java虚拟机栈描述的是Java方法执行的内存模型: 每个方法在执行的同时会创建一个栈帧(Stack Frame)用于存储局部变量表,操作数栈,动态链接,方法出口等信息.每一个方法从调用直到执行完成的过程就对应着一个栈帧在虚拟机栈中入栈到出栈的过程. 局部变量表所需的内存空间在编译时完成分配,当进入一个方法时,这个方法需要在帧中分配多大的局部变量空间是完全确定的 如果线程请求的栈深度大于虚拟机所允许的深度,将抛出StackOverFlowError异常. 虚拟机栈动态扩展的过程中,如果扩展时无法申请到足够的内存,就会抛出OutOfMemoryError异常.  本地方法栈(Native Method Stack)
- 本地方法栈类似于Java虚拟机栈. 前者为Native Method服务,后者为Java方法(字节码)服务.  Java堆(Java Heap)
- 对大多数应用来说, Java Heap是Java虚拟机所管理的内存中最大的一块, 并被所有线程共有. 在虚拟机启动时就已创建. 此内存区域的唯一目的就是存放对象实例,几乎所有的对象实例都在这里分配内存(Java虚拟机规范: 所有的对象实例以及数组都要在堆上分配.">
+  <meta property="og:description" content="#Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
+JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
+Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
+#Part 2（自动内存管理机制）
+Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -225,18 +228,38 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">对深入理解java虚拟机的读书总结</h1>
-      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 1 min read</p>
+      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 2 min read</p>
     </header>
     <article class="post-content">
 
-<h1 id="自动内存管理机制">自动内存管理机制</h1>
+<p>#Part 1(Java 概括)
+<strong>Java技术体系的组成部分</strong>
+- Java 程序设计语言
+- 各种硬件平台上的Java虚拟机
+- Class文件格式
+- Java API 类库
+- 来自商业机构和开源社区的第三方Java类库</p>
+
+<p><strong>JDK(Java Development Kit)</strong>
+包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境</p>
+
+<p><strong>JRE(Java Runtime Environment)</strong>
+包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。</p>
+
+<p><strong>Java的四个平台</strong>
+- Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台
+- Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。
+- Java SE（Standard Edition）: 支持面向桌面级应用。
+- Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。</p>
+
+<p>#Part 2（自动内存管理机制）</p>
 
 <h2 id="java内存区域与内存溢出异常">Java内存区域与内存溢出异常</h2>
 
 <h3 id="运行时的数据区域">运行时的数据区域</h3>
 
 <p>Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域.
-<img src="https://yangzhanghavefun.github.io/yzzhan/media/dataArea.PNG" alt="数据区" />
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/dataArea.PNG" alt="数据区" />
 1. <strong>程序计数器(Program Counter Register)</strong>
     * 当前线程所执行的字节码的行号指示器
     * 字节码解释器工作时通过<strong>程序计数器</strong>来选取下一条需要执行的字节码指令.
@@ -347,21 +370,55 @@
 
 <ol>
 <li><strong>句柄访问</strong>在对象移动时只需要改变句柄中的实例数据指针,reference本身无需修改
-<img src="https://yangzhanghavefun.github.io/yzzhan/media/access_ref.PNG" alt="state access" /></li>
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/access_ref.png" alt="state access" /></li>
 
 <li><p><strong>直接指针访问</strong>速度更快,它节省了一次指针定位的开销
-<img src="https://yangzhanghavefun.github.io/yzzhan/media/access_direct.PNG" alt="direct pointer access" /></p>
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/access_direct.png" alt="direct pointer access" /></p>
 
 <h2 id="垃圾收集器-gc-与内存分配策略">垃圾收集器(GC)与内存分配策略</h2>
 
 <h3 id="判断对象是否可以被回收的算法">判断对象是否可以被回收的算法</h3></li>
 
-<li><p><strong>引用计数算法</strong></p>
+<li><p><strong>引用计数算法</strong>
+&gt; 给对象中添加一个引用计数器，每当有一个地方引用它时，计数器+1；当引用失效时，计数器就减1；任意时刻计数器为0的对象就是不可能再被使用的。
+大部分情况下这是一个不错的算法，但是最大的问题是它很难解决对象之间的互相循环引用的问题。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReferenceCountingGC</span><span style="color:#f92672">{</span>
+<span style="color:#66d9ef">public</span> Object instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> _1MB <span style="color:#f92672">=</span> 1024<span style="color:#f92672">*</span>1024
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> bigsize <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>2<span style="color:#f92672">*</span> _1MB<span style="color:#f92672">]</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testGC</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    ReferenceCountingGC objA <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ReferenceCountingGC<span style="color:#f92672">();</span>
+    ReferenceCountingGC objB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ReferenceCountingGC<span style="color:#f92672">();</span>
+    objA <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    objB <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">//即使两个对象相互引用,Java的GC也把两个对象回收了
+</span><span style="color:#75715e"></span>    System<span style="color:#f92672">.</span><span style="color:#a6e22e">gc</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div></li>
+
+<li><p><strong>可达性分析算法</strong>
+&gt; 这个算法的基本思想就是通过一系列的称为&rdquo;GC Roots&rdquo;的对象作为起始点,从这些节点开始向下搜索,搜索所走过的路径称为引用链(Reference Chain),当一个对象到GC Roots没有任何引用链相连时,则证明此对象是不可用的.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/reachable.PNG" alt="Reachable analysis" /></p></li>
+
+<li><p><strong>对引用更多的定义</strong>
+&gt; 初步的定义: 如果reference类型的数据中存储的数值代表的是另外一块内存的起始地址,就称这块内存代表着一个引用.
+但是我们需要描述一些&rdquo;当内存空间还够时则保留在内存中,若进行了垃圾收集后还是非常紧张,则可以抛弃这些对象.&ldquo;的引用.于是引用的概念被扩充至四个, 强引用,软引用,弱引用和虚引用.</p>
+
+<ul>
+<li><strong>强引用</strong>: 只要强引用还在,垃圾收集器就永远不会收掉被引用的对象.例如Object obj = new Object()这类的引用.</li>
+<li><strong>软引用</strong>: 还有用但非必须的对象. 对于软引用关联着的对象, 在系统将要发生内存溢出异常之前,将会把这些对象列进回收范围之中,进行第二次回收. 若这次回收后还没有足够的内存则抛出内存溢出的异常. SoftReference类来实现.</li>
+<li><strong>弱引用</strong>: 弱引用的强度比软引用更弱, 被弱引用关联的对象只能生存到下一次垃圾收集发生之前.当垃圾收集器工作时, 无论当前内存是否足够, 都会回收掉只被弱引用关联的对象. WeakReference类来实现</li>
+<li><strong>虚引用</strong>: 最弱的引用关系, 为一个对象设置虚引用唯一的目的就是能在这个对象被收集器回收时收到一个系统通知. PhantomReference类来实现.</li>
+</ul></li>
+
+<li><p><strong>对象回收前的工作</strong>
+要真正宣告一个对象死亡, 至少需要经历两次标记过程: 如果对象在进行可达性分析后发现没有与GC Roots相连接的引用链, 那它将会被第一次标记并且进行一次筛选, 筛选的条件是此对象是否有必要执行finalize()方法, 当对象没有覆盖finalize()方法, 或者finalize()方法已经被虚拟机调用过,虚拟机将这两种情况都视为&rdquo;没有必要执行&rdquo;.</p></li>
+</ol>
 
 <h2 id="虚拟机性能监控与故障处理工具">虚拟机性能监控与故障处理工具</h2>
 
-<h2 id="调优案例分析">调优案例分析</h2></li>
-</ol>
+<h2 id="调优案例分析">调优案例分析</h2>
 </article>
     <footer class="post-footer">
       

@@ -8,11 +8,31 @@ categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
 
-# 自动内存管理机制
+#Part 1(Java 概括)
+**Java技术体系的组成部分**
+- Java 程序设计语言
+- 各种硬件平台上的Java虚拟机
+- Class文件格式
+- Java API 类库
+- 来自商业机构和开源社区的第三方Java类库
+
+**JDK(Java Development Kit)**
+包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
+
+**JRE(Java Runtime Environment)**
+包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
+
+**Java的四个平台**
+- Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台
+- Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。
+- Java SE（Standard Edition）: 支持面向桌面级应用。
+- Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
+
+#Part 2（自动内存管理机制）
 ## Java内存区域与内存溢出异常
 ### 运行时的数据区域
 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域.
-![数据区](/media/dataArea.PNG)
+![数据区](/media/posts/dataArea.PNG)
 1. **程序计数器(Program Counter Register)**
     * 当前线程所执行的字节码的行号指示器
     * 字节码解释器工作时通过**程序计数器**来选取下一条需要执行的字节码指令.
@@ -81,11 +101,44 @@ Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若
 
 ### 对象的访问定位
 1. **句柄访问**在对象移动时只需要改变句柄中的实例数据指针,reference本身无需修改
-![state access](/media/access_ref.PNG)
+![state access](/media/posts/access_ref.png)
 2. **直接指针访问**速度更快,它节省了一次指针定位的开销
-![direct pointer access](/media/access_direct.PNG)
+![direct pointer access](/media/posts/access_direct.png)
 ## 垃圾收集器(GC)与内存分配策略
 ### 判断对象是否可以被回收的算法
 1. **引用计数算法**
+> 给对象中添加一个引用计数器，每当有一个地方引用它时，计数器+1；当引用失效时，计数器就减1；任意时刻计数器为0的对象就是不可能再被使用的。
+大部分情况下这是一个不错的算法，但是最大的问题是它很难解决对象之间的互相循环引用的问题。
+```Java
+public class ReferenceCountingGC{
+    public Object instance = null;
+    private static final int _1MB = 1024*1024
+    private byte[] bigsize = new byte[2* _1MB]
+
+    public static void testGC() {
+        ReferenceCountingGC objA = new ReferenceCountingGC();
+        ReferenceCountingGC objB = new ReferenceCountingGC();
+        objA = null;
+        objB = null;
+        //即使两个对象相互引用,Java的GC也把两个对象回收了
+        System.gc();
+    }
+}
+```
+2. **可达性分析算法**
+> 这个算法的基本思想就是通过一系列的称为"GC Roots"的对象作为起始点,从这些节点开始向下搜索,搜索所走过的路径称为引用链(Reference Chain),当一个对象到GC Roots没有任何引用链相连时,则证明此对象是不可用的.
+![Reachable analysis](/media/posts/reachable.PNG)
+
+3. **对引用更多的定义**
+> 初步的定义: 如果reference类型的数据中存储的数值代表的是另外一块内存的起始地址,就称这块内存代表着一个引用.
+但是我们需要描述一些"当内存空间还够时则保留在内存中,若进行了垃圾收集后还是非常紧张,则可以抛弃这些对象."的引用.于是引用的概念被扩充至四个, 强引用,软引用,弱引用和虚引用.
+   - **强引用**: 只要强引用还在,垃圾收集器就永远不会收掉被引用的对象.例如Object obj = new Object()这类的引用.
+   - **软引用**: 还有用但非必须的对象. 对于软引用关联着的对象, 在系统将要发生内存溢出异常之前,将会把这些对象列进回收范围之中,进行第二次回收. 若这次回收后还没有足够的内存则抛出内存溢出的异常. SoftReference类来实现.
+   - **弱引用**: 弱引用的强度比软引用更弱, 被弱引用关联的对象只能生存到下一次垃圾收集发生之前.当垃圾收集器工作时, 无论当前内存是否足够, 都会回收掉只被弱引用关联的对象. WeakReference类来实现
+   - **虚引用**: 最弱的引用关系, 为一个对象设置虚引用唯一的目的就是能在这个对象被收集器回收时收到一个系统通知. PhantomReference类来实现.
+
+4. **对象回收前的工作**
+要真正宣告一个对象死亡, 至少需要经历两次标记过程: 如果对象在进行可达性分析后发现没有与GC Roots相连接的引用链, 那它将会被第一次标记并且进行一次筛选, 筛选的条件是此对象是否有必要执行finalize()方法, 当对象没有覆盖finalize()方法, 或者finalize()方法已经被虚拟机调用过,虚拟机将这两种情况都视为"没有必要执行".
+
 ## 虚拟机性能监控与故障处理工具
 ## 调优案例分析
