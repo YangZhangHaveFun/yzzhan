@@ -104,6 +104,7 @@ Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若
 ![state access](/media/posts/access_ref.png)
 2. **直接指针访问**速度更快,它节省了一次指针定位的开销
 ![direct pointer access](/media/posts/access_direct.png)
+
 ## 垃圾收集器(GC)与内存分配策略
 ### 判断对象是否可以被回收的算法
 1. **引用计数算法**
@@ -140,5 +141,71 @@ public class ReferenceCountingGC{
 4. **对象回收前的工作**
 要真正宣告一个对象死亡, 至少需要经历两次标记过程: 如果对象在进行可达性分析后发现没有与GC Roots相连接的引用链, 那它将会被第一次标记并且进行一次筛选, 筛选的条件是此对象是否有必要执行finalize()方法, 当对象没有覆盖finalize()方法, 或者finalize()方法已经被虚拟机调用过,虚拟机将这两种情况都视为"没有必要执行".
 
+```Java
+public class FinalizeEscapeGC {
+    public static FinalizeEscapeGC SAVE_HOOK = null;
+
+    public void isAlive() {
+        System.out.println("yes, i'm still alive:)");
+    }
+
+    @Override
+    protected void finalize() throws Throwable{
+        super.finalize();
+        System.out.println("finalize method executed!");
+        FinalizeEscapeGC.SAVE_HOOK = this;
+    }
+
+    public static void main(String[] args) throws Throwable {
+        SAVE_HOOK = new FinalizerEscapeGC();
+        //第一次自救
+        SAVE_HOOK = null;
+        System.gc();
+        //finalize方法优先级很低,所以暂停0.5秒
+        Thread.sleep(500);
+        if (SAVE_HOOK != null){
+            SAVE_HOOK.isAlive();
+        } else {
+            System.out.println("no, i'm dead :(");
+        }
+
+        //下面与上面完全相同,但是自救失败
+        SAVE_HOOK = null;
+        System.gc();
+        //finalize方法优先级很低,所以暂停0.5秒
+        Thread.sleep(500);
+        if (SAVE_HOOK != null){
+            SAVE_HOOK.isAlive();
+        } else {
+            System.out.println("no, i'm dead :(");
+        }
+    }
+}
+```
+5. 回收方法区
+    - **回收废弃常量**: 与回收Java堆中的对象非常类似. 
+    - **回收无用的类**: 判断"无用类"的三个条件
+        * 该类所有的实例都已经被回收, 也就是Java堆中不存在该类的任何实例
+        * 加载该类的ClassLoader已经被回收
+        * 该类对应的java.lang.Class对象没有在任何地方被引用, 无法在任何地方通过反射访问该类的方法.
+
+### 垃圾回收算法
+1. **标记-清除算法(Mark-Sweep)**
+   算法分为"标记"和"清除"两个阶段:首先标记出所有需要回收的对象, 在标记完成后统一回收所有被标记的对象. 它时最基础的收集算法.不足有二
+   * 效率问题: 标记和清除两个过程效率都不高
+   * 空间问题: 标记清除之后会产生大量的不连续的内存碎片,空间碎片太多可能会导致以后再程勋运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾回收动作.
+   ![Reachable analysis](/media/posts/marksweep.JPG)
+2. **复制算法(Copying)**
+   此算法为了解决效率问题而产生. 它将可用内存按照容量划分成大小相等的两块, 每次只使用其中的一块.当一块用完时,就将还存活的对象都复制到另一块,然后把已使用过得内存空间一次全部清理掉. 这种算法不用考虑内存碎片等复杂情况但代价是将内存缩小为了原来的一半. 这种算法多用于新生代中的对象的回收.
+   ![Reachable analysis](/media/posts/copying.JPG)
+3. **标记-整理算法(Mark-Compact)**
+   复制算法并不适用于老年代的对象. 因此出现了**标记-整理算法**, 标记过程与标记-清除算法一样, 但后续会让所有存活的对象都向一端移动, 然后直接清理掉端界面以外的内存.
+   ![Reachable analysis](/media/posts/markcompact.JPG)
+4. **分代收集算法(Generational Collection)**
+   当前商业虚拟机的垃圾收集都采用**分代收集算法**, 它根据对象存活周期的不同将内存划分为几块, 一般是把Java堆分成新生代和老年代.在新生代中,每次垃圾收集时都发现有大批的对象死去, 只有少量存活,就选用复制算法.而老年代中因为对象存活率高,没有额外空间对他进行分配担保,就要使用**标记-清理**或者**标记-整理**算法.
+
+###垃圾收集器
+HotSpot虚拟机的垃圾收集器如图所示
+![Reachable analysis](/media/posts/GCmachine.JPG)
 ## 虚拟机性能监控与故障处理工具
 ## 调优案例分析

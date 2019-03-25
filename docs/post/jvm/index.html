@@ -228,7 +228,7 @@ Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在�
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">对深入理解java虚拟机的读书总结</h1>
-      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 2 min read</p>
+      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 3 min read</p>
     </header>
     <article class="post-content">
 
@@ -371,14 +371,15 @@ Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在�
 <ol>
 <li><strong>句柄访问</strong>在对象移动时只需要改变句柄中的实例数据指针,reference本身无需修改
 <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/access_ref.png" alt="state access" /></li>
-
-<li><p><strong>直接指针访问</strong>速度更快,它节省了一次指针定位的开销
-<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/access_direct.png" alt="direct pointer access" /></p>
+<li><strong>直接指针访问</strong>速度更快,它节省了一次指针定位的开销
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/access_direct.png" alt="direct pointer access" /></li>
+</ol>
 
 <h2 id="垃圾收集器-gc-与内存分配策略">垃圾收集器(GC)与内存分配策略</h2>
 
-<h3 id="判断对象是否可以被回收的算法">判断对象是否可以被回收的算法</h3></li>
+<h3 id="判断对象是否可以被回收的算法">判断对象是否可以被回收的算法</h3>
 
+<ol>
 <li><p><strong>引用计数算法</strong>
 &gt; 给对象中添加一个引用计数器，每当有一个地方引用它时，计数器+1；当引用失效时，计数器就减1；任意时刻计数器为0的对象就是不可能再被使用的。
 大部分情况下这是一个不错的算法，但是最大的问题是它很难解决对象之间的互相循环引用的问题。</p>
@@ -415,6 +416,84 @@ Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在�
 <li><p><strong>对象回收前的工作</strong>
 要真正宣告一个对象死亡, 至少需要经历两次标记过程: 如果对象在进行可达性分析后发现没有与GC Roots相连接的引用链, 那它将会被第一次标记并且进行一次筛选, 筛选的条件是此对象是否有必要执行finalize()方法, 当对象没有覆盖finalize()方法, 或者finalize()方法已经被虚拟机调用过,虚拟机将这两种情况都视为&rdquo;没有必要执行&rdquo;.</p></li>
 </ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FinalizeEscapeGC</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> FinalizeEscapeGC SAVE_HOOK <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">isAlive</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;yes, i&#39;m still alive:)&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">finalize</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Throwable<span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">finalize</span><span style="color:#f92672">();</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;finalize method executed!&#34;</span><span style="color:#f92672">);</span>
+        FinalizeEscapeGC<span style="color:#f92672">.</span><span style="color:#a6e22e">SAVE_HOOK</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Throwable <span style="color:#f92672">{</span>
+        SAVE_HOOK <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FinalizerEscapeGC<span style="color:#f92672">();</span>
+        <span style="color:#75715e">//第一次自救
+</span><span style="color:#75715e"></span>        SAVE_HOOK <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">gc</span><span style="color:#f92672">();</span>
+        <span style="color:#75715e">//finalize方法优先级很低,所以暂停0.5秒
+</span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>500<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>SAVE_HOOK <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
+            SAVE_HOOK<span style="color:#f92672">.</span><span style="color:#a6e22e">isAlive</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;no, i&#39;m dead :(&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#75715e">//下面与上面完全相同,但是自救失败
+</span><span style="color:#75715e"></span>        SAVE_HOOK <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">gc</span><span style="color:#f92672">();</span>
+        <span style="color:#75715e">//finalize方法优先级很低,所以暂停0.5秒
+</span><span style="color:#75715e"></span>        Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>500<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>SAVE_HOOK <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>
+            SAVE_HOOK<span style="color:#f92672">.</span><span style="color:#a6e22e">isAlive</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;no, i&#39;m dead :(&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<ol>
+<li>回收方法区
+
+<ul>
+<li><strong>回收废弃常量</strong>: 与回收Java堆中的对象非常类似.</li>
+<li><strong>回收无用的类</strong>: 判断&rdquo;无用类&rdquo;的三个条件
+
+<ul>
+<li>该类所有的实例都已经被回收, 也就是Java堆中不存在该类的任何实例</li>
+<li>加载该类的ClassLoader已经被回收</li>
+<li>该类对应的java.lang.Class对象没有在任何地方被引用, 无法在任何地方通过反射访问该类的方法.</li>
+</ul></li>
+</ul></li>
+</ol>
+
+<h3 id="垃圾回收算法">垃圾回收算法</h3>
+
+<ol>
+<li><strong>标记-清除算法(Mark-Sweep)</strong>
+算法分为&rdquo;标记&rdquo;和&rdquo;清除&rdquo;两个阶段:首先标记出所有需要回收的对象, 在标记完成后统一回收所有被标记的对象. 它时最基础的收集算法.不足有二
+
+<ul>
+<li>效率问题: 标记和清除两个过程效率都不高</li>
+<li>空间问题: 标记清除之后会产生大量的不连续的内存碎片,空间碎片太多可能会导致以后再程勋运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾回收动作.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/marksweep.JPG" alt="Reachable analysis" /></li>
+</ul></li>
+<li><strong>复制算法(Copying)</strong>
+此算法为了解决效率问题而产生. 它将可用内存按照容量划分成大小相等的两块, 每次只使用其中的一块.当一块用完时,就将还存活的对象都复制到另一块,然后把已使用过得内存空间一次全部清理掉. 这种算法不用考虑内存碎片等复杂情况但代价是将内存缩小为了原来的一半. 这种算法多用于新生代中的对象的回收.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/copying.JPG" alt="Reachable analysis" /></li>
+<li><strong>标记-整理算法(Mark-Compact)</strong>
+复制算法并不适用于老年代的对象. 因此出现了<strong>标记-整理算法</strong>, 标记过程与标记-清除算法一样, 但后续会让所有存活的对象都向一端移动, 然后直接清理掉端界面以外的内存.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/markcompact.JPG" alt="Reachable analysis" /></li>
+<li><strong>分代收集算法(Generational Collection)</strong>
+当前商业虚拟机的垃圾收集都采用<strong>分代收集算法</strong>, 它根据对象存活周期的不同将内存划分为几块, 一般是把Java堆分成新生代和老年代.在新生代中,每次垃圾收集时都发现有大批的对象死去, 只有少量存活,就选用复制算法.而老年代中因为对象存活率高,没有额外空间对他进行分配担保,就要使用<strong>标记-清理</strong>或者<strong>标记-整理</strong>算法.</li>
+</ol>
+
+<p>###垃圾收集器
+HotSpot虚拟机的垃圾收集器如图所示
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/GCmachine.JPG" alt="Reachable analysis" /></p>
 
 <h2 id="虚拟机性能监控与故障处理工具">虚拟机性能监控与故障处理工具</h2>
 
