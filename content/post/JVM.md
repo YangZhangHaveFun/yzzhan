@@ -182,7 +182,7 @@ public class FinalizeEscapeGC {
     }
 }
 ```
-5. 回收方法区
+5. **回收方法区**
     - **回收废弃常量**: 与回收Java堆中的对象非常类似. 
     - **回收无用的类**: 判断"无用类"的三个条件
         * 该类所有的实例都已经被回收, 也就是Java堆中不存在该类的任何实例
@@ -190,22 +190,70 @@ public class FinalizeEscapeGC {
         * 该类对应的java.lang.Class对象没有在任何地方被引用, 无法在任何地方通过反射访问该类的方法.
 
 ### 垃圾回收算法
+介绍垃圾回收算法之前需要先明白Java堆的新生代和老年代
+> 在 Java 中，堆被划分成两个不同的区域：年轻代(Young)、老年代 (Tenured).
+> 
+> 年轻代 ( Young ) 又被划分为三个区域：Eden、From Survivor、To Survivor。 这样划分的目的是为了使 JVM 能够更好的管理堆内存中的对象，包括内存的分配以及回收。
+> 
+> 堆大小 = 年轻代 + 老年代
+> 
+> 年轻代 = eden space (新生代) + from survivor + to survivor
+
+年轻代的特点是产生大量的死亡对象,并且要是产生连续可用的空间, 所以使用复制清除算法和并行收集器进行垃圾回收.对年轻代的垃圾回收称作初级回收 (minor gc)
+
+新生代几乎是所有 Java 对象出生的地方，即 Java 对象申请的内存以及存放都是在这个地方。Java 中的大部分对象通常不需长久存活，具有朝生夕灭的性质。 
+
+当一个对象被判定为 "死亡" 的时候，GC 就有责任来回收掉这部分对象的内存空间。新生代是 GC 收集垃圾的频繁区域。 当对象在 Eden 出生后，在经过一次 Minor GC 后，如果对象还存活，并且能够被另外一块 Survivor 区域所容纳，则使用复制算法将这些仍然还存活的对象复制到另外一块 Survivor 区域中，然后清理所使用过的 Eden 以及 Survivor 区域，并且将这些对象的年龄设置为1，以后对象在 Survivor 区每熬过一次 Minor GC，就将对象的年龄 + 1，当对象的年龄达到某个值时 ( 默认是 15 岁，可以通过参数 -XX:MaxTenuringThreshold 来设定 )，这些对象就会成为老年代。 
+但这也不是一定的，对于一些较大的对象 ( 即需要分配一块较大的连续内存空间 ) 则是直接进入到老年代。
+(摘自https://gblog.sherlocky.com/java-xin-sheng-dai-lao-nian-dai/)
 1. **标记-清除算法(Mark-Sweep)**
    算法分为"标记"和"清除"两个阶段:首先标记出所有需要回收的对象, 在标记完成后统一回收所有被标记的对象. 它时最基础的收集算法.不足有二
    * 效率问题: 标记和清除两个过程效率都不高
    * 空间问题: 标记清除之后会产生大量的不连续的内存碎片,空间碎片太多可能会导致以后再程勋运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾回收动作.
-   ![Reachable analysis](/media/posts/marksweep.JPG)
+   ![mark-sweep](/media/posts/marksweep.JPG)
 2. **复制算法(Copying)**
    此算法为了解决效率问题而产生. 它将可用内存按照容量划分成大小相等的两块, 每次只使用其中的一块.当一块用完时,就将还存活的对象都复制到另一块,然后把已使用过得内存空间一次全部清理掉. 这种算法不用考虑内存碎片等复杂情况但代价是将内存缩小为了原来的一半. 这种算法多用于新生代中的对象的回收.
-   ![Reachable analysis](/media/posts/copying.JPG)
+   ![copying](/media/posts/copying.JPG)
 3. **标记-整理算法(Mark-Compact)**
    复制算法并不适用于老年代的对象. 因此出现了**标记-整理算法**, 标记过程与标记-清除算法一样, 但后续会让所有存活的对象都向一端移动, 然后直接清理掉端界面以外的内存.
-   ![Reachable analysis](/media/posts/markcompact.JPG)
+   ![mark-compact](/media/posts/markcompact.JPG)
 4. **分代收集算法(Generational Collection)**
    当前商业虚拟机的垃圾收集都采用**分代收集算法**, 它根据对象存活周期的不同将内存划分为几块, 一般是把Java堆分成新生代和老年代.在新生代中,每次垃圾收集时都发现有大批的对象死去, 只有少量存活,就选用复制算法.而老年代中因为对象存活率高,没有额外空间对他进行分配担保,就要使用**标记-清理**或者**标记-整理**算法.
 
 ###垃圾收集器
 HotSpot虚拟机的垃圾收集器如图所示
-![Reachable analysis](/media/posts/GCmachine.JPG)
+![GC_HotSpot](/media/posts/GCmachine.JPG)
+图中展示了七种不同分代的收集器, 如果两个收集器之间存在连线,说明他们可以搭配使用. 虚拟机所处的区域表示它属于新生代还是老年代的收集器.
+1. **Serial收集器**
+    ![Serial](/media/posts/serial.JPG)
+    * 这是最基本的收集器, 单线程. 并且"单线程"的意义不仅仅说明他只会使用一个CPU或一条收集线程去完成垃圾收集工作,更重要的是它在进行垃圾收集时,必须暂停其他所有的工作线程,直到它收集结束. ---"Stop The World"
+    * 这项工作是自动发起和完成的,在用户不可见的情况下把正常工作的线程全部停掉.
+    * 简单而高效,对于运行在Client模式下的虚拟机来说是一个很好的选择.
+2. **ParNew收集器**
+    ![ParNew](/media/posts/parnew.JPG)
+    * 其实只是Serial收集器的多线程版本.
+    * 是运行在Server模式下的虚拟机中首选的新生代收集器,因为这是目前唯一能和CMS收集器配合工作的新生代收集器.
+    * ParNew收集器在单CPU环境中绝不会有比Serial收集器更好的效果
+
+3. **Parallel Scavenge收集器**
+    * 与ParNew一样,他也是新生代收集器,使用复制算法,也是并行的多线程
+    * Parallel Scavenge收集器的目的是达到一个可控制的吞吐量(Throughput)=>CPU用于运行用户代码的时间与CPU总消耗时间的比值=>吞吐量=运行用户代码的时间/(运行用户代码的时间 + 垃圾回收收集时间)
+    * 也被称为"吞吐量优先"收集器
+    * 参数: MaxGCPauseMillis控制最大垃圾收集停顿时间, GCTimeRatio设置吞吐量大小, UseAdaptiveSizePolicy开启GC自适应调节策略(GC Ergonomics)
+    
+4. **Serial Old 收集器**
+    * Serial收集器的老年代版本
+    * 用来与Parallel Scavenge收集器搭配使用
+    * 用来作为CMS收集器的后备预案
+
+5. **Parallel Old 收集器**
+    ![Parallel Old](/media/posts/parallelold.jpg)
+    * **Parallel Old 收集器**是Parallel Scavenge收集器的老年代版本
+    * 在**Parallel Old 收集器**出现之前, 新生代的Parallel Scavenge收集器一直处在比较尴尬的位置由于其无法与CMS收集器配合工作
+    * "吞吐量优先"收集器终于有了比较给力的应用组合,在注重吞吐量以及CPU资源敏感的场合,都可以优先考虑Parallel Scavenge加Parallel Old收集器.
+
+6. **CMS 收集器**
+
+
 ## 虚拟机性能监控与故障处理工具
 ## 调优案例分析
