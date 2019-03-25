@@ -259,7 +259,7 @@ Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在�
 <h3 id="运行时的数据区域">运行时的数据区域</h3>
 
 <p>Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域.
-<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/dataArea.PNG" alt="数据区" />
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/dataArea.png" alt="数据区" />
 1. <strong>程序计数器(Program Counter Register)</strong>
     * 当前线程所执行的字节码的行号指示器
     * 字节码解释器工作时通过<strong>程序计数器</strong>来选取下一条需要执行的字节码指令.
@@ -537,7 +537,7 @@ HotSpot虚拟机的垃圾收集器如图所示
 </ul></li>
 
 <li><p><strong>Parallel Old 收集器</strong>
-<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/parallelold.jpg" alt="Parallel Old" /></p>
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/parallelold.JPG" alt="Parallel Old" /></p>
 
 <ul>
 <li><strong>Parallel Old 收集器</strong>是Parallel Scavenge收集器的老年代版本</li>
@@ -545,12 +545,29 @@ HotSpot虚拟机的垃圾收集器如图所示
 <li>&ldquo;吞吐量优先&rdquo;收集器终于有了比较给力的应用组合,在注重吞吐量以及CPU资源敏感的场合,都可以优先考虑Parallel Scavenge加Parallel Old收集器.</li>
 </ul></li>
 
-<li><p><strong>CMS 收集器</strong></p></li>
-</ol>
+<li><p><strong>CMS 收集器</strong>
+&gt; CMS(Concurrent Mark Sweep)收集器是一种以获取最短回收停顿时间为目标的收集器. 从名字上看CMS收集器是基于&rdquo;标记-清除&rdquo;算法实现的.</p>
+
+<p>它的运作过程相对于前面几种收集器来说更复杂一些,整个过程分为4个步骤.</p>
+
+<ul>
+<li>初始标记(CMS initial mark)</li>
+<li>并发标记(CMS concurrent mark)</li>
+<li>重新标记(CMS remark)</li>
+<li>并发清除(CMS concurrent sweep)</li>
+</ul>
+
+<p>其中,初始标记和重新标记这两个步骤仍然需要&rdquo;Stop The World&rdquo;.
+* 初始标记仅仅只是标记一下GC Roots能关联到的对象,速度很快
+* 并发标记阶段就是进行GC Roots Tracing的过程
+* 重新标记阶段是为了修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录,</p></li>
+
+<li><p><strong>G1收集器</strong></p>
 
 <h2 id="虚拟机性能监控与故障处理工具">虚拟机性能监控与故障处理工具</h2>
 
-<h2 id="调优案例分析">调优案例分析</h2>
+<h2 id="调优案例分析">调优案例分析</h2></li>
+</ol>
 </article>
     <footer class="post-footer">
       

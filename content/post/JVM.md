@@ -32,7 +32,7 @@ author: "Yang Zhang"
 ## Java内存区域与内存溢出异常
 ### 运行时的数据区域
 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域.
-![数据区](/media/posts/dataArea.PNG)
+![数据区](/media/posts/dataArea.png)
 1. **程序计数器(Program Counter Register)**
     * 当前线程所执行的字节码的行号指示器
     * 字节码解释器工作时通过**程序计数器**来选取下一条需要执行的字节码指令.
@@ -247,13 +247,25 @@ HotSpot虚拟机的垃圾收集器如图所示
     * 用来作为CMS收集器的后备预案
 
 5. **Parallel Old 收集器**
-    ![Parallel Old](/media/posts/parallelold.jpg)
+    ![Parallel Old](/media/posts/parallelold.JPG)
     * **Parallel Old 收集器**是Parallel Scavenge收集器的老年代版本
     * 在**Parallel Old 收集器**出现之前, 新生代的Parallel Scavenge收集器一直处在比较尴尬的位置由于其无法与CMS收集器配合工作
     * "吞吐量优先"收集器终于有了比较给力的应用组合,在注重吞吐量以及CPU资源敏感的场合,都可以优先考虑Parallel Scavenge加Parallel Old收集器.
 
 6. **CMS 收集器**
+    > CMS(Concurrent Mark Sweep)收集器是一种以获取最短回收停顿时间为目标的收集器. 从名字上看CMS收集器是基于"标记-清除"算法实现的.
 
+    它的运作过程相对于前面几种收集器来说更复杂一些,整个过程分为4个步骤.
+    + 初始标记(CMS initial mark)
+    + 并发标记(CMS concurrent mark)
+    + 重新标记(CMS remark)
+    + 并发清除(CMS concurrent sweep)
 
+    其中,初始标记和重新标记这两个步骤仍然需要"Stop The World". 
+    * 初始标记仅仅只是标记一下GC Roots能关联到的对象,速度很快
+    * 并发标记阶段就是进行GC Roots Tracing的过程
+    * 重新标记阶段是为了修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录,
+
+1. **G1收集器**
 ## 虚拟机性能监控与故障处理工具
 ## 调优案例分析
