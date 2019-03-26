@@ -24,43 +24,40 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="#Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+  <meta name="description" content="Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-#Part 2（自动内存管理机制）
-Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="对深入理解java虚拟机的读书总结">
-    <meta name="twitter:description" content="#Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+    <meta name="twitter:description" content="Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-#Part 2（自动内存管理机制）
-Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="对深入理解java虚拟机的读书总结">
-  <meta property="og:description" content="#Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+  <meta property="og:description" content="Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-#Part 2（自动内存管理机制）
-Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
   <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
@@ -232,8 +229,9 @@ Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在�
     </header>
     <article class="post-content">
 
-<p>#Part 1(Java 概括)
-<strong>Java技术体系的组成部分</strong>
+<h1 id="part-1-java-概括">Part 1(Java 概括)</h1>
+
+<p><strong>Java技术体系的组成部分</strong>
 - Java 程序设计语言
 - 各种硬件平台上的Java虚拟机
 - Class文件格式
@@ -252,7 +250,7 @@ Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在�
 - Java SE（Standard Edition）: 支持面向桌面级应用。
 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。</p>
 
-<p>#Part 2（自动内存管理机制）</p>
+<h1 id="part-2-自动内存管理机制">Part 2（自动内存管理机制）</h1>
 
 <h2 id="java内存区域与内存溢出异常">Java内存区域与内存溢出异常</h2>
 
@@ -504,8 +502,9 @@ Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在�
 4. <strong>分代收集算法(Generational Collection)</strong>
    当前商业虚拟机的垃圾收集都采用<strong>分代收集算法</strong>, 它根据对象存活周期的不同将内存划分为几块, 一般是把Java堆分成新生代和老年代.在新生代中,每次垃圾收集时都发现有大批的对象死去, 只有少量存活,就选用复制算法.而老年代中因为对象存活率高,没有额外空间对他进行分配担保,就要使用<strong>标记-清理</strong>或者<strong>标记-整理</strong>算法.</p>
 
-<p>###垃圾收集器
-HotSpot虚拟机的垃圾收集器如图所示
+<h3 id="垃圾收集器">垃圾收集器</h3>
+
+<p>HotSpot虚拟机的垃圾收集器如图所示
 <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/GCmachine.JPG" alt="GC_HotSpot" />
 图中展示了七种不同分代的收集器, 如果两个收集器之间存在连线,说明他们可以搭配使用. 虚拟机所处的区域表示它属于新生代还是老年代的收集器.
 1. <strong>Serial收集器</strong>
@@ -582,7 +581,7 @@ HotSpot虚拟机的垃圾收集器如图所示
 
 <h2 id="调优案例分析">调优案例分析</h2>
 
-<p>###书中实战: 优化Elipse启动时间</p></li>
+<h3 id="书中实战-优化elipse启动时间">书中实战: 优化Elipse启动时间</h3></li>
 </ul></li>
 </ol>
 

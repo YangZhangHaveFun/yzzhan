@@ -8,7 +8,7 @@ categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
 
-#Part 1(Java 概括)
+# Part 1(Java 概括)
 **Java技术体系的组成部分**
 - Java 程序设计语言
 - 各种硬件平台上的Java虚拟机
@@ -28,7 +28,7 @@ author: "Yang Zhang"
 - Java SE（Standard Edition）: 支持面向桌面级应用。
 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
 
-#Part 2（自动内存管理机制）
+# Part 2（自动内存管理机制）
 ## Java内存区域与内存溢出异常
 ### 运行时的数据区域
 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域.
@@ -222,7 +222,7 @@ public class FinalizeEscapeGC {
 4. **分代收集算法(Generational Collection)**
    当前商业虚拟机的垃圾收集都采用**分代收集算法**, 它根据对象存活周期的不同将内存划分为几块, 一般是把Java堆分成新生代和老年代.在新生代中,每次垃圾收集时都发现有大批的对象死去, 只有少量存活,就选用复制算法.而老年代中因为对象存活率高,没有额外空间对他进行分配担保,就要使用**标记-清理**或者**标记-整理**算法.
 
-###垃圾收集器
+### 垃圾收集器
 HotSpot虚拟机的垃圾收集器如图所示
 ![GC_HotSpot](/media/posts/GCmachine.JPG)
 图中展示了七种不同分代的收集器, 如果两个收集器之间存在连线,说明他们可以搭配使用. 虚拟机所处的区域表示它属于新生代还是老年代的收集器.
@@ -279,7 +279,7 @@ HotSpot虚拟机的垃圾收集器如图所示
    * 步骤类似CMS,分别为初始标记,并发标记,最终标记,筛选回收
 ## 虚拟机性能监控与故障处理工具
 ## 调优案例分析
-###书中实战: 优化Elipse启动时间
+### 书中实战: 优化Elipse启动时间
 
 # 虚拟机执行子系统
 ## 类文件结构
