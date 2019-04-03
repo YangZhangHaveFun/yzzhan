@@ -225,7 +225,7 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">对深入理解java虚拟机的读书总结</h1>
-      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 3 min read</p>
+      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 4 min read</p>
     </header>
     <article class="post-content">
 
@@ -589,11 +589,28 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
 
 <h2 id="类文件结构">类文件结构</h2>
 
+<h3 id="平台无关性">平台无关性</h3>
+
+<p>对于Java来说,平台无关性的基石就是<strong>字节码(Byte Code)</strong>.实现语言无关性的基础是<strong>虚拟机</strong>和<strong>字节码存储格式</strong>.<strong>Java虚拟机</strong>不与任何语言绑定, 它只与&rdquo;Class文件&rdquo;这种特定的二进制文件格式所关联.
+&gt;Class文件中包含了Java虚拟机指令集和符号表以及若干其他辅助信息. 基于安全方面的考虑, Java虚拟机规范要求在Class文件中使用许多强制性的语法和结构化约束.虚拟机并不关心Class的来源是何种语言</p>
+
 <h2 id="虚拟机类加载机制">虚拟机类加载机制</h2>
 
 <h2 id="虚拟机字节码执行引擎">虚拟机字节码执行引擎</h2>
 
 <h2 id="类加载及执行子系统的案例与实战">类加载及执行子系统的案例与实战</h2>
+
+<h1 id="程序编译与代码优化">程序编译与代码优化</h1>
+
+<h2 id="早期-编译期-优化">早期(编译期)优化</h2>
+
+<h2 id="晚期-运行期-优化">晚期(运行期)优化</h2>
+
+<h1 id="高效并发">高效并发</h1>
+
+<h2 id="java内存模型与线程">Java内存模型与线程</h2>
+
+<h2 id="线程安全与锁优化">线程安全与锁优化</h2>
 </article>
     <footer class="post-footer">
       
