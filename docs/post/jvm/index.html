@@ -57,7 +57,7 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
@@ -225,7 +225,7 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">对深入理解java虚拟机的读书总结</h1>
-      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 4 min read</p>
+      <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 6 min read</p>
     </header>
     <article class="post-content">
 
@@ -598,21 +598,343 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
 
 <h3 id="class文件的结构">Class文件的结构</h3>
 
-<p><strong>Class文件</strong>是一组以8字节为基础单位的二进制流</p>
+<h4 id="总述">总述</h4>
+
+<p><strong>Class文件</strong>是一组以8字节为基础单位的二进制流,各个数据项目严格按照顺序紧凑地排列在class文件中,没有任何分隔符.当遇到需要占用8位字节以上空间的数据项时,则会按照高位在前的方式分割成若干个8位字节进行存储.
+&gt;<strong>高位存储(Big-Endian)</strong>:具体指最高位字节在地址最低位,最低位字节在地址最高位的顺序来存储数据</p>
+
+<p>根据Java虚拟机规范的规定,class文件格式采用一种类似于C语言结构体的伪结构来存储数据,这种伪结构中只有两种数据类型:<strong>无符号数</strong>和<strong>表</strong>
+&gt;<strong>无符号数</strong>:属于基本的数据类型, 以u1, u2, u4, u8来分别代表1,2,4,8个字节的无符号数.无符号数可以用来描述数字,索引引用,数量值或者按照utf-8编码构成的字符串值.</p>
+
+<blockquote>
+<p><strong>表</strong>:是由多个无符号数或者其他表作为数据项构成的复合数据类型, 所有表都习惯性地以&rdquo;_info&rdquo;结尾.表用于描述有层次关系的复杂结构的数据, 整个class文件本质上就是一张表.</p>
+</blockquote>
+
+<p>无论是无符号数还是表,当需要描述同一类型但数量不定的多个数据时,经常会使用一个前置的容量计数器加若干个连续的数据项的形式,这时称这一系列连续的某一类型的数据为某一类型的集合</p>
+
+<ul>
+<li><strong>魔数</strong>: 每个class文件的头四个字节称为<strong>魔数(Magic Number)</strong>,它唯一的作用就是确定这个文件是否为一个能被虚拟机接受的Class文件. 值为0xCAFEBABY.</li>
+<li>紧接着魔数的四个字节是<strong>版本号</strong>.5,6字节对应次版本号(Minor Version), 7,8字节对应主版本号(Major Version)</li>
+
+<li><p>接着是<strong>常量池</strong>入口.常量池可以理解为Class文件中的资源仓库.</p>
+
+<ul>
+<li>它是与Class文件结构中与其他项目关联最多的数据类型</li>
+<li>是占用Class文件空间最大的数据项目之一</li>
+<li>同时它还是在Class文件中第一个出现的表类型数据项目.</li>
+</ul>
+
+<p>由于常量池中常量的数量是不确定的, 所以在入口需要放置一项u2类型的数据,代表常量池容量计数器(constant_pool_count).</p>
+
+<p>常量池中主要存放两大类常量: **字面量(Literal) <strong>和</strong>符号引用(Symbolic References)**. 字面量类似于Java语言层面的常量的概念, 如文本字符串, 声明为final的常量值等.而符号引用则属于编译原理方面的概念.
+- 类和接口的全限定名(Fully Qualified Name)
+- 字段的名称和描述符(Descriptor)
+- 方法的名称和描述符</p>
+
+<blockquote>
+<p>虚拟机加载Class文件的时候进行动态连接.也就是说,在Class文件中不会保存各个方法,字段的最终内存布局信息,因此这些字段,方法的符号引用不经过运行期转换的话无法得到真正的内存入口地址,也就无法直接被虚拟机使用.当虚拟机运行时,需要从常量池获取对应的符号引用,再在类创建时或运行时解析,翻译到具体的内存地址中.</p>
+</blockquote>
+
+<p>常量池中每一项常量都是一个表,表的开始的第一位是一个u1类型的标志位,代表当前这个常量属于哪个常量类型.</p></li>
+
+<li><p><strong>访问标志(access_flags)</strong>, 这个标志用于识别一些类或者接口层次的访问信息.</p>
+
+<ul>
+<li>class是类还是接口</li>
+<li>是否定义public类型</li>
+<li>是否定义abstract类型</li>
+<li>是否被声明为final等
+<br /></li>
+</ul></li>
+</ul>
+
+<p>访问标志(access_flags)一共有16个标识符,当前定义了八个,其余标志位要求一致为0.</p>
+
+<ul>
+<li><p><strong>类索引(this_class), 父索引(super_class), 与接口索引集合(interfaces)</strong></p>
+
+<ul>
+<li>类索引和父类索引引用两个u2类型的索引值来表示,它们各自指向一个类型为CONSTANT_Class_info的类描述常量.通过其索引值可以找到定义在CONSTANT_Utf8_info类型的常量中的全限定名字符串.</li>
+<li>对于接口索引集合,入口第一项为u2类型的数据为接口计数器(interfaces_count),表示索引表的容量.</li>
+</ul></li>
+
+<li><p><strong>字段表(field_info)</strong> 用于描述接口或者类中声明的变量.<strong>字段(field)</strong>包括*类级变量*以及<em>实例级变量</em></p>
+
+<ul>
+<li>access_flags: 字段修饰符</li>
+<li>name_index: 字段的简单名称的引用(引常量池)
+&gt; 全限定名: 例如&rdquo;org/fenixsoft/clazz/TestClass&rdquo;是一个类的全限定名,仅仅是把类全名中的&rsquo;.&lsquo;换成了&rsquo;/&lsquo;,最后会加一个&rsquo;;&lsquo;表示全限定名的结束</li>
+</ul>
+
+<blockquote>
+<p>简单名称: 指没有类型和参数修饰的方法或者字段名称, 例如inc()方法的简单名称就是inc
+- descriptor_index: 字段和方法的描述符: 用来描述字段的数据类型,方法的参数列表(包括数量,类型以及顺序)和返回值</p>
+</blockquote></li>
+</ul>
+
+<p>这三项是固定数据项目,不过在descriptor_index之后跟随着一个属性表(attribute_info)集合用于存储一些额外的信息, <strong>字段</strong>都可以在属性表集合中描述零至多项的额外信息
++ <strong>方法表集合</strong>: Class文件存储格式中对方法的描述与对字段的描述几乎采用了完全一致的方式, 结构依次是
+  - 访问标志(access_flags)
+  - 名称索引(name_index)
+  - 描述符索引(descriptor_index)
+  - 属性表集合(attributes)</p>
+
+<p>方法里的Java代码经过编译器编译成字节码指令后,存放在方法属性表集合中一个名为&rdquo;Code&rdquo;的属性里
+  &gt; 这里引出了Java语言中的重载(Override)机制. 重载需要满足两个条件,其一是要与原方法具有相同的简单名称,其二是必须拥有一个与原方法不同的<strong>特征签名</strong>,<strong>特征签名</strong>就是一个方法中各个参数在常量池中的字段符号引用的集合.</p>
+
+<blockquote>
+<p>也正是因为返回值不会包含在特征签名中,因此Java语言里面是无法仅仅依靠返回值的不同来对一个方法进行重载的. 但是在Class文件中,只要描述符不是完全一致的两个方法也可以共存, 因此只有返回值不同的两个方法在同一个Class文件中共同存在是合法的.</p>
+</blockquote>
+
+<ul>
+<li><p><strong>属性表集合</strong>
+属性表(attribute_info)存在于字段表和方法表的内部. 对于每一个属性,它的名称都需要偶从常量池中引用一个CONSTANT_Utf8_info类型的常量来表示, 而属性值结构则完全是自定义的,只需要通过一个u4长度属性区说明属性值所占用的位数即可. 以下列举一些常见的属性.</p>
+
+<ul>
+<li>Code属性</li>
+<li>Exception属性</li>
+<li>LineNumberTable属性</li>
+<li>LocalVariableTable属性</li>
+
+<li><p>SourceFile属性</p>
+
+<h3 id="字节码指令">字节码指令</h3>
+
+<p>字节码指令是由一个字节长度的,代表某种特定操作含义的数字以及跟随其后的零至多个代表此操作所需参数而构成. 由于Java虚拟机采用面向操作数栈而不是寄存器的架构,所以大多数的指令都不包含操作数,只有一个操作码.这种模式的优缺点都很明显.优点是可以省略很多填充和间隔符号,缺点也显而易见,虚拟机在处理一些超过一个字节的数据的时候,不得不在运行时从字节中重建出具体数据的结构</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span>
+自动计算PC寄存器的值加1
+根据PC寄存器的指示位置<span style="color:#f92672">,</span>从字节码流中取出操作码<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>字节码存在操作数<span style="color:#f92672">)</span> 从字节码流中取出操作数<span style="color:#f92672">;</span>
+执行操作码所定义的操作
+<span style="color:#f92672">}</span> <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>字节码流长度 <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">);</span></code></pre></div></li>
+</ul></li>
+
+<li><p>加载和存储指令</p></li>
+
+<li><p>运算指令</p></li>
+
+<li><p>类型转换指令对象创建与访问指令</p></li>
+
+<li><p>操作数栈管理指令</p></li>
+
+<li><p>控制转移指令</p></li>
+
+<li><p>方法调用和返回指令</p></li>
+
+<li><p>异常处理指令</p></li>
+
+<li><p>同步指令</p></li>
+</ul>
 
 <h2 id="虚拟机类加载机制">虚拟机类加载机制</h2>
 
+<h3 id="总述-1">总述</h3>
+
+<p>在Class文件中描述的各种信息,最终都需要加载到虚拟机中才能运行和使用.虚拟机把描述类的数据从Class文件加载到内存,并对数据进行校验,转换解析和初始化.最终形成可以被虚拟机直接使用的Java类型,这就是虚拟机的类加载机制.
+- 在Java中,类型的加载,连接和初始化过程都是在程序运行期间完成的.此方法增加了性能开销但为Java应用程序提供了高度的灵活性.
+- Java的动态扩展特性就是依赖运行期的动态加载和动态连接来实现的.</p>
+
+<h3 id="类的生命周期">类的生命周期</h3>
+
+<p>类从被加载进虚拟内存中,到卸载出内存为止, 它的整个生命周期包括七个阶段:
+- <strong>加载(Loading)</strong>
+- <strong>验证(Verification)</strong>
+- <strong>准备(Preparation)</strong>
+- <strong>解析(Resolution)</strong>
+- <strong>初始化(Initialization)</strong>
+- <strong>使用(Usage)</strong>
+- <strong>卸载(Unloading)</strong></p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/classlife.png" alt="类的生命周期" /></p>
+
+<p>其中验证,准备和解析三个部分统称为<strong>连接(Linking)</strong>.
+<strong>加载</strong>,<strong>验证</strong>,<strong>准备</strong>,<strong>初始化</strong>和<strong>卸载</strong>这五个阶段的顺序是确定的. 类的加载过程必须按照这个顺序按部就班的<em>开始(这些阶段按部就班的开始但通常互相交叉混合式地进行.通常会在一个阶段执行的过程中调用,激活另一个阶段)</em></p>
+
+<p>解析阶段在某些情况下可以在初始化阶段之后再开始, 这是为了支持Java语言的运行时绑定.虚拟机规范并没有对加载进行严格的限制.在经过<strong>加载</strong>,<strong>验证</strong>,<strong>准备</strong>这三个阶段后,对于<strong>初始化</strong>阶段,虚拟机有严格的限制,*有且只有*五种情况必须立即对类进行初始化
+- 遇到new, getstatic, putstatic, invokestatic这四条字节码指令时, 如果类没有进行过初始化,需要先触发其初始化. 常见的代码场景有,使用new实例化对象,读取或设置一个类的静态字段(被final修饰已在编译器把结果放入常量池的静态字段除外),还有调用一个类的静态方法的时候.
+- 使用java.lang.reflect包的方法对类进行反射调用的时候
+- 当初始化一个类的时候,如果发现其父类还没有进行过初始化,则需要先触发其父类的初始化.
+- 当虚拟机启动的时候,用户需要指定一个要执行的主类(包含main()方法的那个类), 虚拟机会先初始化这个类.
+- 当使用JDK1.7的动态语言支持时,如果一个java.lang.invoke.MethodHandle实例最后的解析结果是REF_getStatic, REF_putStatic,REF_invokeStatic的方法句柄,并且这个方法句柄所对应的类没有进行过初始化
+除此之外的所有引用类的方式都不会触发初始化, 称为<strong>被动引用</strong>.下面进行简单的举例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SuperClass</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+        system<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;SuperClass init&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> 123<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SubClass</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;SubClass init!&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NotInitialization</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>SubClass<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">/* 运行结果
+</span><span style="color:#75715e">* SuperClass init
+</span><span style="color:#75715e">* 123
+</span><span style="color:#75715e">*/</span></code></pre></div>
+<h3 id="类加载的全过程">类加载的全过程</h3>
+
+<h4 id="加载-loading">加载(Loading)</h4>
+
+<p>&ldquo;加载&rdquo;是类加载的一个阶段.在这个阶段虚拟机需要完成三件事
++ 通过一个类的全限定名来获取定义此类的二进制字节流
++ 将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构
++ 在内存中生成一个代表这个类的java.lang.Class对象,作为方法区这个类的各种数据的访问入口.</p>
+
+<p>虚拟机规范的这三点要求并不具体.从ZIP包中读取类的二进制字节流的方法演变成了JAR格式. 从网络中获取演变成了Applet.运行时计算生成演变出了动态代理技术.</p>
+
+<p>对于非数组类数据来说, 可以由系统提供的引导类加载器来完成, 也可以由用户自定义的类加载器去完成, 开发人员可以通过定义自己的类加载器去控制字节流的获取方式(重写一个类加载器的loadClass()方法).</p>
+
+<p>对于数组类而言, 由于数据类本身不通过类加载器创建,它是由Java虚拟机直接创建.但数组类的元素类型(Element Type)最终要靠类加载器去创建
+- 如果组件类型(Component Type, 指数组去掉一个维度的类型)是引用类型, 则递归地采用之前提到的家在过程去加载这个组件类型
+- 如果组件类型不是引用类型(如int[]),Java虚拟机将会把数组C标记为与引导类加载器关联.
+- 数组类的可见性与它的组件类型的可见性一致, 如果组件类型不是引用类型,那数组类的可见性默认为public.</p>
+
+<p>在类加载完成之后,虚拟机外的二进制字节流就按照虚拟机所需的格式存储在方法区之中. 内存中实例化一个java.lang.Class类的对象, 这个对象将作为程序访问方法区中的这些类型数据的外部接口.</p>
+
+<p>实际上加载阶段和连接阶段的部分内容(如字节码文件格式验证)是交叉进行的.</p>
+
+<h4 id="验证-verification">验证(Verification)</h4>
+
+<p>验证是<strong>连接</strong>阶段的第一步,这一阶段的目的是为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求.并且不会危害虚拟机自身的安全. 这个阶段是否严谨直接决定了Java虚拟机能否承受恶意代码的攻击. 验证阶段大致完成四个检验动作:
+- <strong>文件格式验证</strong>: 字节流是否符合Class文件格式的规范, 并且能被当前版本的虚拟机处理. 这一检验动作的主要目的是保证输入的字节流能正确的解析并存储于方法区之内. 只有通过了此阶段的检验后, 字节流才会进入内存的方法区中进行存储. 所以后面的验证阶段都基于方法区的存储结构进行的,不会再直接操作字节流.
+- <strong>元数据验证</strong>: 对字节码描述的信息进行语义分析,以保证其描述的信息符合Java语言规范的要求.
+- <strong>字节码验证</strong>: 通过数据流和控制流的分析,确定程序语义是合法的,符合逻辑的.
+- <strong>符号引用验证</strong>: 这个阶段验证发生在虚拟机将符号引用转化为直接引用的时候, 这个自动转化动作将在连接的第三个阶段&mdash;解析阶段中发生. 符号引用验证可以看做是对类自身以外(常量池中的各种符号引用)的信息进行匹配性校验.</p>
+
+<p>验证阶段是重要但非必要的阶段(因为对运行期没有影响).如果代码已经被反复使用或验证过,可以使用-Xverify:none参数来关闭大部分的类验证措施,以缩短虚拟机类的加载时间.</p>
+
+<h4 id="准备-preparation">准备(Preparation)</h4>
+
+<p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段, 这些变量所使用的内存都将在方法区中进行分配.
+  &gt; 初始值: 初始值&rdquo;通常情况下是数据类型的零值&rdquo; 例如 public static int value = 123; 变量value在准备阶段过后的初始值是0而不是123. 因为这时尚未开始执行任何Java方法,把value赋值为123的putstatic指令是程序被编译后,存放于类构造器<client()>方法中.赋值动作在初始化阶段才会执行.
+  还存在一些&rdquo;特殊情况&rdquo;,如果类字段的字段属性中存在ConstantValue属性,那在准备阶段变量value就会被初始化为ConstantValue属性所指定的值.例如 public static final int value = 123;</p>
+
+<p>这时候进行内存分配的仅包括类变量(被static修饰的变量), 而不包括实例变量,实例变量将会在对象实例化时随着对象一起分配在Java堆中.</p>
+
+<h4 id="解析-resolution">解析(Resolution)</h4>
+
+<p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程.
+&gt; <strong>符号引用(Symbolic References)</strong>: 符号引用以一组符号来描述所引用的目标. 符号可以是任何形式的字面量, 只要使用时能无歧义地定位到目标即可(引用的目标不一定已经加载到了内存中).</p>
+
+<blockquote>
+<p><strong>直接引用(Direct Reference)</strong>: 直接引用可以是直接指向目标的指针, 相对偏移量或者是一个能间接定位到目标的句柄.</p>
+</blockquote>
+
+<p>解析动作主要针对类或接口, 字段, 类方法, 接口方法, 方法类型, 方法句柄和调用点限定符7类符号引用进行.
+- <strong>类或接口的解析</strong>
+  假设当前代码所处的类为D,如果要把一个从未解析过的符号引用N解析为一个类或者接口C的直接引用.虚拟机需要完成以下三个步骤
+  + 如果C不是一个数组类型,那虚拟机将会把代表N的全限定名传递给D的类加载器去加载C这个类. 在加载过程中由于元数组验证,字节码验证的需要,又可能触发其他相关类的加载动作.
+  + 如果C是一个数据类型,并且数据的元素类型是对象.那将会按照第一点的规则加载数据元素类型,接着由虚拟机生成一个代表此数组维度和元素的数组对象.
+  + 如果以上未出现异常, 那么C在虚拟机中实际上已经成为一个有效的类或者接口了,但在解析完成之前还要进行符号引用验证,确认D是否具备对C的访问权限,
+- <strong>字段解析</strong>
+  要解析一个未被解析的字段符号引用, 首先将会对字段表内的class_index项中索引的CONSTANT_Class_info符号引用进行解析.,也就是对字段所属的类或者接口的符号引用.解析完成后,这个字段所属的类或者接口用C表示,C需进行以下的后续搜索
+  + 如果C本身就包含了简单名称和字段描述符都与目标相匹配的字段,则返回这个字段的直接引用,查找结束.
+  + 否则, 如果在C中实现了接口,按照继承关系由下至上递归搜索其父类,如果在父类中包含了简单名称和字段描述符都与目标相匹配的字段,则返回这个字段的直接引用,查找结束
+  + 否则, 如果在C不是java.lang.Object的话,将按照继承关系从下往上递归搜索其父类,如果在父类中包含了简单名称和字段描述符都与目标相匹配的字段,则返回这个字段的直接引用,查找结束.
+  + 否则, 查找失败, 抛出java.lang.NoSuchFieldError异常.</p>
+
+<p>当父类与接口同时存在一个同名字段是编译器会提示&rdquo;The field **** is ambiguous&rdquo;,并且拒绝编译.
+- <strong>类方法解析</strong>
+  第一步也字段解析一样,解析出所属类或接口的符号引用. 若解析成功,我们依然用C表示这个类,
+  + 类方法和接口方法符号引用的常量类型定义分开的,如果在类方法表中发现 class_index中的索引是个接口,就直接抛出java.lang.IncompatibleClassChangeError异常
+  + 在类C中查找是否包含了简单名称和字段描述符都与目标相匹配的方法,如果有则返回这个方法的直接引用,查找结束
+  + 在类C的父类中递归查找是否包含了简单名称和字段描述符都与目标相匹配的方法,如果有则返回这个方法的直接引用,查找结束
+  + 在类C实现的接口列表及他们的父接口之中递归查找是否包含了简单名称和字段描述符都与目标相匹配的方法,如果有则说明类C是个抽象类,抛出java.lang.AbstractMethodError异常
+- <strong>接口方法解析</strong>
+  第一步也字段解析一样,解析出所属类或接口的符号引用. 若解析成功,我们依然用C表示这个接口.
+  + 与类方法解析不同,如果在接口方法表中发现class_index中的索引C是个类而不是接口,那就直接抛出java.lang.IncompatibleClassChangeError异常.
+  + 在接口C中查找是否包含了简单名称和字段描述符都与目标相匹配的方法,如果有则返回这个方法的直接引用,查找结束
+  + 在接口C的父类中递归查找是否包含了简单名称和字段描述符都与目标相匹配的方法,知道java.lang.Object类,如果有则返回这个方法的直接引用,查找结束
+  + 否则则视为失败</p>
+
+<h4 id="初始化-initializaiton">初始化(Initializaiton)</h4>
+
+<p>类初始化是类加载过程的最后一步, 前面的步骤除了在加载阶段用户应用程序可以通过自定义类加载器参与之外, 其余动作完全由虚拟机主导和控制. 初始化阶段才真正开始执行类中定义的Java程序代码.</p>
+
+<p>在准备阶段,变量已经被赋予了系统要求的初始值, 在初始化阶段则通过程序制定的主观计划去初始化类变量和其他资源. 初始化阶段是执行类构造器<client>方法的过程.
+  - <client\>()方法是由编译器自动收集类中的所有类变量的赋值动作和静态语句块(static{}块)中的语句合并产生的,编译器收集的顺序是由语句在源文件中出现的顺序所决定的,静态语句块中只能访问到定义在静态语句块之前的变量,<em>定义在它之后的变量,在前面的静态语句块可以赋值,但是不能访问</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+          i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>        <span style="color:#75715e">//给变量赋值可以正常编译通过
+</span><span style="color:#75715e"></span>          System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>      <span style="color:#75715e">//这句编译器会提示&#34;非法向前引用&#34;
+</span><span style="color:#75715e"></span>      <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span></code></pre></div>
+<ul>
+<li><client\>()方法与类的构造函数(或者说实例构造器<init\>()方法)不同,它不需要显式地调用父类构造器,虚拟机会保证在子类的<client\>()方法执行之前,父类的<client\>()已经执行完毕.</li>
+<li>由于父类的<client\>方法先执行,也意味着父类中定义的静态语句块要优先于子类的变量赋值操作.</li>
+<li><client\>方法对于类或者接口来说并不是必需的,如果一个类中没有静态语句块,也没有对变量的赋值操作,那么编译器可以不为这个类生成<client\>()方法.</li>
+<li>虚拟机会保证一个类的<client\>()方法在多线程环境下被正确的加锁,同步.多个线程去初始化一个类的话,只会有一个线程去执行这个类的<client\>()方法,其他则被阻塞.</li>
+</ul>
+
+<h3 id="类加载器">类加载器</h3>
+
+<p>虚拟机团队把类加载阶段中&rdquo;<em>通过一类的全限定名来获取描述此类的二进制字节流</em>&ldquo;这个动作放到了Java虚拟机外部实现, 以便让应用程序自己决定如何去获取所需要的类.实现这个动作的代码模块称为<strong>类加载器</strong></p>
+
+<p>对于任意一个类,都需要由加载它的类加载器和这个类本身一同确立其在Java虚拟机中的唯一性.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassLoaderTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+        ClassLoader myLoader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClassLoader<span style="color:#f92672">(){</span>
+            <span style="color:#a6e22e">@Override</span>
+            <span style="color:#66d9ef">public</span> Class<span style="color:#f92672">&lt;?&gt;</span> loadClass<span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ClassNotFoundException <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">try</span><span style="color:#f92672">{</span>
+                    String fileName <span style="color:#f92672">=</span> name<span style="color:#f92672">.</span><span style="color:#a6e22e">substring</span><span style="color:#f92672">(</span>name<span style="color:#f92672">.</span><span style="color:#a6e22e">lastIndexOf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">)+</span>1<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.class&#34;</span><span style="color:#f92672">;</span>
+                    InputStream is <span style="color:#f92672">=</span> getClass<span style="color:#f92672">().</span><span style="color:#a6e22e">getResourceAsStream</span><span style="color:#f92672">(</span>fileName<span style="color:#f92672">);</span>
+                    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>is <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">loadClass</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+                    <span style="color:#f92672">}</span>
+                    <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> b <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span>is<span style="color:#f92672">.</span><span style="color:#a6e22e">available</span><span style="color:#f92672">()];</span>
+                    is<span style="color:#f92672">.</span><span style="color:#a6e22e">read</span><span style="color:#f92672">(</span>b<span style="color:#f92672">);</span>
+                    <span style="color:#66d9ef">return</span> defineClass<span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> b<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> b<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">){</span>
+                    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ClassNotFoundException<span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">};</span>
+
+        Object obj <span style="color:#f92672">=</span> myLoader<span style="color:#f92672">.</span><span style="color:#a6e22e">loadClass</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;org.fenixsoft.classloading.ClassLoaderTest&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">newInstance</span><span style="color:#f92672">();</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>obj<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">());</span>
+        <span style="color:#75715e">// class org.fenixsoft.classloading.ClassLoaderTest
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>obj <span style="color:#66d9ef">instanceof</span> org<span style="color:#f92672">.</span><span style="color:#a6e22e">fenixsoft</span><span style="color:#f92672">.</span><span style="color:#a6e22e">classloading</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ClassLoaderTest</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">// False
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="双亲委派模型">双亲委派模型</h4>
+
+<p>从Java虚拟机的角度讲,只存在两种不同的类加载器:一种是<strong>启动类加载器(Bootstrap ClassLoader)</strong>,这个类加载器使用C++实现,是虚拟机的一部分;另一种就是所有其他的类加载器,这些类加载器都是由Java实现,独立于虚拟机的外部,并且都继承自java.lang.ClassLoader.</p>
+
+<p>从开发者角度看,类加载器可以划分得更细致一些,绝大部分Java程序都会用到以下三种系统提供的类加载器.
+  + <strong>启动类加载器(Bootstrap ClassLoader)</strong>: 这个类加载器负责将存放在<JAVA_HOME>\lib目录中的,或者被-Xbootclasspath参数所指定的路径中的,并且是虚拟机识别的类库加载到虚拟机内存中.
+  + <strong>扩展类加载器(Extension ClassLoader)</strong>: 这个类加载器负责加载<JAVA_HOME>\lib\ext目录中的或者被java.ext.dirs系统变量所指定的路径中的所有类库,开发者可以直接使用
+  + <strong>应用程序类加载器(Application ClassLoader)</strong>:由于这个类加载器是ClassLoader中的getSystemClassLoader()方法的返回值,所以一般也称它为系统类加载器.它负责加载用户类路径(ClassPath)上所指定的类库,开发者可以直接使用这个类加载器,如果应用程序中没有自定义过自己的类加载器,这则是默认的类加载器.</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/delemodel.png" alt="双亲委派模型" /></p>
+
+<p>双亲委派模型要求除了顶层的启动类加载器外,其余的类加载器都应当有自己的父类加载器.这里类加载器之间的父子关系一般不会以继承(Inheritance)的关系来实现,而都使用组合(Composition)关系来复用父加载器的代码.</p>
+
+<p>工作过程是: 如果一个类加载器收到了类加载的请求, 它首先不会自己去尝试加载这个类,而是把这个请求委派给父类加载器去完成,只有当父类加载器反馈自己无法完成这个加载请求时(它的搜索范围中没有找到所需要的类)时,子加载器才会尝试自己去加载.</p>
+
+<p>双亲委派模型的优点是Java类随着它的类加载器一起具备了一种带有优先级的层次关系.它对于保证Java程序的稳定运作很重要.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"></code></pre></div>
 <h2 id="虚拟机字节码执行引擎">虚拟机字节码执行引擎</h2>
 
 <h2 id="类加载及执行子系统的案例与实战">类加载及执行子系统的案例与实战</h2>
 
-<h1 id="程序编译与代码优化">程序编译与代码优化</h1>
+<h1 id="part-3-程序编译与代码优化">Part 3(程序编译与代码优化)</h1>
 
 <h2 id="早期-编译期-优化">早期(编译期)优化</h2>
 
 <h2 id="晚期-运行期-优化">晚期(运行期)优化</h2>
 
-<h1 id="高效并发">高效并发</h1>
+<h1 id="part-4-高效并发">Part 4(高效并发)</h1>
 
 <h2 id="java内存模型与线程">Java内存模型与线程</h2>
 
