@@ -12,7 +12,7 @@ author: "Yang Zhang"
 
 ## Multiple ways to implement the multithreading project in python
 
-## Queue, Lock, RLock, Condition and  
+## Queue, Lock, RLock, Condition and Semorpher 
 
 ```python
 # GIL---global interpreter lock
