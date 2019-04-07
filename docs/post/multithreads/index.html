@@ -24,21 +24,21 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.acquire() sum -= 1 lock.">
+  <meta name="description" content="Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and Semorpher # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="对多线程的理解和深入理解Future源码">
-    <meta name="twitter:description" content="Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.acquire() sum -= 1 lock.">
+    <meta name="twitter:description" content="Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and Semorpher # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="对多线程的理解和深入理解Future源码">
-  <meta property="og:description" content="Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.acquire() sum -= 1 lock.">
+  <meta property="og:description" content="Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and Semorpher # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -221,7 +221,7 @@
 
 <h2 id="multiple-ways-to-implement-the-multithreading-project-in-python">Multiple ways to implement the multithreading project in python</h2>
 
-<h2 id="queue-lock-rlock-condition-and">Queue, Lock, RLock, Condition and</h2>
+<h2 id="queue-lock-rlock-condition-and-semorpher">Queue, Lock, RLock, Condition and Semorpher</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># GIL---global interpreter lock</span>
 <span style="color:#f92672">import</span> threading
 <span style="color:#f92672">from</span> queue <span style="color:#f92672">import</span> Queue

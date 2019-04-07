@@ -24,21 +24,33 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="">
+  <meta name="description" content="迭代器和迭代协议 我们知道实现下标的操作是基于getitem这个协议
+ 可迭代类型
+ 迭代器 #
+  http://39.96.12.43:8000/alipay/return/?charset=utf-8&amp;amp;out_trade_no=201702022ssswq&amp;amp;method=alipay.trade.page.pay.return&amp;amp;total_amount=100.00&amp;amp;sign=X59PxIrSunlz4IqhjBbHb1dzoPCChJbRN720AMn74kyDT54wkSCt1XIK%2B55PiWWU%2F3ytN7yn6Imt%2BaODtjPRF15VCCYrxDdby8tnBCxI3A7owvU9urvH5CwbHuvxE047ceHmVx44lA5%2BE9RUtUwd%2B%2Ba0omTdi83%2Fc6CPWlKLJPq1d5HIbJg8HEnPGqHObJadOkmpEpDcVRQyy74TibmAau9ZfHc4u4%2BuWyIzPJpnsEqjlhsaYraJdIUIEuG5qnO4dpNS66wyX%2FP7Ri3eb1JufklIl3CX9718XYf6IxQ5vrTjmw0PzieAH6ZvavYm2o%2BrH4H01D71mtVzQVJUc3Bqqg%3D%3D&amp;amp;trade_no=2019021722001471690500769031&amp;amp;auth_app_id=2016092400589241&amp;amp;version=1.0&amp;amp;app_id=2016092400589241&amp;amp;sign_type=RSA2&amp;amp;seller_id=2088102177131773&amp;amp;timestamp=2019-02-17&#43;12%3A34%3A09
+https://openapi.alipaydev.com/gateway.do?app_id=&amp;amp;biz_content=%7B%22subject%22%3A%2220190217220809366%22%2C%22out_trade_no%22%3A%2220190217220809366%22%2C%22total_amount%22%3A200.0%2C%22product_code%22%3A%22FAST_INSTANT_TRADE_PAY%22%7D&amp;amp;charset=utf-8&amp;amp;method=alipay.trade.page.pay&amp;amp;notify_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;return_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;sign_type=RSA2&amp;amp;timestamp=2019-02-17&#43;22%3A26%3A09&amp;amp;version=1.0&amp;amp;sign=UuoIjRxBAdVb67zQzLPmZxO3OrDkJvlsh0UCw3OzLDre2HrIrNJaPCbWvtqC7RRvVwMVKnAaCeXGSU9HTHEvnP9Bi4oEevpeMZIcOtMBO9EMKbB1nzk84ROtP4rC6lEqZOeyvOJsi4NHFEh4bO8OXVvK2%2Fb34J9YtplSo5Ucl6qJDHTREjWf3mJ%2FwU4knougrSR269ze0dTGr%2FkjppldVJWjKtbcI5MOy1BrymInhw6qNq9zWQxAS7xpdNpUEWA0DESTK%2B5KQVzRvavGlgqHeFCUCkGH8UoVhMx2wRiLF9ylX4QpZ85kfbQb3uZ%2FmpBHjOjlunEjy5Vj3xypfGGlqg%3D%3D">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="对生成器和协程的理解">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="迭代器和迭代协议 我们知道实现下标的操作是基于getitem这个协议
+ 可迭代类型
+ 迭代器 #
+  http://39.96.12.43:8000/alipay/return/?charset=utf-8&amp;amp;out_trade_no=201702022ssswq&amp;amp;method=alipay.trade.page.pay.return&amp;amp;total_amount=100.00&amp;amp;sign=X59PxIrSunlz4IqhjBbHb1dzoPCChJbRN720AMn74kyDT54wkSCt1XIK%2B55PiWWU%2F3ytN7yn6Imt%2BaODtjPRF15VCCYrxDdby8tnBCxI3A7owvU9urvH5CwbHuvxE047ceHmVx44lA5%2BE9RUtUwd%2B%2Ba0omTdi83%2Fc6CPWlKLJPq1d5HIbJg8HEnPGqHObJadOkmpEpDcVRQyy74TibmAau9ZfHc4u4%2BuWyIzPJpnsEqjlhsaYraJdIUIEuG5qnO4dpNS66wyX%2FP7Ri3eb1JufklIl3CX9718XYf6IxQ5vrTjmw0PzieAH6ZvavYm2o%2BrH4H01D71mtVzQVJUc3Bqqg%3D%3D&amp;amp;trade_no=2019021722001471690500769031&amp;amp;auth_app_id=2016092400589241&amp;amp;version=1.0&amp;amp;app_id=2016092400589241&amp;amp;sign_type=RSA2&amp;amp;seller_id=2088102177131773&amp;amp;timestamp=2019-02-17&#43;12%3A34%3A09
+https://openapi.alipaydev.com/gateway.do?app_id=&amp;amp;biz_content=%7B%22subject%22%3A%2220190217220809366%22%2C%22out_trade_no%22%3A%2220190217220809366%22%2C%22total_amount%22%3A200.0%2C%22product_code%22%3A%22FAST_INSTANT_TRADE_PAY%22%7D&amp;amp;charset=utf-8&amp;amp;method=alipay.trade.page.pay&amp;amp;notify_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;return_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;sign_type=RSA2&amp;amp;timestamp=2019-02-17&#43;22%3A26%3A09&amp;amp;version=1.0&amp;amp;sign=UuoIjRxBAdVb67zQzLPmZxO3OrDkJvlsh0UCw3OzLDre2HrIrNJaPCbWvtqC7RRvVwMVKnAaCeXGSU9HTHEvnP9Bi4oEevpeMZIcOtMBO9EMKbB1nzk84ROtP4rC6lEqZOeyvOJsi4NHFEh4bO8OXVvK2%2Fb34J9YtplSo5Ucl6qJDHTREjWf3mJ%2FwU4knougrSR269ze0dTGr%2FkjppldVJWjKtbcI5MOy1BrymInhw6qNq9zWQxAS7xpdNpUEWA0DESTK%2B5KQVzRvavGlgqHeFCUCkGH8UoVhMx2wRiLF9ylX4QpZ85kfbQb3uZ%2FmpBHjOjlunEjy5Vj3xypfGGlqg%3D%3D">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="对生成器和协程的理解">
-  <meta property="og:description" content="">
+  <meta property="og:description" content="迭代器和迭代协议 我们知道实现下标的操作是基于getitem这个协议
+ 可迭代类型
+ 迭代器 #
+  http://39.96.12.43:8000/alipay/return/?charset=utf-8&amp;amp;out_trade_no=201702022ssswq&amp;amp;method=alipay.trade.page.pay.return&amp;amp;total_amount=100.00&amp;amp;sign=X59PxIrSunlz4IqhjBbHb1dzoPCChJbRN720AMn74kyDT54wkSCt1XIK%2B55PiWWU%2F3ytN7yn6Imt%2BaODtjPRF15VCCYrxDdby8tnBCxI3A7owvU9urvH5CwbHuvxE047ceHmVx44lA5%2BE9RUtUwd%2B%2Ba0omTdi83%2Fc6CPWlKLJPq1d5HIbJg8HEnPGqHObJadOkmpEpDcVRQyy74TibmAau9ZfHc4u4%2BuWyIzPJpnsEqjlhsaYraJdIUIEuG5qnO4dpNS66wyX%2FP7Ri3eb1JufklIl3CX9718XYf6IxQ5vrTjmw0PzieAH6ZvavYm2o%2BrH4H01D71mtVzQVJUc3Bqqg%3D%3D&amp;amp;trade_no=2019021722001471690500769031&amp;amp;auth_app_id=2016092400589241&amp;amp;version=1.0&amp;amp;app_id=2016092400589241&amp;amp;sign_type=RSA2&amp;amp;seller_id=2088102177131773&amp;amp;timestamp=2019-02-17&#43;12%3A34%3A09
+https://openapi.alipaydev.com/gateway.do?app_id=&amp;amp;biz_content=%7B%22subject%22%3A%2220190217220809366%22%2C%22out_trade_no%22%3A%2220190217220809366%22%2C%22total_amount%22%3A200.0%2C%22product_code%22%3A%22FAST_INSTANT_TRADE_PAY%22%7D&amp;amp;charset=utf-8&amp;amp;method=alipay.trade.page.pay&amp;amp;notify_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;return_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;sign_type=RSA2&amp;amp;timestamp=2019-02-17&#43;22%3A26%3A09&amp;amp;version=1.0&amp;amp;sign=UuoIjRxBAdVb67zQzLPmZxO3OrDkJvlsh0UCw3OzLDre2HrIrNJaPCbWvtqC7RRvVwMVKnAaCeXGSU9HTHEvnP9Bi4oEevpeMZIcOtMBO9EMKbB1nzk84ROtP4rC6lEqZOeyvOJsi4NHFEh4bO8OXVvK2%2Fb34J9YtplSo5Ucl6qJDHTREjWf3mJ%2FwU4knougrSR269ze0dTGr%2FkjppldVJWjKtbcI5MOy1BrymInhw6qNq9zWQxAS7xpdNpUEWA0DESTK%2B5KQVzRvavGlgqHeFCUCkGH8UoVhMx2wRiLF9ylX4QpZ85kfbQb3uZ%2FmpBHjOjlunEjy5Vj3xypfGGlqg%3D%3D">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/generator/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -213,9 +225,25 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">对生成器和协程的理解</h1>
-      <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 0 min read</p>
+      <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 1 min read</p>
     </header>
-    <article class="post-content"></article>
+    <article class="post-content">
+
+<h2 id="迭代器和迭代协议">迭代器和迭代协议</h2>
+
+<p>我们知道实现下标的操作是基于<strong>getitem</strong>这个协议</p>
+
+<ol>
+<li><p>可迭代类型</p></li>
+
+<li><p>迭代器
+#</p></li>
+</ol>
+
+<p><a href="http://39.96.12.43:8000/alipay/return/?charset=utf-8&amp;out_trade_no=201702022ssswq&amp;method=alipay.trade.page.pay.return&amp;total_amount=100.00&amp;sign=X59PxIrSunlz4IqhjBbHb1dzoPCChJbRN720AMn74kyDT54wkSCt1XIK%2B55PiWWU%2F3ytN7yn6Imt%2BaODtjPRF15VCCYrxDdby8tnBCxI3A7owvU9urvH5CwbHuvxE047ceHmVx44lA5%2BE9RUtUwd%2B%2Ba0omTdi83%2Fc6CPWlKLJPq1d5HIbJg8HEnPGqHObJadOkmpEpDcVRQyy74TibmAau9ZfHc4u4%2BuWyIzPJpnsEqjlhsaYraJdIUIEuG5qnO4dpNS66wyX%2FP7Ri3eb1JufklIl3CX9718XYf6IxQ5vrTjmw0PzieAH6ZvavYm2o%2BrH4H01D71mtVzQVJUc3Bqqg%3D%3D&amp;trade_no=2019021722001471690500769031&amp;auth_app_id=2016092400589241&amp;version=1.0&amp;app_id=2016092400589241&amp;sign_type=RSA2&amp;seller_id=2088102177131773&amp;timestamp=2019-02-17+12%3A34%3A09">http://39.96.12.43:8000/alipay/return/?charset=utf-8&amp;out_trade_no=201702022ssswq&amp;method=alipay.trade.page.pay.return&amp;total_amount=100.00&amp;sign=X59PxIrSunlz4IqhjBbHb1dzoPCChJbRN720AMn74kyDT54wkSCt1XIK%2B55PiWWU%2F3ytN7yn6Imt%2BaODtjPRF15VCCYrxDdby8tnBCxI3A7owvU9urvH5CwbHuvxE047ceHmVx44lA5%2BE9RUtUwd%2B%2Ba0omTdi83%2Fc6CPWlKLJPq1d5HIbJg8HEnPGqHObJadOkmpEpDcVRQyy74TibmAau9ZfHc4u4%2BuWyIzPJpnsEqjlhsaYraJdIUIEuG5qnO4dpNS66wyX%2FP7Ri3eb1JufklIl3CX9718XYf6IxQ5vrTjmw0PzieAH6ZvavYm2o%2BrH4H01D71mtVzQVJUc3Bqqg%3D%3D&amp;trade_no=2019021722001471690500769031&amp;auth_app_id=2016092400589241&amp;version=1.0&amp;app_id=2016092400589241&amp;sign_type=RSA2&amp;seller_id=2088102177131773&amp;timestamp=2019-02-17+12%3A34%3A09</a></p>
+
+<p><a href="https://openapi.alipaydev.com/gateway.do?app_id=&amp;biz_content=%7B%22subject%22%3A%2220190217220809366%22%2C%22out_trade_no%22%3A%2220190217220809366%22%2C%22total_amount%22%3A200.0%2C%22product_code%22%3A%22FAST_INSTANT_TRADE_PAY%22%7D&amp;charset=utf-8&amp;method=alipay.trade.page.pay&amp;notify_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;return_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;sign_type=RSA2&amp;timestamp=2019-02-17+22%3A26%3A09&amp;version=1.0&amp;sign=UuoIjRxBAdVb67zQzLPmZxO3OrDkJvlsh0UCw3OzLDre2HrIrNJaPCbWvtqC7RRvVwMVKnAaCeXGSU9HTHEvnP9Bi4oEevpeMZIcOtMBO9EMKbB1nzk84ROtP4rC6lEqZOeyvOJsi4NHFEh4bO8OXVvK2%2Fb34J9YtplSo5Ucl6qJDHTREjWf3mJ%2FwU4knougrSR269ze0dTGr%2FkjppldVJWjKtbcI5MOy1BrymInhw6qNq9zWQxAS7xpdNpUEWA0DESTK%2B5KQVzRvavGlgqHeFCUCkGH8UoVhMx2wRiLF9ylX4QpZ85kfbQb3uZ%2FmpBHjOjlunEjy5Vj3xypfGGlqg%3D%3D">https://openapi.alipaydev.com/gateway.do?app_id=&amp;biz_content=%7B%22subject%22%3A%2220190217220809366%22%2C%22out_trade_no%22%3A%2220190217220809366%22%2C%22total_amount%22%3A200.0%2C%22product_code%22%3A%22FAST_INSTANT_TRADE_PAY%22%7D&amp;charset=utf-8&amp;method=alipay.trade.page.pay&amp;notify_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;return_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;sign_type=RSA2&amp;timestamp=2019-02-17+22%3A26%3A09&amp;version=1.0&amp;sign=UuoIjRxBAdVb67zQzLPmZxO3OrDkJvlsh0UCw3OzLDre2HrIrNJaPCbWvtqC7RRvVwMVKnAaCeXGSU9HTHEvnP9Bi4oEevpeMZIcOtMBO9EMKbB1nzk84ROtP4rC6lEqZOeyvOJsi4NHFEh4bO8OXVvK2%2Fb34J9YtplSo5Ucl6qJDHTREjWf3mJ%2FwU4knougrSR269ze0dTGr%2FkjppldVJWjKtbcI5MOy1BrymInhw6qNq9zWQxAS7xpdNpUEWA0DESTK%2B5KQVzRvavGlgqHeFCUCkGH8UoVhMx2wRiLF9ylX4QpZ85kfbQb3uZ%2FmpBHjOjlunEjy5Vj3xypfGGlqg%3D%3D</a></p>
+</article>
     <footer class="post-footer">
       
       <ul class="post-tags">

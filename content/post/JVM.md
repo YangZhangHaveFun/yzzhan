@@ -651,6 +651,223 @@ Class文件的常量池中存在大量的符号引用, 字节码中的方法调�
 > 调用目标在程序代码写好,编译器进行编译时就必须确定下来.这类方法的调用称为**解析**.
 
 在Java语言中符合"编译器可知,运行期不可变"这个要求的方法, 主要包括静态方法和私有方法两大类.前者与类型直接关联后者在外部不可被访问,这两种方法的特点决定了它们都不可能通过继承或别的方式重写其他版本.
+
+Java虚拟机里提供了5条方法调用字节码指令:
+- invokestatic: 调用静态方法
+- invokespecial: 调用实例构造器<init\>方法, 私有方法和父类方法
+- invokevirtual: 调用所有的虚方法
+- invokeinterface: 调用接口方法, 会在运行时再确定一个实现此接口的对象.
+- invokedynamic: 先在运行时动态解析出调用点限定符所引用的方法,然后再执行该方法,前面四条指令的分派逻辑是固话在Java虚拟机内部的, 而invokedynamic指令的分派逻辑是由用户所设定的引导方法决定的.
+
+其中invokespecial和invokestatic指令调用都可以在解析阶段确定唯一的调用版本 ---> 符合条件的有静态方法, 私有方法, 实例构造器, 父类方法这四类.
+
+除了invokespecial和invokestatic指令, 还有被final修饰过的方法.
+
+**解析调用**一定是一个静态的过程. 具体指
+- 在编译期就完全确定
+- 在类装载的解析阶段就会把涉及的符号引用全部转化为可确定直接引用
+- 不会延迟到运行期完成.
+
+####分派(Dispatch)
+分派调用可能是静态的也可能是动态的, 根据分派依据的宗量数的不同, 可分为单分派和多分派. 两两组合后形成四种不同的组合
+- 静态单分派
+- 动态单分派
+- 动态多分派
+- 静态多分派
+
+下面提供一段代码来分析静态分派
+```Java
+//静态方法演示
+public class StaticDispatch{
+    static abstract class Human{}
+    static class Man extends Human{}
+    static class Woman extends Human{}
+    
+    public void sayHello(Human guy){
+        System.out.println("hello, guy");
+    }
+
+    public void sayHello(Man guy){
+        System.out.println("hello, man");
+    }
+
+    public void sayHello(Woman guy){
+        System.out.println("hello, woman");
+    }
+
+    public static void main(String[] args){
+        Human man = new Man();
+        Human woman = new Woman();
+        StaticDispatch sr = new StaticDispatch();
+        sr.sayHello(man);
+        sr.sayHello(woman);
+    }
+    // hello, guy
+    // hello, guy
+}
+```
+上面代码中的"Human"称为变量的静态类型(Static Type),或者叫做的外观类型(Appearent Type), 后面的"Man"则称为变量的实际类型(Actual Type).
+
+静态类型和实际类型在程序中都可以发生一些变化. 区别是静态类型的变化仅仅在使用时发生, 变量本身的静态类型不会改变, 并且最终的静态类型是在编译器可知的, 而实际类型变化的结果在运行期才可确定. 编译器在编译程序的时候并不知道一个对象的实际类型是什么.
+
+代码中刻意定义了两个静态类型相同但实际类型不同的变量, 但虚拟机(编译器)在**重载**时是通过参数的静态类型而不是实际类型作为判断依据的.并且静态类型是编译期可知. 因此,在编译阶段, javac编译器会根据参数的静态类型决定使用哪个重载版本.
+```Java
+//实际类型变化
+Human man = new Man();
+man = new Woman();
+//静态类型变化
+sr.sayHello((Man)man);
+sr.sayHello((Woman man));
+```
+所有依赖静态类型来定位方法执行版本的分派动作称为**静态分派**. 静态的典型应用是方法**重载**.
+
+编译器虽然能确定出重载版本,但是往往这个重载版本不是唯一的,往往只能确定一个更加适合的版本.
+
+**动态分派**则与多态的另一个特性--重写有密切的关联.
+```Java
+//动态方法演示
+public class StaticDispatch{
+    static abstract class Human{
+        protected abstract void sayHello();
+    }
+    static class Man extends Human{
+        @Override
+        protected void sayHello() {
+            System.out.println("man say hello");
+        }
+    }
+    static class Woman extends Human{
+        @Override
+        protected void sayHello() {
+            System.out.println("woman say hello");
+        }
+    }
+    
+    public void sayHello(Human guy){
+        System.out.println("hello, guy");
+    }
+
+    public static void main(String[] args){
+        Human man = new Man();
+        Human woman = new Woman();
+        man.sayHello();
+        woman.sayHello();
+        man = new Woman();
+        man.sayHello();
+    }
+    // hello, man
+    // hello, woman
+    // hello, woman
+}
+```
+invokevirtual指令的运行时解析过程大致分为几个步骤:
+- 找到操作数栈顶的第一元素所指向的对象的实际类型, 记作C.
+- 如果在类型C中找到与常量中的描述符和简单名称都相符的方法, 则进行访问权限校验, 如果通过则返回这个方法的直接引用吗查找过程结束. 如果不通过, 则返回java.lang.IllegalAccessError异常.
+- 否则, 按照继承关系从下往上依次对C的各个父类进行第二步的搜索和验证过程.
+- 如果始终没有找到合适的方法, 则抛出java.lang.AbstractMethodError异常.
+
+由此看出, 重写的本质就是运行期确定接受者的实际类型并且调用中的invokevirtual指令把常量池中的类方法符号引用解析到了不同的直接引用上.
+
+**单分派与多分派**的划分基于多少种宗量
+> 宗量: 方法的接受者与方法的参数统称为方法的宗量, 这个定义最早应该来源于<<Java与模式>>一书.
+
+单分派是根据一个宗量对目标方法进行选择, 多分派则是根据多于一个宗量对目标方法进行选择. 以下给出一个实例.
+```Java
+public class Dispatch {
+    static class QQ {}
+    static class _360 {}
+
+    public static class Father {
+        public void hardChoice(QQ arg) {
+            System.out.println("father choose qq");
+        }
+
+        public void hardChoice(_360 arg) {
+            System.out.println("father choose 360");
+        }
+    }
+
+    public static class Son extends Father {
+        public void hardChoice(QQ arg) {
+            System.out.println("son choose qq");
+        }
+        public void hardChoice(_360 arg) {
+            System.out.println("son choose 360");
+        }
+    }
+
+    public static void main(String[] args) {
+        Father father = new Father();
+        Father son = new Son();
+        father.hardChoice(new _360());
+        son.hardChoice(new QQ());
+    }
+
+    //father choose 360
+    //son choose qq
+}
+```
+- 编译阶段: 也就是静态分配过程, 这时选择目标方法的依据有两点:
+  + 一是静态类型(Father还是son)
+  + 二是方法参数(QQ还是360)
+  这次选择的最终产物是产生了两条invokevirtual指令,两个指令的参数分别为常量池中指向Father.hardChoice(360)及Father.hardChoice(QQ)方法的符号引用.因为根据两个宗量进行选择,所以Java语言的静态分派属于**多分派类型**.
+- 运行阶段: 也就是动态分配过程, 在执行"son.hardChoice(new QQ());"时,由于编译器已经已经决定目标方法的签名必须是hardChoice(QQ),虚拟机此时不会关心传递过来的参数是什么, 换言之, 这时参数的静态类型, 实际类型都对方法的选择不会构成任何影响, 唯一可以影响虚拟机选择的因素只有此方法的接受者的实际类型是Father还是Son. 因为只有一个宗量作为选择依据, 所以Java语言的动态分派属于**单分派类型**.
+
+```Java
+class GrandFather{
+    void thinking(){
+        System.out.printlln("i am grandfather");
+    }
+}
+
+class Father extends GrandFather{
+    void thinking(){
+        System.out.println("i am father");
+    }
+}
+
+class Son extends Father{
+    void thinking(){
+        //如何实现调用祖父类的thinking()方法,打印"i am grandfather"
+    }
+}
+```
+使用纯粹的Java语言很难处理这个问题,原因在于很难在Son类的thinking()方法里获取一个实际类型为GrandFather的对象引用, 而invokevirtual指令的分派逻辑就是按照方法接收者的实际类型进行分派,这个逻辑是固化在虚拟机中的.
+```Java
+import static java.lang.invoke.MethodHandles.lookup;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodType;
+
+class Test {
+class GrandFather{
+    void thinking(){
+        System.out.printlln("i am grandfather");
+    }
+}
+
+class Father extends GrandFather{
+    void thinking(){
+        System.out.println("i am father");
+    }
+}
+
+class Son extends Father{
+    void thinking(){
+        try{
+            MethodType mt = MethodType.methodType(void.class);
+            MethodHandle mh = lookup().findSpecial(GrandFather.class, "thinking", mt, getClass());
+            mh.invoke(this);
+        } catch (Throwable e){
+        }
+    }
+
+    public static void main(String[] args){
+        (new Test().new Son()).thinking();
+    }
+}
+```
+### 基于栈的字节码解释执行引擎
+
 ## 类加载及执行子系统的案例与实战 
 
 

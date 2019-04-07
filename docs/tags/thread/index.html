@@ -218,7 +218,7 @@
     <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 1 min read</p>
   </header>
   
-  <p class="post-summary">Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.acquire() sum -= 1 lock.</p>
+  <p class="post-summary">Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and Semorpher # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/">Read More →</a>
   </footer>
