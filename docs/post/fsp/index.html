@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>FSP and LTSA</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  <meta name="author" content="Yang Zhang">
+  <meta name="description" content="Introduction to FSP When dealing with large code bases, identifying, locating, and removing concurrency problems can be a nightmare. The size of the system and the number of possible interleavings and synchronisations become so large that it is difficult to even understand a single problem, isolate it, figure out how to fix it, or prevent it in the first place.
+s. In particular, we will look at a language called Finite State Processes (FSP), based on the well-known Communicating Sequential Processes (CSP) and Calculus of Communicating Systems (CCS).">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="FSP and LTSA">
+    <meta name="twitter:description" content="Introduction to FSP When dealing with large code bases, identifying, locating, and removing concurrency problems can be a nightmare. The size of the system and the number of possible interleavings and synchronisations become so large that it is difficult to even understand a single problem, isolate it, figure out how to fix it, or prevent it in the first place.
+s. In particular, we will look at a language called Finite State Processes (FSP), based on the well-known Communicating Sequential Processes (CSP) and Calculus of Communicating Systems (CCS).">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="FSP and LTSA">
+  <meta property="og:description" content="Introduction to FSP When dealing with large code bases, identifying, locating, and removing concurrency problems can be a nightmare. The size of the system and the number of possible interleavings and synchronisations become so large that it is difficult to even understand a single problem, isolate it, figure out how to fix it, or prevent it in the first place.
+s. In particular, we will look at a language called Finite State Processes (FSP), based on the well-known Communicating Sequential Processes (CSP) and Calculus of Communicating Systems (CCS).">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/fsp/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.51">
+
+
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/fsp/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Yzzhan Tech Repo">
+<meta name="msapplication-tooltip" content="Yzzhan Tech Repo">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://yangzhanghavefun.github.io/yzzhan/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-152x152.png">
+<link rel="manifest" href="https://yangzhanghavefun.github.io/yzzhan/manifest.json">
+
+
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css" as="style">
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" as="image">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" alt="Avatar">
+  
+  <h2 class="title">Yzzhan Tech Repo</h2>
+  
+  <p class="subtitle">~ Keep It Simple &amp; Stupid ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/">Home</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/categories/">Categories</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/tags/">Tags</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/links/">Links</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/about/">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:yzzhan@student.unimelb.edu.au" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/YangZhangHaveFun" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//weibo.com/weibo_username" title="Weibo" aria-label="Weibo">
+            <span class="icon icon-weibo" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/images/qrcode.jpg" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">FSP and LTSA</h1>
+      <p class="post-meta">@Yang Zhang · Apr 2, 2019 · 6 min read</p>
+    </header>
+    <article class="post-content">
+
+<h2 id="introduction-to-fsp">Introduction to FSP</h2>
+
+<p>When dealing with large code bases, identifying, locating, and removing concurrency problems can be a nightmare. The size of the system and the number of possible interleavings and synchronisations become so large that it is difficult to even understand a single problem, isolate it, figure out how to fix it, or prevent it in the first place.</p>
+
+<p>s. In particular, we will look at a language called <strong>Finite State Processes (FSP)</strong>, based on the well-known <strong>Communicating Sequential Processes (CSP)</strong> and <strong>Calculus of Communicating Systems (CCS)</strong>.</p>
+
+<p>We shall use finite state machines as models of programs. Our particular type of state machine is the <strong>labelled transition system (LTS)</strong></p>
+
+<p>The LTS only specifies the sequence of legal actions in system.</p>
+
+<p>Consequently, process models are described in an algebraic language called <strong>finite state processes (FSP)</strong>.</p>
+
+<p>Non-termination is common in concurrent, real-time systems.</p>
+
+<h2 id="fsp-syntax">FSP syntax</h2>
+
+<h3 id="the-action-prefix">the action prefix</h3>
+
+<p><strong>The action prefix operator, “-&gt;”, is fundamental</strong>:
+&gt; “If x is an action and P a process then the action prefix x -&gt; P describes a process that initially engages in action x and then behaves exactly as described by P.”</p>
+
+<p>The “-&gt;” operator always has an atomic action as the left operand, and a process as the right operand.</p>
+
+<p>eg:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">TRAFFIC_LIGHT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> green <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> yellow <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span>red <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">).</span></code></pre></div>
+<p><strong>Atomic actions use lower case; process names use upper case.</strong></p>
+
+<p>The traffic light behaviour could be modelled using more than one
+process names.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">TRAFFIC_LIGHT <span style="color:#f92672">=</span> GREEN <span style="color:#f92672">,</span>
+GREEN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> green <span style="color:#f92672">-&gt;</span> YELLOW <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+YELLOW <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> yellow <span style="color:#f92672">-&gt;</span> RED <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+RED <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> red <span style="color:#f92672">-&gt;</span> GREEN <span style="color:#f92672">).</span></code></pre></div>
+<p><strong>Note the use of “,” and “.” at the end of lines. The “,” indicates that the processes named GREEN, YELLOW, and RED are part of and local to the definition of the process named TRAFFIC LIGHT.</strong></p>
+
+<h3 id="choice-option">Choice Option</h3>
+
+<p><strong>The choice operation, “|” is used to describe a process that can execute more than one possible sequence of actions.</strong>
+&gt; “If x and y are actions, then (x -&gt; P | y -&gt; Q) describes a process which initially engages in either of the actions x or y. After the first action has occurred, the subsequent behaviour is described by P if the first action was x and Q if the first action was y.”</p>
+
+<p>example: This describes a traffic light with a button for a pedestrian, which turns the light red. If the button is not pushed, the light remains green:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">TRAFFIC_LIGHT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> button <span style="color:#f92672">-&gt;</span> YELLOW <span style="color:#f92672">|</span> none <span style="color:#f92672">-&gt;</span> GREEN <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+GREEN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> green <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT<span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+YELLOW <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> yellow <span style="color:#f92672">-&gt;</span> RED <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+RED <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> red <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">).</span></code></pre></div>
+<p>This example may also raise a question: What is the input to the process, and what is the output?
+FSP makes no distinction make between input and output actions. button is an input, while green is an output, but FSP does not distinguish these semantically—they are both just actions.</p>
+
+<h3 id="non-deterministic-choice">Non-deterministic Choice</h3>
+
+<p>To complicate matters regarding input, output, and choice, FSP allows non-deterministic choice.</p>
+
+<blockquote>
+<p>“Process (x -&gt; P | x -&gt; Q) describes a process that engages in x and then behaves as P or Q.”</p>
+</blockquote>
+
+<p><strong>Note that x is the prefix in both options of the choice.</strong> In this instance, the choice is made by the process, not the environment. Therefore, <strong>x could be an input from the environment, but the choice of P or Q is not controlled by the environment.</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">TRAFFIC_LIGHT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> button <span style="color:#f92672">-&gt;</span> YELLOW
+                <span style="color:#f92672">|</span> button <span style="color:#f92672">-&gt;</span> green <span style="color:#f92672">-&gt;</span> YELLOW
+                <span style="color:#f92672">|</span> none <span style="color:#f92672">-&gt;</span> GREEN
+<span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+GREEN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> green <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT<span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+YELLOW <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> yellow <span style="color:#f92672">-&gt;</span> RED <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+RED <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> red <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">).</span></code></pre></div>
+<h3 id="indexed-processes">Indexed processes</h3>
+
+<p>Consider a buffer that can contain a single value. The value is input into the buffer, and can be then output. Values range from 0 to 3:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">BUFF <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> in <span style="color:#f92672">[</span>i <span style="color:#f92672">:</span>0<span style="color:#f92672">..</span><span style="color:#a6e22e">3</span><span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> out<span style="color:#f92672">[</span> i<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> BUFF <span style="color:#f92672">).</span></code></pre></div>
+<p>This is equivalent to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">BUFF <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> in <span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> out <span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> BUFF
+        <span style="color:#f92672">|</span> in <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> out <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> BUFF
+        <span style="color:#f92672">|</span> in <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> out <span style="color:#f92672">[</span>2<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> BUFF
+        <span style="color:#f92672">|</span> in <span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> out <span style="color:#f92672">[</span>3<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> BUFF
+<span style="color:#f92672">).</span></code></pre></div>
+<h3 id="constants-and-ranges">Constants and Ranges</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">const</span> N <span style="color:#f92672">=</span> 3
+range T <span style="color:#f92672">=</span> 0<span style="color:#f92672">..</span> N
+BUFF <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> in <span style="color:#f92672">[</span>i: T<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> STORE <span style="color:#f92672">[</span>i <span style="color:#f92672">])</span> <span style="color:#f92672">,</span>
+STORE <span style="color:#f92672">[</span>i <span style="color:#f92672">:</span>T<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> out <span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-&gt;</span> BUFF <span style="color:#f92672">).</span></code></pre></div>
+<h3 id="guarded-actions">Guarded actions</h3>
+
+<p><strong>A guarded action allows a context condition to be added to options in a choice.</strong></p>
+
+<blockquote>
+<p>“The choice (when B x -&gt; P | y -&gt; Q) means that when the guard B is true, then the actions x and y are both eligible to be chosen, otherwise if B is false, then action x cannot be chosen.”</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">COUNT <span style="color:#f92672">(</span> N <span style="color:#f92672">=</span>3<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> COUNT <span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">,</span>
+COUNT <span style="color:#f92672">[</span>i <span style="color:#f92672">:</span>0<span style="color:#f92672">..</span> N<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> when <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span>N<span style="color:#f92672">)</span> inc <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> COUNT <span style="color:#f92672">[</span>i <span style="color:#f92672">+</span>1<span style="color:#f92672">]</span>
+                    <span style="color:#f92672">|</span> when <span style="color:#f92672">(</span>i <span style="color:#f92672">&gt;</span>0<span style="color:#f92672">)</span> dec <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> COUNT <span style="color:#f92672">[</span>i <span style="color:#f92672">-</span>1<span style="color:#f92672">]</span>
+<span style="color:#f92672">).</span></code></pre></div>
+<h3 id="the-stop-process">The STOP Process</h3>
+
+<p>The STOP process is a special, pre-defined process that engages in no further actions. It is used for defining processes that terminate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">ONESHOT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> once <span style="color:#f92672">-&gt;</span> STOP <span style="color:#f92672">).</span></code></pre></div>
+<h3 id="parallel-composition">Parallel Composition</h3>
+
+<p>The parallel composition operator allows us to describe the concurrent execution of two processes.</p>
+
+<blockquote>
+<p>“If P and Q are processes, then (P || Q) represents the concurrent execution of P and Q.”</p>
+</blockquote>
+
+<p>example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">ITCH <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> scratch <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> STOP <span style="color:#f92672">).</span>
+CONVERSE <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> think <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> talk <span style="color:#f92672">-</span> <span style="color:#f92672">&gt;</span> STOP <span style="color:#f92672">).</span>
+<span style="color:#f92672">||</span> CONVERSE_ITCH <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> ITCH <span style="color:#f92672">||</span> CONVERSE <span style="color:#f92672">).</span></code></pre></div>
+<p><strong>FSP insists that when a process P is defined by parallel composition, the name of the composite process is prefixed with vertical bars: ||P.</strong></p>
+
+<p>Currently, the combined processes have not interacted with each other yet. How can the pedestrian interact with our traffic light?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">TRAFFIC_LIGHT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> button <span style="color:#f92672">-&gt;</span> YELLOW <span style="color:#f92672">|</span> idle <span style="color:#f92672">-&gt;</span> GREEN <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+GREEN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> green <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+YELLOW <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> yellow <span style="color:#f92672">-&gt;</span> RED <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+RED <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> red <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">).</span>
+PEDESTRIAN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> wander <span style="color:#f92672">-&gt;</span> PEDESTRIAN <span style="color:#f92672">).</span>
+<span style="color:#f92672">||</span> LIGHT_PEDESTRIAN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> TRAFFIC_LIGHT <span style="color:#f92672">||</span> PEDESTRIAN <span style="color:#f92672">).</span></code></pre></div>
+<p>Interaction happens through shared actions:
+&gt; “If the processes in a composition have actions in common, these actions are said to be shared. This is how process interaction is modelled. While unshared actions may be arbitrarily interleaved, a shared action must be executed at the same time by all processes that participate in that shared action.”</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">TRAFFIC_LIGHT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> button <span style="color:#f92672">-&gt;</span> YELLOW <span style="color:#f92672">|</span> idle <span style="color:#f92672">-&gt;</span> GREEN <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+GREEN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> green <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+YELLOW <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> yellow <span style="color:#f92672">-&gt;</span> RED <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+RED <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> red <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">).</span>
+PEDESTRIAN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> button <span style="color:#f92672">-&gt;</span> PEDESTRIAN
+            <span style="color:#f92672">|</span> wander <span style="color:#f92672">-&gt;</span> PEDESTRIAN
+            <span style="color:#f92672">).</span>
+<span style="color:#f92672">||</span> LIGHT_PEDESTRIAN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> TRAFFIC_LIGHT <span style="color:#f92672">||</span> PEDESTRIAN <span style="color:#f92672">).</span></code></pre></div>
+<h3 id="action-relabelling">Action relabelling</h3>
+
+<blockquote>
+<p>“Given a process P, the process P/{new1/old1, &hellip;, newN/oldN} is the same as P but with action old1 renamed to new1, etc.”</p>
+</blockquote>
+
+<p>We can re-label wander in PEDESTRIAN to idle:</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/swen90004"><span class="tag">SWEN90004</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/learning"><span class="tag">Learning</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 Yzzhan Tech Repo</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://yangzhanghavefun.github.io/yzzhan/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>
