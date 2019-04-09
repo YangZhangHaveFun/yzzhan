@@ -164,5 +164,140 @@ PEDESTRIAN = ( button -> PEDESTRIAN
 > “Given a process P, the process P/{new1/old1, ..., newN/oldN} is the same as P but with action old1 renamed to new1, etc.”
 
 We can re-label wander in PEDESTRIAN to idle:
+```Java
+TRAFFIC_LIGHT = ( button -> YELLOW | idle -> GREEN ) ,
+GREEN = ( green -> TRAFFIC_LIGHT ) ,
+YELLOW = ( yellow -> RED ) ,
+RED = ( red -> TRAFFIC_LIGHT ).
+PEDESTRIAN = ( button -> PEDESTRIAN
+| wander -> PEDESTRIAN
+).
+|| LIGHT_PEDESTRIAN =
+( TRAFFIC_LIGHT || PEDESTRIAN /{ idle / wander }).
+```
 
+another example---client and server
+```Java
+CLIENT = ( call -> wait -> continue -> CLIENT ).
+SERVER = ( request -> service -> reply -> SERVER ).
+|| CLIENT_SERVER = ( CLIENT || SERVER ) /{ call / request , reply / wait }.
+```
+### Process Labelling
+We must instead have different action labels in both clients. Writing a number of different definitions for multiple similar processes would be cumbersome and error prone, so instead, we use process labels.
+
+> “a:P prefixes each action label in P with a”
+
+```Java
+|| TWO_CLIENTS = ( a : CLIENT || b : CLIENT ).
+```
+
+### Parameterised Processes and Labelling
+An array of prefix labelled processes can be described using parameterised processes:
+
+```Java
+|| N_CLIENTS ( N =3) = ( c [ i :1.. N ]: CLIENT ).
+```
+
+```Java
+|| N_CLIENTS ( M =3) = ( forall [ i :1.. M ] c [ i ]: CLIENT ).
+```
+
+we want to compose our server with multiple clients. However, with the action label in the clients being prefixed, they are no longer the same as the server labels, so will not be shared. To get around this, we can use a set of prefix labels:
+
+> “{a1,..,ax}:: P replaces every action label n in the
+alphabet of P with the labels a1.n,..,ax.n.
+Further, every transition n->X in the definition of P is
+replaced with the transitions ({a1.n,..,ax.n} -> X)”
+
+({a1,..,ax} -> X) is just shorthand for the set of transitions (a1 -> X), ..., (ax -> X).
+
+```Java
+|| TWO_CLIENT_SERVER
+  = ( a : CLIENT || b : CLIENT ||
+    {a , b }::( SERVER /{ call / request , wait / reply })).
+```
+more generally,
+```Java
+|| N_CLIENT_SERVER ( N =2) =
+    (( c [ i :1.. N ]: CLIENT )
+    ||
+    { c [ i :1.. N ]}::( SERVER /{ call / request , wait / reply })
+    ).
+```
+
+### Variable Hiding
+To reduce complexity, it is often useful to hide variables:
+> ‘Given a process P, the process P\\{a1,..,aN} is the same as P, but with actions names a1,..,aN removed from P, making these silent. Silent actions are named tau and are never shared”.
+
+An alternative is to list the variables that are not to be hidden:
+> ‘Given a process P, the process P@{a1,..,aN} is the same as P, but with actions names other than a1,..,aN removed from P”.
+
+The following two codes result in the same situation.
+```Java
+SERVER_1 = ( request -> service -> reply -> SERVER_1 )
+@ { request , reply }.
+
+SERVER_2 = ( request -> service -> reply -> SERVER_2 )
+\{ service }.
+```
+## Synchronization, Safety & Liveness in FSP
+### Synchronization
+#### Definition for Deadlock and Livelock
+A process is in a **deadlock** if it is blocked waiting for a condition that will never become true.
+
+A process is in a **livelock** (a busy wait deadlock) if it is spinning while waiting for a condition that will never become true. Either can happen if concurrent processes or threads are mutually waiting for each other.
+
+#### Coffman Conditions
+Coffman, Elphick, and Shoshani identify four necessary and sufficient conditions (the Coffman conditions) that all must occur for deadlock to happen:
+
+- **Serially Reusable Resources**: the processes involved must share some reusable resources between themselves under mutual exclusion.
+- **Incremental acquisition**: processes hold on to resources that have been allocated to them while waiting for additional resources.
+- **No preemption**: once a process has acquired a resource, it can only release it voluntarily—it cannot be forced to release it.
+- **Wait-for cycle**: a cycle exists in which each process holds a resource which its successor in the cycle is waiting for.
+
+#### FSP vs Java
+FSP monitors map well to Java monitors. In particular, the design
+template for waiting in Java monitors can be mapped directly from
+FSP guarded processes, such as below.
+
+```Java
+when cond act -> NEWSTAT
+```
+becomes
+```Java
+public synchronized void act () throws InterruptedException {
+    while (! cond ) wait ();
+        // modify monitor data
+    notifyAll ();
+}
+
+```
+### Safety
+####Desirable properties of a Mutex solution
+> **Mutual exclusion:** only one process may be active in its critical section at a time.
+> **No deadlock:** if one or more processes are trying to enter their critical section, one must eventually succeed.
+> **No starvation:** if a process is trying to enter its critical section, it must eventually succeed.
+> **Handles lack of contention:** if only one process is trying to enter its critical section, it must succeed with minimal overhead.
+
+
+To prevent the interference, we need a solution similar to the solutions seen in earlier lectures for mutual exclusion. One advantage of working with FSP instead of Java is that we can disregard all irrelevant details.
+
+```Java
+LOCK = ( acquire -> release -> LOCK ).
+```
+
+#### Checking safety and liveness properties
+In concurrent systems, there are two categories of property that are of interest:
+- Safety properties: A safety property asserts that nothing “bad” happens during execution. A deadlock is an example of this.
+- Liveness properties: A liveness property asserts that some “good” eventually happens. For example, that all processes trying to access a critical section eventually do get access.
+
+**As for safety**,
+In sequential systems, the most common safety property is that the system satisfies some assertion each time a given program point is reached.
+
+In concurrent systems, we have seen that additional important safety properties are absence of deadlock and interference.
+
+**As for safety**,
+The most common liveness property for a sequential system is that the system terminates.
+
+Concurrent systems are often designed to be non-terminating, and liveness properties are most commonly related to resource access.
 

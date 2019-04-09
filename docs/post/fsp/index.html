@@ -216,7 +216,7 @@ s. In particular, we will look at a language called Finite State Processes (FSP)
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">FSP and LTSA</h1>
-      <p class="post-meta">@Yang Zhang · Apr 2, 2019 · 6 min read</p>
+      <p class="post-meta">@Yang Zhang · Apr 2, 2019 · 11 min read</p>
     </header>
     <article class="post-content">
 
@@ -352,6 +352,122 @@ PEDESTRIAN <span style="color:#f92672">=</span> <span style="color:#f92672">(</s
 </blockquote>
 
 <p>We can re-label wander in PEDESTRIAN to idle:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">TRAFFIC_LIGHT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> button <span style="color:#f92672">-&gt;</span> YELLOW <span style="color:#f92672">|</span> idle <span style="color:#f92672">-&gt;</span> GREEN <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+GREEN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> green <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+YELLOW <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> yellow <span style="color:#f92672">-&gt;</span> RED <span style="color:#f92672">)</span> <span style="color:#f92672">,</span>
+RED <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> red <span style="color:#f92672">-&gt;</span> TRAFFIC_LIGHT <span style="color:#f92672">).</span>
+PEDESTRIAN <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> button <span style="color:#f92672">-&gt;</span> PEDESTRIAN
+<span style="color:#f92672">|</span> wander <span style="color:#f92672">-&gt;</span> PEDESTRIAN
+<span style="color:#f92672">).</span>
+<span style="color:#f92672">||</span> LIGHT_PEDESTRIAN <span style="color:#f92672">=</span>
+<span style="color:#f92672">(</span> TRAFFIC_LIGHT <span style="color:#f92672">||</span> PEDESTRIAN <span style="color:#f92672">/{</span> idle <span style="color:#f92672">/</span> wander <span style="color:#f92672">}).</span></code></pre></div>
+<p>another example&mdash;client and server</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">CLIENT <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> call <span style="color:#f92672">-&gt;</span> wait <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">continue</span> <span style="color:#f92672">-&gt;</span> CLIENT <span style="color:#f92672">).</span>
+SERVER <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> request <span style="color:#f92672">-&gt;</span> service <span style="color:#f92672">-&gt;</span> reply <span style="color:#f92672">-&gt;</span> SERVER <span style="color:#f92672">).</span>
+<span style="color:#f92672">||</span> CLIENT_SERVER <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> CLIENT <span style="color:#f92672">||</span> SERVER <span style="color:#f92672">)</span> <span style="color:#f92672">/{</span> call <span style="color:#f92672">/</span> request <span style="color:#f92672">,</span> reply <span style="color:#f92672">/</span> wait <span style="color:#f92672">}.</span></code></pre></div>
+<h3 id="process-labelling">Process Labelling</h3>
+
+<p>We must instead have different action labels in both clients. Writing a number of different definitions for multiple similar processes would be cumbersome and error prone, so instead, we use process labels.</p>
+
+<blockquote>
+<p>“a:P prefixes each action label in P with a”</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#f92672">||</span> TWO_CLIENTS <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> a <span style="color:#f92672">:</span> CLIENT <span style="color:#f92672">||</span> b <span style="color:#f92672">:</span> CLIENT <span style="color:#f92672">).</span></code></pre></div>
+<h3 id="parameterised-processes-and-labelling">Parameterised Processes and Labelling</h3>
+
+<p>An array of prefix labelled processes can be described using parameterised processes:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#f92672">||</span> N_CLIENTS <span style="color:#f92672">(</span> N <span style="color:#f92672">=</span>3<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> c <span style="color:#f92672">[</span> i <span style="color:#f92672">:</span>1<span style="color:#f92672">..</span> N <span style="color:#f92672">]:</span> CLIENT <span style="color:#f92672">).</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#f92672">||</span> N_CLIENTS <span style="color:#f92672">(</span> M <span style="color:#f92672">=</span>3<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> forall <span style="color:#f92672">[</span> i <span style="color:#f92672">:</span>1<span style="color:#f92672">..</span> M <span style="color:#f92672">]</span> c <span style="color:#f92672">[</span> i <span style="color:#f92672">]:</span> CLIENT <span style="color:#f92672">).</span></code></pre></div>
+<p>we want to compose our server with multiple clients. However, with the action label in the clients being prefixed, they are no longer the same as the server labels, so will not be shared. To get around this, we can use a set of prefix labels:</p>
+
+<blockquote>
+<p>“{a1,..,ax}:: P replaces every action label n in the
+alphabet of P with the labels a1.n,..,ax.n.
+Further, every transition n-&gt;X in the definition of P is
+replaced with the transitions ({a1.n,..,ax.n} -&gt; X)”</p>
+</blockquote>
+
+<p>({a1,..,ax} -&gt; X) is just shorthand for the set of transitions (a1 -&gt; X), &hellip;, (ax -&gt; X).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#f92672">||</span> TWO_CLIENT_SERVER
+  <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> a <span style="color:#f92672">:</span> CLIENT <span style="color:#f92672">||</span> b <span style="color:#f92672">:</span> CLIENT <span style="color:#f92672">||</span>
+    <span style="color:#f92672">{</span>a <span style="color:#f92672">,</span> b <span style="color:#f92672">}::(</span> SERVER <span style="color:#f92672">/{</span> call <span style="color:#f92672">/</span> request <span style="color:#f92672">,</span> wait <span style="color:#f92672">/</span> reply <span style="color:#f92672">})).</span></code></pre></div>
+<p>more generally,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#f92672">||</span> N_CLIENT_SERVER <span style="color:#f92672">(</span> N <span style="color:#f92672">=</span>2<span style="color:#f92672">)</span> <span style="color:#f92672">=</span>
+    <span style="color:#f92672">((</span> c <span style="color:#f92672">[</span> i <span style="color:#f92672">:</span>1<span style="color:#f92672">..</span> N <span style="color:#f92672">]:</span> CLIENT <span style="color:#f92672">)</span>
+    <span style="color:#f92672">||</span>
+    <span style="color:#f92672">{</span> c <span style="color:#f92672">[</span> i <span style="color:#f92672">:</span>1<span style="color:#f92672">..</span> N <span style="color:#f92672">]}::(</span> SERVER <span style="color:#f92672">/{</span> call <span style="color:#f92672">/</span> request <span style="color:#f92672">,</span> wait <span style="color:#f92672">/</span> reply <span style="color:#f92672">})</span>
+    <span style="color:#f92672">).</span></code></pre></div>
+<h3 id="variable-hiding">Variable Hiding</h3>
+
+<p>To reduce complexity, it is often useful to hide variables:
+&gt; ‘Given a process P, the process P\{a1,..,aN} is the same as P, but with actions names a1,..,aN removed from P, making these silent. Silent actions are named tau and are never shared”.</p>
+
+<p>An alternative is to list the variables that are not to be hidden:
+&gt; ‘Given a process P, the process P@{a1,..,aN} is the same as P, but with actions names other than a1,..,aN removed from P”.</p>
+
+<p>The following two codes result in the same situation.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">SERVER_1 <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> request <span style="color:#f92672">-&gt;</span> service <span style="color:#f92672">-&gt;</span> reply <span style="color:#f92672">-&gt;</span> SERVER_1 <span style="color:#f92672">)</span>
+<span style="color:#960050;background-color:#1e0010">@</span> <span style="color:#f92672">{</span> request <span style="color:#f92672">,</span> reply <span style="color:#f92672">}.</span>
+
+SERVER_2 <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> request <span style="color:#f92672">-&gt;</span> service <span style="color:#f92672">-&gt;</span> reply <span style="color:#f92672">-&gt;</span> SERVER_2 <span style="color:#f92672">)</span>
+<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">{</span> service <span style="color:#f92672">}.</span></code></pre></div>
+<h2 id="synchronization-safety-liveness-in-fsp">Synchronization, Safety &amp; Liveness in FSP</h2>
+
+<h3 id="synchronization">Synchronization</h3>
+
+<h4 id="definition-for-deadlock-and-livelock">Definition for Deadlock and Livelock</h4>
+
+<p>A process is in a <strong>deadlock</strong> if it is blocked waiting for a condition that will never become true.</p>
+
+<p>A process is in a <strong>livelock</strong> (a busy wait deadlock) if it is spinning while waiting for a condition that will never become true. Either can happen if concurrent processes or threads are mutually waiting for each other.</p>
+
+<h4 id="coffman-conditions">Coffman Conditions</h4>
+
+<p>Coffman, Elphick, and Shoshani identify four necessary and sufficient conditions (the Coffman conditions) that all must occur for deadlock to happen:</p>
+
+<ul>
+<li><strong>Serially Reusable Resources</strong>: the processes involved must share some reusable resources between themselves under mutual exclusion.</li>
+<li><strong>Incremental acquisition</strong>: processes hold on to resources that have been allocated to them while waiting for additional resources.</li>
+<li><strong>No preemption</strong>: once a process has acquired a resource, it can only release it voluntarily—it cannot be forced to release it.</li>
+<li><strong>Wait-for cycle</strong>: a cycle exists in which each process holds a resource which its successor in the cycle is waiting for.</li>
+</ul>
+
+<h4 id="fsp-vs-java">FSP vs Java</h4>
+
+<p>FSP monitors map well to Java monitors. In particular, the design
+template for waiting in Java monitors can be mapped directly from
+FSP guarded processes, such as below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">when cond act <span style="color:#f92672">-&gt;</span> NEWSTAT</code></pre></div>
+<p>becomes</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">act</span> <span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(!</span> cond <span style="color:#f92672">)</span> wait <span style="color:#f92672">();</span>
+        <span style="color:#75715e">// modify monitor data
+</span><span style="color:#75715e"></span>    notifyAll <span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h3 id="safety">Safety</h3>
+
+<p>####Desirable properties of a Mutex solution
+&gt; <strong>Mutual exclusion:</strong> only one process may be active in its critical section at a time.
+&gt; <strong>No deadlock:</strong> if one or more processes are trying to enter their critical section, one must eventually succeed.
+&gt; <strong>No starvation:</strong> if a process is trying to enter its critical section, it must eventually succeed.
+&gt; <strong>Handles lack of contention:</strong> if only one process is trying to enter its critical section, it must succeed with minimal overhead.</p>
+
+<p>To prevent the interference, we need a solution similar to the solutions seen in earlier lectures for mutual exclusion. One advantage of working with FSP instead of Java is that we can disregard all irrelevant details.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">LOCK <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> acquire <span style="color:#f92672">-&gt;</span> release <span style="color:#f92672">-&gt;</span> LOCK <span style="color:#f92672">).</span></code></pre></div>
+<h4 id="checking-safety-and-liveness-properties">Checking safety and liveness properties</h4>
+
+<p>In concurrent systems, there are two categories of property that are of interest:
+- Safety properties: A safety property asserts that nothing “bad” happens during execution. A deadlock is an example of this.
+- Liveness properties: A liveness property asserts that some “good” eventually happens. For example, that all processes trying to access a critical section eventually do get access.</p>
+
+<p><strong>As for safety</strong>,
+In sequential systems, the most common safety property is that the system satisfies some assertion each time a given program point is reached.</p>
+
+<p>In concurrent systems, we have seen that additional important safety properties are absence of deadlock and interference.</p>
+
+<p><strong>As for safety</strong>,
+The most common liveness property for a sequential system is that the system terminates.</p>
+
+<p>Concurrent systems are often designed to be non-terminating, and liveness properties are most commonly related to resource access.</p>
 </article>
     <footer class="post-footer">
       
