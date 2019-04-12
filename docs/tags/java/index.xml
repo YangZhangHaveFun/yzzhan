@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Tue, 02 Apr 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Apr 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Structures and Algorithm in Java</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/javadatastructureandalgorithm/</link>
+      <pubDate>Fri, 12 Apr 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javadatastructureandalgorithm/</guid>
+      <description>Data Structure and Algorithm Iterators Suppose we want to traverse a list, performing some operations on certain links.
+As users of a list, what we need is access to reference that can point to any arbitray link. This allows us to examine or modify the link. We should be able to increment the reference so we can traverse along the list, looking at each link in turn, and we should be able to access the link pointed to by the reference.</description>
+    </item>
     
     <item>
       <title>Java拾遗</title>

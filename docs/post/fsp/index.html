@@ -48,7 +48,7 @@ s. In particular, we will look at a language called Finite State Processes (FSP)
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/fsp/">
@@ -443,13 +443,23 @@ FSP guarded processes, such as below.</p>
         <span style="color:#75715e">// modify monitor data
 </span><span style="color:#75715e"></span>    notifyAll <span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span></code></pre></div>
+<h3 id="alphabet-extension">Alphabet Extension</h3>
+
+<p>alphabet_extension ::= &ldquo;+&rdquo; action_label_set
+&gt; Recall: The alphabet of a process s the set of actions in which it engages.</p>
+
+<p>alphabet extension focuses on extending the actions of process.</p>
+
 <h3 id="safety">Safety</h3>
 
-<p>####Desirable properties of a Mutex solution
-&gt; <strong>Mutual exclusion:</strong> only one process may be active in its critical section at a time.
-&gt; <strong>No deadlock:</strong> if one or more processes are trying to enter their critical section, one must eventually succeed.
-&gt; <strong>No starvation:</strong> if a process is trying to enter its critical section, it must eventually succeed.
-&gt; <strong>Handles lack of contention:</strong> if only one process is trying to enter its critical section, it must succeed with minimal overhead.</p>
+<h4 id="desirable-properties-of-a-mutex-solution">Desirable properties of a Mutex solution</h4>
+
+<blockquote>
+<p><strong>Mutual exclusion:</strong> only one process may be active in its critical section at a time.
+<strong>No deadlock:</strong> if one or more processes are trying to enter their critical section, one must eventually succeed.
+<strong>No starvation:</strong> if a process is trying to enter its critical section, it must eventually succeed.
+<strong>Handles lack of contention:</strong> if only one process is trying to enter its critical section, it must succeed with minimal overhead.</p>
+</blockquote>
 
 <p>To prevent the interference, we need a solution similar to the solutions seen in earlier lectures for mutual exclusion. One advantage of working with FSP instead of Java is that we can disregard all irrelevant details.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">LOCK <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> acquire <span style="color:#f92672">-&gt;</span> release <span style="color:#f92672">-&gt;</span> LOCK <span style="color:#f92672">).</span></code></pre></div>
@@ -468,7 +478,34 @@ In sequential systems, the most common safety property is that the system satisf
 The most common liveness property for a sequential system is that the system terminates.</p>
 
 <p>Concurrent systems are often designed to be non-terminating, and liveness properties are most commonly related to resource access.</p>
-</article>
+
+<h4 id="safety-property-in-fsp">Safety Property in FSP</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">AN_ERROR <span style="color:#f92672">=</span> <span style="color:#f92672">(</span> start <span style="color:#f92672">-&gt;</span> do_something <span style="color:#f92672">-&gt;</span> ERROR <span style="color:#f92672">).</span></code></pre></div>
+<p><code>Note:</code>The state labelled -1 is a special state that indicates the ERROR process. It has no outgoing transitions.</p>
+
+<p>Safety properties
+When modelling complex systems, it is better practice to consider only the desired system behaviour, rather than also try to enumerate all possible undesirable behaviours. So, given a model, specify some desirable properties and check that the model maintains them.</p>
+
+<p>In many formalisms, safety properties are used for this purpose. In FSP, a safety property is just a process, but to identify it clearly as a safety property, FSP uses the property keyword:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">property SAFE_ACTUATOR
+<span style="color:#f92672">=</span> <span style="color:#f92672">(</span> command <span style="color:#f92672">-&gt;</span> respond <span style="color:#f92672">-&gt;</span> SAFE_ACTUATOR <span style="color:#f92672">).</span></code></pre></div>
+<p><strong>This property says that, whenever a command action is observed, a respond action should occur before another command action occurs.</strong></p>
+
+<p><strong>To maintain this transparency, safety properties must be deterministic processes. That is, they must not contain non-deterministic choices.</strong></p>
+
+<h5 id="safe-property-for-interference">Safe Property for Interference</h5>
+
+<h5 id="safe-property-for-mutual-exclusion">Safe Property for Mutual Exclusion</h5>
+
+<h3 id="liveness">Liveness</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVASCRIPT" data-lang="JAVASCRIPT"><span style="color:#a6e22e">range</span> <span style="color:#a6e22e">M</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0..4</span>
+
+<span style="color:#a6e22e">SEND</span>(<span style="color:#a6e22e">E</span><span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">=</span> (<span style="color:#a6e22e">chan</span>[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">STOP</span>).
+
+<span style="color:#a6e22e">RECEIVE</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">chan</span>[<span style="color:#a6e22e">v</span><span style="color:#f92672">:</span><span style="color:#a6e22e">M</span>]<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">received</span>[<span style="color:#a6e22e">v</span>]<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">RECEIVE</span>).
+
+<span style="color:#f92672">||</span><span style="color:#a6e22e">SYS</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">SEND</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">RECEIVE</span>).
+</code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">

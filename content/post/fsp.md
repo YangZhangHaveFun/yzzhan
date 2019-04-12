@@ -8,7 +8,6 @@ categories: ["Subjects reviews in Uni Melb"]
 author: "Yang Zhang"
 ---
 ## Introduction to FSP
-
 When dealing with large code bases, identifying, locating, and removing concurrency problems can be a nightmare. The size of the system and the number of possible interleavings and synchronisations become so large that it is difficult to even understand a single problem, isolate it, figure out how to fix it, or prevent it in the first place.
 
 s. In particular, we will look at a language called **Finite State Processes (FSP)**, based on the well-known **Communicating Sequential Processes (CSP)** and **Calculus of Communicating Systems (CCS)**.
@@ -272,8 +271,13 @@ public synchronized void act () throws InterruptedException {
 }
 
 ```
+### Alphabet Extension
+alphabet_extension ::= "+" action_label_set
+> Recall: The alphabet of a process s the set of actions in which it engages. 
+
+alphabet extension focuses on extending the actions of process.
 ### Safety
-####Desirable properties of a Mutex solution
+#### Desirable properties of a Mutex solution
 > **Mutual exclusion:** only one process may be active in its critical section at a time.
 > **No deadlock:** if one or more processes are trying to enter their critical section, one must eventually succeed.
 > **No starvation:** if a process is trying to enter its critical section, it must eventually succeed.
@@ -301,3 +305,35 @@ The most common liveness property for a sequential system is that the system ter
 
 Concurrent systems are often designed to be non-terminating, and liveness properties are most commonly related to resource access.
 
+#### Safety Property in FSP
+```Java
+AN_ERROR = ( start -> do_something -> ERROR ).
+```
+`Note:`The state labelled -1 is a special state that indicates the ERROR process. It has no outgoing transitions.
+
+Safety properties
+When modelling complex systems, it is better practice to consider only the desired system behaviour, rather than also try to enumerate all possible undesirable behaviours. So, given a model, specify some desirable properties and check that the model maintains them.
+
+In many formalisms, safety properties are used for this purpose. In FSP, a safety property is just a process, but to identify it clearly as a safety property, FSP uses the property keyword:
+
+```Java
+property SAFE_ACTUATOR
+= ( command -> respond -> SAFE_ACTUATOR ).
+```
+**This property says that, whenever a command action is observed, a respond action should occur before another command action occurs.**
+
+**To maintain this transparency, safety properties must be deterministic processes. That is, they must not contain non-deterministic choices.**
+
+##### Safe Property for Interference
+##### Safe Property for Mutual Exclusion
+
+### Liveness
+```JAVASCRIPT
+range M = 0..4
+
+SEND(E=3) = (chan[3] -> STOP).
+
+RECEIVE = (chan[v:M]->received[v]->RECEIVE).
+
+||SYS = (SEND || RECEIVE).
+```

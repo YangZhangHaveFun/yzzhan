@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/linux/</link>
+    <description>Recent content in Linux on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Thu, 11 Apr 2019 01:37:56 +0800</lastBuildDate>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>对用过的Linux(Centos7.0&#43;)指令的总结</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/</link>
+      <pubDate>Thu, 11 Apr 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/</guid>
+      <description>###开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
+!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart ###重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.
+# 首先检查数据库的状态 systemctl status mariadb.service # 如果在运行则先停止服务 systemctl stop mariadb.service # 然后检查所有的安装文件和相应的依赖包, 然后全部删掉 rpm -qa | grep &amp;#39;maria*&amp;#39; yum -y remove maria* rpm -qa | grep &amp;#39;maria*&amp;#39; # 先把配置文件删掉 rm /etc/my.cnf # 然后检查遗留文件 find / -name mysql find / -name mariadb # Manually delete every single file and corresponding folder, here only shows part of code as example.</description>
+    </item>
+    
+  </channel>
+</rss>
