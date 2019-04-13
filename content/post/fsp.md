@@ -232,7 +232,7 @@ An alternative is to list the variables that are not to be hidden:
 > ‘Given a process P, the process P@{a1,..,aN} is the same as P, but with actions names other than a1,..,aN removed from P”.
 
 The following two codes result in the same situation.
-```Java
+```java
 SERVER_1 = ( request -> service -> reply -> SERVER_1 )
 @ { request , reply }.
 
