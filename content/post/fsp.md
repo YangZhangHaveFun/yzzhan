@@ -223,6 +223,19 @@ more generally,
     { c [ i :1.. N ]}::( SERVER /{ call / request , wait / reply })
     ).
 ```
+Sometimes, we don't really need specify the index of process while it could only be declared once in a composed process. Therefore, a more efficient and general way to represent the whole group of processes is by range directly. Here I shows part of my assignment answer as example:
+```
+||SPACESYS = ((p[PilotRange]:PILOT)||
+	{p[PilotRange]}::tugs:TUGS(NumOfTugs)||
+	{p[PilotRange]}::arrZone:WAITZONE/{shipArriveArrivalZone/p[PilotRange].arrZone.shipArrive}||
+	{p[PilotRange]}::depZone:WAITZONE/{shipDepartDepartureZone/p[PilotRange].depZone.shipDepart}||
+	{p[PilotRange]}::berthsys:BERTHSYS/{shieldActivate/p[PilotRange].berthsys.shieldActivate, 
+										shieldDeactivate/p[PilotRange].berthsys.shieldDeactivate}
+).
+```
+
+The syntax process1::process2 represents the mapping process in my understanding, which means that all the actions for process2 will be shared with each member of process1. Different from syntax process1||process2 to execute process1 and process2 concurrently. In :: syntax, all the actions in process2 will be executed with a forehead process1. Action Relabeling could be used to remove this forehead.
+
 
 ### Variable Hiding
 To reduce complexity, it is often useful to hide variables:
@@ -322,7 +335,11 @@ property SAFE_ACTUATOR
 ```
 **This property says that, whenever a command action is observed, a respond action should occur before another command action occurs.**
 
+The LTSA compiler generates the LTS as if SAFE ACTUATOR is a normal FSP process, and then, for every state in the LTS, it adds an outgoing action for all actions in the process’s alphabet that are not already outgoing actions. These new outgoing actions go to the error state. As a result, the LTS is complete: all actions can occur from all states. Invalid actions go to the error state. Therefore, every possible combination of actions are permitted.
+
 **To maintain this transparency, safety properties must be deterministic processes. That is, they must not contain non-deterministic choices.**
+
+An LTS generated from a property process allows every possible combination of actions in a process’s alphabet. As a result, composing a property process with a normal process, as we have done with ACTUATOR and SAFE ACTUATOR, means that we do not affect the **normal** behaviour of the original process: all previous transitions remain because all shared actions can be synchronised. If behaviour that violates the safety property occurs, the result in the composite process will be the error state.
 
 ##### Safe Property for Interference
 ##### Safe Property for Mutual Exclusion
