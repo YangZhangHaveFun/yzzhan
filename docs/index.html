@@ -208,6 +208,17 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/" class="post-link">Java知识点杂记</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 15, 2019 · 0 min read</p>
+  </header>
+  
+  <p class="post-summary"></p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javadatastructureandalgorithm/" class="post-link">Data Structures and Algorithm in Java</a></h3>
     <p class="post-meta">@Yang Zhang · Apr 12, 2019 · 2 min read</p>
   </header>
@@ -238,7 +249,9 @@ As users of a list, what we need is access to reference that can point to any ar
   </header>
   
   <p class="post-summary">Content: 面向对象和面向过程 什么是fast-fail和fail-safe Java是如何做到平台无关的 面向对象和面向过程的区别与面向对象的三大基本特征和五大基本原则  面向过程指把task分解成一个一个的步骤, 每个步骤用函数来实现,依次调用即可.
+进一步解释:在软件开发初期,程序编写都是以算法为核心,程序员会把数据和过程分别作为独立的部分来考虑, 数据代表空间中的客体,程序代码则用于处理这些数据,这种直接站在计算机的角度去抽象问题和解决问题的思想称为面向过程的编程思想.
 面向对象指把task分解成一个一个的步骤之后, 并对各个步骤进行相应的抽象, 形成对象, 同时建立对象之间的联系. 随后组合解决问题. 在面向对象编程的过程中,要把步骤进行相应的抽象形成对象, 对象封装了相应的属性和方法. 最后基于对象和对象的能力来完成业务逻辑的实现.
+进一步解释:面向对象的编程思想是站在现实角度去抽象和解决问题,它把数据和行为都看做是对象的一部分, 这样可以让程序员能以符合现实世界的思维方式来编写和组织程序.
 面向对象的三个基本特征 - 封装 - 继承 - 多态 &gt;封装(Encapsulation):是指利用抽象数据类型将数据和基于数据的操作封装在一起，使其构成一个不可分割的独立实体，数据被保护在抽象数据类型的内部，尽可能地隐藏内部的细节，只保留一些对外接口使之与外部发生联系。系统的其他对象只能通过包裹在数据外面的已经授权的操作来与这个封装的对象进行交流和交互。也就是说用户是无需知道对象内部的细节，但可以通过该对象对外的提供的接口来访问该对象。
  继承(Inheritance): 继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承我们能够非常方便地复用以前的代码，能够大大的提高开发的效率。 继承所描述的是“is-a”的关系，如果有两个对象A和B，若可以描述为“A是B”，则可以表示A继承B，其中B是被继承者称之为父类或者超类，A是继承者称之为子类或者派生类。
  《Think in java》：问一问自己是否需要从子类向父类进行向上转型。如果必须向上转型，则继承是必要的，但是如果不需要，则应当好好考虑自己是否需要继承。
@@ -258,7 +271,7 @@ Liskov替换原则(Liskov-Substituion Principle): 其核心思想是：子类必
   <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/fsp/" class="post-link">FSP and LTSA</a></h3>
-    <p class="post-meta">@Yang Zhang · Apr 2, 2019 · 11 min read</p>
+    <p class="post-meta">@Yang Zhang · Apr 2, 2019 · 13 min read</p>
   </header>
   
   <p class="post-summary">Introduction to FSP When dealing with large code bases, identifying, locating, and removing concurrency problems can be a nightmare. The size of the system and the number of possible interleavings and synchronisations become so large that it is difficult to even understand a single problem, isolate it, figure out how to fix it, or prevent it in the first place.
@@ -270,7 +283,7 @@ s. In particular, we will look at a language called Finite State Processes (FSP)
   <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/jvm/" class="post-link">对深入理解java虚拟机的读书总结</a></h3>
-    <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 9 min read</p>
+    <p class="post-meta">@Yang Zhang · Mar 24, 2019 · 12 min read</p>
   </header>
   
   <p class="post-summary">Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
@@ -307,17 +320,6 @@ ElasticSearch 概念  集群： 一个或多个节点组织在一起 节点： �
 * @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/" class="post-link">对多线程的理解和深入理解Future源码</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">Basic Concepts related to thread and process Multiple ways to implement the multithreading project in python Queue, Lock, RLock, Condition and Semorpher # GIL---global interpreter lock import threading from queue import Queue import time # Communication between threads # 1. Share Variables sum = 0 lock = threading.Lock() def add_glo(lock): global sum for i in range(1000000): lock.acquire() sum &#43;= 1 lock.release() def dec_glo(lock): global sum for i in range(1000000): lock.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/">Read More →</a>
   </footer>
 </article>
   <article class="post-entry">
