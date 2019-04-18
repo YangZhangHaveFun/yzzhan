@@ -18,11 +18,12 @@
       <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/jvm/</guid>
-      <description>Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+      <description>这篇文章是关于/&amp;lt;&amp;lt;深入理解Java虚拟机第二版&amp;gt;&amp;gt;的全书总结.总结的目录也与原书的章节吻合.
+Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.</description>
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令.</description>
     </item>
     
   </channel>

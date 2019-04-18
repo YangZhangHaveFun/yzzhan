@@ -212,13 +212,26 @@
     <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 12 min read</p>
   </header>
   
-  <p class="post-summary">Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+  <p class="post-summary">这篇文章是关于/&lt;&lt;深入理解Java虚拟机第二版&gt;&gt;的全书总结.总结的目录也与原书的章节吻合.
+Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.</p>
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/" class="post-link">对操作系统中并发的读书总结</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> 这篇文章是对&lt;&gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.
+进程的描述和控制 线程 并发性 并发中的死锁和饥饿 </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/">Read More →</a>
   </footer>
 </article>
   <article class="post-entry">
@@ -320,27 +333,6 @@ ElasticSearch 概念  集群： 一个或多个节点组织在一起 节点： �
 * @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/" class="post-link">实现高并发并深入理解asyncio内置包</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">Package Asynic 实现协程和io多路复用，python提供了一个内置包—asyncio去简化 回调&#43;事件循环(核心)&#43;select(poll,epoll)这个流程。
-在async包的内部，已经实现了事件循环，并且为了把generator和coroutine方法区分开，python引入了两个关键词 async和await
--async用于方法开头，声明此方法为协程方法
--await用于方法中，声明需要异步处理的地方，类似于生成器里的yield from
--同时方法末尾可提供一个返回值。
--在协程方法中不可以使用同步/阻塞的方法或函数(eg: time.sleep() —&gt; async.sleep())，否则会使异步编程无意义
-Adding tasks into loop  我们实例化loop —&gt; loop = asyncio.get_event_loop()
- 然后列出需要异步实现的Tasks. 此时我们有两种实现方法。第一我们可以把我们的task转成Future object eg: ``python futures = [asyncio.ensure_future(get_html(&#34;www.baidu.com/{}&#34;.format(i))) for i in range(100)]
-  for future in futures: future.add_done_callback(callbakck)
- 这个方法与线程池的实现方法和原理相同，在future object里存着返回的值，并用result()可以调出。并且，future object支持增加回调函数.当我们的回调函数需要输入参数时，我们需要用到包装函数partial ---- from functools import partial ```python for future in futures: future.add_done_callback(partial(callbakck, &#34;www.baidu.com&#34;))  或者用async.wait, async.gather包装
-task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(10)] task_group_2 = [get_html(&#34;www.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/">Read More →</a>
   </footer>
 </article>
   <article class="post-entry">
