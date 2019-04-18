@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | Hugo Blog (SEO Version)
-</title>
+  <title>对操作系统中并发的读书总结</title>
 
   
   
@@ -25,21 +23,26 @@
   
 
   
-  <meta name="author" content="Ritchie Zhu">
-  <meta name="description" content="Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.">
+  <meta name="author" content="Yang Zhang">
+  <meta name="description" content=" 这篇文章是对&amp;lt;&amp;gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.
+进程的描述和控制 线程 并发性 并发中的死锁和饥饿 ">
 
   
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@gohugoio">
-  <meta name="twitter:title" content="Hugo Blog (SEO Version)">
-  <meta name="twitter:description" content="Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.">
-  <meta name="twitter:image" content="/images/avatar.png">
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="对操作系统中并发的读书总结">
+    <meta name="twitter:description" content=" 这篇文章是对&amp;lt;&amp;gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.
+进程的描述和控制 线程 并发性 并发中的死锁和饥饿 ">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
 
   
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Hugo Blog (SEO Version)">
-  <meta property="og:description" content="Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.">
-  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/tags/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="对操作系统中并发的读书总结">
+  <meta property="og:description" content=" 这篇文章是对&amp;lt;&amp;gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.
+进程的描述和控制 线程 并发性 并发中的死锁和饥饿 ">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/">
   <meta property="og:image" content="/images/avatar.png">
 
 
@@ -48,8 +51,7 @@
 <meta name="generator" content="Hugo 0.54.0">
 
 
-<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/tags/">
-<link rel="alternate" type="application/rss+xml" href="https://yangzhanghavefun.github.io/yzzhan/tags/index.xml" title="Yzzhan Tech Repo">
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -100,8 +102,12 @@
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
 
 
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
 
 
 
@@ -123,6 +129,10 @@
     
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
       
     </div>
     
@@ -147,7 +157,7 @@
         <li class="menu-item
           
           
-          ">
+           is-active">
           <a href="https://yangzhanghavefun.github.io/yzzhan/">Home</a>
         </li>
       
@@ -159,7 +169,7 @@
         </li>
       
         <li class="menu-item
-           is-active
+          
           
           ">
           <a href="https://yangzhanghavefun.github.io/yzzhan/tags/">Tags</a>
@@ -203,98 +213,62 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
+  <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+      <h1 class="post-title">对操作系统中并发的读书总结</h1>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 1 min read</p>
     </header>
-    <div class="tags-cloud">
+    <article class="post-content">
+
+<p>这篇文章是对&lt;<Operating Systems Internals and Design Principles\>&gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.</p>
+
+<hr />
+
+<h3 id="进程的描述和控制">进程的描述和控制</h3>
+
+<h3 id="线程">线程</h3>
+
+<h3 id="并发性">并发性</h3>
+
+<h3 id="并发中的死锁和饥饿">并发中的死锁和饥饿</h3>
+</article>
+    <footer class="post-footer">
       
-      
+      <ul class="post-tags">
         
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/python/" class="tag-xxl">python</a>
-      
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/concurrency"><span class="tag">Concurrency</span></a></li>
         
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/java/" class="tag-xxl">java</a>
-      
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/operating-system"><span class="tag">Operating System</span></a></li>
         
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/hugo/" class="tag-xxl">hugo</a>
+      </ul>
       
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/interview/" class="tag-xxl">interview</a>
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/overview/" class="tag-xxl">overview</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/development/" class="tag-m">development</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/go/" class="tag-m">go</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/golang/" class="tag-m">golang</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/theme/" class="tag-m">theme</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/" class="tag-s">algorithm</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/async/" class="tag-s">async</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/centos/" class="tag-s">centos</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/concurrency/" class="tag-s">concurrency</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/coroutine/" class="tag-s">coroutine</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/cryptography/" class="tag-s">cryptography</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/generator/" class="tag-s">generator</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/hash-function/" class="tag-s">hash-function</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/jvm/" class="tag-s">jvm</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/learning/" class="tag-s">learning</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/linux/" class="tag-s">linux</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/markdown/" class="tag-s">markdown</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/operating-system/" class="tag-s">operating-system</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/search-engine/" class="tag-s">search-engine</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/sha-3/" class="tag-s">sha-3</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/swen90004/" class="tag-s">swen90004</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/templates/" class="tag-s">templates</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/themes/" class="tag-s">themes</a>
-      
-        
-        <a href="https://yangzhanghavefun.github.io/yzzhan/tags/thread/" class="tag-s">thread</a>
-      
-    </div>
+    
   </section>
   
 <footer class="site-footer">
@@ -308,8 +282,33 @@
 
 
 
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
 
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
 
 
 

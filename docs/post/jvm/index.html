@@ -24,33 +24,36 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+  <meta name="description" content="这篇文章是关于/&amp;lt;&amp;lt;深入理解Java虚拟机第二版&amp;gt;&amp;gt;的全书总结.总结的目录也与原书的章节吻合.
+Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="对深入理解java虚拟机的读书总结">
-    <meta name="twitter:description" content="Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+    <meta name="twitter:description" content="这篇文章是关于/&amp;lt;&amp;lt;深入理解Java虚拟机第二版&amp;gt;&amp;gt;的全书总结.总结的目录也与原书的章节吻合.
+Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="对深入理解java虚拟机的读书总结">
-  <meta property="og:description" content="Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
+  <meta property="og:description" content="这篇文章是关于/&amp;lt;&amp;lt;深入理解Java虚拟机第二版&amp;gt;&amp;gt;的全书总结.总结的目录也与原书的章节吻合.
+Part 1(Java 概括) Java技术体系的组成部分 - Java 程序设计语言 - 各种硬件平台上的Java虚拟机 - Class文件格式 - Java API 类库 - 来自商业机构和开源社区的第三方Java类库
 JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI类库这三部分。是用于支持Java程序开发的最小环境
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
-Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令. * 每个线程都需要一个独立的程序计数器,各条线程之间的计数器互不影响,独立存储.">
+Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/jvm/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -228,6 +231,10 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
       <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 12 min read</p>
     </header>
     <article class="post-content">
+
+<p>这篇文章是关于/&lt;&lt;深入理解Java虚拟机第二版&gt;&gt;的全书总结.总结的目录也与原书的章节吻合.</p>
+
+<hr />
 
 <h1 id="part-1-java-概括">Part 1(Java 概括)</h1>
 
@@ -1407,22 +1414,31 @@ sr<span style="color:#f92672">.</span><span style="color:#a6e22e">sayHello</span
 
 <h4 id="java线程的状态">Java线程的状态</h4>
 
-<p>Java语言定义了5种线程的状态, 在任意一个时间点, 一个线程只能有且仅有其中的一种状态.
-- <strong>新建(New)</strong>: 创建后尚未启动的处于这种状态.
-- <strong>运行(Runable)</strong>: Runable 包括了操作系统线程状态中的Running和Ready, 也就是说处于此状态的线程可能正在执行, 也可能正在等待CPU为它分配执行时间.
-- <strong>无限期等待(Waiting)</strong>: 处于这种状态的线程不会被分配CPU执行时间, 他们要等待被其他线程显式唤醒.以下方法会让线程陷入Waiting状态:
-  - 没有设置Timeout参数的Object.wait()方法
-  - 没有设置Timeout参数的Thread.join()方法
-  - LockSupport.park()方法
-- <strong>限期等待(Timed Waiting)</strong>: 处于这种状态的线程也不会被分配CPU执行时间,不过无需等待被其他线程显式地唤醒, 在一定时间后他们会由系统自动唤醒.以下方法会让线程陷入Timed Waiting状态:
-  - Thread.sleep()
-  - 设置了Timeout参数的Object.wait()方法
-  - 设置了Timeout参数的Thread.join()方法
-  - LockSupport.parkNanos()方法
-  - LockSupport.parkUntil()方法
-- 阻塞(Blocked): 线程被阻塞了,&ldquo;阻塞状态&rdquo;与&rdquo;等待状态&rdquo;的区别是:&ldquo;阻塞状态&rdquo;在等待获取到一个排他锁,<strong>这个事件将在另外一个线程放弃这个锁的时候发生</strong>;而<strong>等待状态则是在等待一段时间或者唤醒动作的发生</strong>.
-    在程序<strong>等待进入同步区域</strong>的时候,线程将进入这种状态.
-- <strong>结束(Terminated)</strong>: 已终止线程的线程状态, 线程已经执行结束.</p>
+<p>Java语言定义了5种线程的状态, 在任意一个时间点, 一个线程只能有且仅有其中的一种状态.</p>
+
+<ul>
+<li><strong>新建(New)</strong>: 创建后尚未启动的处于这种状态.</li>
+<li><strong>运行(Runable)</strong>: Runable 包括了操作系统线程状态中的Running和Ready, 也就是说处于此状态的线程可能正在执行, 也可能正在等待CPU为它分配执行时间.</li>
+<li><strong>无限期等待(Waiting)</strong>: 处于这种状态的线程不会被分配CPU执行时间, 他们要等待被其他线程显式唤醒.以下方法会让线程陷入Waiting状态:
+
+<ul>
+<li>没有设置Timeout参数的Object.wait()方法</li>
+<li>没有设置Timeout参数的Thread.join()方法</li>
+<li>LockSupport.park()方法</li>
+</ul></li>
+<li><strong>限期等待(Timed Waiting)</strong>: 处于这种状态的线程也不会被分配CPU执行时间,不过无需等待被其他线程显式地唤醒, 在一定时间后他们会由系统自动唤醒.以下方法会让线程陷入Timed Waiting状态:
+
+<ul>
+<li>Thread.sleep()</li>
+<li>设置了Timeout参数的Object.wait()方法</li>
+<li>设置了Timeout参数的Thread.join()方法</li>
+<li>LockSupport.parkNanos()方法</li>
+<li>LockSupport.parkUntil()方法</li>
+</ul></li>
+<li>阻塞(Blocked): 线程被阻塞了,&ldquo;阻塞状态&rdquo;与&rdquo;等待状态&rdquo;的区别是:&ldquo;阻塞状态&rdquo;在等待获取到一个排他锁,<strong>这个事件将在另外一个线程放弃这个锁的时候发生</strong>;而<strong>等待状态则是在等待一段时间或者唤醒动作的发生</strong>.
+在程序<strong>等待进入同步区域</strong>的时候,线程将进入这种状态.</li>
+<li><strong>结束(Terminated)</strong>: 已终止线程的线程状态, 线程已经执行结束.</li>
+</ul>
 
 <p>这五种状态的转化关系如图.
 <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/threadState.png" alt="Threads State Relationship" /></p>

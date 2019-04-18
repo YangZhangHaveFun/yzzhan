@@ -7,6 +7,9 @@ tags: ["Java", "JVM"]
 categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
+这篇文章是关于/<<深入理解Java虚拟机第二版>>的全书总结.总结的目录也与原书的章节吻合.     
+
+-------------------------------
 
 # Part 1(Java 概括)
 **Java技术体系的组成部分**
@@ -1019,12 +1022,13 @@ Java语言设置了10个级别的线程优先级, 优先级越高的线程越容
 
 #### Java线程的状态
 Java语言定义了5种线程的状态, 在任意一个时间点, 一个线程只能有且仅有其中的一种状态.
+
 - **新建(New)**: 创建后尚未启动的处于这种状态.
 - **运行(Runable)**: Runable 包括了操作系统线程状态中的Running和Ready, 也就是说处于此状态的线程可能正在执行, 也可能正在等待CPU为它分配执行时间.
 - **无限期等待(Waiting)**: 处于这种状态的线程不会被分配CPU执行时间, 他们要等待被其他线程显式唤醒.以下方法会让线程陷入Waiting状态:
-  - 没有设置Timeout参数的Object.wait()方法
-  - 没有设置Timeout参数的Thread.join()方法
-  - LockSupport.park()方法
+  + 没有设置Timeout参数的Object.wait()方法
+  + 没有设置Timeout参数的Thread.join()方法
+  + LockSupport.park()方法
 - **限期等待(Timed Waiting)**: 处于这种状态的线程也不会被分配CPU执行时间,不过无需等待被其他线程显式地唤醒, 在一定时间后他们会由系统自动唤醒.以下方法会让线程陷入Timed Waiting状态:
   - Thread.sleep()
   - 设置了Timeout参数的Object.wait()方法

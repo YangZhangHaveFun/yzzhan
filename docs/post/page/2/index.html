@@ -243,6 +243,29 @@ https://openapi.alipaydev.com/gateway.do?app_id=&amp;biz_content=%7B%22subject%2
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/" class="post-link">实现高并发并深入理解asyncio内置包</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">Package Asynic 实现协程和io多路复用，python提供了一个内置包—asyncio去简化 回调&#43;事件循环(核心)&#43;select(poll,epoll)这个流程。
+在async包的内部，已经实现了事件循环，并且为了把generator和coroutine方法区分开，python引入了两个关键词 async和await
+-async用于方法开头，声明此方法为协程方法
+-await用于方法中，声明需要异步处理的地方，类似于生成器里的yield from
+-同时方法末尾可提供一个返回值。
+-在协程方法中不可以使用同步/阻塞的方法或函数(eg: time.sleep() —&gt; async.sleep())，否则会使异步编程无意义
+Adding tasks into loop  我们实例化loop —&gt; loop = asyncio.get_event_loop()
+ 然后列出需要异步实现的Tasks. 此时我们有两种实现方法。第一我们可以把我们的task转成Future object eg: ``python futures = [asyncio.ensure_future(get_html(&#34;www.baidu.com/{}&#34;.format(i))) for i in range(100)]
+  for future in futures: future.add_done_callback(callbakck)
+ 这个方法与线程池的实现方法和原理相同，在future object里存着返回的值，并用result()可以调出。并且，future object支持增加回调函数.当我们的回调函数需要输入参数时，我们需要用到包装函数partial ---- from functools import partial ```python for future in futures: future.add_done_callback(partial(callbakck, &#34;www.baidu.com&#34;))  或者用async.wait, async.gather包装
+task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(10)] task_group_2 = [get_html(&#34;www.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/" class="post-link">Detailed algorithm For Hash Function</a></h3>
     <p class="post-meta">@Yang Zhang · Jan 12, 2019 · 4 min read</p>
   </header>
@@ -340,21 +363,6 @@ Follow the following steps:
  Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/" class="post-link">Migrate to Hugo from Jekyll</a></h3>
-    <p class="post-meta">@Ritchie Zhu · Mar 10, 2014 · 4 min read</p>
-  </header>
-  
-  <p class="post-summary">Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &lt;root&gt;/ ▾ images/ logo.png  should become
-▾ &lt;root&gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you’ll want any files that should reside at the root (such as CNAME) to be moved to static.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/">Read More →</a>
   </footer>
 </article>
 
