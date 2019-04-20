@@ -263,11 +263,22 @@ As users of a list, what we need is access to reference that can point to any ar
     <p class="post-meta">@yang zhang · Apr 11, 2019 · 1 min read</p>
   </header>
   
-  <p class="post-summary">###开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
-!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart ###重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.
-# 首先检查数据库的状态 systemctl status mariadb.service # 如果在运行则先停止服务 systemctl stop mariadb.service # 然后检查所有的安装文件和相应的依赖包, 然后全部删掉 rpm -qa | grep &#39;maria*&#39; yum -y remove maria* rpm -qa | grep &#39;maria*&#39; # 先把配置文件删掉 rm /etc/my.cnf # 然后检查遗留文件 find / -name mysql find / -name mariadb # Manually delete every single file and corresponding folder, here only shows part of code as example.</p>
+  <p class="post-summary">开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
+!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart 如果iptables save不能用则使用以下命令
+# It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service: systemctl stop firewalld systemctl mask firewalld # Then, install the iptables-services package: yum install iptables-services # Enable the service at boot-time: systemctl enable iptables # Managing the service systemctl [stop|start|restart] iptables # Saving your firewall rules can be done as follows: service iptables save # check your listenning ports with: netstat -nat |grep :3306 重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/websecurity/" class="post-link">对学习过的Web Security的总结</a></h3>
+    <p class="post-meta">@yang zhang · Apr 11, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> 横向越权和纵向越权 </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/websecurity/">Read More →</a>
   </footer>
 </article>
   <article class="post-entry">
@@ -333,17 +344,6 @@ ElasticSearch 概念  集群： 一个或多个节点组织在一起 节点： �
 * @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/" class="post-link">如何在python环境实现并发和一些对并发的理解</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 — 回调 &#43; 事件循环 &#43; select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&#34;https://www.baidu.com&#34;, &#34;https://www.baidu.com&#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&#34;.format(self.path, self.host).encode(&#34;utf8&#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data &#43;= d else: selector.unregister(key.fd) data = self.data.decode(&#34;utf8&#34;) html_data = data.split(&#34;\r\n\r\n&#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/">Read More →</a>
   </footer>
 </article>
  

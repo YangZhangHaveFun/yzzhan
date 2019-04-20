@@ -255,6 +255,17 @@ task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(
 </article>
   <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/" class="post-link">如何在python环境实现并发和一些对并发的理解</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 — 回调 &#43; 事件循环 &#43; select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&#34;https://www.baidu.com&#34;, &#34;https://www.baidu.com&#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&#34;.format(self.path, self.host).encode(&#34;utf8&#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data &#43;= d else: selector.unregister(key.fd) data = self.data.decode(&#34;utf8&#34;) html_data = data.split(&#34;\r\n\r\n&#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/" class="post-link">Detailed algorithm For Hash Function</a></h3>
     <p class="post-meta">@Yang Zhang · Jan 12, 2019 · 4 min read</p>
   </header>
@@ -322,24 +333,6 @@ This document is a brief primer on using go templates.</p>
 </p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hugo-nuo-post-preview/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/" class="post-link">Getting Started with Hugo</a></h3>
-    <p class="post-meta">@Ritchie Zhu · Apr 2, 2014 · 2 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://yangzhanghavefun.github.io/yzzhan/media/cover.jpg" alt="Getting Started with Hugo" lazyload="on">
-  
-  <p class="post-summary">Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hugoisforlovers/">Read More →</a>
   </footer>
 </article>
  

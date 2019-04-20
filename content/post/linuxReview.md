@@ -7,7 +7,7 @@ tags: ["Linux", "Centos"]
 categories: ["Linux related"]
 author: "yang zhang"
 ---
-###开启防火墙对指定Port外界访问的权限
+### 开启防火墙对指定Port外界访问的权限
 例如开启数据库port3306的port
 ```bash
 !/bin/bash
@@ -15,8 +15,24 @@ author: "yang zhang"
 service iptables save
 service iptables restart
 ```
+如果iptables save不能用则使用以下命令
+```bash
+# It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service:
+systemctl stop firewalld
+systemctl mask firewalld
+# Then, install the iptables-services package:
+yum install iptables-services
+# Enable the service at boot-time:
+systemctl enable iptables
+# Managing the service
+systemctl [stop|start|restart] iptables
+# Saving your firewall rules can be done as follows:
+service iptables save
+# check your listenning ports with:
+netstat -nat |grep :3306
+```
 
-###重装mariadb
+### 重装mariadb
 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.
 ```bash
 # 首先检查数据库的状态
@@ -47,5 +63,13 @@ systemctl enable mariadb
 mysql_secure_installation
 ```
 
-### 
+### linux系统下生成秘钥并通知本地系统
+```bash
+ssh-keygen -t rsa -C "yzzhan@student.unimelb.edu.au"
+# identification has been saved in /home/root/.ssh/id_rsa.
+# public key has been saved in /home/root/.ssh/id_rsa.pub
+
+ssh-add ~/.ssh/id_rsa
+
+```
 

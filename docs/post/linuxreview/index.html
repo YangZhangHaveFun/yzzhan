@@ -24,27 +24,27 @@
 
   
   <meta name="author" content="yang zhang">
-  <meta name="description" content="###开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
-!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart ###重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.
-# 首先检查数据库的状态 systemctl status mariadb.service # 如果在运行则先停止服务 systemctl stop mariadb.service # 然后检查所有的安装文件和相应的依赖包, 然后全部删掉 rpm -qa | grep &amp;#39;maria*&amp;#39; yum -y remove maria* rpm -qa | grep &amp;#39;maria*&amp;#39; # 先把配置文件删掉 rm /etc/my.cnf # 然后检查遗留文件 find / -name mysql find / -name mariadb # Manually delete every single file and corresponding folder, here only shows part of code as example.">
+  <meta name="description" content="开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
+!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart 如果iptables save不能用则使用以下命令
+# It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service: systemctl stop firewalld systemctl mask firewalld # Then, install the iptables-services package: yum install iptables-services # Enable the service at boot-time: systemctl enable iptables # Managing the service systemctl [stop|start|restart] iptables # Saving your firewall rules can be done as follows: service iptables save # check your listenning ports with: netstat -nat |grep :3306 重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="对用过的Linux(Centos7.0&#43;)指令的总结">
-    <meta name="twitter:description" content="###开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
-!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart ###重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.
-# 首先检查数据库的状态 systemctl status mariadb.service # 如果在运行则先停止服务 systemctl stop mariadb.service # 然后检查所有的安装文件和相应的依赖包, 然后全部删掉 rpm -qa | grep &amp;#39;maria*&amp;#39; yum -y remove maria* rpm -qa | grep &amp;#39;maria*&amp;#39; # 先把配置文件删掉 rm /etc/my.cnf # 然后检查遗留文件 find / -name mysql find / -name mariadb # Manually delete every single file and corresponding folder, here only shows part of code as example.">
+    <meta name="twitter:description" content="开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
+!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart 如果iptables save不能用则使用以下命令
+# It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service: systemctl stop firewalld systemctl mask firewalld # Then, install the iptables-services package: yum install iptables-services # Enable the service at boot-time: systemctl enable iptables # Managing the service systemctl [stop|start|restart] iptables # Saving your firewall rules can be done as follows: service iptables save # check your listenning ports with: netstat -nat |grep :3306 重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="对用过的Linux(Centos7.0&#43;)指令的总结">
-  <meta property="og:description" content="###开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
-!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart ###重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.
-# 首先检查数据库的状态 systemctl status mariadb.service # 如果在运行则先停止服务 systemctl stop mariadb.service # 然后检查所有的安装文件和相应的依赖包, 然后全部删掉 rpm -qa | grep &amp;#39;maria*&amp;#39; yum -y remove maria* rpm -qa | grep &amp;#39;maria*&amp;#39; # 先把配置文件删掉 rm /etc/my.cnf # 然后检查遗留文件 find / -name mysql find / -name mariadb # Manually delete every single file and corresponding folder, here only shows part of code as example.">
+  <meta property="og:description" content="开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
+!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart 如果iptables save不能用则使用以下命令
+# It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service: systemctl stop firewalld systemctl mask firewalld # Then, install the iptables-services package: yum install iptables-services # Enable the service at boot-time: systemctl enable iptables # Managing the service systemctl [stop|start|restart] iptables # Saving your firewall rules can be done as follows: service iptables save # check your listenning ports with: netstat -nat |grep :3306 重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -221,14 +221,32 @@
       <h1 class="post-title">对用过的Linux(Centos7.0&#43;)指令的总结</h1>
       <p class="post-meta">@yang zhang · Apr 11, 2019 · 1 min read</p>
     </header>
-    <article class="post-content"><p>###开启防火墙对指定Port外界访问的权限
-例如开启数据库port3306的port</p>
+    <article class="post-content">
+
+<h3 id="开启防火墙对指定port外界访问的权限">开启防火墙对指定Port外界访问的权限</h3>
+
+<p>例如开启数据库port3306的port</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">!/bin/bash
 /sbin/iptables -I INPUT -p tcp --dport <span style="color:#ae81ff">3306</span> -j ACCEPT
 service iptables save
 service iptables restart</code></pre></div>
-<p>###重装mariadb
-重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.</p>
+<p>如果iptables save不能用则使用以下命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service:</span>
+systemctl stop firewalld
+systemctl mask firewalld
+<span style="color:#75715e"># Then, install the iptables-services package:</span>
+yum install iptables-services
+<span style="color:#75715e"># Enable the service at boot-time:</span>
+systemctl enable iptables
+<span style="color:#75715e"># Managing the service</span>
+systemctl <span style="color:#f92672">[</span>stop|start|restart<span style="color:#f92672">]</span> iptables
+<span style="color:#75715e"># Saving your firewall rules can be done as follows:</span>
+service iptables save
+<span style="color:#75715e"># check your listenning ports with:</span>
+netstat -nat |grep :3306</code></pre></div>
+<h3 id="重装mariadb">重装mariadb</h3>
+
+<p>重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.service不能正常启动.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 首先检查数据库的状态</span>
 systemctl status mariadb.service
 <span style="color:#75715e"># 如果在运行则先停止服务</span>
@@ -254,7 +272,13 @@ sudo reboot
 yum -y install mariadb mariadb-server
 systemctl status mariadb
 systemctl enable mariadb
-mysql_secure_installation</code></pre></div></article>
+mysql_secure_installation</code></pre></div>
+<h3 id="linux系统下生成秘钥并通知本地系统">linux系统下生成秘钥并通知本地系统</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -C <span style="color:#e6db74">&#34;yzzhan@student.unimelb.edu.au&#34;</span>
+<span style="color:#75715e"># identification has been saved in /home/root/.ssh/id_rsa.</span>
+<span style="color:#75715e"># public key has been saved in /home/root/.ssh/id_rsa.pub</span>
+
+ssh-add ~/.ssh/id_rsa</code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
