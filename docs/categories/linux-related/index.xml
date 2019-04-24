@@ -18,7 +18,9 @@
       <pubDate>Thu, 11 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/websecurity/</guid>
-      <description> 横向越权和纵向越权 </description>
+      <description> 横向越权和纵向越权  横向越权: 攻击者尝试访问与他拥有相同权限的用户的资源.
+纵向越权: 低级别攻击者尝试访问高级别用户的资源.
+ </description>
     </item>
     
     <item>

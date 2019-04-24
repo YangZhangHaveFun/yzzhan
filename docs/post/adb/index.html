@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Notes for Advanced Database System(COMP90050)</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  <meta name="author" content="Yang Zhang">
+  <meta name="description" content="Different types of Database System There are multiple database technologies related to database structure. - Simple file systems like Unix File System - Relational Database System(RDBS) - Object Oriented(oo) Database System - Deductive Database System(DDBS) - Key-Value pair based Database System - NoSQL
+Different types of Database Architectures  Centralised Database System Client-Server Distributed Database System World Wide Web Grid Computing/Databases that lead to Cloud Computing/Data Centres P2P Databases  Basic Memory Knowledge Memory Hierarchy In single core circumstance, the CPU communication case is : In muliple cores circumstance, the CPU communication case is : In Inter i7 Block Diagram, the CPU interaction is: Transaction Processing  A transaction is collection of operations that need to be performed on the physical and abstract application state.">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="Notes for Advanced Database System(COMP90050)">
+    <meta name="twitter:description" content="Different types of Database System There are multiple database technologies related to database structure. - Simple file systems like Unix File System - Relational Database System(RDBS) - Object Oriented(oo) Database System - Deductive Database System(DDBS) - Key-Value pair based Database System - NoSQL
+Different types of Database Architectures  Centralised Database System Client-Server Distributed Database System World Wide Web Grid Computing/Databases that lead to Cloud Computing/Data Centres P2P Databases  Basic Memory Knowledge Memory Hierarchy In single core circumstance, the CPU communication case is : In muliple cores circumstance, the CPU communication case is : In Inter i7 Block Diagram, the CPU interaction is: Transaction Processing  A transaction is collection of operations that need to be performed on the physical and abstract application state.">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Notes for Advanced Database System(COMP90050)">
+  <meta property="og:description" content="Different types of Database System There are multiple database technologies related to database structure. - Simple file systems like Unix File System - Relational Database System(RDBS) - Object Oriented(oo) Database System - Deductive Database System(DDBS) - Key-Value pair based Database System - NoSQL
+Different types of Database Architectures  Centralised Database System Client-Server Distributed Database System World Wide Web Grid Computing/Databases that lead to Cloud Computing/Data Centres P2P Databases  Basic Memory Knowledge Memory Hierarchy In single core circumstance, the CPU communication case is : In muliple cores circumstance, the CPU communication case is : In Inter i7 Block Diagram, the CPU interaction is: Transaction Processing  A transaction is collection of operations that need to be performed on the physical and abstract application state.">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/adb/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0">
+
+
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/adb/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Yzzhan Tech Repo">
+<meta name="msapplication-tooltip" content="Yzzhan Tech Repo">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://yangzhanghavefun.github.io/yzzhan/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-152x152.png">
+<link rel="manifest" href="https://yangzhanghavefun.github.io/yzzhan/manifest.json">
+
+
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css" as="style">
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" as="image">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" alt="Avatar">
+  
+  <h2 class="title">Yzzhan Tech Repo</h2>
+  
+  <p class="subtitle">~ Keep It Simple &amp; Stupid ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/">Home</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/categories/">Categories</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/tags/">Tags</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/links/">Links</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/about/">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:yzzhan@student.unimelb.edu.au" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/YangZhangHaveFun" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//weibo.com/weibo_username" title="Weibo" aria-label="Weibo">
+            <span class="icon icon-weibo" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/images/qrcode.jpg" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Notes for Advanced Database System(COMP90050)</h1>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 4 min read</p>
+    </header>
+    <article class="post-content">
+
+<h4 id="different-types-of-database-system">Different types of Database System</h4>
+
+<p>There are multiple database technologies related to database structure.
+- Simple file systems like Unix File System
+- Relational Database System(RDBS)
+- Object Oriented(oo) Database System
+- Deductive Database System(DDBS)
+- Key-Value pair based Database System
+- NoSQL</p>
+
+<h4 id="different-types-of-database-architectures">Different types of Database Architectures</h4>
+
+<ul>
+<li>Centralised Database System</li>
+<li>Client-Server</li>
+<li>Distributed Database System</li>
+<li>World Wide Web</li>
+<li>Grid Computing/Databases that lead to Cloud Computing/Data Centres</li>
+<li>P2P Databases</li>
+</ul>
+
+<h3 id="basic-memory-knowledge">Basic Memory Knowledge</h3>
+
+<h4 id="memory-hierarchy">Memory Hierarchy</h4>
+
+<p>In single core circumstance, the CPU communication case is :
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/cache.png" alt="Sinle core" />
+In muliple cores circumstance, the CPU communication case is :
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/multiCores.png" alt="Multi cores" />
+In Inter i7 Block Diagram, the CPU interaction is:
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/i7Cores.png" alt="I7 cores" /></p>
+
+<h4 id="transaction-processing">Transaction Processing</h4>
+
+<blockquote>
+<p>A transaction is collection of operations that need to be performed on the physical and abstract application state.</p>
+</blockquote>
+
+<p>Structure of a transaction should be:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">begin_Transaction()
+        <span style="color:#f92672">&lt;</span>Sequence <span style="color:#66d9ef">of</span> operations <span style="color:#66d9ef">to</span> be performed<span style="color:#f92672">&gt;</span>
+    <span style="color:#66d9ef">if</span> (successful)
+        commit_Trans() <span style="color:#f92672">%</span> <span style="color:#66d9ef">Any</span> changes made durable.
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">rollback</span>() <span style="color:#f92672">%</span><span style="color:#66d9ef">Any</span> changes made <span style="color:#66d9ef">are</span> <span style="color:#66d9ef">all</span> undone
+end_Transaction()</code></pre></div>
+<p><strong>Transaction processing</strong> contributed many concepts in distributed computing and fault tolerant computing.</p>
+
+<h5 id="acid-atomicity-consistency-isolation-durability">ACID(atomicity, consistency, isolation, durability)</h5>
+
+<dl>
+<dt><strong>Atomicity</strong></dt>
+<dd>A transaction’s changes to the state (Database) are atomic implying either all actions happen or none happen.</dd>
+<dt><strong>Consistency</strong></dt>
+<dd>A the transaction is a correct transformation of the state. Actions taken as a whole do not violate the integrity of the application state assuming transactions are correct programs.</dd>
+<dt><strong>Isolation</strong></dt>
+<dd>Even when several transactions are executed simultaneously, it appears to each transaction T that others executed either happen before T or after T but not at the same time.</dd>
+<dt><strong>Durability</strong></dt>
+<dd>State changes committed by a transaction survive failures.</dd>
+</dl>
+
+<h5 id="distributed-transaction-processing-system">distributed transaction processing system</h5>
+
+<p>As for the distributed transaction processing system, it should look like this.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/dtbs.png" alt="distributed transaction processing system" /></p>
+
+<p>The features of distributed transaction processing system.
+- Application development features
+- Repository features
+- Database features</p>
+
+<h4 id="probability-and-fault-tolerance">Probability and Fault Tolerance</h4>
+
+<h5 id="concepts">Concepts</h5>
+
+<ul>
+<li>P(A) is the probability of an event A is happening in <strong>certain period</strong></li>
+<li>Assuming event A and B is independent,
+
+<ul>
+<li>P(A and B) = P(A) * P(B)</li>
+<li>P(A or B) = P(A) + P(B) - P(A) * P(B) = P(A) + P(B)</li>
+</ul></li>
+<li><strong>Mean time</strong> to the event A is 1/P(A). MT(A) = 1/P(A)</li>
+<li><strong>Meantime to failure(MTTF)</strong> means the time I need to wait to see the failure(which means running period).</li>
+<li><strong>Meantime to repair(MTTR)</strong> means the time I need to wait to see the repair finished.</li>
+<li><strong>Module Availability</strong> measures the ratio of service accomplishment to elapsed time.
+MA = MTTF/(MTTF + MTTR)</li>
+</ul>
+
+<h5 id="fault-tolerance-in-multiple-events-case">Fault tolerance in multiple events case</h5>
+
+<p>If all <strong>N</strong> different events have same mean time <strong>M</strong>. The mean time to the first one of the evenets = M/N. It means that the more devices we use, the shorter time the system meets the failure.</p>
+
+<h5 id="fault-types">Fault types</h5>
+
+<h5 id="fault-tolerance">Fault Tolerance</h5>
+
+<ul>
+<li>Failvote - use two are more modules and compare their outputs. Stops if there are no majority outputs agreeing. It fails twice as often with duplication but gives clean failure semantics</li>
+<li>Failfast - this scheme is similar to fail voting except the system senses which modules are available and then uses the majority of the available modules. (which means we only concern of majority among the working ones.)
+&gt; In systems design, a fail-fast system is one which immediately reports at its interface any condition that is likely to indicate a failure. Fail-fast systems are usually designed to stop normal operation rather than attempt to continue a possibly flawed process. Such designs often check the system&rsquo;s state at several points in an operation, so any failures can be detected early. The responsibility of a fail-fast module is detecting errors, then letting the next-highest level of the system handle them.</li>
+</ul>
+
+<p>A 10-plex module system continues to operate until the failure of 9 modules in Failfast.
+A 10-plex module system continues to operate until the failure of 5 modules in Failvote.</p>
+
+<h4 id="how-to-improve-hardware-reliability">How to improve hardware reliability</h4>
+
+<h4 id="how-to-improve-software-reliability">How to improve software reliability</h4>
+
+<h5 id="process-pairing">Process-pairing</h5>
+
+<h5 id="transaction-based-recovery">Transaction based recovery</h5>
+
+<h4 id="how-to-improve-communication-system-reliability">How to improve communication system reliability</h4>
+
+<h3 id="lock-mechanisms">Lock Mechanisms</h3>
+
+<h4 id="pessimistic-concurrency-control">Pessimistic Concurrency Control</h4>
+
+<h4 id="optimistic-concurrency-control">Optimistic Concurrency Control</h4>
+
+<h4 id="two-phase-locking-2pl">Two Phase Locking(2PL)</h4>
+
+<h4 id="priority-ceiling-protocol">Priority Ceiling Protocol</h4>
+
+<h4 id="read-write-priority-ceiling">Read-Write Priority Ceiling</h4>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/concurrency"><span class="tag">Concurrency</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/database"><span class="tag">Database</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 Yzzhan Tech Repo</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://yangzhanghavefun.github.io/yzzhan/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

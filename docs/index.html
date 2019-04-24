@@ -236,6 +236,30 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
 </article>
   <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/" class="post-link">Notes for distributed system preparation(COMP90024)</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 3 min read</p>
+  </header>
+  
+  <p class="post-summary">Auto-deploying by Ansible Docker Background Introduction Virtualization vs. Containerization The advantages of virtualization, such as application containment and horizontal scalability come at a cost: resources.
+The containerization allows virtual instances to share a single host OS to reduce wasted resources since each container only holds the application and related binaries. The rest are shared among the containers. Container Container is similar to concept of resouce isolation and allocation as a virtual machine.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/adb/" class="post-link">Notes for Advanced Database System(COMP90050)</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 4 min read</p>
+  </header>
+  
+  <p class="post-summary">Different types of Database System There are multiple database technologies related to database structure. - Simple file systems like Unix File System - Relational Database System(RDBS) - Object Oriented(oo) Database System - Deductive Database System(DDBS) - Key-Value pair based Database System - NoSQL
+Different types of Database Architectures  Centralised Database System Client-Server Distributed Database System World Wide Web Grid Computing/Databases that lead to Cloud Computing/Data Centres P2P Databases  Basic Memory Knowledge Memory Hierarchy In single core circumstance, the CPU communication case is : In muliple cores circumstance, the CPU communication case is : In Inter i7 Block Diagram, the CPU interaction is: Transaction Processing  A transaction is collection of operations that need to be performed on the physical and abstract application state.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/adb/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/" class="post-link">Java知识点杂记</a></h3>
     <p class="post-meta">@Yang Zhang · Apr 15, 2019 · 0 min read</p>
   </header>
@@ -243,6 +267,17 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
   <p class="post-summary"></p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/" class="post-link">深入理解java并发知识的归纳</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 14, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">多线程 在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/">Read More →</a>
   </footer>
 </article>
   <article class="post-entry">
@@ -276,35 +311,11 @@ As users of a list, what we need is access to reference that can point to any ar
     <p class="post-meta">@yang zhang · Apr 11, 2019 · 1 min read</p>
   </header>
   
-  <p class="post-summary"> 横向越权和纵向越权 </p>
+  <p class="post-summary"> 横向越权和纵向越权  横向越权: 攻击者尝试访问与他拥有相同权限的用户的资源.
+纵向越权: 低级别攻击者尝试访问高级别用户的资源.
+ </p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/websecurity/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javashiyi/" class="post-link">Java拾遗</a></h3>
-    <p class="post-meta">@Yang Zhang · Apr 2, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">Content: 面向对象和面向过程 什么是fast-fail和fail-safe Java是如何做到平台无关的 面向对象和面向过程的区别与面向对象的三大基本特征和五大基本原则  面向过程指把task分解成一个一个的步骤, 每个步骤用函数来实现,依次调用即可.
-进一步解释:在软件开发初期,程序编写都是以算法为核心,程序员会把数据和过程分别作为独立的部分来考虑, 数据代表空间中的客体,程序代码则用于处理这些数据,这种直接站在计算机的角度去抽象问题和解决问题的思想称为面向过程的编程思想.
-面向对象指把task分解成一个一个的步骤之后, 并对各个步骤进行相应的抽象, 形成对象, 同时建立对象之间的联系. 随后组合解决问题. 在面向对象编程的过程中,要把步骤进行相应的抽象形成对象, 对象封装了相应的属性和方法. 最后基于对象和对象的能力来完成业务逻辑的实现.
-进一步解释:面向对象的编程思想是站在现实角度去抽象和解决问题,它把数据和行为都看做是对象的一部分, 这样可以让程序员能以符合现实世界的思维方式来编写和组织程序.
-面向对象的三个基本特征 - 封装 - 继承 - 多态 &gt;封装(Encapsulation):是指利用抽象数据类型将数据和基于数据的操作封装在一起，使其构成一个不可分割的独立实体，数据被保护在抽象数据类型的内部，尽可能地隐藏内部的细节，只保留一些对外接口使之与外部发生联系。系统的其他对象只能通过包裹在数据外面的已经授权的操作来与这个封装的对象进行交流和交互。也就是说用户是无需知道对象内部的细节，但可以通过该对象对外的提供的接口来访问该对象。
- 继承(Inheritance): 继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承我们能够非常方便地复用以前的代码，能够大大的提高开发的效率。 继承所描述的是“is-a”的关系，如果有两个对象A和B，若可以描述为“A是B”，则可以表示A继承B，其中B是被继承者称之为父类或者超类，A是继承者称之为子类或者派生类。
- 《Think in java》：问一问自己是否需要从子类向父类进行向上转型。如果必须向上转型，则继承是必要的，但是如果不需要，则应当好好考虑自己是否需要继承。
- 多态(Polymorphism): 所谓多态就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。
- 对于面向对象而言，多态分为编译时多态和运行时多态。其中编辑时多态是静态的，主要是指方法的重载，它是根据参数列表的不同来区分不同的函数，通过编辑之后会变成两个不同的函数，在运行时谈不上多态。而运行时多态是动态的，它是通过动态绑定来实现的，也就是我们所说的多态性。
-总结:OOP是一种编程思想,一种程序范式,提倡用类来实现对象,用继承来实现关系,用封装来实现类所提供的功能,用多态来实现角色的动态转换
-原文：https://blog.csdn.net/jianyuerensheng/article/details/51602015
-面向对象的五个基本原则 &gt;单一职责原则(Single-Resposibility Principle): 其核心思想为：一个类，最好只做一件事，只有一个引起它的变化。单一职责原则可以看做是低耦合、高内聚在面向对象原则上的引申，将职责定义为引起变化的原因，以提高内聚性来减少引起变化的原因。职责过多，可能引起它变化的原因就越多，这将导致职责依赖，相互之间就产生影响，从而大大损伤其内聚性和耦合度。通常意义下的单一职责，就是指只有一种单一功能，不要为类实现过多的功能点，以保证实体只有一个引起它变化的原因。 专注，是一个人优良的品质；同样的，单一也是一个类的优良设计。交杂不清的职责将使得代码看起来特别别扭牵一发而动全身，有失美感和必然导致丑陋的系统错误风险。
- 开放封闭原则(Open-Closed principle): 其核心思想是：软件实体应该是可扩展的，而不可修改的。也就是，对扩展开放，对修改封闭的。开放封闭原则主要体现在两个方面1、对扩展开放，意味着有新的需求或变化时，可以对现有代码进行扩展，以适应新的情况。2、对修改封闭，意味着类一旦设计完成，就可以独立完成其工作，而不要对其进行任何尝试的修改。 实现开开放封闭原则的核心思想就是对抽象编程，而不对具体编程，因为抽象相对稳定。让类依赖于固定的抽象，所以修改就是封闭的；而通过面向对象的继承和多态机制，又可以实现对抽象类的继承，通过覆写其方法来改变固有行为，实现新的拓展方法，所以就是开放的。 “需求总是变化”没有不变的软件，所以就需要用封闭开放原则来封闭变化满足需求，同时还能保持软件内部的封装体系稳定，不被需求的变化影响。
-Liskov替换原则(Liskov-Substituion Principle): 其核心思想是：子类必须能够替换其基类。这一思想体现为对继承机制的约束规范，只有子类能够替换基类时，才能保证系统在运行期内识别子类，这是保证继承复用的基础。在父类和子类的具体行为中，必须严格把握继承层次中的关系和特征，将基类替换为子类，程序的行为不会发生任何变化。同时，这一约束反过来则是不成立的，子类可以替换基类，但是基类不一定能替换子类。 Liskov替换原则，主要着眼于对抽象和多态建立在继承的基础上，因此只有遵循了Liskov替换原则，才能保证继承复用是可靠地。实现的方法是面向接口编程：将公共部分抽象为基类接口或抽象类，通过Extract Abstract Class，在子类中通过覆写父类的方法实现新的方式支持同样的职责。 Liskov替换原则是关于继承机制的设计原则，违反了Liskov替换原则就必然导致违反开放封闭原则。 Liskov替换原则能够保证系统具有良好的拓展性，同时实现基于多态的抽象机制，能够减少代码冗余，避免运行期的类型判别。
-依赖倒置原则(Dependecy-Inversion Principle): 其核心思想是：依赖于抽象。具体而言就是高层模块不依赖于底层模块，二者都同依赖于抽象；抽象不依赖于具体，具体依赖于抽象。 我们知道，依赖一定会存在于类与类、模块与模块之间。当两个模块之间存在紧密的耦合关系时，最好的方法就是分离接口和实现：在依赖之间定义一个抽象的接口使得高层模块调用接口，而底层模块实现接口的定义，以此来有效控制耦合关系，达到依赖于抽象的设计目标。 抽象的稳定性决定了系统的稳定性，因为抽象是不变的，依赖于抽象是面向对象设计的精髓，也是依赖倒置原则的核心。 依赖于抽象是一个通用的原则，而某些时候依赖于细节则是在所难免的，必须权衡在抽象和具体之间的取舍，方法不是一层不变的。依赖于抽象，就是对接口编程，不要对实现编程。
-接口隔离原则(Interface-Segregation Principle): 其核心思想是：使用多个小的专门的接口，而不要使用一个大的总接口。 具体而言，接口隔离原则体现在：接口应该是内聚的，应该避免“胖”接口。一个类对另外一个类的依赖应该建立在最小的接口上，不要强迫依赖不用的方法，这是一种接口污染。 接口有效地将细节和抽象隔离，体现了对抽象编程的一切好处，接口隔离强调接口的单一性。而胖接口存在明显的弊端，会导致实现的类型必须完全实现接口的所有方法、属性等；而某些时候，实现类型并非需要所有的接口定义，在设计上这是“浪费”，而且在实施上这会带来潜在的问题，对胖接口的修改将导致一连串的客户端程序需要修改，有时候这是一种灾难。在这种情况下，将胖接口分解为多个特点的定制化方法，使得客户端仅仅依赖于它们的实际调用的方法，从而解除了客户端不会依赖于它们不用的方法。 分离的手段主要有以下两种：1、委托分离，通过增加一个新的类型来委托客户的请求，隔离客户和接口的直接依赖，但是会增加系统的开销。2、多重继承分离，通过接口多继承来实现客户的需求，这种方式是较好的。</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javashiyi/">Read More →</a>
   </footer>
 </article>
   <article class="post-entry">
@@ -317,33 +328,6 @@ Liskov替换原则(Liskov-Substituion Principle): 其核心思想是：子类必
 s. In particular, we will look at a language called Finite State Processes (FSP), based on the well-known Communicating Sequential Processes (CSP) and Calculus of Communicating Systems (CCS).</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/fsp/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/search_engine/" class="post-link">对Elastic Search的实现和理解</a></h3>
-    <p class="post-meta">@Yang Zhang · Mar 16, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary"> Elastic Search Engine Specification  Coding Language : python FrameWork : django &#43; scrapy Scrapied website: www.zhihu.com www.jobbole.com www.lagou.com  Knowledge Preparation 浏览器 driver 由于知乎等网站需要登录后才能访问所需要的内容，于是我们需要安装chrome driver 和 selenium去模拟登录
-下载链接 http://chromedriver.chromium.org/downloads 但是，直接使用还是凉凉， 因为服务器会从Chrome driver的某些js文件中检测出这是个driver不是正常浏览器，然后返回403.我们的解决方法是开启chrome remote debug 模式 配置 关闭所有chrome正在运行的实例 在Cmd里找到Chrome.exe所在的目录，输入chrome.exe –remote-debugging-port=9222 然后访问127.0.0.1:9222/json
-ElasticSearch 概念  集群： 一个或多个节点组织在一起 节点： 一个节点是集群中的一个服务器，由一个名字来标识 分片： 将索引划分为多份的能力，允许水平分割和扩展容量，多个分片响应请求，提高性能和吞吐量 副本： 创建分片的一份或多份的能力，在一个节点失败是其余节点可以顶上     ElasticSearch Mysql     index(索引) 数据库   type(类型) 表   documents(文档) 行   Fields 列    </p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/search_engine/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/" class="post-link">Java面试的知识储备</a></h3>
-    <p class="post-meta">@Yang Zhang · Mar 16, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">#Content 1. Difference between Hashtable and HashMap
-1.Difference between Hashtable and HashMap  ### 作者不一样。。。  Hashtable阵容
-* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter HashMap阵容
-* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">Read More →</a>
   </footer>
 </article>
  
