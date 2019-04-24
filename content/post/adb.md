@@ -106,3 +106,8 @@ A 10-plex module system continues to operate until the failure of 5 modules in F
 #### Two Phase Locking(2PL)
 #### Priority Ceiling Protocol
 ####  Read-Write Priority Ceiling 
+
+We evaluate experimentally two sharing method- ologies, based on their original prototype systems, that exploit work sharing opportunities among concurrent queries at run-time:
+**Si- multaneous Pipelining (SP)**
+**Global Query Plans (GQP)**
+These two methods build and evaluate a single query plan with shared operators. We show that SP and GQP are orthogonal techniques.

@@ -86,7 +86,7 @@ Further more, the technical detailed construction of compression function is :
 2. Num of Stages : 4
     Stage 1------> Round j = 0-19
     Stage 2------> Round j = 20-39
-    Stage 3------> Round j = 40-59
+    Stage 3------> Round j = 40-59s
     Stage 4------> Round j = 60-79
 3. Input of each Round:
     1. 5*32 bits input(A,B,C,D,E)
