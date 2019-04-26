@@ -427,7 +427,7 @@ Txns can read anything that they want at the partitions that they have locked. I
 All updates occur in place.
 - Maintain a separate in-memory buffer to undo changes if the txn aborts.
 
-IIf a txn tries to write a partition that it does not have the lock, it is aborted+restarted.
+If a txn tries to write a partition that it does not have the lock, it is aborted+restarted.
 
 The Partition-based T/O protocol is fast if:
 - The DBMS knows waht partitions the txn needs before it starts.
@@ -435,6 +435,98 @@ The Partition-based T/O protocol is fast if:
 
 However, Multi-partition txns causes partition to be idle while txn executes.
 
+
+## Multi-version Concurrency Control
+The DBMS maintains multiple physical versions of a single logical object in the database:
+- When a txn writes to an object, the DBMS creates a new version of that object.
+- When a txn reads an objects, it reads the newest version that existed when the txn started.
+
+The principles of MVCC are:
+- Writers don't block readers.
+- Readers don't block writers.
+
+Read-only txns can read a **consistent snapshot** without acquiring locks and timestamps is used to determine the visibility. Meanwhile, MVCC easily support **time-travel** queries
+
+MVCC is more than just a concurrency control protocol. It completely affects how the DBMS manages transactions and the database.
+
+### MVCC DESIGN DECISIONS
+- Concurrency Control Protocol
+- Version Storage
+- Garbage Collection
+- Index Management
+
+#### Concurrency Control Protocol
+- Timestamp Ordering $\implies$ Assign txns timestamps that determine serial order.
+- Optimistic Cocurrency Control $\implies$ Three-phase protocol and private workspace for new version
+- Two-Phase Locking $\implies$ Txns acquire appropriate lock on physical they can read/write a logical tuple.
+
+#### Version Storage
+The DBMS uses the tuples' pointer filed to create a **version chain** per logical tuple.
+- this allows the DBMS to find the version that is visible to a particular txn at runtime.
+- Indexes always point to the "head" of the chain.
+
+Different storage schemes determine where/what to store for each version. Here shows the approaches.
+- Append-Only Storage: New versions are appended to the same table space.
+- Time-Travel Storage: Old versions are copied to separate table space.
+- Delta Storage: The original values of the modified attributes are copied into a separate delta record space.
+
+#### Garbage Collection
+The DBMS needs to remove reclaimable physical versions from the database over time.
+- No active txn in the DBMS can "see" that version(SI)
+- The version was created by an aborted txn.
+
+Two additional design decision:
+- How to look for expired versions
+- How to decide when it is safe to reclaim the memory
+
+These are two collection level.
+- Tuple level
+- Transaction level
+
+**Tuple Level**: find old versions by examining tuples directly. Background Vacuuming vs Cooperative Cleaning.
+> **Background Vacuuming**: Separate threads periodically scan the table and look for reclaimable versions. Works with any storage.
+
+> **Cooperative Cleaning**: Worker threads identify reclaimable versions as they traverse version chain. Only works with O2N.
+
+
+**Transaction Level**: Txns keep trak of their old versions so the DBMS does not have to scan tuples to determine visibility.
+
+In transaction level GC, each txn keeps track of its read/write set. The DBMS determines when all versions created by a finished txn are no longer visible.
+
+#### Index Management
+Primary key indexes point to version chain head.
+- How often the DBMS has to update the pkey index depends on whether the system creates new versions when a tuple is updated.
+-  If a txn updates a tuple’s pkey attribute(s), then this is treated as an `DELETE` followed by an `INSERT`. Secondary indexes are more complicated...
+
+For secondary Index, there are two approaches.
+- Logical Pointers: Use a fixed identifier per tuple that does not change. 
+  - Requires an extra indirection layer.
+  - Primary Key(MySQL) vs. Tuple Id
+- Physical Pointers: Use the physical address to the version chain head.
+![MVCC Implimentations](/media/posts/adbgc.png)
+
+MVCC is the widely used scheme in DBMSs. Even systems that do not support multi-statement txns(NoSQL) to use it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Another EXPLAINANTION
 Two-phase locking (2PL) synchronizes reads and writes by explicitly detecting and preventing conflicts between concurrent operations.
 
 Before reading data item x, a transaction must "own" a readlock on x. Before writing into x, it must "own" a writelock on x. The ownership of locks is governed by two rules:
