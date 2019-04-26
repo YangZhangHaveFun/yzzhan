@@ -216,7 +216,7 @@ Different types of Database Architectures  Centralised Database System Client-Se
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Notes for Advanced Database System(COMP90050)</h1>
-      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 17 min read</p>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 21 min read</p>
     </header>
     <article class="post-content">
 
@@ -540,22 +540,29 @@ The result of successfully committing a group of transactions is inconsistent wi
 
 <h3 id="concurrency-control-protocol">Concurrency Control Protocol</h3>
 
+<h3 id="concurrency-control-approach">Concurrency Control Approach</h3>
+
+<ul>
+<li><strong>Two Phase Locking(2PL)</strong>: Determine serializability order of conflicting operations at runtime while txns executes</li>
+
+<li><p><strong>Timestamp Ordering(T/O)</strong>: Determine serializability order of txns before they execute.</p>
+
 <h4 id="two-phase-lock">Two-phase Lock</h4>
 
 <p><strong>Two-phase lock</strong> is a standard solution and broad mathematical theory has been developed to analyse the problem.
 &gt;Two-phase locking(2PL) is a concurrency control protocol that determines whethere a txn is allowed to access an object in the database on the fly.
 &gt;The protocol does not need to know all of the queries that a txn will execute ahead of time.</p>
 
-<h5 id="process">Process</h5>
+<h5 id="process">Process</h5></li>
 
-<ul>
-<li><strong>Phase 1: Growing</strong>
+<li><p><strong>Phase 1: Growing</strong></p>
 
 <ul>
 <li>Each txn requests the locks that it needs from the DBMS&rsquo;s lock manager.</li>
 <li>The lock manager grants/denies lock requests.</li>
 </ul></li>
-<li><strong>Phase 2: Shrinking</strong>
+
+<li><p><strong>Phase 2: Shrinking</strong></p>
 
 <ul>
 <li>The txn is allowed to only release the locks that it previously acquried. It can not acquire new locks.</li>
@@ -624,6 +631,122 @@ To get X, IX or SIX on a node, must hold at least IX on parent node.</p>
 - Intention-Shared(IS):Intent to get S lock(s) at finer granularity.
 - Intention-Exclusive(IX):Intent to get X lock(s) at finer granularity.
 - Shared+Intention-Exclusive(SIX): Like S and IX at the same time.</p>
+
+<h4 id="timestamp-ordering-t-o">Timestamp Ordering(T/O)</h4>
+
+<p>Using timestamps to determine the serializability order of txns</p>
+
+<p>if TS($T_i$)&lt;TS($T_j$),then the DBMS must ensure that the execution schedule is equivalent to a serial schedule where $T_i$ appears before $T_j$.</p>
+
+<p>Each txn $T_i$ is assigned a unique fixed timestamp that is monotonically increasing.
+- Let TS($T_i$) be the timestamp allocated to txn $T_i$.
+- Different schemes assign timestamps at different times during the txn.</p>
+
+<p>Implementation strategies could be System Clock, Logical Counter, Hybrid.</p>
+
+<h5 id="basic-timestamp-ordering-protocol">Basic Timestamp Ordering Protocol</h5>
+
+<p>Txns read and write objects without locks.</p>
+
+<p>Every object X is tagged with timestamp of the last txn that successfully did read/write:
+- W-TS(X): Write timestamp on X
+- R-TS(X): Read timestamp on X</p>
+
+<p><strong>READ PROCESS</strong>
+<code>If TS($T_i$)&lt;W-TS(X)</code>, this violates timestamp order of $T_i$ with regard to the writer of X.
+- Abort $T_i$ and restart it with same TS</p>
+
+<p><code>Else</code>:
+- Allow $T_i$ to read X.
+- Update R-TS(X) to max(R-TS(X), TS($T_i$))
+- Have to make a local copy of X to ensure repeatable reads for $T_i$</p>
+
+<p><strong>WRITE PROCESS</strong>
+<code>If TS($T_i$)&lt;W-TS(X) OR TS($T_i$)&lt;W-TS(X)</code>
+- Abort and restart $T_i$</p>
+
+<p><code>Else</code>:
+- Allow $T_i$ to write X and update W-TS(X)
+- Also have to make a local copy of X to ensure repeatable reads for $T_i$.</p>
+
+<p><strong>THOMAS WRITE RULE</strong>
+<code>If TS($T_i$)&lt;R-TS(X)</code>:
+- Abort and restart $T_i$</p>
+
+<p><code>If TS($T_i$)&lt;W-TS(X)</code>:
+- Thomas Write Rule: Ignore the write and allow the txn to continue.
+- This violates timestamp order of $T_i$</p>
+
+<p><code>Else</code>:
+- Allow $T_i$ to write X and update W-TS(X)</p>
+
+<p><strong>Basic T/O-Performance Issue</strong>:
+- High overhead from copying data to txn&rsquo;s workspace and from updating timestamps
+- Long running txns can get starved.</p>
+
+<h5 id="optimistic-concurrency-control-1">Optimistic Concurrency Control</h5>
+
+<p>The DBMS creates a private workspace for each txn.
+- Any object read is copied into workspace
+- Modifications are applied to workspace.</p>
+
+<p>When a txn commits, the DBMS compares workspace write set to see whether it conflicts with other txns.</p>
+
+<p>If there are no conflicts, the write set is installed into the &ldquo;global&rdquo; database.
+<strong>OCC Phases</strong></p>
+
+<p><strong>Read Phase</strong>:Track the read/write sets of txns and store their writes in a private workspace.</p>
+
+<p><strong>Validation Phase</strong>:When a txn commits, check whether it conflicts with other txns.</p>
+
+<p><strong>Write Phase</strong>:If validation succeeds, apply private changes to database. Otherwise abort and restart the txn.</p>
+
+<p><strong>Validation Phase</strong>:The DBMS needs to guarantee only serializable schedules are permitted.</p>
+
+<p>$T_i$ checks other txns for RW and WW conflicts and makes sure that all conflicts go one way(from older txns to young txns). Record read set and write set while txns are running and write into private workspace.</p>
+
+<p>Execute Validation and Write phase inside a protected critical section.</p>
+
+<p>Each txn&rsquo;s timestamp is assigned at the beginning of the validation phase. Check the timestamp ordering of the committing txn with all other running txns.</p>
+
+<p>If TS($T_i$) &lt; TS($T_j$), then one of the following three conditions must hold.
+- $T_i$ completes all three phases before $T_j$ begins.
+- $T_i$ completes before $T_j$ starts its Write phase, and $T_i$ does not write to any object read by $T_j$  $\implies$  WriteSet($T_i$) $\cap$ WriteSet($T_j$) = $\emptyset$
+- $T_i$ completes its Read phase before $T_j$ completes its Read phase. And $T_i$ does not write to any object that is either read or written by $T_j$:
+  - WriteSet($T_i$) $\cap$ ReadSet($T_j$) = $\emptyset$
+  - WriteSet($T_i$) $\cap$ WriteSet($T_j$) = $\emptyset$</p>
+
+<p>OCC works well when the # of conflicts is low:
+- All txns are read-only(ideal)
+- Txns access disjoint  subsets of data.</p>
+
+<p>If the database is large and the workload is not skewed, then there is a low probability of conflict, so again locking is wasteful. Therefore, the performance issues could be concluded as :
+- High overhead for copying data locally.
+- Validation/Write phase bottlenecks.
+- Aborts are more wasteful than in 2PL because they only occur after a txn has already executed.</p>
+
+<h5 id="partition-based-timestamp-ordering">Partition-based Timestamp Ordering</h5>
+
+<p>Txns are assigned timestamps based on when they arrive at the DBMS.</p>
+
+<p>Partitions are protected by a single lock:
+- Each txn is queued at the partitions it needs.
+- The txn acquires a partition&rsquo;s lock if it has the lowest timestamp in that partition&rsquo;s queue.
+- The txn starts when it has all of the locks for all the partitions that is will read/write.</p>
+
+<p><strong>READ PROCESS</strong>
+Txns can read anything that they want at the partitions that they have locked. If a txn tries to access a partition that it does not have the lock, it is aborted+restarted.
+<strong>WRITE PROCESS</strong>
+All updates occur in place.
+- Maintain a separate in-memory buffer to undo changes if the txn aborts.</p>
+
+<p>IIf a txn tries to write a partition that it does not have the lock, it is aborted+restarted.</p>
+
+<p>The Partition-based T/O protocol is fast if:
+- The DBMS knows waht partitions the txn needs before it starts.
+- Most(if not all)txns only need to access a single partition.</p>
+
+<p>However, Multi-partition txns causes partition to be idle while txn executes.</p>
 
 <p>Two-phase locking (2PL) synchronizes reads and writes by explicitly detecting and preventing conflicts between concurrent operations.</p>
 

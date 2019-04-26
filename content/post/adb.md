@@ -254,6 +254,9 @@ To guarantee true serializability PostgreSQL uses predicate locking, which means
 #### Page-level Locks
 
 ### Concurrency Control Protocol
+### Concurrency Control Approach
+- **Two Phase Locking(2PL)**: Determine serializability order of conflicting operations at runtime while txns executes
+- **Timestamp Ordering(T/O)**: Determine serializability order of txns before they execute. 
 #### Two-phase Lock
 **Two-phase lock** is a standard solution and broad mathematical theory has been developed to analyse the problem.
 >Two-phase locking(2PL) is a concurrency control protocol that determines whethere a txn is allowed to access an object in the database on the fly.
@@ -321,6 +324,116 @@ Intention locks help improve concurrency:
 - Intention-Exclusive(IX):Intent to get X lock(s) at finer granularity.
 - Shared+Intention-Exclusive(SIX): Like S and IX at the same time.
 
+#### Timestamp Ordering(T/O) 
+Using timestamps to determine the serializability order of txns
+
+if TS($T_i$)<TS($T_j$),then the DBMS must ensure that the execution schedule is equivalent to a serial schedule where $T_i$ appears before $T_j$. 
+
+Each txn $T_i$ is assigned a unique fixed timestamp that is monotonically increasing.
+- Let TS($T_i$) be the timestamp allocated to txn $T_i$.
+- Different schemes assign timestamps at different times during the txn.
+
+Implementation strategies could be System Clock, Logical Counter, Hybrid.
+
+##### Basic Timestamp Ordering Protocol
+Txns read and write objects without locks.
+
+Every object X is tagged with timestamp of the last txn that successfully did read/write:
+- W-TS(X): Write timestamp on X
+- R-TS(X): Read timestamp on X
+
+**READ PROCESS**
+`If TS($T_i$)<W-TS(X)`, this violates timestamp order of $T_i$ with regard to the writer of X. 
+- Abort $T_i$ and restart it with same TS
+
+`Else`:
+- Allow $T_i$ to read X.
+- Update R-TS(X) to max(R-TS(X), TS($T_i$))
+- Have to make a local copy of X to ensure repeatable reads for $T_i$
+
+**WRITE PROCESS**
+`If TS($T_i$)<W-TS(X) OR TS($T_i$)<W-TS(X)`
+- Abort and restart $T_i$
+
+`Else`:
+- Allow $T_i$ to write X and update W-TS(X)
+- Also have to make a local copy of X to ensure repeatable reads for $T_i$.
+
+**THOMAS WRITE RULE**
+`If TS($T_i$)<R-TS(X)`:
+- Abort and restart $T_i$
+
+`If TS($T_i$)<W-TS(X)`:
+- Thomas Write Rule: Ignore the write and allow the txn to continue.
+- This violates timestamp order of $T_i$
+
+`Else`:
+- Allow $T_i$ to write X and update W-TS(X)
+
+**Basic T/O-Performance Issue**:
+- High overhead from copying data to txn's workspace and from updating timestamps
+- Long running txns can get starved.
+##### Optimistic Concurrency Control
+The DBMS creates a private workspace for each txn.
+- Any object read is copied into workspace
+- Modifications are applied to workspace.
+
+When a txn commits, the DBMS compares workspace write set to see whether it conflicts with other txns.
+
+If there are no conflicts, the write set is installed into the "global" database.
+**OCC Phases**
+
+**Read Phase**:Track the read/write sets of txns and store their writes in a private workspace.
+
+**Validation Phase**:When a txn commits, check whether it conflicts with other txns.
+
+**Write Phase**:If validation succeeds, apply private changes to database. Otherwise abort and restart the txn.
+
+**Validation Phase**:The DBMS needs to guarantee only serializable schedules are permitted.
+
+$T_i$ checks other txns for RW and WW conflicts and makes sure that all conflicts go one way(from older txns to young txns). Record read set and write set while txns are running and write into private workspace.
+
+Execute Validation and Write phase inside a protected critical section.
+
+Each txn's timestamp is assigned at the beginning of the validation phase. Check the timestamp ordering of the committing txn with all other running txns.
+
+If TS($T_i$) < TS($T_j$), then one of the following three conditions must hold.
+- $T_i$ completes all three phases before $T_j$ begins.
+- $T_i$ completes before $T_j$ starts its Write phase, and $T_i$ does not write to any object read by $T_j$  $\implies$  WriteSet($T_i$) $\cap$ WriteSet($T_j$) = $\emptyset$
+- $T_i$ completes its Read phase before $T_j$ completes its Read phase. And $T_i$ does not write to any object that is either read or written by $T_j$:
+  - WriteSet($T_i$) $\cap$ ReadSet($T_j$) = $\emptyset$
+  - WriteSet($T_i$) $\cap$ WriteSet($T_j$) = $\emptyset$
+
+OCC works well when the # of conflicts is low:
+- All txns are read-only(ideal)
+- Txns access disjoint  subsets of data.
+
+If the database is large and the workload is not skewed, then there is a low probability of conflict, so again locking is wasteful. Therefore, the performance issues could be concluded as :
+- High overhead for copying data locally.
+- Validation/Write phase bottlenecks.
+- Aborts are more wasteful than in 2PL because they only occur after a txn has already executed.
+
+##### Partition-based Timestamp Ordering
+Txns are assigned timestamps based on when they arrive at the DBMS.
+
+Partitions are protected by a single lock:
+- Each txn is queued at the partitions it needs.
+- The txn acquires a partition's lock if it has the lowest timestamp in that partition's queue.
+- The txn starts when it has all of the locks for all the partitions that is will read/write.
+
+**READ PROCESS**
+Txns can read anything that they want at the partitions that they have locked. If a txn tries to access a partition that it does not have the lock, it is aborted+restarted.
+**WRITE PROCESS**
+All updates occur in place.
+- Maintain a separate in-memory buffer to undo changes if the txn aborts.
+
+IIf a txn tries to write a partition that it does not have the lock, it is aborted+restarted.
+
+The Partition-based T/O protocol is fast if:
+- The DBMS knows waht partitions the txn needs before it starts.
+- Most(if not all)txns only need to access a single partition.
+
+However, Multi-partition txns causes partition to be idle while txn executes.
 
 Two-phase locking (2PL) synchronizes reads and writes by explicitly detecting and preventing conflicts between concurrent operations.
 
