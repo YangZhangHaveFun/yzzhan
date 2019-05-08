@@ -219,7 +219,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">对用过的Linux(Centos7.0&#43;)指令的总结</h1>
-      <p class="post-meta">@yang zhang · Apr 11, 2019 · 1 min read</p>
+      <p class="post-meta">@yang zhang · Apr 11, 2019 · 2 min read</p>
     </header>
     <article class="post-content">
 
@@ -278,7 +278,45 @@ mysql_secure_installation</code></pre></div>
 <span style="color:#75715e"># identification has been saved in /home/root/.ssh/id_rsa.</span>
 <span style="color:#75715e"># public key has been saved in /home/root/.ssh/id_rsa.pub</span>
 
-ssh-add ~/.ssh/id_rsa</code></pre></div></article>
+ssh-add ~/.ssh/id_rsa</code></pre></div>
+<h3 id="对ssh用法的总结">对ssh用法的总结</h3>
+
+<p>先来一段关于ssh的定义
+&gt; SSH is a software package that enables secure system administration and file transfers over insecure networks.</p>
+
+<h4 id="基本用法">基本用法</h4>
+
+<p>一般最简单ssh的用法就是直接登录远程服务器,然后输入密码进入服务器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh USER@IP_OR_DOMAINNAME</code></pre></div>
+<p>或者通过把自己的公钥放到服务器,用自己的私钥来访问远程服务器. 这需要私钥存放在~/.ssh目录下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i id_rsa USER@IP_OR_DOMAINNAME</code></pre></div>
+<p>如果觉得麻烦可以把自己的公钥放在服务器的~/.ssh/authorized_keys文件里.这样就可以直接登录了.
+&gt; An authorized key in SSH is a public key used for granting login access to users. The authentication mechanism is called public key authentication.</p>
+
+<h4 id="高级用法">高级用法</h4>
+
+<p>这些是ssh的一些基本用法. 下面开始介绍ssh的高级用法 ssh Tunnel-Local and Remote Port Forwarding</p>
+
+<h5 id="local-port-forwarding-本地端口映射">Local Port Forwarding 本地端口映射</h5>
+
+<p>对于一个服务器来说,22端口一般都会开放,用来做ssh远程连接.但是对于数据库的端口一般是不对外开放的.那我们如何在数据库端口不对外开放的情况下连接数据库呢.这里拿couchdb做例子对应的外部访问端口是5984.
+这里提供的方法是通过ssh建立连接,然后把服务器的5984端口映射到本机上,再通过本机访问</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -L <span style="color:#ae81ff">9000</span>:localhost:5984</code></pre></div>
+<p>这时通过访问 <a href="http://localhost:9000">http://localhost:9000</a> 就可以访问到远程服务器的couchdb服务器了,并且绕过了服务器的防火墙.</p>
+
+<p>这里对这行shell command做一些解释, -L 表示要进行的操作是local port forwarding. 9000是本地的目标端口. <code>localhost:5984</code>是指以服务器的角度看的localhost:5984, 换言之就是服务器的数据库以为请求是localhost:5984.
+&gt; If we however say something like 9000:localhost:5984, it means localhost from the server’s perspective, not localhost on your machine. This means forward my local port 9000 to port 5984 on the server, because when you’re on the server, localhost means the server itself.</p>
+
+<h5 id="remote-port-forwarding-远程端口映射">Remote Port Forwarding 远程端口映射</h5>
+
+<p>这个功能相对于上个功能有一点鸡肋,主要的作用在于本地无法访问外网,但是可以连到一个内网的计算机,这个计算机可以连接外网.如果你想把自己的某个端口暴露给外界,则可以使用Remote Port Forwarding的方法.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -R <span style="color:#ae81ff">9000</span>:localhost:5984 user@example.com</code></pre></div>
+<p>-R 代表remote port forwarding, 9000代表远程服务器要监听的端口. localhost就代表本地的localhost,5984是本地想要开放的端口. 但是,默认的配置是关闭remote port forwarding,需要在<code>/etc/ssh/sshd_config</code>这个文件里配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GatewayPorts yes</code></pre></div>
+<p>然后重启ssh service. 之后别的计算机可以通过user@example.com:9000来访问本地的5984端口.</p>
+
+<p>需要注意的是执行以上ssh命令会同时登陆服务器, 但其实并不需要,我们可以加上以下参数避免同时登陆.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -nNT -R <span style="color:#ae81ff">9000</span>:localhost:5984 user@example.com</code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">

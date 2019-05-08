@@ -466,24 +466,29 @@ The DBMS uses the tuples' pointer filed to create a **version chain** per logica
 - Indexes always point to the "head" of the chain.
 
 Different storage schemes determine where/what to store for each version. Here shows the approaches.
+
 - Append-Only Storage: New versions are appended to the same table space.
 - Time-Travel Storage: Old versions are copied to separate table space.
 - Delta Storage: The original values of the modified attributes are copied into a separate delta record space.
 
 #### Garbage Collection
 The DBMS needs to remove reclaimable physical versions from the database over time.
+
 - No active txn in the DBMS can "see" that version(SI)
 - The version was created by an aborted txn.
 
 Two additional design decision:
+
 - How to look for expired versions
 - How to decide when it is safe to reclaim the memory
 
 These are two collection level.
+
 - Tuple level
 - Transaction level
 
 **Tuple Level**: find old versions by examining tuples directly. Background Vacuuming vs Cooperative Cleaning.
+
 > **Background Vacuuming**: Separate threads periodically scan the table and look for reclaimable versions. Works with any storage.
 
 > **Cooperative Cleaning**: Worker threads identify reclaimable versions as they traverse version chain. Only works with O2N.
@@ -508,7 +513,18 @@ For secondary Index, there are two approaches.
 MVCC is the widely used scheme in DBMSs. Even systems that do not support multi-statement txns(NoSQL) to use it.
 
 
+#### Concepts & History
+At first, we apply 2PL to ensure the consistency of concurrency. However, lock operation will extremely limit the performance and scalability in concurrent database or distributed databse. Therefore, the researchers camp up with the idea of version to get rid of most lock operations. The final aim of multi-version concurrency control is that readers don't block writers and writers don't block readers. 
 
+Protocol was first proposed in 1978 MIT PhD 
+
+First implementations was Rdb/VMS and InterBase at DEC in early 1980s. 
+
+The core solution to avoid lock is snapshot. Based on different 
+
+
+
+sed ri ’s/session required required pam_loginuid.so/g ’ / etc/pam .d/sshd pam_loginuid .so/#session
 
 
 
