@@ -9,3 +9,5 @@ author: "Yang Zhang"
 ---
 ### 多线程
 在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();
+
+### Java内存模型
