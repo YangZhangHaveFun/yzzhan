@@ -5,16 +5,9 @@ layout: "about"
 menu: "main"
 weight: 50
 ---
+My name is Yang Zhang, currently studying MC-IT in University of Melbourne. Welcome to my personal blog. I'm interested in Java backend and high concurrent  programing. 
 
-Hugo is a static site engine written in Go.
+I'm glad if there is anything could help you. 
 
-
-It makes use of a variety of open source projects including:
-
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+Email: yzzhan@student.unimelb.edu.au
 

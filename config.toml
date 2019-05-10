@@ -37,12 +37,12 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
 
 # Add your own params here
 [params]
-  author = "Ritchie Zhu"
+  author = "Yang Zhang"
   bg = "images/grey-prism.svg"
   avatar = "images/avatar.png"
-  seotitle = "Hugo Blog (SEO Version)"
-  subtitle = "~ Keep It Simple & Stupid ~"
-  description = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."
+  seotitle = "Personal Tech Blog"
+  subtitle = "~ Keep Simple & Stupid ~"
+  # description = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."
   paginate = 10
 
   # Choose your social networks
@@ -50,7 +50,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   github = "YangZhangHaveFun"
   # twitter = "twitter_username"
   # linkedin = "linkedin_username"
-  weibo = "weibo_username"
+  weibo = "刹那灬行年"
   wechat= "images/qrcode.jpg"  # Replace with your wechat qrcode image
   # facebook = "facebook_username"
   # google = "googlplus_id_number"
