@@ -27,9 +27,21 @@
       <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/about/</guid>
-      <description>Hugo is a static site engine written in Go.
-It makes use of a variety of open source projects including:
- Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+      <description>My name is Yang Zhang, currently studying MC-IT in University of Melbourne. Welcome to my personal blog. I&amp;rsquo;m interested in Java backend and high concurrent programing.
+I&amp;rsquo;m glad if there is anything could help you.
+Email: yzzhan@student.unimelb.edu.au</description>
+    </item>
+    
+    <item>
+      <title>深入理解java并发知识的归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
+      <pubDate>Fri, 10 May 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
+      <description>多线程 在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();
+多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
+Volatile volatile 关键字最原始的意义是禁用CPU缓存.
+极客时间版权所有: https://time.geekbang.org/column/article/84017</description>
     </item>
     
     <item>
@@ -92,15 +104,6 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>深入理解java并发知识的归纳</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
-      <pubDate>Sun, 14 Apr 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
-      <description>多线程 在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();</description>
     </item>
     
     <item>

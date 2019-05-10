@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Wed, 17 Apr 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 May 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>深入理解java并发知识的归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
+      <pubDate>Fri, 10 May 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
+      <description>多线程 在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();
+多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
+Volatile volatile 关键字最原始的意义是禁用CPU缓存.
+极客时间版权所有: https://time.geekbang.org/column/article/84017</description>
+    </item>
     
     <item>
       <title>Notes for Advanced Database System(COMP90050)</title>
@@ -30,15 +42,6 @@ Different types of Database Architectures  Centralised Database System Client-Se
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/</guid>
       <description> 这篇文章是对&amp;lt;&amp;gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.
 进程的描述和控制 线程 并发性 并发中的死锁和饥饿 </description>
-    </item>
-    
-    <item>
-      <title>深入理解java并发知识的归纳</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
-      <pubDate>Sun, 14 Apr 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
-      <description>多线程 在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();</description>
     </item>
     
   </channel>

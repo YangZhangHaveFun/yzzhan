@@ -142,7 +142,7 @@ Different types of Database Architectures  Centralised Database System Client-Se
   
   <h2 class="title">Yzzhan Tech Repo</h2>
   
-  <p class="subtitle">~ Keep It Simple &amp; Stupid ~</p>
+  <p class="subtitle">~ Keep Simple &amp; Stupid ~</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -202,7 +202,7 @@ Different types of Database Architectures  Centralised Database System Client-Se
             <span class="icon icon-github" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//weibo.com/weibo_username" title="Weibo" aria-label="Weibo">
+          <a href="//weibo.com/%e5%88%b9%e9%82%a3%e7%81%ac%e8%a1%8c%e5%b9%b4" title="Weibo" aria-label="Weibo">
             <span class="icon icon-weibo" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
@@ -216,7 +216,7 @@ Different types of Database Architectures  Centralised Database System Client-Se
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Notes for Advanced Database System(COMP90050)</h1>
-      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 23 min read</p>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 24 min read</p>
     </header>
     <article class="post-content">
 
@@ -785,29 +785,42 @@ All updates occur in place.
 - this allows the DBMS to find the version that is visible to a particular txn at runtime.
 - Indexes always point to the &ldquo;head&rdquo; of the chain.</p>
 
-<p>Different storage schemes determine where/what to store for each version. Here shows the approaches.
-- Append-Only Storage: New versions are appended to the same table space.
-- Time-Travel Storage: Old versions are copied to separate table space.
-- Delta Storage: The original values of the modified attributes are copied into a separate delta record space.</p>
+<p>Different storage schemes determine where/what to store for each version. Here shows the approaches.</p>
+
+<ul>
+<li>Append-Only Storage: New versions are appended to the same table space.</li>
+<li>Time-Travel Storage: Old versions are copied to separate table space.</li>
+<li>Delta Storage: The original values of the modified attributes are copied into a separate delta record space.</li>
+</ul>
 
 <h4 id="garbage-collection">Garbage Collection</h4>
 
-<p>The DBMS needs to remove reclaimable physical versions from the database over time.
-- No active txn in the DBMS can &ldquo;see&rdquo; that version(SI)
-- The version was created by an aborted txn.</p>
+<p>The DBMS needs to remove reclaimable physical versions from the database over time.</p>
 
-<p>Two additional design decision:
-- How to look for expired versions
-- How to decide when it is safe to reclaim the memory</p>
+<ul>
+<li>No active txn in the DBMS can &ldquo;see&rdquo; that version(SI)</li>
+<li>The version was created by an aborted txn.</li>
+</ul>
 
-<p>These are two collection level.
-- Tuple level
-- Transaction level</p>
+<p>Two additional design decision:</p>
 
-<p><strong>Tuple Level</strong>: find old versions by examining tuples directly. Background Vacuuming vs Cooperative Cleaning.
-&gt; <strong>Background Vacuuming</strong>: Separate threads periodically scan the table and look for reclaimable versions. Works with any storage.</p>
+<ul>
+<li>How to look for expired versions</li>
+<li>How to decide when it is safe to reclaim the memory</li>
+</ul>
+
+<p>These are two collection level.</p>
+
+<ul>
+<li>Tuple level</li>
+<li>Transaction level</li>
+</ul>
+
+<p><strong>Tuple Level</strong>: find old versions by examining tuples directly. Background Vacuuming vs Cooperative Cleaning.</p>
 
 <blockquote>
+<p><strong>Background Vacuuming</strong>: Separate threads periodically scan the table and look for reclaimable versions. Works with any storage.</p>
+
 <p><strong>Cooperative Cleaning</strong>: Worker threads identify reclaimable versions as they traverse version chain. Only works with O2N.</p>
 </blockquote>
 
@@ -829,6 +842,18 @@ All updates occur in place.
 <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/adbgc.png" alt="MVCC Implimentations" /></p>
 
 <p>MVCC is the widely used scheme in DBMSs. Even systems that do not support multi-statement txns(NoSQL) to use it.</p>
+
+<h4 id="concepts-history">Concepts &amp; History</h4>
+
+<p>At first, we apply 2PL to ensure the consistency of concurrency. However, lock operation will extremely limit the performance and scalability in concurrent database or distributed databse. Therefore, the researchers camp up with the idea of version to get rid of most lock operations. The final aim of multi-version concurrency control is that readers don&rsquo;t block writers and writers don&rsquo;t block readers.</p>
+
+<p>Protocol was first proposed in 1978 MIT PhD</p>
+
+<p>First implementations was Rdb/VMS and InterBase at DEC in early 1980s.</p>
+
+<p>The core solution to avoid lock is snapshot. Based on different</p>
+
+<p>sed ri ’s/session required required pam_loginuid.so/g ’ / etc/pam .d/sshd pam_loginuid .so/#session</p>
 
 <h2 id="another-explainantion">Another EXPLAINANTION</h2>
 
