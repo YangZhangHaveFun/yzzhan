@@ -258,3 +258,69 @@ boolean tryLock();
 ```
 JUC里用锁的经典范例就是try{}finally{}
 ##### 如何保证可见性
+```Java
+class X {
+    private final Lock rtl = new ReentrantLock();
+    int value;
+    public void addOne() {
+        //获取锁
+        rtl.lock();
+        try {
+            value += 1;
+        } finally {
+            //保证锁能够释放
+            rtl.unlock();
+        }
+    }
+}
+```
+之前介绍的sychronized之所以能够保证可见性是因为有一条Happens-before规则,即synchronized的解锁Happens-before于后续对这个锁的加锁. 而在JUC中,实现可见性利用了volatile相关的Happens-before规则. 例如ReentrantLock, 内部持有一个volatile成员变量state,获取锁的时候,会读写state的值,释放锁的时候也会读写state的值.也就是说,在执行value+=1之前,程序需要先读写一次Volatile变量state, 在执行value+=1之后,又读写了一次volatile变量state.根据相关的Happens-before规则:
+1. 顺序规则: 对于线程T1, value+=1 Happens-before 释放锁的操作unlock();
+2. volatile变量规则: 由于state=1 会先读取state, 所以线程T1的unlock()操作 Happens-Before 线程T2的lock()操作;
+3. 传递性规则: 线程T1的value+=1 Happens-before 线程T2的lock()操作
+
+```Java
+class SamleLock {
+    volatile int state;
+    //加锁
+    lock(){
+        //省略代码...
+        state = 1;
+    }
+    //解锁
+    unlock(){
+        //省略代码...
+        state = 0;
+    }
+}
+``` 
+##### 可重入锁
+所谓可重入锁,指的是线程可以重复获取同一把锁
+```Java
+class X {
+  private final Lock rtl =
+  new ReentrantLock();
+  int value;
+  public int get() {
+    // 获取锁
+    rtl.lock();         ②
+    try {
+      return value;
+    } finally {
+      // 保证锁能释放
+      rtl.unlock();
+    }
+  }
+  public void addOne() {
+    // 获取锁
+    rtl.lock();  
+    try {
+      value = 1 + get(); ①
+    } finally {
+      // 保证锁能释放
+      rtl.unlock();
+    }
+  }
+}
+```
+##### 公平与非公平锁
