@@ -7,8 +7,7 @@ tags: ["Java", "Concurrency"]
 categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
-### 多线程
-在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();
+### 多线程基础
 
 #### 多线程的三个问题
 - 多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为**可见性**.
@@ -143,6 +142,10 @@ class SafeCalc {
 
 当**必须共享数据**时,多个线程同时访问同一数据且又一线程要写数据就会引发**数据竞争(Data race)**. 程序的执行结果依赖线程执行的顺序,就是所谓的**竞态条件**. 
 
+竞态条件（Race Condition）：计算的正确性取决于多个线程的交替执行时序时，就会发生竞态条件。常见的竞态条件有:
+- 先检测后执行
+- 两个线程同时修改统一数据
+
 ##### 活跃性问题
 活跃性问题指的是某个操作无法执行下去. 常见的典型活跃性问题有三类:
 - 死锁: 线程互相等待, 表现为线程永久阻塞
@@ -157,13 +160,101 @@ class SafeCalc {
 - 第二, 可以尽量多的减少锁的持有时间, 互斥锁本质上就是将并行的程序串行化.实现这个方案的方法也很多,例如细粒度锁. ConcurrentHashMap它使用了所谓分段锁的技术;还有读写锁等.
 
 在性能方面的度量指标有三个:
-- 吞吐量
-- 延迟
+- 吞吐量: 指的是在单位时间内能处理请求的数量.
+- 延迟: 指的是发出请求到收到响应这个过程的时间.
 - 并发量.
 
+#### 管程
+管程(Monitor), 在Java中经常称之为监视器,在操作系统中被常称为管程.
+> 管程,指管理共享变量以及对共享变量的操作过程,使其支持并发.
+
+##### 管程的发展-Hasen模型, Hoare模型, MESA模型
+并发编程领域有两大问题,两大核心问题:**互斥**和**同步**.
+- 互斥: 同一时刻只允许一个线程访问共享资源.
+- 同步: 线程之间如果通信与协作.
+
+首先关注管程如何解决互斥问题. 其思路是将共享变量及其对共享变量的操作统一封装起来.
 
 
+其次管程解决同步的方法需引入条件变量,每个条件变量都有一个对应的等待队列. 同时,只有一个线程允许进入管程.
 
+![monitor illustration](/media/posts/monitor.png)
 
+#### 线程
+##### 线程的生命周期
+通用的线程模型包括五种状态,通常以"五态模型"来描述. 这五态分别是:
+- 初始状态: 线程已经被创建,但还不允许分配CPU执行.这个状态只存在于编程语言中, 换言之,这里的线程只是在编程语言层面被创建, 而在操作系统层面,真正的系统还没有创建.
+- 可运行状态: 指线程可以分配CPU执行.
+- 运行状态: 当空闲CPU分配给一个处于可运行状态的线程,被分配到CPU的线程的状态就转换成了可运行状态.
+- 休眠状态: 运行的线程如果调用一个阻塞的API(阻塞的读取文件)或者等待某个事件(条件变量),那么线程状态就会转换到休眠状态,同时释放CPU的使用权. 当等待的时间出现并通知此线程,线程就会从休眠状态转换到可运行状态.
+- 终止状态: 线程执行完或出现异常就会进入终止状态,终止状态的线程不会切换到其他任何状态. 这个状态意味着线程的生命周期结束了.
 
+![monitor illustration](/media/posts/threadstate.png)
 
+##### Java中线程的生命周期
+Java语言中线程共有六种状态, 分别是
+1. NEW (初始化状态)
+2. RUNNABLE (可运行/运行状态)
+3. BLOCKED (阻塞状态)
+4. WAITING (无时限等待)
+5. TIMED_WAITING (有时限等待)
+6. TERMINATED (终止等待)
+
+BLOCKED, WAITING, TIMED_WAITING均属于线程的休眠状态, 换言之, 只要Java线程处于这三种状态之一, 那么这个线程就永远没有CPU的使用权. 这三种状态的划分是源于导致线程休眠的三个原因
+- RUNNABLE -> BLOCKED: 只有一种场景会触发这种转换, 就是线程等待synchronized的隐式锁. synchronized修饰的方法,代码块同一时刻只允许一个线程执行,其他线程只能等待,这种情况下,等待的线程就会从RUNNABLE转换到BLOCK状态.
+需要注意的是, 当线程调用阻塞式API时,操作系统层面,线程会转换到休眠状态,但是在JVM层面, Java线程的状态不会发生变化.也就是说Java线程的状态依然会保持RUNNABLE状态. JVM层面不关心操作系统的调度状态因为在JVM看来,等待CPU使用权和等待I/O没有区别, 都是在等待某个系统资源,于是都属于RUNNABLE状态.
+- RUNNABLE -> WAITING: 有三种情况会发生这种状态的转化.
+  - 第一种是在获得synchronized隐式锁后,调用无参数的wait()方法. 
+  - 第二种是调用无参数的Thread.join()方法.其中的join()是一种线程同步方法.例如一个线程对象thread A,当调用A.join().执行这条语句的线程会等待thread A执行完, 而等待中的这个线程,其状态会从RUNNABLE转换到WAITING. 当线程thread A执行完, 原来等待它的线程又会从WAITING变回RUNNABLE. 
+  - 第三种情况是调用LockSupport.park()方法.Java并发包中的锁都是基于其实现的.调用LockSupport.park()方法,当前线程会阻塞,线程的状态会从RUNNABLE转换到WAITING. 调用LockSupport.unpack(Thread thread)可以唤醒目标线程, 目标线程的状态会从WAITING状态转换到RUNNABLE.
+- RUNNABLE -> TIMED_WAITING: 
+  - 带超时参数的Thread.sleep(long millis)
+  - 获得synchronized隐式锁的线程, 调用wait(long timeout)
+  - 调用带超时参数的Thread.join()
+  - 调用带超时参数的LockSupport.parkNanos(Object blocker, long deadline)方法
+  - 调用带超时参数的LockSupport.parkUntil(long deadline)
+- NEW -> RUNNABLE: 可以分为NEW线程的部分和NEW->RUNNABLE部分.
+  - NEW线程部分可以通过继承Thread对象或者实现Runnable接口.
+  - NEW->RUNNABLE只能通过myThread.start()方法.
+- RUNNABLE -> TERMINATED: 当线程执行完run()方法之后,线程的状态转化为TERMINATED,或者当执行run()方法时有异常抛出. 当我们想主动结束线程时,建议使用interrupt()方法. stop()已经被标记为了@Deprecated.
+
+stop()方法和interrupt()方法的区别是stop()方法会直接杀死线程,被杀死的线程不会自动释放ReentrantLock锁,致使其他线程也无法获取到相应的锁.这样的方法因为太危险而被不建议使用,类似的还有suspend()和resume()方法.
+
+interrupt()方法只是通知线程,线程可以选择忽略或者继续执行一些收尾操作. 线程由两种方法接收到通知.一种是异常,一种是主动监测
+- 异常: 
+  - 当线程处于WAITING, TIMED_WAITING状态时,如果其他线程调用线程A的interrupt()方法,会使线程A返回到RUNNABLE的状态, 同时线程A的代码会触发InterruptedException异常. 上面提到过的wait(), join(), sleep()等方法的签名都有throws InterruptedException这个异常. 这个异常的触发条件是: 其他线程调用了该线程的interrupt()方法.
+  - 当线程处于RUNNABLE状态时,并且阻塞在java.nio.channels.InterruptibleChannel上时, 如果其他线程调用线程A的interrupt()方法, 线程A会触发java.nio.channels.ClosedByInterruptException这个异常.
+  - 当线程处于RUNNABLE状态时,并且阻塞在java.nio.channels.Selector上时,如果其他线程调用线程A的interrupt()方法,线程A的java.nio.channels.Selector会立即返回.
+- 主动监测: 如果线程处于RUNNABLE状态,并且没有阻塞在某个I/O操作上,这时依赖线程A主动监测中断状态.如果其他线程调用线程的interrupt()方法,那么线程可以通过isInterrupted()方法,监测是不是自己被中断了.
+
+#### 并发量
+在并发编程领域,提升性能本质上是提升硬件的利用率, 提升I/O的利用率和CPU的利用率. 最佳的线程数量的决定可以分为CPU密集型计算场景和I/O密集型计算场景.
+- CPU密集型计算场景: 理论上"线程的数量=CPU核数"是最适合的,但在工程上,一般会设置为#CPU+1,因为偶尔当内存失效或其他原因导致阻塞的时候,额外的线程可以顶上来保证CPU的利用率.
+- I/O密集型计算场景: 最佳的线程数量与程序中CPU计算和I/O操作的耗时比相关的.
+ > 最佳线程数 = 1+ (I/O耗时/CPU耗时)
+
+#### 局部变量 -- 线程封闭
+方法里的局部变量, 因为不会和其他线程共享, 所以没有并发问题. 这是一个解决并发问题的重要思路和技术,称之为**线程封闭**.
+> 线程封闭: 仅在单线程内访问数据.
+
+采用线程封闭的案例非常多,例如在数据库连接池里获取的连接Connection, 在JDBC里没有要求这个Connection必须是线程安全的. 数据库连接池通过线程封闭技术,保证一个Connection一旦被一个线程获取之后,在这个线程关闭Connection之前的这段时间里, 不会再分配给其他线程,从而保证了Connection不会有并发问题.
+
+### Java.util.Concurrent JUC并发包详解
+#### Lock和Condition
+JUC通过lock和condition这两个接口来重新实现管程, 其中Lock用于解决互斥问题,Condition用于解决同步问题. 
+##### 重造管程而不使用自带的synchronized的理由
+- 能够相应中断. synchronized的问题是, 持有锁A后,如果尝试获取锁B失败, 那么线程就进入阻塞状态.一旦发生死锁, 就没有任何机会来唤醒阻塞的线程. 我们的期望是如果处于阻塞状态的线程能够相应中断信号, 换言之当我们给阻塞的线程发送中断信号时,线程能够被唤醒,那它就有机会释放锁A,也就破坏了不可抢占的条件.
+- 支持超时. 如果线程在一段时间内都没有获取到锁, 不是进入阻塞状态而是返回一个错误,那这个线程也有机会释放曾经的锁.
+- 非租塞的获取锁. 如果尝试获取锁失败可以立即返回.
+
+这三个理由构成了API上就是Lock接口的三个方法.
+```Java
+// 支持中断的API
+void lockInterruptibly() throws InterruptedException;
+// 支持超时的API
+boolean tryLock(long time, TimeUnit unit) throws InterruptedException;
+// 支持非阻塞获取锁的API
+boolean tryLock();
+```
+JUC里用锁的经典范例就是try{}finally{}
+##### 如何保证可见性
