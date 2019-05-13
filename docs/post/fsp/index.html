@@ -48,7 +48,7 @@ s. In particular, we will look at a language called Finite State Processes (FSP)
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.51">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/fsp/">
@@ -399,11 +399,11 @@ replaced with the transitions ({a1.n,..,ax.n} -&gt; X)”</p>
 <p>Sometimes, we don&rsquo;t really need specify the index of process while it could only be declared once in a composed process. Therefore, a more efficient and general way to represent the whole group of processes is by range directly. Here I shows part of my assignment answer as example:</p>
 
 <pre><code>||SPACESYS = ((p[PilotRange]:PILOT)||
-	{p[PilotRange]}::tugs:TUGS(NumOfTugs)||
-	{p[PilotRange]}::arrZone:WAITZONE/{shipArriveArrivalZone/p[PilotRange].arrZone.shipArrive}||
-	{p[PilotRange]}::depZone:WAITZONE/{shipDepartDepartureZone/p[PilotRange].depZone.shipDepart}||
-	{p[PilotRange]}::berthsys:BERTHSYS/{shieldActivate/p[PilotRange].berthsys.shieldActivate, 
-										shieldDeactivate/p[PilotRange].berthsys.shieldDeactivate}
+    {p[PilotRange]}::tugs:TUGS(NumOfTugs)||
+    {p[PilotRange]}::arrZone:WAITZONE/{shipArriveArrivalZone/p[PilotRange].arrZone.shipArrive}||
+    {p[PilotRange]}::depZone:WAITZONE/{shipDepartDepartureZone/p[PilotRange].depZone.shipDepart}||
+    {p[PilotRange]}::berthsys:BERTHSYS/{shieldActivate/p[PilotRange].berthsys.shieldActivate, 
+                                        shieldDeactivate/p[PilotRange].berthsys.shieldDeactivate}
 ).
 </code></pre>
 

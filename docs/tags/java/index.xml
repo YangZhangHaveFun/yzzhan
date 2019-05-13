@@ -7,27 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Fri, 10 May 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 May 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>深入理解java并发知识的归纳</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
-      <pubDate>Fri, 10 May 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
-      <description>多线程 在Java中创建线程的方式有且仅有一种就是Thread myThread = new Thread();
-多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
-Volatile volatile 关键字最原始的意义是禁用CPU缓存.
-极客时间版权所有: https://time.geekbang.org/column/article/84017</description>
-    </item>
-    
-    <item>
       <title>对深入理解java虚拟机的读书总结</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/jvm/</link>
-      <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
+      <pubDate>Mon, 13 May 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/jvm/</guid>
       <description>这篇文章是关于/&amp;lt;&amp;lt;深入理解Java虚拟机第二版&amp;gt;&amp;gt;的全书总结.总结的目录也与原书的章节吻合.
@@ -36,6 +24,17 @@ JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI�
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
 Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令.</description>
+    </item>
+    
+    <item>
+      <title>深入理解java并发知识的归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
+      <pubDate>Mon, 13 May 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
+      <description>多线程基础 多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
+Volatile volatile 关键字最原始的意义是禁用CPU缓存.变量的读写必须从内存中读取或者写入.
+class VolatileExample { int x = 0; volatile boolean v = false; public void writer() { x = 42; v = true; } public void reader() { if (v == true) { // 若有两个线程,一个线程进行writer()一个线程进行reader()则  // 这里 X 在1.5之前 是 0 或者42, X在1.5之后一定是42.  } } }  Happen-Before规则 Java1.</description>
     </item>
     
     <item>

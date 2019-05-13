@@ -1,7 +1,6 @@
 ---
 title : "对深入理解java虚拟机的读书总结"
-date: 2019-04-17T01:37:56+08:00
-lastmod: 2019-04-17T01:37:56+08:00
+date: 2019-05-13T01:37:56+08:00
 draft: false
 tags: ["Java", "JVM"]
 categories: ["Java fundemental knowledge"]

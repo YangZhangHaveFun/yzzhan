@@ -46,7 +46,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.51">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/">
@@ -213,6 +213,21 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/" class="post-link">对用过的Linux(Centos7.0&#43;)指令的总结</a></h3>
+    <p class="post-meta">@yang zhang · Apr 11, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">开启防火墙对指定Port外界访问的权限 例如开启数据库port3306的port
+!/bin/bash /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT service iptables save service iptables restart 如果iptables save不能用则使用以下命令
+# It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service: systemctl stop firewalld systemctl mask firewalld # Then, install the iptables-services package: yum install iptables-services # Enable the service at boot-time: systemctl enable iptables # Managing the service systemctl [stop|start|restart] iptables # Saving your firewall rules can be done as follows: service iptables save # check your listenning ports with: netstat -nat |grep :3306 重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javashiyi/" class="post-link">Java拾遗</a></h3>
     <p class="post-meta">@Yang Zhang · Apr 2, 2019 · 1 min read</p>
   </header>
@@ -360,20 +375,6 @@ task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(
  MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/" class="post-link">Overview For Advanced Cryptography A</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 11, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">This is the overview about what I have done related with Cryptography and Security. Here I have introduced the algorithm for SHA-1 and SHA-3.
-The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/">Read More →</a>
   </footer>
 </article>
 
