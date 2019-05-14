@@ -240,7 +240,7 @@ interrupt()方法只是通知线程,线程可以选择忽略或者继续执行�
 采用线程封闭的案例非常多,例如在数据库连接池里获取的连接Connection, 在JDBC里没有要求这个Connection必须是线程安全的. 数据库连接池通过线程封闭技术,保证一个Connection一旦被一个线程获取之后,在这个线程关闭Connection之前的这段时间里, 不会再分配给其他线程,从而保证了Connection不会有并发问题.
 
 ### Java.util.Concurrent JUC并发包详解
-#### Lock和Condition
+#### Lock接口
 JUC通过lock和condition这两个接口来重新实现管程, 其中Lock用于解决互斥问题,Condition用于解决同步问题. 
 ##### 重造管程而不使用自带的synchronized的理由
 - 能够相应中断. synchronized的问题是, 持有锁A后,如果尝试获取锁B失败, 那么线程就进入阻塞状态.一旦发生死锁, 就没有任何机会来唤醒阻塞的线程. 我们的期望是如果处于阻塞状态的线程能够相应中断信号, 换言之当我们给阻塞的线程发送中断信号时,线程能够被唤醒,那它就有机会释放锁A,也就破坏了不可抢占的条件.
@@ -335,3 +335,110 @@ ReentrantLock的构造器支持传递一个fair参数,fair代表锁的公平策�
 - 永远只在更新对象的成员变量时加锁
 - 永远只在访问可变的成员变量时加锁
 - 永远不在调用其他对象的方法时加锁
+
+#### Condition接口
+JUC的Condition实现了管程模型里面的条件变量.Java内置的管程里只有一个条件变量, 而Lock&Condition实现的管程是支持多个条件变量.
+
+在很多并发场景下, 支持多个条件变量能够让我们的并发程序的可读性更好, 实现也更加容易. 例如,实现一个阻塞队列就需要两个条件变量, 队列不空和队列不满.
+```Java
+public class BlockedQueue<T>{
+  final Lock lock =
+    new ReentrantLock();
+  // 条件变量：队列不满  
+  final Condition notFull =
+    lock.newCondition();
+  // 条件变量：队列不空  
+  final Condition notEmpty =
+    lock.newCondition();
+
+  // 入队
+  void enq(T x) {
+    lock.lock();
+    try {
+      while (队列已满){
+        // 等待队列不满
+        notFull.await();
+      }  
+      // 省略入队操作...
+      // 入队后, 通知可出队
+      notEmpty.signal();
+    }finally {
+      lock.unlock();
+    }
+  }
+  // 出队
+  void deq(){
+    lock.lock();
+    try {
+      while (队列已空){
+        // 等待队列不空
+        notEmpty.await();
+      }  
+      // 省略出队操作...
+      // 出队后，通知可入队
+      notFull.signal();
+    }finally {
+      lock.unlock();
+    }  
+  }
+}
+```
+##### Dubbo源码分析
+**同步与异步**:当被调用方执行后返回结果,则为同步.当被调用方立即返回结果时则为异步.
+![monitor illustration](/media/posts/async.png)
+
+
+在Java中,默认的代码方式就是同步,如果要异步可以用两种方式来实现:
+1. 调用方创建子线程, 在子线程中执行方法调用,这种调用称之为异步调用.
+2. 当方法实现的时候,创建一个新的线程执行主要的逻辑,主线程直接return,这种方法我们一般称之为异步方法.
+
+TCP协议本身就是非阻塞的. 在TCP协议层面, 发送完RPC请求之后,线程不会等待RPC的响应结果. 但日常使用时RPC调用大多数都是同步的, 这里以Dubbo为例, 展示如何从异步转化为同步.
+
+DefaultFuture类实现了当RPC返回结果之前,阻塞调用线程,让调用线程等待;当RPC返回结果后,唤醒线程,让调用线程重新执行.
+```Java
+// 创建锁与条件变量
+private final Lock lock 
+    = new ReentrantLock();
+private final Condition done 
+    = lock.newCondition();
+
+// 调用方通过该方法等待结果
+Object get(int timeout){
+  long start = System.nanoTime();
+  lock.lock();
+  try {
+	while (!isDone()) {
+	  done.await(timeout);
+      long cur=System.nanoTime();
+	  if (isDone() || 
+          cur-start > timeout){
+	    break;
+	  }
+	}
+  } finally {
+	lock.unlock();
+  }
+  if (!isDone()) {
+	throw new TimeoutException();
+  }
+  return returnFromResponse();
+}
+// RPC 结果是否已经返回
+boolean isDone() {
+  return response != null;
+}
+// RPC 结果返回时调用该方法   
+private void doReceived(Response res) {
+  lock.lock();
+  try {
+    response = res;
+    if (done != null) {
+      done.signal();
+    }
+  } finally {
+    lock.unlock();
+  }
+}
+```
+
+#### 信号量模型
