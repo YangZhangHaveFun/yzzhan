@@ -35,4 +35,7 @@ target/
 .DS_Store
 Thumbs.db
 
+# vs workspace
+*.code-workspace
+
 

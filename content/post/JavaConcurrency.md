@@ -7,6 +7,8 @@ tags: ["Java", "Concurrency"]
 categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
+[[TOC]]
+
 ### 多线程基础
 
 #### 多线程的三个问题
@@ -442,3 +444,88 @@ private void doReceived(Response res) {
 ```
 
 #### 信号量模型
+
+信号量的模型有一个计数器,一个等待队列和三个方法. 信号量模型中, 计数器和等待队列是透明的, 所以只能通过信号量模型提供的三个方法来访问它们.
+- init(): 设置计数器的初始值
+- down(): 计数器的值减1; 如果此时计数器的值小于0, 则当前线程将被阻塞, 否则当前线程可以继续执行.
+- up(): 计数器的值加1; 如果此时计数器的值小于或者等于0, 则唤醒等待队列的一个线程,并将其从等待队列中移除.
+
+这三个方法都具有原子性. 信号量模型是由J.U.C.Semaphore实现的.
+```Java
+class Semaphore{
+  // 计数器
+  int count;
+  // 等待队列
+  Queue queue;
+  // 初始化操作
+  Semaphore(int c){
+    this.count=c;
+  }
+  // 
+  void down(){
+    this.count--;
+    if(this.count<0){
+      // 将当前线程插入等待队列
+      // 阻塞当前线程
+    }
+  }
+  void up(){
+    this.count++;
+    if(this.count<=0) {
+      // 移除等待队列中的某个线程 T
+      // 唤醒线程 T
+    }
+  }
+}
+```
+在JUC中, up()和down()方法对应的是acquire()和release()方法.
+
+信号量相较于锁和条件变量, 最突出的优点是可以控制多个线程进入同一个临界区. 实际的例子就是限流器, 例如连接池,对象池,线程池. 这里的例子是对象池.
+```Java
+class ObjPool<T, R> {
+  final List<T> pool;
+  // 用信号量实现限流器
+  final Semaphore sem;
+  // 构造函数
+  ObjPool(int size, T t){
+    pool = new Vector<T>(){};
+    for(int i=0; i<size; i++){
+      pool.add(t);
+    }
+    sem = new Semaphore(size);
+  }
+  // 利用对象池的对象，调用 func
+  R exec(Function<T,R> func) {
+    T t = null;
+    sem.acquire();
+    try {
+      t = pool.remove(0);
+      return func.apply(t);
+    } finally {
+      pool.add(t);
+      sem.release();
+    }
+  }
+}
+// 创建对象池
+ObjPool<Long, String> pool = 
+  new ObjPool<Long, String>(10, 2);
+// 通过对象池获取 t，之后执行  
+pool.exec(t -> {
+    System.out.println(t);
+    return t.toString();
+});
+```
+Java并发编程重点在管程模型, 解决了信号量模型的易用性和工程化方面. 
+
+#### ReadWriteLock 实现
+
+JUC提供很多工具类, 目的就是分场景优化性能, 提供易用性.
+
+一种非常普遍的并发场景, 读多写少的场景. 我们经常使用缓存,例如缓存元数据,缓存基础数据等, 这是一种典型的读多写少的应用场景. 缓存之所以能提升性能, 一个重要的条件就是缓存的数据一定是读多写少的, 例如元数据和基础数据基本不会发生变化,但使用的地方却很多. 针对这种并发场景, JUC包中的ReadWriteLock用来解决此类型的并发问题并极大提高性能.
+
+读写锁的三个基本原则
+- 允许多个线程同时读共享变量
+- asdas
+
+
