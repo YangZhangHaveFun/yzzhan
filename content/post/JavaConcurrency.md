@@ -7,7 +7,6 @@ tags: ["Java", "Concurrency"]
 categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
-[[TOC]]
 
 ### 多线程基础
 
