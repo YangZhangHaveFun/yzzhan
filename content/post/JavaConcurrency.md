@@ -631,8 +631,48 @@ try {
   sl.unlockWrite(stamp);
 }
 ```
-乐观读是
+乐观读是StampedLock比ReadWriteLock性能高的关键所在. StampedLock支持的乐观读允许在多个线程读数据时一个线程写数据.同时,这个乐观读操作是无锁的.
+```Java
+class Point {
+  private int x, y;
+  final StampedLock sl = 
+    new StampedLock();
+  // 计算到原点的距离  
+  int distanceFromOrigin() {
+    // 乐观读
+    long stamp = 
+      sl.tryOptimisticRead();
+    // 读入局部变量，
+    // 读的过程数据可能被修改
+    int curX = x, curY = y;
+    // 判断执行读操作期间，
+    // 是否存在写操作，如果存在，
+    // 则 sl.validate 返回 false
+    if (!sl.validate(stamp)){
+      // 升级为悲观读锁
+      stamp = sl.readLock();
+      try {
+        curX = x;
+        curY = y;
+      } finally {
+        // 释放悲观读锁
+        sl.unlockRead(stamp);
+      }
+    }
+    return Math.sqrt(
+      curX * curX + curY * curY);
+  }
+}
+```
+##### StampedLock使用注意事项
 
+- 对于读多写少的场景, StampedLock的性能优于ReadWriteLock
+- StampedLock只是ReadWriteLock的子集.
+- StampedLock不支持重入
+- StampedLock 的悲观读锁、写锁都不支持条件变量
+- 如果线程阻塞在 StampedLock 的 readLock()或者WriteLock()上会导致CPU飙升
+
+#### CountDownLatch和CyclicBarrier
 
 
 
