@@ -8,79 +8,19 @@ categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
 
-<!-- TOC -->
 
-- [1. 多线程基础](#1-多线程基础)
-    - [1.1. 多线程的三个问题](#11-多线程的三个问题)
-    - [1.2. Java内存模型](#12-java内存模型)
-        - [1.2.1. Volatile](#121-volatile)
-        - [1.2.2. Happen-Before规则](#122-happen-before规则)
-    - [1.3. 如果解决并发原子性问题---互斥锁](#13-如果解决并发原子性问题---互斥锁)
-        - [1.3.1. 死锁](#131-死锁)
-    - [1.4. "等待-通知"机制](#14-等待-通知机制)
-    - [1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.](#15-编程中需要注意的三类问题-安全性问题-活跃性问题和性能问题)
-        - [1.5.1. 安全性问题](#151-安全性问题)
-        - [1.5.2. 活跃性问题](#152-活跃性问题)
-        - [1.5.3. 性能问题](#153-性能问题)
-    - [1.6. 管程](#16-管程)
-        - [1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型](#161-管程的发展-hasen模型-hoare模型-mesa模型)
-    - [1.7. 线程](#17-线程)
-        - [1.7.1. 线程的生命周期](#171-线程的生命周期)
-        - [1.7.2. Java中线程的生命周期](#172-java中线程的生命周期)
-    - [1.8. 并发量](#18-并发量)
-    - [1.9. 局部变量 -- 线程封闭](#19-局部变量----线程封闭)
-- [2. Java.util.Concurrent JUC并发包详解](#2-javautilconcurrent-juc并发包详解)
-    - [2.1. Lock接口](#21-lock接口)
-        - [2.1.1. 重造管程而不使用自带的synchronized的理由](#211-重造管程而不使用自带的synchronized的理由)
-        - [2.1.2. 如何保证可见性](#212-如何保证可见性)
-        - [2.1.3. 可重入锁](#213-可重入锁)
-        - [2.1.4. 公平与非公平锁](#214-公平与非公平锁)
-    - [2.2. Condition接口](#22-condition接口)
-        - [2.2.1. Dubbo源码分析](#221-dubbo源码分析)
-    - [2.3. 信号量模型](#23-信号量模型)
-    - [2.4. ReadWriteLock 实现](#24-readwritelock-实现)
-        - [2.4.1. 读写锁的升级与降级](#241-读写锁的升级与降级)
-    - [2.5. StampedLock](#25-stampedlock)
-        - [2.5.1. StampedLock使用注意事项](#251-stampedlock使用注意事项)
-    - [2.6. CountDownLatch和CyclicBarrier](#26-countdownlatch和cyclicbarrier)
-    - [2.7. 并发容器](#27-并发容器)
-    - [2.8. 原子类](#28-原子类)
-        - [2.8.1. 原理](#281-原理)
-        - [2.8.2. ABA问题](#282-aba问题)
-        - [2.8.3. Java实现原子化的count += 1](#283-java实现原子化的count--1)
-        - [2.8.4. 原子类概览](#284-原子类概览)
-    - [2.9. 线程池Executor](#29-线程池executor)
-        - [使用线程池的注意事项](#使用线程池的注意事项)
-    - [2.10. Future](#210-future)
-        - [FutureTask工具类](#futuretask工具类)
-        - [实现"烧水泡茶"程序](#实现烧水泡茶程序)
-    - [2.11. CompletableFuture](#211-completablefuture)
-        - [创建CompletableFuture对象](#创建completablefuture对象)
-        - [如何理解CompletionStage接口](#如何理解completionstage接口)
-    - [2.12. CompletionService](#212-completionservice)
-    - [2.13. Fork/Join](#213-forkjoin)
-- [3. 并发编程设计模式](#3-并发编程设计模式)
-    - [3.1. Immutability模式](#31-immutability模式)
-    - [3.2. Copy-on-Write模式](#32-copy-on-write模式)
-    - [3.3. 线程本地存储模式](#33-线程本地存储模式)
-    - [3.4. Guarded Suspension模式](#34-guarded-suspension模式)
-    - [3.5. Balking模式](#35-balking模式)
-    - [3.6. Thread-Per-Message模式](#36-thread-per-message模式)
-    - [3.7. Worker Thread模式](#37-worker-thread模式)
 
-<!-- /TOC -->
+## 多线程基础
 
-## 1. 多线程基础
-
-### 1.1. 多线程的三个问题
+### 多线程的三个问题
 - 多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为**可见性**.
 - 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性**原子性**.
 - 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为**有序性**
 
-### 1.2. Java内存模型
+### Java内存模型
 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 **volatile**, **synchronized**和**final**关键字, 以及六项**Happen-Before**规则.
 
-#### 1.2.1. Volatile
+#### Volatile
 volatile 关键字最原始的意义是禁用CPU缓存.变量的读写必须从内存中读取或者写入.
 ```java
 class VolatileExample {
@@ -99,7 +39,7 @@ class VolatileExample {
 } 
 ```
 
-#### 1.2.2. Happen-Before规则
+#### Happen-Before规则
 Java1.5 用**Happen-Before**规则来解决这个问题. 下面介绍六项**Happen-Before**的规则. 首先**Happen-Before**表示前面一个操作的结果对后续操作是可见的.
 - **程序的顺序性规则**: 这条规则是指在一个线程中, 按照程序顺序, 前面的操作Happens-Before于后续的任意操作.
 - **Volatile规则**: 这条规则是指对一个volatile的写操作, Happens-Before于后续对这个volatile变量的读操作.
@@ -128,7 +68,7 @@ Java1.5 用**Happen-Before**规则来解决这个问题. 下面介绍六项**Hap
 
 Java内存模型关于JVM的部分见深入理解JVM的读书总结.
 
-### 1.3. 如果解决并发原子性问题---互斥锁
+### 如果解决并发原子性问题---互斥锁
 我们称 **同一时刻只有一个线程执行**这个条件为**互斥(mutex)**. 一段需要互斥执行的代码称为**临界区(critical area)**, 需要注意的是我们需要标注出来临界区内受保护的资源. Java中互斥锁的关键词为synchronized. 加锁的本质就是在锁对象的对象头中添加当前线程的ID.
 ```java
 class X {
@@ -177,7 +117,7 @@ class SafeCalc {
 }
 ```
 简单的来说,我们可以用一把锁锁住所有需要的数据,但是这样会导致性能问题.因为一把锁会使所有的方法串行但很多方法是可以并行运行的. 用不同的锁对保护资源进行精细化管理,能够很大程度上提高性能.这种锁叫做**细粒度锁**. 使用**细粒度锁**可以提高并行度,但设计不良会导致**死锁**.
-#### 1.3.1. 死锁
+#### 死锁
 死锁指一组互相竞争资源的线程因互相等待,导致"永久"阻塞的现象. 触发死锁必须满足四个条件
 - 互斥, 共享资源X和Y只能被一个线程占用.
 - 占有且等待, 线程T已经取得共享资源X,在等待共享资源Y的时候,不释放共享资源X.
@@ -186,7 +126,7 @@ class SafeCalc {
 
 破坏其中一条就可以避免死锁的发生. 一般较为实用的方法是破坏第二和第四条,第二条可以通过设置timeout或者循环等待所有条件就绪再占有来预防,第四条可以通过序列化共享资源的占用来避免.
 
-### 1.4. "等待-通知"机制
+### "等待-通知"机制
 在并发冲突较小时,循环等待所有条件尚可行.但当冲突量增大时,这种自旋的方式会白白浪费CPU. 另外一种可行的方式当线程要求不满足时,线程阻塞自己进入阻塞状态. 当线程线程的要求被满足时,别的线程可以通知线程继续执行.
 
 在Java语言里, "等待-通知"机制可以由Java语言内置的synchronized配合wait(), notify(), notifyAll()来实现.
@@ -196,9 +136,9 @@ class SafeCalc {
 当条件满足时,可以通过notifyAll()方法, 这个方法会通知等待队列(**对应互斥锁的等待队列**)中的线程,告诉它**条件曾经满足过**. 但被通知的线程想要重新被执行,仍然需要获取到互斥锁.
 > 需要注意的是,wait(), notify(), notifyAll()这三个方法能够被调用的前提是已经获取了相应的互斥锁. 通常来说, 使用notifyAll(),并在wait()处设置重复判断是绝大多数的选择.
 
-### 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.
+### 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.
 
-#### 1.5.1. 安全性问题
+#### 安全性问题
 安全性问题主要讨论的方向是方法或类是否线程安全. 所谓线程安全就是指程序按照预期的执行. 发生不安全的源头则是前面介绍过的可见性, 原子性和有序性问题.
 
 但是只有一种情况需要具体分析这三个问题. 这种情况是**存在共享数据并且该数据会发生变化,通俗的说就是多个线程会同时读写同一数据.** 如果能够做到不共享数据或者数据状态不发生变化,就能够保证线程的安全性. 有许多方案是针对这个理论, 例如**线程本地存储(Thread Local Storage)**, 不变模式等等.
@@ -209,13 +149,13 @@ class SafeCalc {
 - 先检测后执行
 - 两个线程同时修改统一数据
 
-#### 1.5.2. 活跃性问题
+#### 活跃性问题
 活跃性问题指的是某个操作无法执行下去. 常见的典型活跃性问题有三类:
 - 死锁: 线程互相等待, 表现为线程永久阻塞
 - 活锁: 线程并未发生阻塞, 但仍然会存在执行不下去的情况. 通常设置随机等待时间可以解决此类问题
 - 饥饿: 线程因无法访问所需资源而无法执行下去的情况. 通常是因为CPU繁忙且线程优先级的差异导致的. 使用公平锁可以极大程度上解决此类问题.
 
-#### 1.5.3. 性能问题
+#### 性能问题
 我们应尽量使程序并行而提高性能. 有一个阿姆达尔(Amdahl)定律代表处理器并行计算之后效率提升的能力,它可以解决此类问题. 具体公式是:$S=1/(1-p)+\frac{p}{n})$. 在这个公式里, n为CPU的核数, p为并行百分比. 当n无穷大, 并行百分比为95%时, 最高也只能提高20倍的性能.
 
 在方案设计层面,有两个方向可以用来提高性能.
@@ -227,11 +167,11 @@ class SafeCalc {
 - 延迟: 指的是发出请求到收到响应这个过程的时间.
 - 并发量.
 
-### 1.6. 管程
+### 管程
 管程(Monitor), 在Java中经常称之为监视器,在操作系统中被常称为管程.
 > 管程,指管理共享变量以及对共享变量的操作过程,使其支持并发.
 
-#### 1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型
+#### 管程的发展-Hasen模型, Hoare模型, MESA模型
 并发编程领域有两大问题,两大核心问题:**互斥**和**同步**.
 - 互斥: 同一时刻只允许一个线程访问共享资源.
 - 同步: 线程之间如果通信与协作.
@@ -243,8 +183,8 @@ class SafeCalc {
 
 ![monitor illustration](/media/posts/monitor.png)
 
-### 1.7. 线程
-#### 1.7.1. 线程的生命周期
+### 线程
+#### 线程的生命周期
 通用的线程模型包括五种状态,通常以"五态模型"来描述. 这五态分别是:
 - 初始状态: 线程已经被创建,但还不允许分配CPU执行.这个状态只存在于编程语言中, 换言之,这里的线程只是在编程语言层面被创建, 而在操作系统层面,真正的系统还没有创建.
 - 可运行状态: 指线程可以分配CPU执行.
@@ -254,7 +194,7 @@ class SafeCalc {
 
 ![monitor illustration](/media/posts/threadstate.png)
 
-#### 1.7.2. Java中线程的生命周期
+#### Java中线程的生命周期
 Java语言中线程共有六种状态, 分别是
 1. NEW (初始化状态)
 2. RUNNABLE (可运行/运行状态)
@@ -290,22 +230,22 @@ interrupt()方法只是通知线程,线程可以选择忽略或者继续执行�
   - 当线程处于RUNNABLE状态时,并且阻塞在java.nio.channels.Selector上时,如果其他线程调用线程A的interrupt()方法,线程A的java.nio.channels.Selector会立即返回.
 - 主动监测: 如果线程处于RUNNABLE状态,并且没有阻塞在某个I/O操作上,这时依赖线程A主动监测中断状态.如果其他线程调用线程的interrupt()方法,那么线程可以通过isInterrupted()方法,监测是不是自己被中断了.
 
-### 1.8. 并发量
+### 并发量
 在并发编程领域,提升性能本质上是提升硬件的利用率, 提升I/O的利用率和CPU的利用率. 最佳的线程数量的决定可以分为CPU密集型计算场景和I/O密集型计算场景.
 - CPU密集型计算场景: 理论上"线程的数量=CPU核数"是最适合的,但在工程上,一般会设置为#CPU+1,因为偶尔当内存失效或其他原因导致阻塞的时候,额外的线程可以顶上来保证CPU的利用率.
 - I/O密集型计算场景: 最佳的线程数量与程序中CPU计算和I/O操作的耗时比相关的.
  > 最佳线程数 = 1+ (I/O耗时/CPU耗时)
 
-### 1.9. 局部变量 -- 线程封闭
+### 局部变量 -- 线程封闭
 方法里的局部变量, 因为不会和其他线程共享, 所以没有并发问题. 这是一个解决并发问题的重要思路和技术,称之为**线程封闭**.
 > 线程封闭: 仅在单线程内访问数据.
 
 采用线程封闭的案例非常多,例如在数据库连接池里获取的连接Connection, 在JDBC里没有要求这个Connection必须是线程安全的. 数据库连接池通过线程封闭技术,保证一个Connection一旦被一个线程获取之后,在这个线程关闭Connection之前的这段时间里, 不会再分配给其他线程,从而保证了Connection不会有并发问题.
 
-## 2. Java.util.Concurrent JUC并发包详解
-### 2.1. Lock接口
+## Java.util.Concurrent JUC并发包详解
+### Lock接口
 JUC通过lock和condition这两个接口来重新实现管程, 其中Lock用于解决互斥问题,Condition用于解决同步问题. 
-#### 2.1.1. 重造管程而不使用自带的synchronized的理由
+#### 重造管程而不使用自带的synchronized的理由
 - 能够相应中断. synchronized的问题是, 持有锁A后,如果尝试获取锁B失败, 那么线程就进入阻塞状态.一旦发生死锁, 就没有任何机会来唤醒阻塞的线程. 我们的期望是如果处于阻塞状态的线程能够相应中断信号, 换言之当我们给阻塞的线程发送中断信号时,线程能够被唤醒,那它就有机会释放锁A,也就破坏了不可抢占的条件.
 - 支持超时. 如果线程在一段时间内都没有获取到锁, 不是进入阻塞状态而是返回一个错误,那这个线程也有机会释放曾经的锁.
 - 非租塞的获取锁. 如果尝试获取锁失败可以立即返回.
@@ -320,7 +260,7 @@ boolean tryLock(long time, TimeUnit unit) throws InterruptedException;
 boolean tryLock();
 ```
 JUC里用锁的经典范例就是try{}finally{}
-#### 2.1.2. 如何保证可见性
+#### 如何保证可见性
 ```Java
 class X {
     private final Lock rtl = new ReentrantLock();
@@ -357,7 +297,7 @@ class SamleLock {
     }
 }
 ``` 
-#### 2.1.3. 可重入锁
+#### 可重入锁
 所谓可重入锁,指的是线程可以重复获取同一把锁
 ```Java
 class X {
@@ -386,7 +326,7 @@ class X {
   }
 }
 ```
-#### 2.1.4. 公平与非公平锁
+#### 公平与非公平锁
 ReentrantLock的构造器支持传递一个fair参数,fair代表锁的公平策略. 默认fair = false.
 
 - 当fair == true, 然后有线程释放锁的时候,从等待队列中唤醒一个等待线程时,谁等待的时间长就唤醒谁.
@@ -399,7 +339,7 @@ ReentrantLock的构造器支持传递一个fair参数,fair代表锁的公平策�
 - 永远只在访问可变的成员变量时加锁
 - 永远不在调用其他对象的方法时加锁
 
-### 2.2. Condition接口
+### Condition接口
 JUC的Condition实现了管程模型里面的条件变量.Java内置的管程里只有一个条件变量, 而Lock&Condition实现的管程是支持多个条件变量.
 
 在很多并发场景下, 支持多个条件变量能够让我们的并发程序的可读性更好, 实现也更加容易. 例如,实现一个阻塞队列就需要两个条件变量, 队列不空和队列不满.
@@ -446,7 +386,7 @@ public class BlockedQueue<T>{
   }
 }
 ```
-#### 2.2.1. Dubbo源码分析
+#### Dubbo源码分析
 **同步与异步**:当被调用方执行后返回结果,则为同步.当被调用方立即返回结果时则为异步.
 ![monitor illustration](/media/posts/async.png)
 
@@ -504,7 +444,7 @@ private void doReceived(Response res) {
 }
 ```
 
-### 2.3. 信号量模型
+### 信号量模型
 
 信号量的模型有一个计数器,一个等待队列和三个方法. 信号量模型中, 计数器和等待队列是透明的, 所以只能通过信号量模型提供的三个方法来访问它们.
 - init(): 设置计数器的初始值
@@ -579,7 +519,7 @@ pool.exec(t -> {
 ```
 Java并发编程重点在管程模型, 解决了信号量模型的易用性和工程化方面. 
 
-### 2.4. ReadWriteLock 实现
+### ReadWriteLock 实现
 
 JUC提供很多工具类, 目的就是分场景优化性能, 提供易用性.
 
@@ -629,7 +569,7 @@ class Cache<K,V> {
   }
 }
 ```
-#### 2.4.1. 读写锁的升级与降级
+#### 读写锁的升级与降级
 在ReadWriteLock中,不支持先获得读锁再升级成写锁的功能. 虽然锁的升级是不允许的, 锁的降级却是允许的.同时,只有写锁支持条件变量,读锁是不支持条件变量的.
 ```Java
 class CachedData {
@@ -671,7 +611,7 @@ class CachedData {
 }
 ```
 
-### 2.5. StampedLock
+### StampedLock
 StampedLock类似于数据库并发模型中的Timestamp模型. StampedLock有三种模式, 写锁, 悲观读锁和乐观读. 其中写锁和悲观读锁与ReadWriteLock相似. 允许多个线程读操作和一个线程写操作, 不同的是StampedLock里的悲观读和写锁加锁成功后,会返回一个stamp. 在解锁的时候,需要传进这个stamp.
 ```Java
 final StampedLock sl = 
@@ -726,7 +666,7 @@ class Point {
   }
 }
 ```
-#### 2.5.1. StampedLock使用注意事项
+#### StampedLock使用注意事项
 
 - 对于读多写少的场景, StampedLock的性能优于ReadWriteLock
 - StampedLock只是ReadWriteLock的子集.
@@ -734,7 +674,7 @@ class Point {
 - StampedLock 的悲观读锁、写锁都不支持条件变量
 - 如果线程阻塞在 StampedLock 的 readLock()或者WriteLock()上会导致CPU飙升
 
-### 2.6. CountDownLatch和CyclicBarrier
+### CountDownLatch和CyclicBarrier
 CountDownLatch和CyclicBarrier是Java并发包提供的两个非常易用的线程同步工具类. 当每次循环都生成新线程时,join()可以被用来做为线程同步的方式. 当我们用线程池不新建线程时, CountDownLatch和CyclicBarrier来使线程同步.
 ```Java
 // 创建 2 个线程的线程池
@@ -817,7 +757,7 @@ void checkAll(){
 CountDownLatch不能循环利用,一旦计数器减到0, 后面的线程调用await()会直接通过. 但CyclicBarrier的计数器是可以循环使用的, 而且具备自动重置的功能.
 
 
-### 2.7. 并发容器
+### 并发容器
 Java的容器可以分为四大类: List, Map, Set和Queue. 
 
 - 把线程不安全的容器封装在安全的容器对象内部, 并控制好访问路径是最简单的构造线程安全容器的方法. 但潜在的组合操作导致竞态条件问题并没有解决. 例如SafeArrayList方法.
@@ -881,7 +821,7 @@ Java1.5版本之后,提供了性能更高的容器,一般为**并发容器**.
   - 选对所需要的容器是最关键的
   - Fail-Fast机制
 
-### 2.8. 原子类
+### 原子类
 之前提到可见性问题一般用volatile解决,原子性问题一般用互斥锁的方式解决. 但对于简单的原子性问题.还有一种方法就是**无锁方案**. JUC提供一系列的原子类, 下面提供一个例子.
 ```Java
 public class Test {
@@ -895,7 +835,7 @@ public class Test {
   }
 }
 ```
-#### 2.8.1. 原理
+#### 原理
 原子类通过硬件支持的CAS(Compare and Swap)指令来解决并发问题.CAS指令包含三个参数:共享变量的内存地址A, 用于比较的值B和共享变量的新值C. 只有当内存中地址A处的值等于B时, 才能将内存中地址A处的值更新为新值C. CAS是一条CPU指令,指令本身可以保证其原子性. 这里代码模拟工作原理.
 ```Java
 class SimulatedCAS{
@@ -914,6 +854,7 @@ class SimulatedCAS{
 }
 ```
 使用CAS来解决并发问题, 一般都会伴随着自旋, 下面为演示代码
+
 ```Java
 class SimulatedCAS{
   volatile int count;
@@ -940,11 +881,11 @@ class SimulatedCAS{
 }
 ```
 
-#### 2.8.2. ABA问题
+#### ABA问题
 
 简单来说,ABA问题就是一个共享变量A被线程2修改成了B,又被线程3修改成了A, 这样线程1看到的共享变量的值就一直是A. 但实际上,共享变量已经被修改过了. 大多数情况下我们无需关心ABA问题. 但当原子化的更新对象可能就需要关心ABA问题,因为两个A虽然相等, 但是第二个A的属性可能已经发生变化了.
 
-#### 2.8.3. Java实现原子化的count += 1
+#### Java实现原子化的count += 1
 
 在Java1.8中,getAndIncrement()方法会转调unsafe.getAndAddLong()方法. this和valueOffset两个参数可以唯一确定共享变量的内存地址.
 ```Java
@@ -983,7 +924,7 @@ do {
 }while(!compareAndSet(oldV,newV);
 
 ```
-#### 2.8.4. 原子类概览
+#### 原子类概览
 ![Atomic Class](/media/posts/atomic.png)
 
 ##### 原子化的基本数据类型
@@ -1029,7 +970,7 @@ DoubleAccumulator, DoubleAdder, LongAccumulator和LongAdder, 这四个类仅仅�
 
 原子类的方法都是针对一个共享变量的, 如果需要解决多个变量的原子性问题, 建议还是使用互斥锁的方案. 原子类虽然好,但使用需要慎之又慎.
 
-### 2.9. 线程池Executor
+### 线程池Executor
 - 创建对象, 仅需要在JVM的堆上分配一块内存
 - 创建一个线程,却需要调用操作系统内核的API, 然后操作系统要为线程分配一系列的资源.
 
@@ -1107,7 +1048,7 @@ ThreadPoolExecutor(
 #### 使用线程池的注意事项
 - 不建议使用Executors, 原因是Executors提供的很多方法默认使用都是无界的LinkedBlockingQueue,在高负载情境下, 容易导致OOM, OOM会导致所有请求都无法处理.
 - 谨慎使用默认拒绝策略. RejectedExecutionException是运行时异常, 编译器并不强制要求catch, 因此容易被忽略.
-### 2.10. Future
+### Future
 ThreadPoolExecutor的void execute(Runnable command) 方法, 利用这个方法虽然可以提交任务, 但是却没有办法获取任务的执行结果.
 
 Java通过ThreadPoolExecutor提供的3个submit()方法和1个FutureTask工具类来支持获得任务执行结果的需求
@@ -1156,6 +1097,7 @@ class Task implements Runnable{
 ```
 
 #### FutureTask工具类
+
 Future前面提到是个接口,而FutureTask是一个工具类, 这个工具类有两个构造函数.
 ```Java
 FutureTask(Callable<V> callable);
@@ -1163,6 +1105,7 @@ FutureTask(Runnable runnable, V result);
 ```
 
 FutureTask实现了Runnable和Future接口, 由于其实现了Runnable接口, 所以可以将FutureTask对象作为任务提交给ThreadPoolExecutor执行, 也可以直接被Thread执行; 又因为实现了Future接口, 所以也可以用来获得任务的执行结果.
+
 ```Java
 // 创建 FutureTask
 FutureTask<Integer> futureTask
@@ -1176,9 +1119,10 @@ es.submit(futureTask);
 Integer result = futureTask.get();
 ```
 
-#### 实现"烧水泡茶"程序
+**实现"烧水泡茶"程序**
 
 ![烧水泡茶](/media/posts/boil.png)
+
 一种方式可以分为两个FutureTask----ft1和ft2, 
 - ft1完成洗水壶, 烧开水, 泡茶的任务. 
 - ft2完成洗茶壶, 洗茶杯, 拿茶叶的任务. 
@@ -1248,11 +1192,12 @@ T2: 拿茶叶...
 T1: 拿到茶叶: 龙井
 T1: 泡茶...
 上茶: 龙井
-
 ```
-### 2.11. CompletableFuture
 
-CompletableFuture是一个更为复杂的异步化工具类, 同时提供更加直接的功能
+### CompletableFuture
+
+CompletableFuture是一个更为复杂的异步化工具类, 同时提供更加直接的功能.
+
 - 无需手动维护线程, 没有繁琐的手动维护线程的工作
 - 语义更清晰
 - 代码更加简练并且专注于业务逻辑
@@ -1307,36 +1252,34 @@ T1: 泡茶...
 ```
 #### 创建CompletableFuture对象
 
-- static CompletableFuture<Void> runAsync(Runnable runnable): 没有返回值
-- static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier): 有返回值
-- static CompletableFuture<Void> runAsync(Runnable runnable, Executor executor): 没有返回值, 可以指定线程池.
-- static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier, Executor executor): 有返回值, 可以指定线程池.
-
+```Java
+//没有返回值, 默认ForkJoinPool线程池
+static CompletableFuture<Void> runAsync(Runnable runnable);
+//有返回值, 默认ForkJoinPool线程池
+static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier);
+//没有返回值, 可以指定线程池.
+static CompletableFuture<Void> runAsync(Runnable runnable, Executor executor);
+//有返回值, 可以指定线程池.
+static <U> CompletableFuture<U> supplyAsync(Supplier<U> supplier, Executor executor);
+```
 JUC默认使用ForkJoinPool线程池, 这个线程池默认创建的线程数是CPU的核数.
 
 创建完成后, 会自动运行runnable.run()或者supplier.get()方法. 因为CompletableFuture实现了Future接口, 所以关于异步操作什么时候结束和如果获取异步操作的执行结果的问题都可以通过Future接口来解决.
 
 #### 如何理解CompletionStage接口
+
 首先需要理解的是任务的时序关系.
+
 - 串行关系
 - 并行关系
 - 汇聚关系
 
 CompletionStage接口可以清晰地描述任务之间的这种时序关系.
 
-1. 描述串行关系: 
-有关的方法有thenApply, thenAccept, thenRun和thenCompose这四个系列的接口.  
+- **描述串行关系**: 
+有关的方法有thenApply, thenAccept, thenRun和thenCompose这四个系列的接口.
+  - then
+  
 
-### 2.12. CompletionService
 
-### 2.13. Fork/Join
 
-## 3. 并发编程设计模式
-
-### 3.1. Immutability模式
-### 3.2. Copy-on-Write模式
-### 3.3. 线程本地存储模式
-### 3.4. Guarded Suspension模式
-### 3.5. Balking模式
-### 3.6. Thread-Per-Message模式
-### 3.7. Worker Thread模式
