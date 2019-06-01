@@ -119,5 +119,18 @@ GatewayPorts yes
 ssh -nNT -R 9000:localhost:5984 user@example.com
 ```
 
+### vsftpd
+#### 530 Login incorrect 错误
+#### 500 
 
+### mysql语法
 
+#### 赋予权限
+```sql
+grant all privileges on mmall_learning.* to mmall@'%' identified by 'mmall' with grant option;
+
+flush privileges;
+```
+`mmall_learning`为数据库名, `mmall`为被赋予权限的MySQL用户名, identified by `mall`为对应用户名的密码.
+
+具体为赋予mmall对mmall_learning数据库的all privileges权限.
