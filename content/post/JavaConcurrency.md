@@ -1,6 +1,6 @@
 ---
 title : "深入理解java并发知识的归纳"
-date: 2019-06-02T01:37:56+08:00
+date: 2019-05-13T01:37:56+08:00
 lastmod: 2019-04-14T01:37:56+08:00
 draft: false
 tags: ["Java", "Concurrency"]
@@ -56,6 +56,11 @@ author: "Yang Zhang"
     - [2.11. CompletableFuture](#211-completablefuture)
         - [2.11.1. 创建CompletableFuture对象](#2111-创建completablefuture对象)
         - [2.11.2. 如何理解CompletionStage接口](#2112-如何理解completionstage接口)
+    - [2.12. CompletionService: 批量异步化操作](#212-completionservice-批量异步化操作)
+        - [2.12.1. CompletionService 接口](#2121-completionservice-接口)
+    - [2.13. Fork/Join 分治模型](#213-forkjoin-分治模型)
+        - [2.13.1. Fork/Join 计算框架](#2131-forkjoin-计算框架)
+        - [2.13.2. 工作原理](#2132-工作原理)
 
 <!-- /TOC -->
 
@@ -1118,36 +1123,20 @@ Future接口有五个方法.
 - get(timeout, unit): 获取任务执行结果,并支持超时机制.
 
 submit()方法之间的区别
+
 - 提交Runnable任务submit(Runnable task): 这个方法的参数是一个RUNNABLE接口, Runnable接口的run()方法是没有返回值的,所以submit(Runnable task)这个方法返回的Future仅可以用来断言任务已经结束了,类似于Thread.join().
 - 提交Callable任务submit(Callable<T> task): 这个方法的参数是一个Callale接口, 它只有一个call()方法, 并且这个方法是有返回值的,所以这个方法返回的Future对象可以通过调用其get()方法来获取任务的执行结果.
-- 提交Runnable任务及结果引用submit(Runnable task, T result): Runnable接口的实现类Task声明了一个有参构造函数Task(Result r), 创建Task对象的时候传入了result对象, 这样就能在类Task的run()方法中对result进行各种操作. result相当于主线程和子线程之间的桥梁, 通过它主子线程可以共享数据.
+- 提交Runnable任务及结果引用submit(Runnable task, T result): Runnable接口的实现类Task声明了一个有参构造函数Task(Result r), 创建Task对象的时候传入了result对象, 这样就能在类Task的run()方法中对result进行各种操作. result相当于主线程和子线程之间的桥梁,通过它主子线程可以共享数据.
 
-```Java 
-ExecutorService executor = Executor.newFixedThreadPool(1);
-//创建Result对象
-Result r = new Result();
-r.setAAA(a);
-//提交任务
-Future<Result> future = executor.submit(new Task(r),r);
-Result fr = future.get()
 
-class Task implements Runnable{
-    Result r;
-    //通过构造函数传入result
-    Task(Result r){
-        this.r = r;
-    }
-    void run() {
-        //可以操作 result
-        a = r.getAAA();
-        r.setXXX(x);
-    }
-}
-```
+
+
 
 #### 2.10.1. FutureTask工具类
 
+
 Future前面提到是个接口,而FutureTask是一个工具类, 这个工具类有两个构造函数.
+
 ```Java
 FutureTask(Callable<V> callable);
 FutureTask(Runnable runnable, V result);
@@ -1325,10 +1314,199 @@ JUC默认使用ForkJoinPool线程池, 这个线程池默认创建的线程数是
 
 CompletionStage接口可以清晰地描述任务之间的这种时序关系.
 
-- **描述串行关系**: 
+##### 描述串行关系
+
 有关的方法有thenApply, thenAccept, thenRun和thenCompose这四个系列的接口.
-  - then
+- thenApply系列函数的参数fn的类型是接口Function<T,R>, 这个接口里与CompletionStage相关的方法是 R apply(T t), 这个方法既能接受参数也能支持返回值, 所以thenApply系列方法返回的是CompletionStage<R>.
+- thenAccept系列函数里参数consumer的类型是接口Consumer<T>, 这个接口里与CompletionStage相关的方法是void accept(T t), 这个方法虽然支持参数,但却不支持回值, 所以thenAccept方法返回的也是CompletionStage<Void>.
+- thenRun系列方法里action的参数是Runnable, 所以action既不能接收参数也不支持返回值, 所以thenRun方法返回的也是CompletionStage<Void>.
+- thenCompose系列方法, 这个系列方法会新创建一个子流程, 最终结果和thenApply系列是相同的.
+
+```Java
+CompletionStage<R> thenApply(fn);
+CompletionStage<R> thenApplyAsync(fn);
+CompletionStage<Void> thenAccept(consumer);
+CompletionStage<Void> thenAcceptAsync(consumer);
+CompletionStage<Void> thenRun(action);
+CompletionStage<Void> thenRunAsync(action);
+CompletionStage<R> thenCompose(fn);
+CompletionStage<R> thenComposeAsync(fn);
+```
+这些方法里面Async代表异步执行fn, consumer或者action.
   
+下面是一个示例代码
+```Java
+CompletableFuture<String> f0 = 
+  CompletableFuture.supplyAsync(
+    () -> "Hello World")      //Step 1
+  .thenApply(s -> s + " QQ")  //Step 2
+  .thenApply(String::toUpperCase);//Step 3
+
+System.out.println(f0.join());
+// 输出结果
+HELLO WORLD QQ
+```
+首先通过supplyAsync()启动一个异步流程, 之后是两个串行操作. 虽然这个一个异步流程,对于Step 1,2,3来说却是串行执行的. Step2 依赖 Step1的执行结果, Step3 依赖 Step2的执行结果.
+
+##### 描述AND汇聚关系
+CompletionStage中有关的方法主要是thenCombine, thenAcceptBoth和runAfterBoth系列的接口. 这些接口的区别也源自fn, consumer, action这三个核心参数不同.
+
+```Java
+CompletionStage applyToEither(other, fn);
+CompletionStage applyToEitherAsync(other, fn);
+CompletionStage acceptEither(other, consumer);
+CompletionStage acceptEitherAsync(other, consumer);
+CompletionStage runAfterEither(other, action);
+CompletionStage runAfterEitherAsync(other, action);
+```
 
 
+##### 描述OR汇聚关系
+CompletionStage中有关的方法主要是applyToEither, acceptEither和runAfterEither系列的接口. 这些接口的区别也源自fn, consumer, action这三个核心参数不同.
+
+```Java
+CompletionStage applyToEither(other, fn);
+CompletionStage applyToEitherAsync(other, fn);
+CompletionStage acceptEither(other, consumer);
+CompletionStage acceptEitherAsync(other, consumer);
+CompletionStage runAfterEither(other, action);
+CompletionStage runAfterEitherAsync(other, action);
+```
+
+下面展示如何使用applyToEither()方法来描述一个OR汇聚关系.
+
+```Java
+CompletableFuture<String> f1 = 
+  CompletableFuture.supplyAsync(()->{
+    int t = getRandom(5, 10);
+    sleep(t, TimeUnit.SECONDS);
+    return String.valueOf(t);
+});
+
+CompletableFuture<String> f2 = 
+  CompletableFuture.supplyAsync(()->{
+    int t = getRandom(5, 10);
+    sleep(t, TimeUnit.SECONDS);
+    return String.valueOf(t);
+});
+
+CompletableFuture<String> f3 = 
+  f1.applyToEither(f2,s -> s);
+
+System.out.println(f3.join());
+```
+
+##### 异常处理
+
+fn, consumer, action这三个核心方法都不允许抛出可检查异常, 但却无法限制它们抛出运行时异常. CompletionStage接口提供了相关的方法, 使用这些方法进行异常处理和串行操作是一样的,都支持链式编程.
+
+```Java
+CompletionStage exceptionally(fn);
+CompletionStage<R> whenComplete(consumer);
+CompletionStage<R> whenCompleteAsync(consumer);
+CompletionStage<R> handle(fn);
+CompletionStage<R> handleAsync(fn);
+```
+
+- exceptionally(): 方法来处理异常, 相当于try{}catch{}中的catch{}.
+- whenComplete()和handle(): 相当于try{}finally中的finally{}. 无论是否发生异常都会执行whenComplete()中的回调函数consumer和handle()中的回调函数fn.
+  - whenComplete()不支持返回结果.
+  - handle()是支持返回结果.
+
+### 2.12. CompletionService: 批量异步化操作
+
+CompletionService的实现原理是内部维护了一个阻塞队列, 当任务执行结束就把任务的执行结果的Future对象加入到阻塞队列中.
+
+CompletionService接口的实现类是ExecutorCompletionService, 这个实现类的构造方法有两个
+1. ExecutorCompletionService(Executor executor);
+2. ExecutorCompletionService(Executor executor, BlockingQueue<Future<V>> completionQueue)
+
+这两个构造方法都需要传入一个线程池, 如果不指定completionQueue, 那么默认会使用无界的LinkedBlockingQueue. 任务执行结果的Future对象就是加入到completionQueue中.
+
+```Java
+// 创建阻塞队列
+BlockingQueue<Integer> bq =
+  new LinkedBlockingQueue<>();
+// 电商 S1 报价异步进入阻塞队列  
+executor.execute(()->
+  bq.put(f1.get()));
+// 电商 S2 报价异步进入阻塞队列  
+executor.execute(()->
+  bq.put(f2.get()));
+// 电商 S3 报价异步进入阻塞队列  
+executor.execute(()->
+  bq.put(f3.get()));
+// 异步保存所有报价  
+for (int i=0; i<3; i++) {
+  Integer r = bq.take();
+  executor.execute(()->save(r));
+}  
+```
+
+#### 2.12.1. CompletionService 接口
+
+CompletionService接口提供的方法有5个
+
+```Java
+Future<V> submit(Callable<V> task);
+Future<V> submit(Runnable task, V result);
+Future<V> take() 
+  throws InterruptedException;
+Future<V> poll();
+Future<V> poll(long timeout, TimeUnit unit) 
+  throws InterruptedException;
+```
+
+- submit()方法有两个, 一个方法参数是Callable<V> task, 另一个方法有Runnable task, V result两个方法. 这个方法类似于ThreadPoolExecutor的Future<T> submit(Runnable task, T result).
+- take(), poll() 都是从阻塞队列中获取并移除一个元素, 不同点是如果阻塞队列时空的, 调用take()方法的线程会被阻塞, 而调用poll()方法会返回null值.
+
+### 2.13. Fork/Join 分治模型
+
+对于简单的并行任务可以用"线程池+Future"方案解决, 如果任务之间有聚合关系(AND聚合或者OR聚合), 可以用CompletableFuture来解决, 如果任务是批量的, 可以用CompletionService来解决. Fork/Join计算框架用来处理分治问题.
+
+> 分治, 具体指把一个复杂问题分解成多个相似的子问题, 一直分到子问题简单到可以直接求解.
+
+#### 2.13.1. Fork/Join 计算框架
+
+- Fork对应的是分治任务模型的任务分解
+- Join对应的是分治任务模型的结果合并
+
+计算框架内部主要包括两个部分, 分治任务的线程池**ForkJoinPool**, 和分治任务**ForkJoinTask**. 这两个部分的关系类似于ThreadPoolExecutor和Runnable的关系.
+
+ForkJoinTask是一个抽象类, 最核心的方法是fork()方法和join()方法, 其中fork()方法会异步地执行一个子任务, 而join()方法则会阻塞当前线程来等待子任务的执行结果. ForkJoinTask有两个子类--RecursiveAction和RecursiveTask.这两个子类都定义了抽象方法compute(), 类似于前面的, RecursiveAction的compute()方法没有返回值而RecursiveTask的compute()方法有返回值. 这两个子类也是抽象类需要使用时定义子类去扩展. 下面例子演示Fork/Join计算斐波那契数列.
+
+```Java
+static void main(String[] args){
+  // 创建分治任务线程池  
+  ForkJoinPool fjp = 
+    new ForkJoinPool(4);
+  // 创建分治任务
+  Fibonacci fib = 
+    new Fibonacci(30);   
+  // 启动分治任务  
+  Integer result = 
+    fjp.invoke(fib);
+  // 输出结果  
+  System.out.println(result);
+}
+// 递归任务
+static class Fibonacci extends 
+    RecursiveTask<Integer>{
+  final int n;
+  Fibonacci(int n){this.n = n;}
+  protected Integer compute(){
+    if (n <= 1)
+      return n;
+    Fibonacci f1 = 
+      new Fibonacci(n - 1);
+    // 创建子任务  
+    f1.fork();
+    Fibonacci f2 = 
+      new Fibonacci(n - 2);
+    // 等待子任务结果，并合并结果  
+    return f2.compute() + f1.join();
+  }
+}
+```
+#### 2.13.2. 工作原理
 
