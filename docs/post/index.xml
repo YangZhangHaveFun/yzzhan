@@ -7,10 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Mon, 13 May 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 May 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>杂记</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/zaji/</link>
+      <pubDate>Fri, 17 May 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/zaji/</guid>
+      <description>老子曰: 死而不亡者寿. &amp;ldquo;&amp;lsquo;太上有立德，其次有立功，其次有立言&amp;rsquo;，虽久不废，此之谓不朽。&amp;rdquo; &amp;mdash;&amp;lt;&amp;lt;左传&amp;gt;&amp;gt;
+为君纠错, 是为忠; 为家擎天, 是为孝; 为子作则, 是为礼; 为法辩白, 是为节.
+&amp;ldquo;为天地立心，为生民立命，为往圣继绝学，为万世开太平” &amp;ndash; 张载
+《我的心曾悲伤七次》
+&amp;mdash;-卡里·纪伯伦 Kahlil Gibran
+第一次，当它本可进取时，却故作谦卑；
+第二次，当它在空虚时，用爱欲来填充；
+第三次，在困难和容易之间，它选择了容易；
+第四次，它犯了错，却借由别人也会犯错来宽慰自己；
+第五次，它自由软弱，却把它认为是生命的坚韧；
+第六次，当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副；
+第七次，它侧身于生活的污泥中，虽不甘心，却又畏首畏尾。
+Kahlil Gibran，1883—1931
+The first time when I saw her being meek that she might attain height. The second time when I saw her limping before the crippled. The third time when she was given to choose between the hard and the easy, and she chose the easy.</description>
+    </item>
     
     <item>
       <title>对深入理解java虚拟机的读书总结</title>
@@ -32,9 +54,7 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
       <pubDate>Mon, 13 May 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
-      <description>多线程基础 多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
-Volatile volatile 关键字最原始的意义是禁用CPU缓存.变量的读写必须从内存中读取或者写入.
-class VolatileExample { int x = 0; volatile boolean v = false; public void writer() { x = 42; v = true; } public void reader() { if (v == true) { // 若有两个线程,一个线程进行writer()一个线程进行reader()则  // 这里 X 在1.5之前 是 0 或者42, X在1.5之后一定是42.  } } }  Happen-Before规则 Java1.</description>
+      <description>1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.</description>
     </item>
     
     <item>
@@ -74,15 +94,6 @@ The containerization allows virtual instances to share a single host OS to reduc
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/</guid>
       <description> 这篇文章是对&amp;lt;&amp;gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.
 进程的描述和控制 线程 并发性 并发中的死锁和饥饿 </description>
-    </item>
-    
-    <item>
-      <title>杂记</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/zaji/</link>
-      <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/zaji/</guid>
-      <description>老子曰: 死而不亡者寿. &amp;ldquo;&amp;lsquo;太上有立德，其次有立功，其次有立言&amp;rsquo;，虽久不废，此之谓不朽。&amp;rdquo; &amp;mdash;&amp;lt;&amp;lt;左传&amp;gt;&amp;gt;</description>
     </item>
     
     <item>

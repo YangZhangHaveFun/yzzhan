@@ -24,27 +24,21 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="多线程基础 多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
-Volatile volatile 关键字最原始的意义是禁用CPU缓存.变量的读写必须从内存中读取或者写入.
-class VolatileExample { int x = 0; volatile boolean v = false; public void writer() { x = 42; v = true; } public void reader() { if (v == true) { // 若有两个线程,一个线程进行writer()一个线程进行reader()则  // 这里 X 在1.5之前 是 0 或者42, X在1.5之后一定是42.  } } }  Happen-Before规则 Java1.">
+  <meta name="description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="深入理解java并发知识的归纳">
-    <meta name="twitter:description" content="多线程基础 多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
-Volatile volatile 关键字最原始的意义是禁用CPU缓存.变量的读写必须从内存中读取或者写入.
-class VolatileExample { int x = 0; volatile boolean v = false; public void writer() { x = 42; v = true; } public void reader() { if (v == true) { // 若有两个线程,一个线程进行writer()一个线程进行reader()则  // 这里 X 在1.5之前 是 0 或者42, X在1.5之后一定是42.  } } }  Happen-Before规则 Java1.">
+    <meta name="twitter:description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="深入理解java并发知识的归纳">
-  <meta property="og:description" content="多线程基础 多线程的三个问题  多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为可见性. 线程切换带来的原子性问题: 我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性原子性. 编译优化带来的有序性问题: 代码按照预期的顺序执行,称为有序性  Java内存模型 Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 volatile, synchronized和final关键字, 以及六项Happen-Before规则.
-Volatile volatile 关键字最原始的意义是禁用CPU缓存.变量的读写必须从内存中读取或者写入.
-class VolatileExample { int x = 0; volatile boolean v = false; public void writer() { x = 42; v = true; } public void reader() { if (v == true) { // 若有两个线程,一个线程进行writer()一个线程进行reader()则  // 这里 X 在1.5之前 是 0 或者42, X在1.5之后一定是42.  } } }  Happen-Before规则 Java1.">
+  <meta property="og:description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -219,13 +213,122 @@ class VolatileExample { int x = 0; volatile boolean v = false; public void write
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">深入理解java并发知识的归纳</h1>
-      <p class="post-meta">@Yang Zhang · May 13, 2019 · 3 min read</p>
+      <p class="post-meta">@Yang Zhang · May 13, 2019 · 15 min read</p>
     </header>
     <article class="post-content">
 
-<h3 id="多线程基础">多线程基础</h3>
+<!-- TOC -->
 
-<h4 id="多线程的三个问题">多线程的三个问题</h4>
+<ul>
+<li><a href="#1-多线程基础">1. 多线程基础</a>
+
+<ul>
+<li><a href="#11-多线程的三个问题">1.1. 多线程的三个问题</a></li>
+<li><a href="#12-java内存模型">1.2. Java内存模型</a>
+
+<ul>
+<li><a href="#121-volatile">1.2.1. Volatile</a></li>
+<li><a href="#122-happen-before规则">1.2.2. Happen-Before规则</a></li>
+</ul></li>
+<li><a href="#13-如果解决并发原子性问题---互斥锁">1.3. 如果解决并发原子性问题&mdash;互斥锁</a>
+
+<ul>
+<li><a href="#131-死锁">1.3.1. 死锁</a></li>
+</ul></li>
+<li><a href="#14-等待-通知机制">1.4. &ldquo;等待-通知&rdquo;机制</a></li>
+<li><a href="#15-编程中需要注意的三类问题-安全性问题-活跃性问题和性能问题">1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.</a>
+
+<ul>
+<li><a href="#151-安全性问题">1.5.1. 安全性问题</a></li>
+<li><a href="#152-活跃性问题">1.5.2. 活跃性问题</a></li>
+<li><a href="#153-性能问题">1.5.3. 性能问题</a></li>
+</ul></li>
+<li><a href="#16-管程">1.6. 管程</a>
+
+<ul>
+<li><a href="#161-管程的发展-hasen模型-hoare模型-mesa模型">1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型</a></li>
+</ul></li>
+<li><a href="#17-线程">1.7. 线程</a>
+
+<ul>
+<li><a href="#171-线程的生命周期">1.7.1. 线程的生命周期</a></li>
+<li><a href="#172-java中线程的生命周期">1.7.2. Java中线程的生命周期</a></li>
+</ul></li>
+<li><a href="#18-并发量">1.8. 并发量</a></li>
+<li><a href="#19-局部变量----线程封闭">1.9. 局部变量 &ndash; 线程封闭</a></li>
+</ul></li>
+<li><a href="#2-javautilconcurrent-juc并发包详解">2. Java.util.Concurrent JUC并发包详解</a>
+
+<ul>
+<li><a href="#21-lock接口">2.1. Lock接口</a>
+
+<ul>
+<li><a href="#211-重造管程而不使用自带的synchronized的理由">2.1.1. 重造管程而不使用自带的synchronized的理由</a></li>
+<li><a href="#212-如何保证可见性">2.1.2. 如何保证可见性</a></li>
+<li><a href="#213-可重入锁">2.1.3. 可重入锁</a></li>
+<li><a href="#214-公平与非公平锁">2.1.4. 公平与非公平锁</a></li>
+</ul></li>
+<li><a href="#22-condition接口">2.2. Condition接口</a>
+
+<ul>
+<li><a href="#221-dubbo源码分析">2.2.1. Dubbo源码分析</a></li>
+</ul></li>
+<li><a href="#23-信号量模型">2.3. 信号量模型</a></li>
+<li><a href="#24-readwritelock-实现">2.4. ReadWriteLock 实现</a>
+
+<ul>
+<li><a href="#241-读写锁的升级与降级">2.4.1. 读写锁的升级与降级</a></li>
+</ul></li>
+<li><a href="#25-stampedlock">2.5. StampedLock</a>
+
+<ul>
+<li><a href="#251-stampedlock使用注意事项">2.5.1. StampedLock使用注意事项</a></li>
+</ul></li>
+<li><a href="#26-countdownlatch和cyclicbarrier">2.6. CountDownLatch和CyclicBarrier</a></li>
+<li><a href="#27-并发容器">2.7. 并发容器</a></li>
+<li><a href="#28-原子类">2.8. 原子类</a>
+
+<ul>
+<li><a href="#281-原理">2.8.1. 原理</a></li>
+<li><a href="#282-aba问题">2.8.2. ABA问题</a></li>
+<li><a href="#283-java实现原子化的count--1">2.8.3. Java实现原子化的count += 1</a></li>
+<li><a href="#284-原子类概览">2.8.4. 原子类概览</a></li>
+</ul></li>
+<li><a href="#29-线程池executor">2.9. 线程池Executor</a>
+
+<ul>
+<li><a href="#291-使用线程池的注意事项">2.9.1. 使用线程池的注意事项</a></li>
+</ul></li>
+<li><a href="#210-future">2.10. Future</a>
+
+<ul>
+<li><a href="#2101-futuretask工具类">2.10.1. FutureTask工具类</a></li>
+</ul></li>
+<li><a href="#211-completablefuture">2.11. CompletableFuture</a>
+
+<ul>
+<li><a href="#2111-创建completablefuture对象">2.11.1. 创建CompletableFuture对象</a></li>
+<li><a href="#2112-如何理解completionstage接口">2.11.2. 如何理解CompletionStage接口</a></li>
+</ul></li>
+<li><a href="#212-completionservice-批量异步化操作">2.12. CompletionService: 批量异步化操作</a>
+
+<ul>
+<li><a href="#2121-completionservice-接口">2.12.1. CompletionService 接口</a></li>
+</ul></li>
+<li><a href="#213-forkjoin-分治模型">2.13. Fork/Join 分治模型</a>
+
+<ul>
+<li><a href="#2131-forkjoin-计算框架">2.13.1. Fork/Join 计算框架</a></li>
+<li><a href="#2132-工作原理">2.13.2. 工作原理</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<h2 id="1-多线程基础">1. 多线程基础</h2>
+
+<h3 id="1-1-多线程的三个问题">1.1. 多线程的三个问题</h3>
 
 <ul>
 <li>多核和缓存导致的可见性问题: 一个线程对共享变量的修改，另外一个线程能够立刻看到，我们称为<strong>可见性</strong>.</li>
@@ -233,11 +336,11 @@ class VolatileExample { int x = 0; volatile boolean v = false; public void write
 <li>编译优化带来的有序性问题: 代码按照预期的顺序执行,称为<strong>有序性</strong></li>
 </ul>
 
-<h4 id="java内存模型">Java内存模型</h4>
+<h3 id="1-2-java内存模型">1.2. Java内存模型</h3>
 
 <p>Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 <strong>volatile</strong>, <strong>synchronized</strong>和<strong>final</strong>关键字, 以及六项<strong>Happen-Before</strong>规则.</p>
 
-<h5 id="volatile">Volatile</h5>
+<h4 id="1-2-1-volatile">1.2.1. Volatile</h4>
 
 <p>volatile 关键字最原始的意义是禁用CPU缓存.变量的读写必须从内存中读取或者写入.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VolatileExample</span> <span style="color:#f92672">{</span>
@@ -254,7 +357,7 @@ class VolatileExample { int x = 0; volatile boolean v = false; public void write
 </span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span> </code></pre></div>
-<h5 id="happen-before规则">Happen-Before规则</h5>
+<h4 id="1-2-2-happen-before规则">1.2.2. Happen-Before规则</h4>
 
 <p>Java1.5 用<strong>Happen-Before</strong>规则来解决这个问题. 下面介绍六项<strong>Happen-Before</strong>的规则. 首先<strong>Happen-Before</strong>表示前面一个操作的结果对后续操作是可见的.
 - <strong>程序的顺序性规则</strong>: 这条规则是指在一个线程中, 按照程序顺序, 前面的操作Happens-Before于后续的任意操作.
@@ -283,7 +386,7 @@ class VolatileExample { int x = 0; volatile boolean v = false; public void write
 
 Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="color:#f92672">.</span>
 
-<span style="color:#960050;background-color:#1e0010">####</span> 如果解决并发原子性问题<span style="color:#f92672">---</span>互斥锁
+<span style="color:#960050;background-color:#1e0010">###</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">3</span><span style="color:#f92672">.</span> 如果解决并发原子性问题<span style="color:#f92672">---</span>互斥锁
 我们称 <span style="color:#f92672">**</span>同一时刻只有一个线程执行<span style="color:#f92672">**</span>这个条件为<span style="color:#f92672">**</span>互斥<span style="color:#f92672">(</span>mutex<span style="color:#f92672">)**.</span> 一段需要互斥执行的代码称为<span style="color:#f92672">**</span>临界区<span style="color:#f92672">(</span>critical area<span style="color:#f92672">)**,</span> 需要注意的是我们需要标注出来临界区内受保护的资源<span style="color:#f92672">.</span> Java中互斥锁的关键词为synchronized<span style="color:#f92672">.</span> 加锁的本质就是在锁对象的对象头中添加当前线程的ID<span style="color:#f92672">.</span>
 <span style="color:#960050;background-color:#1e0010">```</span>java
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">X</span> <span style="color:#f92672">{</span>
@@ -328,7 +431,7 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 <span style="color:#f92672">}</span></code></pre></div>
 <p>简单的来说,我们可以用一把锁锁住所有需要的数据,但是这样会导致性能问题.因为一把锁会使所有的方法串行但很多方法是可以并行运行的. 用不同的锁对保护资源进行精细化管理,能够很大程度上提高性能.这种锁叫做<strong>细粒度锁</strong>. 使用<strong>细粒度锁</strong>可以提高并行度,但设计不良会导致<strong>死锁</strong>.</p>
 
-<h5 id="死锁">死锁</h5>
+<h4 id="1-3-1-死锁">1.3.1. 死锁</h4>
 
 <p>死锁指一组互相竞争资源的线程因互相等待,导致&rdquo;永久&rdquo;阻塞的现象. 触发死锁必须满足四个条件
 - 互斥, 共享资源X和Y只能被一个线程占用.
@@ -338,7 +441,7 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 
 <p>破坏其中一条就可以避免死锁的发生. 一般较为实用的方法是破坏第二和第四条,第二条可以通过设置timeout或者循环等待所有条件就绪再占有来预防,第四条可以通过序列化共享资源的占用来避免.</p>
 
-<h4 id="等待-通知-机制">&ldquo;等待-通知&rdquo;机制</h4>
+<h3 id="1-4-等待-通知-机制">1.4. &ldquo;等待-通知&rdquo;机制</h3>
 
 <p>在并发冲突较小时,循环等待所有条件尚可行.但当冲突量增大时,这种自旋的方式会白白浪费CPU. 另外一种可行的方式当线程要求不满足时,线程阻塞自己进入阻塞状态. 当线程线程的要求被满足时,别的线程可以通知线程继续执行.</p>
 
@@ -349,9 +452,9 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 <p>当条件满足时,可以通过notifyAll()方法, 这个方法会通知等待队列(<strong>对应互斥锁的等待队列</strong>)中的线程,告诉它<strong>条件曾经满足过</strong>. 但被通知的线程想要重新被执行,仍然需要获取到互斥锁.
 &gt; 需要注意的是,wait(), notify(), notifyAll()这三个方法能够被调用的前提是已经获取了相应的互斥锁. 通常来说, 使用notifyAll(),并在wait()处设置重复判断是绝大多数的选择.</p>
 
-<h4 id="编程中需要注意的三类问题-安全性问题-活跃性问题和性能问题">编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.</h4>
+<h3 id="1-5-编程中需要注意的三类问题-安全性问题-活跃性问题和性能问题">1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.</h3>
 
-<h5 id="安全性问题">安全性问题</h5>
+<h4 id="1-5-1-安全性问题">1.5.1. 安全性问题</h4>
 
 <p>安全性问题主要讨论的方向是方法或类是否线程安全. 所谓线程安全就是指程序按照预期的执行. 发生不安全的源头则是前面介绍过的可见性, 原子性和有序性问题.</p>
 
@@ -363,14 +466,14 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 - 先检测后执行
 - 两个线程同时修改统一数据</p>
 
-<h5 id="活跃性问题">活跃性问题</h5>
+<h4 id="1-5-2-活跃性问题">1.5.2. 活跃性问题</h4>
 
 <p>活跃性问题指的是某个操作无法执行下去. 常见的典型活跃性问题有三类:
 - 死锁: 线程互相等待, 表现为线程永久阻塞
 - 活锁: 线程并未发生阻塞, 但仍然会存在执行不下去的情况. 通常设置随机等待时间可以解决此类问题
 - 饥饿: 线程因无法访问所需资源而无法执行下去的情况. 通常是因为CPU繁忙且线程优先级的差异导致的. 使用公平锁可以极大程度上解决此类问题.</p>
 
-<h5 id="性能问题">性能问题</h5>
+<h4 id="1-5-3-性能问题">1.5.3. 性能问题</h4>
 
 <p>我们应尽量使程序并行而提高性能. 有一个阿姆达尔(Amdahl)定律代表处理器并行计算之后效率提升的能力,它可以解决此类问题. 具体公式是:$S=1/(1-p)+\frac{p}{n})$. 在这个公式里, n为CPU的核数, p为并行百分比. 当n无穷大, 并行百分比为95%时, 最高也只能提高20倍的性能.</p>
 
@@ -383,12 +486,12 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 - 延迟: 指的是发出请求到收到响应这个过程的时间.
 - 并发量.</p>
 
-<h4 id="管程">管程</h4>
+<h3 id="1-6-管程">1.6. 管程</h3>
 
 <p>管程(Monitor), 在Java中经常称之为监视器,在操作系统中被常称为管程.
 &gt; 管程,指管理共享变量以及对共享变量的操作过程,使其支持并发.</p>
 
-<h5 id="管程的发展-hasen模型-hoare模型-mesa模型">管程的发展-Hasen模型, Hoare模型, MESA模型</h5>
+<h4 id="1-6-1-管程的发展-hasen模型-hoare模型-mesa模型">1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型</h4>
 
 <p>并发编程领域有两大问题,两大核心问题:<strong>互斥</strong>和<strong>同步</strong>.
 - 互斥: 同一时刻只允许一个线程访问共享资源.
@@ -400,9 +503,9 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 
 <p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/monitor.png" alt="monitor illustration" /></p>
 
-<h4 id="线程">线程</h4>
+<h3 id="1-7-线程">1.7. 线程</h3>
 
-<h5 id="线程的生命周期">线程的生命周期</h5>
+<h4 id="1-7-1-线程的生命周期">1.7.1. 线程的生命周期</h4>
 
 <p>通用的线程模型包括五种状态,通常以&rdquo;五态模型&rdquo;来描述. 这五态分别是:
 - 初始状态: 线程已经被创建,但还不允许分配CPU执行.这个状态只存在于编程语言中, 换言之,这里的线程只是在编程语言层面被创建, 而在操作系统层面,真正的系统还没有创建.
@@ -413,7 +516,7 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 
 <p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/threadstate.png" alt="monitor illustration" /></p>
 
-<h5 id="java中线程的生命周期">Java中线程的生命周期</h5>
+<h4 id="1-7-2-java中线程的生命周期">1.7.2. Java中线程的生命周期</h4>
 
 <p>Java语言中线程共有六种状态, 分别是
 1. NEW (初始化状态)
@@ -450,27 +553,27 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
   - 当线程处于RUNNABLE状态时,并且阻塞在java.nio.channels.Selector上时,如果其他线程调用线程A的interrupt()方法,线程A的java.nio.channels.Selector会立即返回.
 - 主动监测: 如果线程处于RUNNABLE状态,并且没有阻塞在某个I/O操作上,这时依赖线程A主动监测中断状态.如果其他线程调用线程的interrupt()方法,那么线程可以通过isInterrupted()方法,监测是不是自己被中断了.</p>
 
-<h4 id="并发量">并发量</h4>
+<h3 id="1-8-并发量">1.8. 并发量</h3>
 
 <p>在并发编程领域,提升性能本质上是提升硬件的利用率, 提升I/O的利用率和CPU的利用率. 最佳的线程数量的决定可以分为CPU密集型计算场景和I/O密集型计算场景.
 - CPU密集型计算场景: 理论上&rdquo;线程的数量=CPU核数&rdquo;是最适合的,但在工程上,一般会设置为#CPU+1,因为偶尔当内存失效或其他原因导致阻塞的时候,额外的线程可以顶上来保证CPU的利用率.
 - I/O密集型计算场景: 最佳的线程数量与程序中CPU计算和I/O操作的耗时比相关的.
  &gt; 最佳线程数 = 1+ (I/O耗时/CPU耗时)</p>
 
-<h4 id="局部变量-线程封闭">局部变量 &ndash; 线程封闭</h4>
+<h3 id="1-9-局部变量-线程封闭">1.9. 局部变量 &ndash; 线程封闭</h3>
 
 <p>方法里的局部变量, 因为不会和其他线程共享, 所以没有并发问题. 这是一个解决并发问题的重要思路和技术,称之为<strong>线程封闭</strong>.
 &gt; 线程封闭: 仅在单线程内访问数据.</p>
 
 <p>采用线程封闭的案例非常多,例如在数据库连接池里获取的连接Connection, 在JDBC里没有要求这个Connection必须是线程安全的. 数据库连接池通过线程封闭技术,保证一个Connection一旦被一个线程获取之后,在这个线程关闭Connection之前的这段时间里, 不会再分配给其他线程,从而保证了Connection不会有并发问题.</p>
 
-<h3 id="java-util-concurrent-juc并发包详解">Java.util.Concurrent JUC并发包详解</h3>
+<h2 id="2-java-util-concurrent-juc并发包详解">2. Java.util.Concurrent JUC并发包详解</h2>
 
-<h4 id="lock和condition">Lock和Condition</h4>
+<h3 id="2-1-lock接口">2.1. Lock接口</h3>
 
 <p>JUC通过lock和condition这两个接口来重新实现管程, 其中Lock用于解决互斥问题,Condition用于解决同步问题.</p>
 
-<h5 id="重造管程而不使用自带的synchronized的理由">重造管程而不使用自带的synchronized的理由</h5>
+<h4 id="2-1-1-重造管程而不使用自带的synchronized的理由">2.1.1. 重造管程而不使用自带的synchronized的理由</h4>
 
 <ul>
 <li>能够相应中断. synchronized的问题是, 持有锁A后,如果尝试获取锁B失败, 那么线程就进入阻塞状态.一旦发生死锁, 就没有任何机会来唤醒阻塞的线程. 我们的期望是如果处于阻塞状态的线程能够相应中断信号, 换言之当我们给阻塞的线程发送中断信号时,线程能够被唤醒,那它就有机会释放锁A,也就破坏了不可抢占的条件.</li>
@@ -487,7 +590,1149 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">tryLock</span><span style="color:#f92672">();</span></code></pre></div>
 <p>JUC里用锁的经典范例就是try{}finally{}</p>
 
-<h5 id="如何保证可见性">如何保证可见性</h5>
+<h4 id="2-1-2-如何保证可见性">2.1.2. 如何保证可见性</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">X</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Lock rtl <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ReentrantLock<span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">int</span> value<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//获取锁
+</span><span style="color:#75715e"></span>        rtl<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            value <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//保证锁能够释放
+</span><span style="color:#75715e"></span>            rtl<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>之前介绍的sychronized之所以能够保证可见性是因为有一条Happens-before规则,即synchronized的解锁Happens-before于后续对这个锁的加锁. 而在JUC中,实现可见性利用了volatile相关的Happens-before规则. 例如ReentrantLock, 内部持有一个volatile成员变量state,获取锁的时候,会读写state的值,释放锁的时候也会读写state的值.也就是说,在执行value+=1之前,程序需要先读写一次Volatile变量state, 在执行value+=1之后,又读写了一次volatile变量state.根据相关的Happens-before规则:
+1. 顺序规则: 对于线程T1, value+=1 Happens-before 释放锁的操作unlock();
+2. volatile变量规则: 由于state=1 会先读取state, 所以线程T1的unlock()操作 Happens-Before 线程T2的lock()操作;
+3. 传递性规则: 线程T1的value+=1 Happens-before 线程T2的lock()操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SamleLock</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> state<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//加锁
+</span><span style="color:#75715e"></span>    lock<span style="color:#f92672">(){</span>
+        <span style="color:#75715e">//省略代码...
+</span><span style="color:#75715e"></span>        state <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">//解锁
+</span><span style="color:#75715e"></span>    unlock<span style="color:#f92672">(){</span>
+        <span style="color:#75715e">//省略代码...
+</span><span style="color:#75715e"></span>        state <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-1-3-可重入锁">2.1.3. 可重入锁</h4>
+
+<p>所谓可重入锁,指的是线程可以重复获取同一把锁</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">X</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Lock rtl <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">new</span> ReentrantLock<span style="color:#f92672">();</span>
+  <span style="color:#66d9ef">int</span> value<span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// 获取锁
+</span><span style="color:#75715e"></span>    rtl<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>         <span style="color:#960050;background-color:#1e0010">②</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">return</span> value<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+      <span style="color:#75715e">// 保证锁能释放
+</span><span style="color:#75715e"></span>      rtl<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// 获取锁
+</span><span style="color:#75715e"></span>    rtl<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>  
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      value <span style="color:#f92672">=</span> 1 <span style="color:#f92672">+</span> get<span style="color:#f92672">();</span> <span style="color:#960050;background-color:#1e0010">①</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+      <span style="color:#75715e">// 保证锁能释放
+</span><span style="color:#75715e"></span>      rtl<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-1-4-公平与非公平锁">2.1.4. 公平与非公平锁</h4>
+
+<p>ReentrantLock的构造器支持传递一个fair参数,fair代表锁的公平策略. 默认fair = false.</p>
+
+<ul>
+<li>当fair == true, 然后有线程释放锁的时候,从等待队列中唤醒一个等待线程时,谁等待的时间长就唤醒谁.</li>
+<li>当fair == false, 等待的时间并不决定唤醒线程的次序.</li>
+</ul>
+
+<p><strong>锁的实现建议</strong>
+锁的最佳实践可以分为三个方面</p>
+
+<ul>
+<li>永远只在更新对象的成员变量时加锁</li>
+<li>永远只在访问可变的成员变量时加锁</li>
+<li>永远不在调用其他对象的方法时加锁</li>
+</ul>
+
+<h3 id="2-2-condition接口">2.2. Condition接口</h3>
+
+<p>JUC的Condition实现了管程模型里面的条件变量.Java内置的管程里只有一个条件变量, 而Lock&amp;Condition实现的管程是支持多个条件变量.</p>
+
+<p>在很多并发场景下, 支持多个条件变量能够让我们的并发程序的可读性更好, 实现也更加容易. 例如,实现一个阻塞队列就需要两个条件变量, 队列不空和队列不满.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BlockedQueue</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;{</span>
+  <span style="color:#66d9ef">final</span> Lock lock <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">new</span> ReentrantLock<span style="color:#f92672">();</span>
+  <span style="color:#75715e">// 条件变量：队列不满  
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">final</span> Condition notFull <span style="color:#f92672">=</span>
+    lock<span style="color:#f92672">.</span><span style="color:#a6e22e">newCondition</span><span style="color:#f92672">();</span>
+  <span style="color:#75715e">// 条件变量：队列不空  
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">final</span> Condition notEmpty <span style="color:#f92672">=</span>
+    lock<span style="color:#f92672">.</span><span style="color:#a6e22e">newCondition</span><span style="color:#f92672">();</span>
+
+  <span style="color:#75715e">// 入队
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">enq</span><span style="color:#f92672">(</span>T x<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    lock<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>队列已满<span style="color:#f92672">){</span>
+        <span style="color:#75715e">// 等待队列不满
+</span><span style="color:#75715e"></span>        notFull<span style="color:#f92672">.</span><span style="color:#a6e22e">await</span><span style="color:#f92672">();</span>
+      <span style="color:#f92672">}</span>  
+      <span style="color:#75715e">// 省略入队操作...
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// 入队后, 通知可出队
+</span><span style="color:#75715e"></span>      notEmpty<span style="color:#f92672">.</span><span style="color:#a6e22e">signal</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+      lock<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// 出队
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">deq</span><span style="color:#f92672">(){</span>
+    lock<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>队列已空<span style="color:#f92672">){</span>
+        <span style="color:#75715e">// 等待队列不空
+</span><span style="color:#75715e"></span>        notEmpty<span style="color:#f92672">.</span><span style="color:#a6e22e">await</span><span style="color:#f92672">();</span>
+      <span style="color:#f92672">}</span>  
+      <span style="color:#75715e">// 省略出队操作...
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// 出队后，通知可入队
+</span><span style="color:#75715e"></span>      notFull<span style="color:#f92672">.</span><span style="color:#a6e22e">signal</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span><span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+      lock<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>  
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-2-1-dubbo源码分析">2.2.1. Dubbo源码分析</h4>
+
+<p><strong>同步与异步</strong>:当被调用方执行后返回结果,则为同步.当被调用方立即返回结果时则为异步.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/async.png" alt="monitor illustration" /></p>
+
+<p>在Java中,默认的代码方式就是同步,如果要异步可以用两种方式来实现:
+1. 调用方创建子线程, 在子线程中执行方法调用,这种调用称之为异步调用.
+2. 当方法实现的时候,创建一个新的线程执行主要的逻辑,主线程直接return,这种方法我们一般称之为异步方法.</p>
+
+<p>TCP协议本身就是非阻塞的. 在TCP协议层面, 发送完RPC请求之后,线程不会等待RPC的响应结果. 但日常使用时RPC调用大多数都是同步的, 这里以Dubbo为例, 展示如何从异步转化为同步.</p>
+
+<p>DefaultFuture类实现了当RPC返回结果之前,阻塞调用线程,让调用线程等待;当RPC返回结果后,唤醒线程,让调用线程重新执行.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 创建锁与条件变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Lock lock 
+    <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ReentrantLock<span style="color:#f92672">();</span>
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> Condition done 
+    <span style="color:#f92672">=</span> lock<span style="color:#f92672">.</span><span style="color:#a6e22e">newCondition</span><span style="color:#f92672">();</span>
+
+<span style="color:#75715e">// 调用方通过该方法等待结果
+</span><span style="color:#75715e"></span>Object <span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> timeout<span style="color:#f92672">){</span>
+  <span style="color:#66d9ef">long</span> start <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">nanoTime</span><span style="color:#f92672">();</span>
+  lock<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+  <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(!</span>isDone<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+      done<span style="color:#f92672">.</span><span style="color:#a6e22e">await</span><span style="color:#f92672">(</span>timeout<span style="color:#f92672">);</span>
+      <span style="color:#66d9ef">long</span> cur<span style="color:#f92672">=</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">nanoTime</span><span style="color:#f92672">();</span>
+      <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isDone<span style="color:#f92672">()</span> <span style="color:#f92672">||</span> 
+          cur<span style="color:#f92672">-</span>start <span style="color:#f92672">&gt;</span> timeout<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+    lock<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>isDone<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> TimeoutException<span style="color:#f92672">();</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">return</span> returnFromResponse<span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// RPC 结果是否已经返回
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isDone</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">return</span> response <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// RPC 结果返回时调用该方法   
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doReceived</span><span style="color:#f92672">(</span>Response res<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  lock<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+  <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+    response <span style="color:#f92672">=</span> res<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>done <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      done<span style="color:#f92672">.</span><span style="color:#a6e22e">signal</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+    lock<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h3 id="2-3-信号量模型">2.3. 信号量模型</h3>
+
+<p>信号量的模型有一个计数器,一个等待队列和三个方法. 信号量模型中, 计数器和等待队列是透明的, 所以只能通过信号量模型提供的三个方法来访问它们.
+- init(): 设置计数器的初始值
+- down(): 计数器的值减1; 如果此时计数器的值小于0, 则当前线程将被阻塞, 否则当前线程可以继续执行.
+- up(): 计数器的值加1; 如果此时计数器的值小于或者等于0, 则唤醒等待队列的一个线程,并将其从等待队列中移除.</p>
+
+<p>这三个方法都具有原子性. 信号量模型是由J.U.C.Semaphore实现的.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Semaphore</span><span style="color:#f92672">{</span>
+  <span style="color:#75715e">// 计数器
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> count<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// 等待队列
+</span><span style="color:#75715e"></span>  Queue queue<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// 初始化操作
+</span><span style="color:#75715e"></span>  Semaphore<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> c<span style="color:#f92672">){</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">count</span><span style="color:#f92672">=</span>c<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// 
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">down</span><span style="color:#f92672">(){</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">count</span><span style="color:#f92672">--;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">count</span><span style="color:#f92672">&lt;</span>0<span style="color:#f92672">){</span>
+      <span style="color:#75715e">// 将当前线程插入等待队列
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// 阻塞当前线程
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">up</span><span style="color:#f92672">(){</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">count</span><span style="color:#f92672">++;</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">count</span><span style="color:#f92672">&lt;=</span>0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      <span style="color:#75715e">// 移除等待队列中的某个线程 T
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// 唤醒线程 T
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>在JUC中, up()和down()方法对应的是acquire()和release()方法.</p>
+
+<p>信号量相较于锁和条件变量, 最突出的优点是可以控制多个线程进入同一个临界区. 实际的例子就是限流器, 例如连接池,对象池,线程池. 这里的例子是对象池.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ObjPool</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">,</span> R<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">final</span> List<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> pool<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// 用信号量实现限流器
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">final</span> Semaphore sem<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// 构造函数
+</span><span style="color:#75715e"></span>  ObjPool<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> size<span style="color:#f92672">,</span> T t<span style="color:#f92672">){</span>
+    pool <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;(){};</span>
+    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span> i<span style="color:#f92672">&lt;</span>size<span style="color:#f92672">;</span> i<span style="color:#f92672">++){</span>
+      pool<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>t<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+    sem <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Semaphore<span style="color:#f92672">(</span>size<span style="color:#f92672">);</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// 利用对象池的对象，调用 func
+</span><span style="color:#75715e"></span>  R <span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span>Function<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">,</span>R<span style="color:#f92672">&gt;</span> func<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    T t <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    sem<span style="color:#f92672">.</span><span style="color:#a6e22e">acquire</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      t <span style="color:#f92672">=</span> pool<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+      <span style="color:#66d9ef">return</span> func<span style="color:#f92672">.</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>t<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+      pool<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>t<span style="color:#f92672">);</span>
+      sem<span style="color:#f92672">.</span><span style="color:#a6e22e">release</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 创建对象池
+</span><span style="color:#75715e"></span>ObjPool<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;</span> pool <span style="color:#f92672">=</span> 
+  <span style="color:#66d9ef">new</span> ObjPool<span style="color:#f92672">&lt;</span>Long<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;(</span>10<span style="color:#f92672">,</span> 2<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 通过对象池获取 t，之后执行  
+</span><span style="color:#75715e"></span>pool<span style="color:#f92672">.</span><span style="color:#a6e22e">exec</span><span style="color:#f92672">(</span>t <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>t<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> t<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">});</span></code></pre></div>
+<p>Java并发编程重点在管程模型, 解决了信号量模型的易用性和工程化方面.</p>
+
+<h3 id="2-4-readwritelock-实现">2.4. ReadWriteLock 实现</h3>
+
+<p>JUC提供很多工具类, 目的就是分场景优化性能, 提供易用性.</p>
+
+<p>一种非常普遍的并发场景, 读多写少的场景. 我们经常使用缓存,例如缓存元数据,缓存基础数据等, 这是一种典型的读多写少的应用场景. 缓存之所以能提升性能, 一个重要的条件就是缓存的数据一定是读多写少的, 例如元数据和基础数据基本不会发生变化,但使用的地方却很多. 针对这种并发场景, JUC包中的ReadWriteLock用来解决此类型的并发问题并极大提高性能.</p>
+
+<p>读写锁的三个基本原则
+- 允许多个线程同时读共享变量
+- 只允许一个线程写共享变量
+- 如果一个线程正在执行写操作, 此时禁止读线程读共享变量``</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Cache</span><span style="color:#f92672">&lt;</span>K<span style="color:#f92672">,</span>V<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">final</span> Map<span style="color:#f92672">&lt;</span>K<span style="color:#f92672">,</span> V<span style="color:#f92672">&gt;</span> m <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;();</span>
+  <span style="color:#66d9ef">final</span> ReadWriteLock rwl <span style="color:#f92672">=</span> 
+    <span style="color:#66d9ef">new</span> ReentrantReadWriteLock<span style="color:#f92672">();</span>
+  <span style="color:#66d9ef">final</span> Lock r <span style="color:#f92672">=</span> rwl<span style="color:#f92672">.</span><span style="color:#a6e22e">readLock</span><span style="color:#f92672">();</span>
+  <span style="color:#66d9ef">final</span> Lock w <span style="color:#f92672">=</span> rwl<span style="color:#f92672">.</span><span style="color:#a6e22e">writeLock</span><span style="color:#f92672">();</span>
+ 
+  V <span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>K key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    V v <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 读缓存
+</span><span style="color:#75715e"></span>    r<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>         <span style="color:#960050;background-color:#1e0010">①</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      v <span style="color:#f92672">=</span> m<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>key<span style="color:#f92672">);</span> <span style="color:#960050;background-color:#1e0010">②</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span><span style="color:#f92672">{</span>
+      r<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>     <span style="color:#960050;background-color:#1e0010">③</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">// 缓存中存在，返回
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>v <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>   <span style="color:#960050;background-color:#1e0010">④</span>
+      <span style="color:#66d9ef">return</span> v<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>  
+    <span style="color:#75715e">// 缓存中不存在，查询数据库
+</span><span style="color:#75715e"></span>    w<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>         <span style="color:#960050;background-color:#1e0010">⑤</span>
+    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+      <span style="color:#75715e">// 再次验证
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// 其他线程可能已经查询过数据库
+</span><span style="color:#75715e"></span>      v <span style="color:#f92672">=</span> m<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>key<span style="color:#f92672">);</span> <span style="color:#960050;background-color:#1e0010">⑥</span>
+      <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>v <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">){</span>  <span style="color:#960050;background-color:#1e0010">⑦</span>
+        <span style="color:#75715e">// 查询数据库
+</span><span style="color:#75715e"></span>        v<span style="color:#f92672">=</span> 省略代码无数
+        m<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>key<span style="color:#f92672">,</span> v<span style="color:#f92672">);</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span><span style="color:#f92672">{</span>
+      w<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> v<span style="color:#f92672">;</span> 
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-4-1-读写锁的升级与降级">2.4.1. 读写锁的升级与降级</h4>
+
+<p>在ReadWriteLock中,不支持先获得读锁再升级成写锁的功能. 虽然锁的升级是不允许的, 锁的降级却是允许的.同时,只有写锁支持条件变量,读锁是不支持条件变量的.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CachedData</span> <span style="color:#f92672">{</span>
+  Object data<span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">boolean</span> cacheValid<span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">final</span> ReadWriteLock rwl <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">new</span> ReentrantReadWriteLock<span style="color:#f92672">();</span>
+  <span style="color:#75715e">// 读锁  
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">final</span> Lock r <span style="color:#f92672">=</span> rwl<span style="color:#f92672">.</span><span style="color:#a6e22e">readLock</span><span style="color:#f92672">();</span>
+  <span style="color:#75715e">// 写锁
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">final</span> Lock w <span style="color:#f92672">=</span> rwl<span style="color:#f92672">.</span><span style="color:#a6e22e">writeLock</span><span style="color:#f92672">();</span>
+  
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">processCachedData</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// 获取读锁
+</span><span style="color:#75715e"></span>    r<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>cacheValid<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      <span style="color:#75715e">// 释放读锁，因为不允许读锁的升级
+</span><span style="color:#75715e"></span>      r<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span>
+      <span style="color:#75715e">// 获取写锁
+</span><span style="color:#75715e"></span>      w<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span>
+      <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 再次检查状态  
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>cacheValid<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+          data <span style="color:#f92672">=</span> <span style="color:#f92672">...</span>
+          cacheValid <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">// 释放写锁前，降级为读锁
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 降级是可以的
+</span><span style="color:#75715e"></span>        r<span style="color:#f92672">.</span><span style="color:#a6e22e">lock</span><span style="color:#f92672">();</span> <span style="color:#960050;background-color:#1e0010">①</span>
+      <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 释放写锁
+</span><span style="color:#75715e"></span>        w<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();</span> 
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">// 此处仍然持有读锁
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>use<span style="color:#f92672">(</span>data<span style="color:#f92672">);}</span> 
+    <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>r<span style="color:#f92672">.</span><span style="color:#a6e22e">unlock</span><span style="color:#f92672">();}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h3 id="2-5-stampedlock">2.5. StampedLock</h3>
+
+<p>StampedLock类似于数据库并发模型中的Timestamp模型. StampedLock有三种模式, 写锁, 悲观读锁和乐观读. 其中写锁和悲观读锁与ReadWriteLock相似. 允许多个线程读操作和一个线程写操作, 不同的是StampedLock里的悲观读和写锁加锁成功后,会返回一个stamp. 在解锁的时候,需要传进这个stamp.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">final</span> StampedLock sl <span style="color:#f92672">=</span> 
+  <span style="color:#66d9ef">new</span> StampedLock<span style="color:#f92672">();</span>
+  
+<span style="color:#75715e">// 获取 / 释放悲观读锁示意代码
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> stamp <span style="color:#f92672">=</span> sl<span style="color:#f92672">.</span><span style="color:#a6e22e">readLock</span><span style="color:#f92672">();</span>
+<span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+  <span style="color:#75715e">// 省略业务相关代码
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+  sl<span style="color:#f92672">.</span><span style="color:#a6e22e">unlockRead</span><span style="color:#f92672">(</span>stamp<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">// 获取 / 释放写锁示意代码
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> stamp <span style="color:#f92672">=</span> sl<span style="color:#f92672">.</span><span style="color:#a6e22e">writeLock</span><span style="color:#f92672">();</span>
+<span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+  <span style="color:#75715e">// 省略业务相关代码
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+  sl<span style="color:#f92672">.</span><span style="color:#a6e22e">unlockWrite</span><span style="color:#f92672">(</span>stamp<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>乐观读是StampedLock比ReadWriteLock性能高的关键所在. StampedLock支持的乐观读允许在多个线程读数据时一个线程写数据.同时,这个乐观读操作是无锁的.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Point</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> x<span style="color:#f92672">,</span> y<span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">final</span> StampedLock sl <span style="color:#f92672">=</span> 
+    <span style="color:#66d9ef">new</span> StampedLock<span style="color:#f92672">();</span>
+  <span style="color:#75715e">// 计算到原点的距离  
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">distanceFromOrigin</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// 乐观读
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> stamp <span style="color:#f92672">=</span> 
+      sl<span style="color:#f92672">.</span><span style="color:#a6e22e">tryOptimisticRead</span><span style="color:#f92672">();</span>
+    <span style="color:#75715e">// 读入局部变量，
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 读的过程数据可能被修改
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> curX <span style="color:#f92672">=</span> x<span style="color:#f92672">,</span> curY <span style="color:#f92672">=</span> y<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 判断执行读操作期间，
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 是否存在写操作，如果存在，
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 则 sl.validate 返回 false
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>sl<span style="color:#f92672">.</span><span style="color:#a6e22e">validate</span><span style="color:#f92672">(</span>stamp<span style="color:#f92672">)){</span>
+      <span style="color:#75715e">// 升级为悲观读锁
+</span><span style="color:#75715e"></span>      stamp <span style="color:#f92672">=</span> sl<span style="color:#f92672">.</span><span style="color:#a6e22e">readLock</span><span style="color:#f92672">();</span>
+      <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+        curX <span style="color:#f92672">=</span> x<span style="color:#f92672">;</span>
+        curY <span style="color:#f92672">=</span> y<span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// 释放悲观读锁
+</span><span style="color:#75715e"></span>        sl<span style="color:#f92672">.</span><span style="color:#a6e22e">unlockRead</span><span style="color:#f92672">(</span>stamp<span style="color:#f92672">);</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">sqrt</span><span style="color:#f92672">(</span>
+      curX <span style="color:#f92672">*</span> curX <span style="color:#f92672">+</span> curY <span style="color:#f92672">*</span> curY<span style="color:#f92672">);</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-5-1-stampedlock使用注意事项">2.5.1. StampedLock使用注意事项</h4>
+
+<ul>
+<li>对于读多写少的场景, StampedLock的性能优于ReadWriteLock</li>
+<li>StampedLock只是ReadWriteLock的子集.</li>
+<li>StampedLock不支持重入</li>
+<li>StampedLock 的悲观读锁、写锁都不支持条件变量</li>
+<li>如果线程阻塞在 StampedLock 的 readLock()或者WriteLock()上会导致CPU飙升</li>
+</ul>
+
+<h3 id="2-6-countdownlatch和cyclicbarrier">2.6. CountDownLatch和CyclicBarrier</h3>
+
+<p>CountDownLatch和CyclicBarrier是Java并发包提供的两个非常易用的线程同步工具类. 当每次循环都生成新线程时,join()可以被用来做为线程同步的方式. 当我们用线程池不新建线程时, CountDownLatch和CyclicBarrier来使线程同步.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 创建 2 个线程的线程池
+</span><span style="color:#75715e"></span>Executor executor <span style="color:#f92672">=</span> 
+  Executors<span style="color:#f92672">.</span><span style="color:#a6e22e">newFixedThreadPool</span><span style="color:#f92672">(</span>2<span style="color:#f92672">);</span>
+<span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>存在未对账订单<span style="color:#f92672">){</span>
+  <span style="color:#75715e">// 计数器初始化为 2
+</span><span style="color:#75715e"></span>  CountDownLatch latch <span style="color:#f92672">=</span> 
+    <span style="color:#66d9ef">new</span> CountDownLatch<span style="color:#f92672">(</span>2<span style="color:#f92672">);</span>
+  <span style="color:#75715e">// 查询未对账订单
+</span><span style="color:#75715e"></span>  executor<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;</span> <span style="color:#f92672">{</span>
+    pos <span style="color:#f92672">=</span> getPOrders<span style="color:#f92672">();</span>
+    latch<span style="color:#f92672">.</span><span style="color:#a6e22e">countDown</span><span style="color:#f92672">();</span>
+  <span style="color:#f92672">});</span>
+  <span style="color:#75715e">// 查询派送单
+</span><span style="color:#75715e"></span>  executor<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;</span> <span style="color:#f92672">{</span>
+    dos <span style="color:#f92672">=</span> getDOrders<span style="color:#f92672">();</span>
+    latch<span style="color:#f92672">.</span><span style="color:#a6e22e">countDown</span><span style="color:#f92672">();</span>
+  <span style="color:#f92672">});</span>
+  
+  <span style="color:#75715e">// 等待两个查询操作结束
+</span><span style="color:#75715e"></span>  latch<span style="color:#f92672">.</span><span style="color:#a6e22e">await</span><span style="color:#f92672">();</span>
+  
+  <span style="color:#75715e">// 执行对账操作
+</span><span style="color:#75715e"></span>  diff <span style="color:#f92672">=</span> check<span style="color:#f92672">(</span>pos<span style="color:#f92672">,</span> dos<span style="color:#f92672">);</span>
+  <span style="color:#75715e">// 差异写入差异库
+</span><span style="color:#75715e"></span>  save<span style="color:#f92672">(</span>diff<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 订单队列
+</span><span style="color:#75715e"></span>Vector<span style="color:#f92672">&lt;</span>P<span style="color:#f92672">&gt;</span> pos<span style="color:#f92672">;</span>
+<span style="color:#75715e">// 派送单队列
+</span><span style="color:#75715e"></span>Vector<span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&gt;</span> dos<span style="color:#f92672">;</span>
+<span style="color:#75715e">// 执行回调的线程池 
+</span><span style="color:#75715e"></span>Executor executor <span style="color:#f92672">=</span> 
+  Executors<span style="color:#f92672">.</span><span style="color:#a6e22e">newFixedThreadPool</span><span style="color:#f92672">(</span>1<span style="color:#f92672">);</span>
+<span style="color:#66d9ef">final</span> CyclicBarrier barrier <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">new</span> CyclicBarrier<span style="color:#f92672">(</span>2<span style="color:#f92672">,</span> <span style="color:#f92672">()-&gt;{</span>
+    executor<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;</span>check<span style="color:#f92672">());</span>
+  <span style="color:#f92672">});</span>
+  
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">check</span><span style="color:#f92672">(){</span>
+  P p <span style="color:#f92672">=</span> pos<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+  D d <span style="color:#f92672">=</span> dos<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+  <span style="color:#75715e">// 执行对账操作
+</span><span style="color:#75715e"></span>  diff <span style="color:#f92672">=</span> check<span style="color:#f92672">(</span>p<span style="color:#f92672">,</span> d<span style="color:#f92672">);</span>
+  <span style="color:#75715e">// 差异写入差异库
+</span><span style="color:#75715e"></span>  save<span style="color:#f92672">(</span>diff<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+  
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">checkAll</span><span style="color:#f92672">(){</span>
+  <span style="color:#75715e">// 循环查询订单库
+</span><span style="color:#75715e"></span>  Thread T1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()-&gt;{</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>存在未对账订单<span style="color:#f92672">){</span>
+      <span style="color:#75715e">// 查询订单库
+</span><span style="color:#75715e"></span>      pos<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>getPOrders<span style="color:#f92672">());</span>
+      <span style="color:#75715e">// 等待
+</span><span style="color:#75715e"></span>      barrier<span style="color:#f92672">.</span><span style="color:#a6e22e">await</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">});</span>
+  T1<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>  
+  <span style="color:#75715e">// 循环查询运单库
+</span><span style="color:#75715e"></span>  Thread T2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(()-&gt;{</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>存在未对账订单<span style="color:#f92672">){</span>
+      <span style="color:#75715e">// 查询运单库
+</span><span style="color:#75715e"></span>      dos<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>getDOrders<span style="color:#f92672">());</span>
+      <span style="color:#75715e">// 等待
+</span><span style="color:#75715e"></span>      barrier<span style="color:#f92672">.</span><span style="color:#a6e22e">await</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">});</span>
+  T2<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<ul>
+<li>CountDownLatch主要用来解决一个线程等待多个线程的场景.</li>
+<li>CyclicBarrier是一组线程之间互相等待.</li>
+</ul>
+
+<p>CountDownLatch不能循环利用,一旦计数器减到0, 后面的线程调用await()会直接通过. 但CyclicBarrier的计数器是可以循环使用的, 而且具备自动重置的功能.</p>
+
+<h3 id="2-7-并发容器">2.7. 并发容器</h3>
+
+<p>Java的容器可以分为四大类: List, Map, Set和Queue.</p>
+
+<ul>
+<li>把线程不安全的容器封装在安全的容器对象内部, 并控制好访问路径是最简单的构造线程安全容器的方法. 但潜在的组合操作导致竞态条件问题并没有解决. 例如SafeArrayList方法.
+```Java
+SafeArrayList<T>{
+// 封装 ArrayList
+List<T> c = new ArrayList&lt;&gt;();
+// 控制访问路径
+synchronized
+T get(int idx){
+return c.get(idx);
+}</li>
+</ul>
+
+<p>synchronized
+  void add(int idx, T t) {
+    c.add(idx, t);
+  }</p>
+
+<p>synchronized
+  boolean addIfNotExist(T t){
+    if(!c.contains(t)) {
+      c.add(t);
+      return true;
+    }
+    return false;
+  }
+}</p>
+
+<pre><code>对于addIfNotExist()方法, 存在组合操作的竞态条件问题. 一个容易被忽略的问题是
+迭代器遍历容器导致并发问题.
+```Java
+List list = Collections.
+  synchronizedList(new ArrayList());
+synchronized (list) {  
+  Iterator i = list.iterator(); 
+  while (i.hasNext())
+    foo(i.next());
+}    
+</code></pre>
+
+<p>Java1.5版本之前所谓的线程安全的容器, 主要指的就是<strong>同步容器</strong>, 但是同步容器的问题就是性能差, 所有的方法都用synchronized来保证互斥,这种串行度太高.</p>
+
+<p>Java1.5版本之后,提供了性能更高的容器,一般为<strong>并发容器</strong>.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/conc.png" alt="Concurrent Container" /></p>
+
+<ul>
+<li>List: List实现类只有CopyOnWriteList. CopyOnWriteList内部维护了一个数组, 成员变量array就指向这个内部数组,所有的读操作都是基于array进行的. 迭代器Iterator遍历的就是array数组. 迭代器Iterator遍历的就是array数组. 当在遍历array的同时,还有一个写操作,例如增加元素, CopyOnWriteList会将array复制一份, 然后在新复制处理的数据上执行增加元素的操作,执行完之后再将array指向这个新的数组. 因此读写操作是可以并行的, 遍历操作一直都是基于原array执行的, 而写操作则是基于新array执行的.
+
+<ul>
+<li>在应用场景中,CopyOnWriteList仅适用于写操作非常少的场景, 而且能够容忍读写的短暂不一致.</li>
+<li>CopyOnWriteList迭代器是只读的, 不支持增删改.</li>
+</ul></li>
+<li>Map: Map接口的两个实现是ConcurrentHashMap和ConcurrentSkipMap, 它们从应用的角度看,主要的区别是ConcurrentHashMap的key是无序的,而ConcurrentSkipMap的key是有序的.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/cmap.PNG" alt="Maps Comparison Table" /></li>
+<li>Set: Set的两个接口是CopyOnWriteArraySet和ConcurrentListSet, 它们使用的场景类似于CopyOnwriteArrayList和ConcurrentSkipMap.</li>
+<li>Queue: Queue的并发容器相对较为复杂. 从两个维度来看
+
+<ul>
+<li>阻塞与非阻塞: 阻塞指当队列已满时,入队操作阻塞; 队列空时,出队操作阻塞.</li>
+<li>单端与双端: 单端只能队尾入队,队首出队; 双端指队首队尾皆可入队出队. JUC里, 阻塞队列用Blocking标识, 单双队列分别用Queue和Deque标识.</li>
+<li>单端阻塞队列: ArrayBlockingQueue, LinkedBlockingQueue, SynchronousQueue, LinkedTransferQueue, PriorityBlockingQueue和DelayQueue. 一般来说, 单端阻塞队列中会持有一个队列,可以是数组(ArrayBlockingQueue), 可以是链表(LinkedBlockingQueue), 甚至可以不持有队列(SynchronousQueue), 此时生产者线程的入队操作必须等待消费者线程的出队操作. 而LinkedBlockingQueue融合了LinkedBlockingQueue和 SynchronousQueue的功能,性能更好.PriorityBlockingQueue和DelayQueue支持按照优先级出队, DelayQueue支持延迟出队.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/bqueue.png" alt="Blocking queue" /></li>
+<li>双端阻塞队列: LinkedBlockingDeque
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/bdeque.png" alt="Blocking deque" /></li>
+<li>单端非阻塞队列: ConcurrentLinkedQueue</li>
+<li>双端非阻塞队列: ConcurrentLinkedDeque</li>
+<li>在使用时,需格外注意是否支持有界(容量限制), 数据量大了的时候会引发OOM问题. 只有ArrayBlockingQueue, LinkedBlockingQueue支持有界. 在使用其他无界队列时,一定要充分考虑是否存在导致OOM的隐患.</li>
+<li>选对所需要的容器是最关键的</li>
+<li>Fail-Fast机制</li>
+</ul></li>
+</ul>
+
+<h3 id="2-8-原子类">2.8. 原子类</h3>
+
+<p>之前提到可见性问题一般用volatile解决,原子性问题一般用互斥锁的方式解决. 但对于简单的原子性问题.还有一种方法就是<strong>无锁方案</strong>. JUC提供一系列的原子类, 下面提供一个例子.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> <span style="color:#f92672">{</span>
+  AtomicLong count <span style="color:#f92672">=</span> 
+    <span style="color:#66d9ef">new</span> AtomicLong<span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add10K</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>idx<span style="color:#f92672">++</span> <span style="color:#f92672">&lt;</span> 10000<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      count<span style="color:#f92672">.</span><span style="color:#a6e22e">getAndIncrement</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-8-1-原理">2.8.1. 原理</h4>
+
+<p>原子类通过硬件支持的CAS(Compare and Swap)指令来解决并发问题.CAS指令包含三个参数:共享变量的内存地址A, 用于比较的值B和共享变量的新值C. 只有当内存中地址A处的值等于B时, 才能将内存中地址A处的值更新为新值C. CAS是一条CPU指令,指令本身可以保证其原子性. 这里代码模拟工作原理.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimulatedCAS</span><span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">int</span> count<span style="color:#960050;background-color:#1e0010">；</span>
+  <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">cas</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> expect<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> newValue<span style="color:#f92672">){</span>
+    <span style="color:#75715e">// 读目前 count 的值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> curValue <span style="color:#f92672">=</span> count<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 比较目前 count 值是否 == 期望值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>curValue <span style="color:#f92672">==</span> expect<span style="color:#f92672">){</span>
+      <span style="color:#75715e">// 如果是，则更新 count 的值
+</span><span style="color:#75715e"></span>      count <span style="color:#f92672">=</span> newValue<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">// 返回写入前的值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> curValue<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>使用CAS来解决并发问题, 一般都会伴随着自旋, 下面为演示代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimulatedCAS</span><span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> count<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// 实现 count+=1
+</span><span style="color:#75715e"></span>  addOne<span style="color:#f92672">(){</span>
+    <span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span>
+      newValue <span style="color:#f92672">=</span> count<span style="color:#f92672">+</span>1<span style="color:#f92672">;</span> <span style="color:#75715e">//①
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>count <span style="color:#f92672">!=</span>
+      cas<span style="color:#f92672">(</span>count<span style="color:#f92672">,</span>newValue<span style="color:#f92672">)</span> <span style="color:#75715e">//②
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// 模拟实现 CAS，仅用来帮助理解
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">cas</span><span style="color:#f92672">(</span>
+    <span style="color:#66d9ef">int</span> expect<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> newValue<span style="color:#f92672">){</span>
+    <span style="color:#75715e">// 读目前 count 的值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> curValue <span style="color:#f92672">=</span> count<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 比较目前 count 值是否 == 期望值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>curValue <span style="color:#f92672">==</span> expect<span style="color:#f92672">){</span>
+      <span style="color:#75715e">// 如果是，则更新 count 的值
+</span><span style="color:#75715e"></span>      count<span style="color:#f92672">=</span> newValue<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">// 返回写入前的值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> curValue<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-8-2-aba问题">2.8.2. ABA问题</h4>
+
+<p>简单来说,ABA问题就是一个共享变量A被线程2修改成了B,又被线程3修改成了A, 这样线程1看到的共享变量的值就一直是A. 但实际上,共享变量已经被修改过了. 大多数情况下我们无需关心ABA问题. 但当原子化的更新对象可能就需要关心ABA问题,因为两个A虽然相等, 但是第二个A的属性可能已经发生变化了.</p>
+
+<h4 id="2-8-3-java实现原子化的count-1">2.8.3. Java实现原子化的count += 1</h4>
+
+<p>在Java1.8中,getAndIncrement()方法会转调unsafe.getAndAddLong()方法. this和valueOffset两个参数可以唯一确定共享变量的内存地址.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getAndIncrement</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">return</span> unsafe<span style="color:#f92672">.</span><span style="color:#a6e22e">getAndAddLong</span><span style="color:#f92672">(</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> valueOffset<span style="color:#f92672">,</span> 1L<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>之后是unsafe.getAndAddLong()的源码, 该方法首先会在内存中读取共享变量的值, 之后循环调用compareAndSwapLong()方法尝试设置共享变量的值, 直到成功为止. compareAndSwapLong()是native的方法. 共享变量的值成功更新返回true否则返回false.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getAndAddLong</span><span style="color:#f92672">(</span>
+  Object o<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> offset<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> delta<span style="color:#f92672">){</span>
+  <span style="color:#66d9ef">long</span> v<span style="color:#f92672">;</span>
+  <span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">// 读取内存中的值
+</span><span style="color:#75715e"></span>    v <span style="color:#f92672">=</span> getLongVolatile<span style="color:#f92672">(</span>o<span style="color:#f92672">,</span> offset<span style="color:#f92672">);</span>
+  <span style="color:#f92672">}</span> <span style="color:#66d9ef">while</span> <span style="color:#f92672">(!</span>compareAndSwapLong<span style="color:#f92672">(</span>
+      o<span style="color:#f92672">,</span> offset<span style="color:#f92672">,</span> v<span style="color:#f92672">,</span> v <span style="color:#f92672">+</span> delta<span style="color:#f92672">));</span>
+  <span style="color:#66d9ef">return</span> v<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 原子性地将变量更新为 x
+</span><span style="color:#75715e">// 条件是内存中的值等于 expected
+</span><span style="color:#75715e">// 更新成功则返回 true
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">native</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">compareAndSwapLong</span><span style="color:#f92672">(</span>
+  Object o<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> offset<span style="color:#f92672">,</span> 
+  <span style="color:#66d9ef">long</span> expected<span style="color:#f92672">,</span>
+  <span style="color:#66d9ef">long</span> x<span style="color:#f92672">);</span></code></pre></div>
+<p>compareAndSwapLong的语义和CAS指令的语义差别仅仅是返回值不同而已. 另外getAndAddLong方法的实现基本是CAS使用的典范.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span>
+  <span style="color:#75715e">// 获取当前值
+</span><span style="color:#75715e"></span>  oldV <span style="color:#f92672">=</span> xxxx<span style="color:#960050;background-color:#1e0010">；</span>
+  <span style="color:#75715e">// 根据当前值计算新值
+</span><span style="color:#75715e"></span>  newV <span style="color:#f92672">=</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">oldV</span><span style="color:#f92672">...</span>
+<span style="color:#f92672">}</span><span style="color:#66d9ef">while</span><span style="color:#f92672">(!</span>compareAndSet<span style="color:#f92672">(</span>oldV<span style="color:#f92672">,</span>newV<span style="color:#f92672">);</span></code></pre></div>
+<h4 id="2-8-4-原子类概览">2.8.4. 原子类概览</h4>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/atomic.png" alt="Atomic Class" /></p>
+
+<h5 id="原子化的基本数据类型">原子化的基本数据类型</h5>
+
+<p>AtomicBoolean、AtomicInteger 和 AtomicLong</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">getAndIncrement<span style="color:#f92672">()</span> <span style="color:#75715e">// 原子化 i++
+</span><span style="color:#75715e"></span>getAndDecrement<span style="color:#f92672">()</span> <span style="color:#75715e">// 原子化的 i--
+</span><span style="color:#75715e"></span>incrementAndGet<span style="color:#f92672">()</span> <span style="color:#75715e">// 原子化的 ++i
+</span><span style="color:#75715e"></span>decrementAndGet<span style="color:#f92672">()</span> <span style="color:#75715e">// 原子化的 --i
+</span><span style="color:#75715e">// 当前值 +=delta，返回 += 前的值
+</span><span style="color:#75715e"></span>getAndAdd<span style="color:#f92672">(</span>delta<span style="color:#f92672">)</span> 
+<span style="color:#75715e">// 当前值 +=delta，返回 += 后的值
+</span><span style="color:#75715e"></span>addAndGet<span style="color:#f92672">(</span>delta<span style="color:#f92672">)</span>
+<span style="color:#75715e">//CAS 操作，返回是否成功
+</span><span style="color:#75715e"></span>compareAndSet<span style="color:#f92672">(</span>expect<span style="color:#f92672">,</span> update<span style="color:#f92672">)</span>
+<span style="color:#75715e">// 以下四个方法
+</span><span style="color:#75715e">// 新值可以通过传入 func 函数来计算
+</span><span style="color:#75715e"></span>getAndUpdate<span style="color:#f92672">(</span>func<span style="color:#f92672">)</span>
+updateAndGet<span style="color:#f92672">(</span>func<span style="color:#f92672">)</span>
+getAndAccumulate<span style="color:#f92672">(</span>x<span style="color:#f92672">,</span>func<span style="color:#f92672">)</span>
+accumulateAndGet<span style="color:#f92672">(</span>x<span style="color:#f92672">,</span>func<span style="color:#f92672">)</span></code></pre></div>
+<h5 id="原子化的对象引用类型">原子化的对象引用类型</h5>
+
+<p>相关实现有 AtomicReference, AtomicStampedReference和AtomicMarkableReference, 利用它们实现对象引用的原子化更新. 后两者是用来解决ABA问题.</p>
+
+<h5 id="原子化数组">原子化数组</h5>
+
+<p>相关实现有 AtomicIntegerArray, AtomicLongArray和AtomicReferenceArray, 利用这些原子类, 我们可以原子化地更新数组里面的每一个元素. 这些类提供的方法和原子化地基本数据类型的区别是: <strong>每个方法多了一个数组的索引参数</strong>.</p>
+
+<h5 id="原子化对象属性更新器">原子化对象属性更新器</h5>
+
+<p>相关实现有AtomicIntegerFieldUpdater, AtomicLongFieldUpdater和AtomicReferenceFieldUpdater, 利用它们可以原子化地更新对象的属性, 这三个方法都是利用反射机制实现的, 创建更新器的方法如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span>
+AtomicXXXFieldUpdater<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> 
+<span style="color:#a6e22e">newUpdater</span><span style="color:#f92672">(</span>Class<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> tclass<span style="color:#f92672">,</span> 
+  String fieldName<span style="color:#f92672">)</span></code></pre></div>
+<h5 id="原子化的累加器">原子化的累加器</h5>
+
+<p>DoubleAccumulator, DoubleAdder, LongAccumulator和LongAdder, 这四个类仅仅支持执行累加的操作, 相比于原子化的基本数据类型, 速度更快,但不支持compareAndSet()方法. 如果仅仅需要累加操作, 使用原子化的累加器性能更佳.</p>
+
+<p>原子类的方法都是针对一个共享变量的, 如果需要解决多个变量的原子性问题, 建议还是使用互斥锁的方案. 原子类虽然好,但使用需要慎之又慎.</p>
+
+<h3 id="2-9-线程池executor">2.9. 线程池Executor</h3>
+
+<ul>
+<li>创建对象, 仅需要在JVM的堆上分配一块内存</li>
+<li>创建一个线程,却需要调用操作系统内核的API, 然后操作系统要为线程分配一系列的资源.</li>
+</ul>
+
+<p>作为一个重量级的对象,线程应避免频繁创建和销毁. 因此线程池孕育而生. 不同于其他池化资源通过acquire()方法申请资源通过release()方法释放资源. 线程池采用生产-消费者模式. 我们可以根据这个模式组建一个简单的线程池.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 简化的线程池，仅用来说明工作原理
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThreadPool</span><span style="color:#f92672">{</span>
+  <span style="color:#75715e">// 利用阻塞队列实现生产者 - 消费者模式
+</span><span style="color:#75715e"></span>  BlockingQueue<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span> workQueue<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// 保存内部工作线程
+</span><span style="color:#75715e"></span>  List<span style="color:#f92672">&lt;</span>WorkerThread<span style="color:#f92672">&gt;</span> threads 
+    <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;();</span>
+  <span style="color:#75715e">// 构造方法
+</span><span style="color:#75715e"></span>  MyThreadPool<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> poolSize<span style="color:#f92672">,</span> 
+    BlockingQueue<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span> workQueue<span style="color:#f92672">){</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">workQueue</span> <span style="color:#f92672">=</span> workQueue<span style="color:#f92672">;</span>
+    <span style="color:#75715e">// 创建工作线程
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> idx<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span> idx<span style="color:#f92672">&lt;</span>poolSize<span style="color:#f92672">;</span> idx<span style="color:#f92672">++){</span>
+      WorkerThread work <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WorkerThread<span style="color:#f92672">();</span>
+      work<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+      threads<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>work<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// 提交任务
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">execute</span><span style="color:#f92672">(</span>Runnable command<span style="color:#f92672">){</span>
+    workQueue<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>command<span style="color:#f92672">);</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#75715e">// 工作线程负责消费任务，并执行任务
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WorkerThread</span> <span style="color:#66d9ef">extends</span> Thread<span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+      <span style="color:#75715e">// 循环取任务并执行
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">){</span> <span style="color:#960050;background-color:#1e0010">①</span>
+        Runnable task <span style="color:#f92672">=</span> workQueue<span style="color:#f92672">.</span><span style="color:#a6e22e">take</span><span style="color:#f92672">();</span>
+        task<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">();</span>
+      <span style="color:#f92672">}</span> 
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>  
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">/** 下面是使用示例 **/</span>
+<span style="color:#75715e">// 创建有界阻塞队列
+</span><span style="color:#75715e"></span>BlockingQueue<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span> workQueue <span style="color:#f92672">=</span> 
+  <span style="color:#66d9ef">new</span> LinkedBlockingQueue<span style="color:#f92672">&lt;&gt;(</span>2<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 创建线程池  
+</span><span style="color:#75715e"></span>MyThreadPool pool <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyThreadPool<span style="color:#f92672">(</span>
+  10<span style="color:#f92672">,</span> workQueue<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 提交任务  
+</span><span style="color:#75715e"></span>pool<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hello&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">});</span></code></pre></div>
+<p>JUC里的线程池复杂和强大的多, 最核心部分是ThreadPoolExecutor. 最完备的ThreadPoolExecutor构造函数有7个参数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">ThreadPoolExecutor<span style="color:#f92672">(</span>
+  <span style="color:#66d9ef">int</span> corePoolSize<span style="color:#f92672">,</span>
+  <span style="color:#66d9ef">int</span> maximumPoolSize<span style="color:#f92672">,</span>
+  <span style="color:#66d9ef">long</span> keepAliveTime<span style="color:#f92672">,</span>
+  TimeUnit unit<span style="color:#f92672">,</span>
+  BlockingQueue<span style="color:#f92672">&lt;</span>Runnable<span style="color:#f92672">&gt;</span> workQueue<span style="color:#f92672">,</span>
+  ThreadFactory threadFactory<span style="color:#f92672">,</span>
+  RejectedExecutionHandler handler<span style="color:#f92672">)</span> </code></pre></div>
+<ul>
+<li>corePoolSize: 表示线程池保有的最小线程数.</li>
+<li>maximumPoolSize: 表示线程池创建的最大线程数.</li>
+<li>keepAliveTime &amp; unit: 用来定义线程是否繁忙, 如果一个线程在unit下的keepAliveTime这么长的时间内都处于空闲,并且线程池的数量大于corePoolSize,那么这个线程将被回收.</li>
+<li>workQueue: 工作队列</li>
+<li>threadFactory: 通过这个参数可以自定义如何创建线程,例如给线程命名.</li>
+<li>handler: 自定义任务的拒绝策略,当线程池所有线程都在忙碌且工作队列已满时, 此时提交任务, 线程池会拒绝接收.
+
+<ul>
+<li>CallerRunsPolicy: 提交任务的线程自己去执行任务</li>
+<li>AbortPolicy: 默认拒绝策略, 会throws RejectedExecutionException</li>
+<li>DiscardPolicy: 直接丢弃任务,没有异常抛出</li>
+<li>DiscardOldestPolicy: 丢弃最老的任务(最早进入工作队列的任务)</li>
+</ul></li>
+</ul>
+
+<h4 id="2-9-1-使用线程池的注意事项">2.9.1. 使用线程池的注意事项</h4>
+
+<ul>
+<li>不建议使用Executors, 原因是Executors提供的很多方法默认使用都是无界的LinkedBlockingQueue,在高负载情境下, 容易导致OOM, OOM会导致所有请求都无法处理.</li>
+
+<li><p>谨慎使用默认拒绝策略. RejectedExecutionException是运行时异常, 编译器并不强制要求catch, 因此容易被忽略.</p>
+
+<h3 id="2-10-future">2.10. Future</h3>
+
+<p>ThreadPoolExecutor的void execute(Runnable command) 方法, 利用这个方法虽然可以提交任务, 但是却没有办法获取任务的执行结果.</p></li>
+</ul>
+
+<p>Java通过ThreadPoolExecutor提供的3个submit()方法和1个FutureTask工具类来支持获得任务执行结果的需求</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 提交 Runnable 任务
+</span><span style="color:#75715e"></span>Future<span style="color:#f92672">&lt;?&gt;</span> submit<span style="color:#f92672">(</span>Runnable task<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 提交 Callable 任务
+</span><span style="color:#75715e"></span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> Future<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">submit</span><span style="color:#f92672">(</span>Callable<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> task<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 提交 Runnable 任务及结果引用
+</span><span style="color:#75715e"></span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> Future<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">submit</span><span style="color:#f92672">(</span>Runnable task<span style="color:#f92672">,</span> T result<span style="color:#f92672">);</span></code></pre></div>
+<p>Future接口有五个方法.
+- cancle(): 取消任务
+- isCancelled(): 判断任务是否已经取消
+- isDone(): 判断任务是否已经结束
+- get(): 获取任务执行结果(阻塞)
+- get(timeout, unit): 获取任务执行结果,并支持超时机制.</p>
+
+<p>submit()方法之间的区别</p>
+
+<ul>
+<li>提交Runnable任务submit(Runnable task): 这个方法的参数是一个RUNNABLE接口, Runnable接口的run()方法是没有返回值的,所以submit(Runnable task)这个方法返回的Future仅可以用来断言任务已经结束了,类似于Thread.join().</li>
+<li>提交Callable任务submit(Callable<T> task): 这个方法的参数是一个Callale接口, 它只有一个call()方法, 并且这个方法是有返回值的,所以这个方法返回的Future对象可以通过调用其get()方法来获取任务的执行结果.</li>
+<li>提交Runnable任务及结果引用submit(Runnable task, T result): Runnable接口的实现类Task声明了一个有参构造函数Task(Result r), 创建Task对象的时候传入了result对象, 这样就能在类Task的run()方法中对result进行各种操作. result相当于主线程和子线程之间的桥梁,通过它主子线程可以共享数据.</li>
+</ul>
+
+<h4 id="2-10-1-futuretask工具类">2.10.1. FutureTask工具类</h4>
+
+<p>Future前面提到是个接口,而FutureTask是一个工具类, 这个工具类有两个构造函数.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">FutureTask<span style="color:#f92672">(</span>Callable<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> callable<span style="color:#f92672">);</span>
+FutureTask<span style="color:#f92672">(</span>Runnable runnable<span style="color:#f92672">,</span> V result<span style="color:#f92672">);</span></code></pre></div>
+<p>FutureTask实现了Runnable和Future接口, 由于其实现了Runnable接口, 所以可以将FutureTask对象作为任务提交给ThreadPoolExecutor执行, 也可以直接被Thread执行; 又因为实现了Future接口, 所以也可以用来获得任务的执行结果.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 创建 FutureTask
+</span><span style="color:#75715e"></span>FutureTask<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> futureTask
+  <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FutureTask<span style="color:#f92672">&lt;&gt;(()-&gt;</span> 1<span style="color:#f92672">+</span>2<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 创建线程池
+</span><span style="color:#75715e"></span>ExecutorService es <span style="color:#f92672">=</span> 
+  Executors<span style="color:#f92672">.</span><span style="color:#a6e22e">newCachedThreadPool</span><span style="color:#f92672">();</span>
+<span style="color:#75715e">// 提交 FutureTask 
+</span><span style="color:#75715e"></span>es<span style="color:#f92672">.</span><span style="color:#a6e22e">submit</span><span style="color:#f92672">(</span>futureTask<span style="color:#f92672">);</span>
+<span style="color:#75715e">// 获取计算结果
+</span><span style="color:#75715e"></span>Integer result <span style="color:#f92672">=</span> futureTask<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">();</span></code></pre></div>
+<p><strong>实现&rdquo;烧水泡茶&rdquo;程序</strong></p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/boil.png" alt="烧水泡茶" /></p>
+
+<p>一种方式可以分为两个FutureTask&mdash;-ft1和ft2,
+- ft1完成洗水壶, 烧开水, 泡茶的任务.
+- ft2完成洗茶壶, 洗茶杯, 拿茶叶的任务.</p>
+
+<p>需要注意的是ft1在执行泡茶任务前,需要等待ft2完成所有任务, 换言之ft1需要在内部引用ft2,在执行泡茶之前, 调用ft2的get()方法实现等待.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 创建任务 T2 的 FutureTask
+</span><span style="color:#75715e"></span>FutureTask<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> ft2
+  <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FutureTask<span style="color:#f92672">&lt;&gt;(</span><span style="color:#66d9ef">new</span> T2Task<span style="color:#f92672">());</span>
+<span style="color:#75715e">// 创建任务 T1 的 FutureTask
+</span><span style="color:#75715e"></span>FutureTask<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> ft1
+  <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FutureTask<span style="color:#f92672">&lt;&gt;(</span><span style="color:#66d9ef">new</span> T1Task<span style="color:#f92672">(</span>ft2<span style="color:#f92672">));</span>
+<span style="color:#75715e">// 线程 T1 执行任务 ft1
+</span><span style="color:#75715e"></span>Thread T1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>ft1<span style="color:#f92672">);</span>
+T1<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+<span style="color:#75715e">// 线程 T2 执行任务 ft2
+</span><span style="color:#75715e"></span>Thread T2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>ft2<span style="color:#f92672">);</span>
+T2<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+<span style="color:#75715e">// 等待线程 T1 执行结果
+</span><span style="color:#75715e"></span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>ft1<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">());</span>
+
+<span style="color:#75715e">// T1Task 需要执行的任务：
+</span><span style="color:#75715e">// 洗水壶、烧开水、泡茶
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T1Task</span> <span style="color:#66d9ef">implements</span> Callable<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;{</span>
+  FutureTask<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> ft2<span style="color:#f92672">;</span>
+  <span style="color:#75715e">// T1 任务需要 T2 任务的 FutureTask
+</span><span style="color:#75715e"></span>  T1Task<span style="color:#f92672">(</span>FutureTask<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> ft2<span style="color:#f92672">){</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">ft2</span> <span style="color:#f92672">=</span> ft2<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#a6e22e">@Override</span>
+  String <span style="color:#a6e22e">call</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 洗水壶...&#34;</span><span style="color:#f92672">);</span>
+    TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1<span style="color:#f92672">);</span>
+    
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 烧开水...&#34;</span><span style="color:#f92672">);</span>
+    TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>15<span style="color:#f92672">);</span>
+    <span style="color:#75715e">// 获取 T2 线程的茶叶  
+</span><span style="color:#75715e"></span>    String tf <span style="color:#f92672">=</span> ft2<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">();</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 拿到茶叶:&#34;</span><span style="color:#f92672">+</span>tf<span style="color:#f92672">);</span>
+
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 泡茶...&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34; 上茶:&#34;</span> <span style="color:#f92672">+</span> tf<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// T2Task 需要执行的任务:
+</span><span style="color:#75715e">// 洗茶壶、洗茶杯、拿茶叶
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T2Task</span> <span style="color:#66d9ef">implements</span> Callable<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+  <span style="color:#a6e22e">@Override</span>
+  String <span style="color:#a6e22e">call</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T2: 洗茶壶...&#34;</span><span style="color:#f92672">);</span>
+    TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1<span style="color:#f92672">);</span>
+
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T2: 洗茶杯...&#34;</span><span style="color:#f92672">);</span>
+    TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>2<span style="color:#f92672">);</span>
+
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T2: 拿茶叶...&#34;</span><span style="color:#f92672">);</span>
+    TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34; 龙井 &#34;</span><span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 一次执行结果：
+</span><span style="color:#75715e"></span>T1: 洗水壶<span style="color:#f92672">...</span>
+T2: 洗茶壶<span style="color:#f92672">...</span>
+T1: 烧开水<span style="color:#f92672">...</span>
+T2: 洗茶杯<span style="color:#f92672">...</span>
+T2: 拿茶叶<span style="color:#f92672">...</span>
+T1: 拿到茶叶: 龙井
+T1: 泡茶<span style="color:#f92672">...</span>
+上茶: 龙井</code></pre></div>
+<h3 id="2-11-completablefuture">2.11. CompletableFuture</h3>
+
+<p>CompletableFuture是一个更为复杂的异步化工具类, 同时提供更加直接的功能.</p>
+
+<ul>
+<li>无需手动维护线程, 没有繁琐的手动维护线程的工作</li>
+<li>语义更清晰</li>
+<li>代码更加简练并且专注于业务逻辑</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 任务 1：洗水壶 -&gt; 烧开水
+</span><span style="color:#75715e"></span>CompletableFuture<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> f1 <span style="color:#f92672">=</span> 
+  CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">runAsync</span><span style="color:#f92672">(()-&gt;{</span>
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 洗水壶...&#34;</span><span style="color:#f92672">);</span>
+  sleep<span style="color:#f92672">(</span>1<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 烧开水...&#34;</span><span style="color:#f92672">);</span>
+  sleep<span style="color:#f92672">(</span>15<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">});</span>
+<span style="color:#75715e">// 任务 2：洗茶壶 -&gt; 洗茶杯 -&gt; 拿茶叶
+</span><span style="color:#75715e"></span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> f2 <span style="color:#f92672">=</span> 
+  CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()-&gt;{</span>
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T2: 洗茶壶...&#34;</span><span style="color:#f92672">);</span>
+  sleep<span style="color:#f92672">(</span>1<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T2: 洗茶杯...&#34;</span><span style="color:#f92672">);</span>
+  sleep<span style="color:#f92672">(</span>2<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+
+  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T2: 拿茶叶...&#34;</span><span style="color:#f92672">);</span>
+  sleep<span style="color:#f92672">(</span>1<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34; 龙井 &#34;</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">});</span>
+<span style="color:#75715e">// 任务 3：任务 1 和任务 2 完成后执行：泡茶
+</span><span style="color:#75715e"></span>CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> f3 <span style="color:#f92672">=</span> 
+  f1<span style="color:#f92672">.</span><span style="color:#a6e22e">thenCombine</span><span style="color:#f92672">(</span>f2<span style="color:#f92672">,</span> <span style="color:#f92672">(</span>__<span style="color:#f92672">,</span> tf<span style="color:#f92672">)-&gt;{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 拿到茶叶:&#34;</span> <span style="color:#f92672">+</span> tf<span style="color:#f92672">);</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;T1: 泡茶...&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34; 上茶:&#34;</span> <span style="color:#f92672">+</span> tf<span style="color:#f92672">;</span>
+  <span style="color:#f92672">});</span>
+<span style="color:#75715e">// 等待任务 3 执行结果
+</span><span style="color:#75715e"></span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>f3<span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">());</span>
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> t<span style="color:#f92672">,</span> TimeUnit u<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+    u<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>t<span style="color:#f92672">);</span>
+  <span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">){}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 一次执行结果：
+</span><span style="color:#75715e"></span>T1: 洗水壶<span style="color:#f92672">...</span>
+T2: 洗茶壶<span style="color:#f92672">...</span>
+T1: 烧开水<span style="color:#f92672">...</span>
+T2: 洗茶杯<span style="color:#f92672">...</span>
+T2: 拿茶叶<span style="color:#f92672">...</span>
+T1: 拿到茶叶: 龙井
+T1: 泡茶<span style="color:#f92672">...</span>
+上茶: 龙井</code></pre></div>
+<h4 id="2-11-1-创建completablefuture对象">2.11.1. 创建CompletableFuture对象</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">//没有返回值, 默认ForkJoinPool线程池
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">runAsync</span><span style="color:#f92672">(</span>Runnable runnable<span style="color:#f92672">);</span>
+<span style="color:#75715e">//有返回值, 默认ForkJoinPool线程池
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> CompletableFuture<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(</span>Supplier<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> supplier<span style="color:#f92672">);</span>
+<span style="color:#75715e">//没有返回值, 可以指定线程池.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> CompletableFuture<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">runAsync</span><span style="color:#f92672">(</span>Runnable runnable<span style="color:#f92672">,</span> Executor executor<span style="color:#f92672">);</span>
+<span style="color:#75715e">//有返回值, 可以指定线程池.
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> CompletableFuture<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(</span>Supplier<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;</span> supplier<span style="color:#f92672">,</span> Executor executor<span style="color:#f92672">);</span></code></pre></div>
+<p>JUC默认使用ForkJoinPool线程池, 这个线程池默认创建的线程数是CPU的核数.</p>
+
+<p>创建完成后, 会自动运行runnable.run()或者supplier.get()方法. 因为CompletableFuture实现了Future接口, 所以关于异步操作什么时候结束和如果获取异步操作的执行结果的问题都可以通过Future接口来解决.</p>
+
+<h4 id="2-11-2-如何理解completionstage接口">2.11.2. 如何理解CompletionStage接口</h4>
+
+<p>首先需要理解的是任务的时序关系.</p>
+
+<ul>
+<li>串行关系</li>
+<li>并行关系</li>
+<li>汇聚关系</li>
+</ul>
+
+<p>CompletionStage接口可以清晰地描述任务之间的这种时序关系.</p>
+
+<h5 id="描述串行关系">描述串行关系</h5>
+
+<p>有关的方法有thenApply, thenAccept, thenRun和thenCompose这四个系列的接口.
+- thenApply系列函数的参数fn的类型是接口Function<T,R>, 这个接口里与CompletionStage相关的方法是 R apply(T t), 这个方法既能接受参数也能支持返回值, 所以thenApply系列方法返回的是CompletionStage<R>.
+- thenAccept系列函数里参数consumer的类型是接口Consumer<T>, 这个接口里与CompletionStage相关的方法是void accept(T t), 这个方法虽然支持参数,但却不支持回值, 所以thenAccept方法返回的也是CompletionStage<Void>.
+- thenRun系列方法里action的参数是Runnable, 所以action既不能接收参数也不支持返回值, 所以thenRun方法返回的也是CompletionStage<Void>.
+- thenCompose系列方法, 这个系列方法会新创建一个子流程, 最终结果和thenApply系列是相同的.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenApply</span><span style="color:#f92672">(</span>fn<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenApplyAsync</span><span style="color:#f92672">(</span>fn<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenAccept</span><span style="color:#f92672">(</span>consumer<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenAcceptAsync</span><span style="color:#f92672">(</span>consumer<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenRun</span><span style="color:#f92672">(</span>action<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenRunAsync</span><span style="color:#f92672">(</span>action<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenCompose</span><span style="color:#f92672">(</span>fn<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">thenComposeAsync</span><span style="color:#f92672">(</span>fn<span style="color:#f92672">);</span></code></pre></div>
+<p>这些方法里面Async代表异步执行fn, consumer或者action.</p>
+
+<p>下面是一个示例代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> f0 <span style="color:#f92672">=</span> 
+  CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(</span>
+    <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Hello World&#34;</span><span style="color:#f92672">)</span>      <span style="color:#75715e">//Step 1
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">.</span><span style="color:#a6e22e">thenApply</span><span style="color:#f92672">(</span>s <span style="color:#f92672">-&gt;</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; QQ&#34;</span><span style="color:#f92672">)</span>  <span style="color:#75715e">//Step 2
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">.</span><span style="color:#a6e22e">thenApply</span><span style="color:#f92672">(</span>String:<span style="color:#f92672">:</span>toUpperCase<span style="color:#f92672">);</span><span style="color:#75715e">//Step 3
+</span><span style="color:#75715e"></span>
+System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>f0<span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">());</span>
+<span style="color:#75715e">// 输出结果
+</span><span style="color:#75715e"></span>HELLO WORLD QQ</code></pre></div>
+<p>首先通过supplyAsync()启动一个异步流程, 之后是两个串行操作. 虽然这个一个异步流程,对于Step 1,2,3来说却是串行执行的. Step2 依赖 Step1的执行结果, Step3 依赖 Step2的执行结果.</p>
+
+<h5 id="描述and汇聚关系">描述AND汇聚关系</h5>
+
+<p>CompletionStage中有关的方法主要是thenCombine, thenAcceptBoth和runAfterBoth系列的接口. 这些接口的区别也源自fn, consumer, action这三个核心参数不同.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">CompletionStage <span style="color:#a6e22e">applyToEither</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> fn<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">applyToEitherAsync</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> fn<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">acceptEither</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> consumer<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">acceptEitherAsync</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> consumer<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">runAfterEither</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> action<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">runAfterEitherAsync</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> action<span style="color:#f92672">);</span></code></pre></div>
+<h5 id="描述or汇聚关系">描述OR汇聚关系</h5>
+
+<p>CompletionStage中有关的方法主要是applyToEither, acceptEither和runAfterEither系列的接口. 这些接口的区别也源自fn, consumer, action这三个核心参数不同.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">CompletionStage <span style="color:#a6e22e">applyToEither</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> fn<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">applyToEitherAsync</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> fn<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">acceptEither</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> consumer<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">acceptEitherAsync</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> consumer<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">runAfterEither</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> action<span style="color:#f92672">);</span>
+CompletionStage <span style="color:#a6e22e">runAfterEitherAsync</span><span style="color:#f92672">(</span>other<span style="color:#f92672">,</span> action<span style="color:#f92672">);</span></code></pre></div>
+<p>下面展示如何使用applyToEither()方法来描述一个OR汇聚关系.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> f1 <span style="color:#f92672">=</span> 
+  CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()-&gt;{</span>
+    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> getRandom<span style="color:#f92672">(</span>5<span style="color:#f92672">,</span> 10<span style="color:#f92672">);</span>
+    sleep<span style="color:#f92672">(</span>t<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>t<span style="color:#f92672">);</span>
+<span style="color:#f92672">});</span>
+
+CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> f2 <span style="color:#f92672">=</span> 
+  CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()-&gt;{</span>
+    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> getRandom<span style="color:#f92672">(</span>5<span style="color:#f92672">,</span> 10<span style="color:#f92672">);</span>
+    sleep<span style="color:#f92672">(</span>t<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> String<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>t<span style="color:#f92672">);</span>
+<span style="color:#f92672">});</span>
+
+CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> f3 <span style="color:#f92672">=</span> 
+  f1<span style="color:#f92672">.</span><span style="color:#a6e22e">applyToEither</span><span style="color:#f92672">(</span>f2<span style="color:#f92672">,</span>s <span style="color:#f92672">-&gt;</span> s<span style="color:#f92672">);</span>
+
+System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>f3<span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">());</span></code></pre></div>
+<h5 id="异常处理">异常处理</h5>
+
+<p>fn, consumer, action这三个核心方法都不允许抛出可检查异常, 但却无法限制它们抛出运行时异常. CompletionStage接口提供了相关的方法, 使用这些方法进行异常处理和串行操作是一样的,都支持链式编程.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">CompletionStage <span style="color:#a6e22e">exceptionally</span><span style="color:#f92672">(</span>fn<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">whenComplete</span><span style="color:#f92672">(</span>consumer<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">whenCompleteAsync</span><span style="color:#f92672">(</span>consumer<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">handle</span><span style="color:#f92672">(</span>fn<span style="color:#f92672">);</span>
+CompletionStage<span style="color:#f92672">&lt;</span>R<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">handleAsync</span><span style="color:#f92672">(</span>fn<span style="color:#f92672">);</span></code></pre></div>
+<ul>
+<li>exceptionally(): 方法来处理异常, 相当于try{}catch{}中的catch{}.</li>
+<li>whenComplete()和handle(): 相当于try{}finally中的finally{}. 无论是否发生异常都会执行whenComplete()中的回调函数consumer和handle()中的回调函数fn.
+
+<ul>
+<li>whenComplete()不支持返回结果.</li>
+<li>handle()是支持返回结果.</li>
+</ul></li>
+</ul>
+
+<h3 id="2-12-completionservice-批量异步化操作">2.12. CompletionService: 批量异步化操作</h3>
+
+<p>CompletionService的实现原理是内部维护了一个阻塞队列, 当任务执行结束就把任务的执行结果的Future对象加入到阻塞队列中.</p>
+
+<p>CompletionService接口的实现类是ExecutorCompletionService, 这个实现类的构造方法有两个
+1. ExecutorCompletionService(Executor executor);
+2. ExecutorCompletionService(Executor executor, BlockingQueue<Future<V>&gt; completionQueue)</p>
+
+<p>这两个构造方法都需要传入一个线程池, 如果不指定completionQueue, 那么默认会使用无界的LinkedBlockingQueue. 任务执行结果的Future对象就是加入到completionQueue中.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">// 创建阻塞队列
+</span><span style="color:#75715e"></span>BlockingQueue<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> bq <span style="color:#f92672">=</span>
+  <span style="color:#66d9ef">new</span> LinkedBlockingQueue<span style="color:#f92672">&lt;&gt;();</span>
+<span style="color:#75715e">// 电商 S1 报价异步进入阻塞队列  
+</span><span style="color:#75715e"></span>executor<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;</span>
+  bq<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>f1<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">()));</span>
+<span style="color:#75715e">// 电商 S2 报价异步进入阻塞队列  
+</span><span style="color:#75715e"></span>executor<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;</span>
+  bq<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>f2<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">()));</span>
+<span style="color:#75715e">// 电商 S3 报价异步进入阻塞队列  
+</span><span style="color:#75715e"></span>executor<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;</span>
+  bq<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span>f3<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">()));</span>
+<span style="color:#75715e">// 异步保存所有报价  
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span> i<span style="color:#f92672">&lt;</span>3<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+  Integer r <span style="color:#f92672">=</span> bq<span style="color:#f92672">.</span><span style="color:#a6e22e">take</span><span style="color:#f92672">();</span>
+  executor<span style="color:#f92672">.</span><span style="color:#a6e22e">execute</span><span style="color:#f92672">(()-&gt;</span>save<span style="color:#f92672">(</span>r<span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span>  </code></pre></div>
+<h4 id="2-12-1-completionservice-接口">2.12.1. CompletionService 接口</h4>
+
+<p>CompletionService接口提供的方法有5个</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">submit</span><span style="color:#f92672">(</span>Callable<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> task<span style="color:#f92672">);</span>
+Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">submit</span><span style="color:#f92672">(</span>Runnable task<span style="color:#f92672">,</span> V result<span style="color:#f92672">);</span>
+Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">take</span><span style="color:#f92672">()</span> 
+  <span style="color:#66d9ef">throws</span> InterruptedException<span style="color:#f92672">;</span>
+Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">poll</span><span style="color:#f92672">();</span>
+Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">poll</span><span style="color:#f92672">(</span><span style="color:#66d9ef">long</span> timeout<span style="color:#f92672">,</span> TimeUnit unit<span style="color:#f92672">)</span> 
+  <span style="color:#66d9ef">throws</span> InterruptedException<span style="color:#f92672">;</span></code></pre></div>
+<ul>
+<li>submit()方法有两个, 一个方法参数是Callable<V> task, 另一个方法有Runnable task, V result两个方法. 这个方法类似于ThreadPoolExecutor的Future<T> submit(Runnable task, T result).</li>
+<li>take(), poll() 都是从阻塞队列中获取并移除一个元素, 不同点是如果阻塞队列时空的, 调用take()方法的线程会被阻塞, 而调用poll()方法会返回null值.</li>
+</ul>
+
+<h3 id="2-13-fork-join-分治模型">2.13. Fork/Join 分治模型</h3>
+
+<p>对于简单的并行任务可以用&rdquo;线程池+Future&rdquo;方案解决, 如果任务之间有聚合关系(AND聚合或者OR聚合), 可以用CompletableFuture来解决, 如果任务是批量的, 可以用CompletionService来解决. Fork/Join计算框架用来处理分治问题.</p>
+
+<blockquote>
+<p>分治, 具体指把一个复杂问题分解成多个相似的子问题, 一直分到子问题简单到可以直接求解.</p>
+</blockquote>
+
+<h4 id="2-13-1-fork-join-计算框架">2.13.1. Fork/Join 计算框架</h4>
+
+<ul>
+<li>Fork对应的是分治任务模型的任务分解</li>
+<li>Join对应的是分治任务模型的结果合并</li>
+</ul>
+
+<p>计算框架内部主要包括两个部分, 分治任务的线程池<strong>ForkJoinPool</strong>, 和分治任务<strong>ForkJoinTask</strong>. 这两个部分的关系类似于ThreadPoolExecutor和Runnable的关系.</p>
+
+<p>ForkJoinTask是一个抽象类, 最核心的方法是fork()方法和join()方法, 其中fork()方法会异步地执行一个子任务, 而join()方法则会阻塞当前线程来等待子任务的执行结果. ForkJoinTask有两个子类&ndash;RecursiveAction和RecursiveTask.这两个子类都定义了抽象方法compute(), 类似于前面的, RecursiveAction的compute()方法没有返回值而RecursiveTask的compute()方法有返回值. 这两个子类也是抽象类需要使用时定义子类去扩展. 下面例子演示Fork/Join计算斐波那契数列.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">){</span>
+  <span style="color:#75715e">// 创建分治任务线程池  
+</span><span style="color:#75715e"></span>  ForkJoinPool fjp <span style="color:#f92672">=</span> 
+    <span style="color:#66d9ef">new</span> ForkJoinPool<span style="color:#f92672">(</span>4<span style="color:#f92672">);</span>
+  <span style="color:#75715e">// 创建分治任务
+</span><span style="color:#75715e"></span>  Fibonacci fib <span style="color:#f92672">=</span> 
+    <span style="color:#66d9ef">new</span> Fibonacci<span style="color:#f92672">(</span>30<span style="color:#f92672">);</span>   
+  <span style="color:#75715e">// 启动分治任务  
+</span><span style="color:#75715e"></span>  Integer result <span style="color:#f92672">=</span> 
+    fjp<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>fib<span style="color:#f92672">);</span>
+  <span style="color:#75715e">// 输出结果  
+</span><span style="color:#75715e"></span>  System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>result<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">// 递归任务
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fibonacci</span> <span style="color:#66d9ef">extends</span> 
+    RecursiveTask<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;{</span>
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> n<span style="color:#f92672">;</span>
+  Fibonacci<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">){</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">n</span> <span style="color:#f92672">=</span> n<span style="color:#f92672">;}</span>
+  <span style="color:#66d9ef">protected</span> Integer <span style="color:#a6e22e">compute</span><span style="color:#f92672">(){</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;=</span> 1<span style="color:#f92672">)</span>
+      <span style="color:#66d9ef">return</span> n<span style="color:#f92672">;</span>
+    Fibonacci f1 <span style="color:#f92672">=</span> 
+      <span style="color:#66d9ef">new</span> Fibonacci<span style="color:#f92672">(</span>n <span style="color:#f92672">-</span> 1<span style="color:#f92672">);</span>
+    <span style="color:#75715e">// 创建子任务  
+</span><span style="color:#75715e"></span>    f1<span style="color:#f92672">.</span><span style="color:#a6e22e">fork</span><span style="color:#f92672">();</span>
+    Fibonacci f2 <span style="color:#f92672">=</span> 
+      <span style="color:#66d9ef">new</span> Fibonacci<span style="color:#f92672">(</span>n <span style="color:#f92672">-</span> 2<span style="color:#f92672">);</span>
+    <span style="color:#75715e">// 等待子任务结果，并合并结果  
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> f2<span style="color:#f92672">.</span><span style="color:#a6e22e">compute</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> f1<span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">();</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="2-13-2-工作原理">2.13.2. 工作原理</h4>
 </article>
     <footer class="post-footer">
       
