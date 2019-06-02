@@ -1,5 +1,5 @@
 ---
-title : "Notes for distributed system preparation(COMP90024)"
+title : "Notes for Cluster and Cloud Computing(COMP90024)"
 date: 2019-04-17T01:37:56+08:00
 lastmod: 2019-04-17T01:37:56+08:00
 draft: false
@@ -7,6 +7,25 @@ tags: ["cluster", "auto-deploying","distributed"]
 categories: ["cluster computing related"]
 author: "Yang Zhang"
 ---
+## Information Session
+
+Cloud Characteristics:
+- **On-demand self-service**: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider.
+- **Networked access**: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms.
+- **Resource pooling**: The provider's computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.
+- **Rapid elasticity**: Capabilities can be elastically provisioned and released, in some cases automatically, to scale rapidly upon demand.
+- **Measured service**: Cloud systems automatically control and optimize resource use by leveraging a metering capability at some level of abstraction appropriate to the type of service. 
+
+## Domain Driver
+## Parallel System, Distributed Computing and HPC/HTC
+## HPC
+## Cloud Computing
+## ReST and Docker(Containalization)
+## Big Data and Related Technologies
+## Big Data Analytics
+## Cloud Underpinning and Other Things
+## Security and Clouds
+
 ### Auto-deploying by Ansible
 ### Docker
 #### Background Introduction
