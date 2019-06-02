@@ -1,6 +1,6 @@
 ---
 title : "深入理解java并发知识的归纳"
-date: 2019-05-13T01:37:56+08:00
+date: 2019-06-04T01:37:56+08:00
 lastmod: 2019-04-14T01:37:56+08:00
 draft: false
 tags: ["Java", "Concurrency"]
@@ -246,7 +246,7 @@ class SafeCalc {
 - 休眠状态: 运行的线程如果调用一个阻塞的API(阻塞的读取文件)或者等待某个事件(条件变量),那么线程状态就会转换到休眠状态,同时释放CPU的使用权. 当等待的时间出现并通知此线程,线程就会从休眠状态转换到可运行状态.
 - 终止状态: 线程执行完或出现异常就会进入终止状态,终止状态的线程不会切换到其他任何状态. 这个状态意味着线程的生命周期结束了.
 
-![monitor illustration](/media/posts/threadstate.png)
+![monitor illustration](/media/posts/threadState.png)
 
 #### 1.7.2. Java中线程的生命周期
 Java语言中线程共有六种状态, 分别是
