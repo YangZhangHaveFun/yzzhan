@@ -38,5 +38,4 @@ Thumbs.db
 # vs workspace
 *.code-workspace
 
-
-content/.DS_Store
+/content/.DS-Store
