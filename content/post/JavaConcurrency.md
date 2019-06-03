@@ -8,65 +8,49 @@ categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
 
----
-
-## Contents
 <!-- TOC -->
+
 - [1. 多线程基础](#1-多线程基础)
     - [1.1. 多线程的三个问题](#11-多线程的三个问题)
     - [1.2. Java内存模型](#12-java内存模型)
-        - [1.2.1. Volatile](#121-volatile)
-        - [1.2.2. Happen-Before规则](#122-happen-before规则)
     - [1.3. 如果解决并发原子性问题---互斥锁](#13-如果解决并发原子性问题---互斥锁)
-        - [1.3.1. 死锁](#131-死锁)
     - [1.4. "等待-通知"机制](#14-等待-通知机制)
     - [1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.](#15-编程中需要注意的三类问题-安全性问题-活跃性问题和性能问题)
-        - [1.5.1. 安全性问题](#151-安全性问题)
-        - [1.5.2. 活跃性问题](#152-活跃性问题)
-        - [1.5.3. 性能问题](#153-性能问题)
     - [1.6. 管程](#16-管程)
-        - [1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型](#161-管程的发展-hasen模型-hoare模型-mesa模型)
     - [1.7. 线程](#17-线程)
-        - [1.7.1. 线程的生命周期](#171-线程的生命周期)
-        - [1.7.2. Java中线程的生命周期](#172-java中线程的生命周期)
     - [1.8. 并发量](#18-并发量)
     - [1.9. 局部变量 -- 线程封闭](#19-局部变量----线程封闭)
 - [2. Java.util.Concurrent JUC并发包详解](#2-javautilconcurrent-juc并发包详解)
     - [2.1. Lock接口](#21-lock接口)
-        - [2.1.1. 重造管程而不使用自带的synchronized的理由](#211-重造管程而不使用自带的synchronized的理由)
-        - [2.1.2. 如何保证可见性](#212-如何保证可见性)
-        - [2.1.3. 可重入锁](#213-可重入锁)
-        - [2.1.4. 公平与非公平锁](#214-公平与非公平锁)
     - [2.2. Condition接口](#22-condition接口)
-        - [2.2.1. Dubbo源码分析](#221-dubbo源码分析)
     - [2.3. 信号量模型](#23-信号量模型)
     - [2.4. ReadWriteLock 实现](#24-readwritelock-实现)
-        - [2.4.1. 读写锁的升级与降级](#241-读写锁的升级与降级)
     - [2.5. StampedLock](#25-stampedlock)
-        - [2.5.1. StampedLock使用注意事项](#251-stampedlock使用注意事项)
     - [2.6. CountDownLatch和CyclicBarrier](#26-countdownlatch和cyclicbarrier)
     - [2.7. 并发容器](#27-并发容器)
     - [2.8. 原子类](#28-原子类)
-        - [2.8.1. 原理](#281-原理)
-        - [2.8.2. ABA问题](#282-aba问题)
-        - [2.8.3. Java实现原子化的count += 1](#283-java实现原子化的count--1)
-        - [2.8.4. 原子类概览](#284-原子类概览)
     - [2.9. 线程池Executor](#29-线程池executor)
-        - [2.9.1. 使用线程池的注意事项](#291-使用线程池的注意事项)
     - [2.10. Future](#210-future)
-        - [2.10.1. FutureTask工具类](#2101-futuretask工具类)
     - [2.11. CompletableFuture](#211-completablefuture)
-        - [2.11.1. 创建CompletableFuture对象](#2111-创建completablefuture对象)
-        - [2.11.2. 如何理解CompletionStage接口](#2112-如何理解completionstage接口)
     - [2.12. CompletionService: 批量异步化操作](#212-completionservice-批量异步化操作)
-        - [2.12.1. CompletionService 接口](#2121-completionservice-接口)
     - [2.13. Fork/Join 分治模型](#213-forkjoin-分治模型)
-        - [2.13.1. Fork/Join 计算框架](#2131-forkjoin-计算框架)
-        - [2.13.2. 工作原理](#2132-工作原理)
+- [并发设计模式](#并发设计模式)
+    - [Immutability模式](#immutability模式)
+    - [Copy-on-Write模式](#copy-on-write模式)
+    - [线程本地存储模式](#线程本地存储模式)
+    - [Guarded Suspension模式](#guarded-suspension模式)
+    - [Balking模式](#balking模式)
+    - [Thread-Per-Message模式](#thread-per-message模式)
+    - [Worker Thread模式](#worker-thread模式)
+    - [两阶段终止模式](#两阶段终止模式)
+    - [生产者消费者模式](#生产者消费者模式)
+- [实际并发框架的简要分析](#实际并发框架的简要分析)
+    - [Guava RateLimiter 高性能限流器](#guava-ratelimiter-高性能限流器)
+    - [Netty 高性能网络应用框架](#netty-高性能网络应用框架)
+    - [Disruptor 高性能队列](#disruptor-高性能队列)
+    - [HiKariCP 高性能数据库连接池](#hikaricp-高性能数据库连接池)
 
 <!-- /TOC -->
-
----
 
 ## 1. 多线程基础
 
@@ -301,8 +285,6 @@ interrupt()方法只是通知线程,线程可以选择忽略或者继续执行�
 采用线程封闭的案例非常多,例如在数据库连接池里获取的连接Connection, 在JDBC里没有要求这个Connection必须是线程安全的. 数据库连接池通过线程封闭技术,保证一个Connection一旦被一个线程获取之后,在这个线程关闭Connection之前的这段时间里, 不会再分配给其他线程,从而保证了Connection不会有并发问题.
 
 ## 2. Java.util.Concurrent JUC并发包详解
-### AbstractQueuedSynchronizer -- AQS
-
 ### 2.1. Lock接口
 JUC通过lock和condition这两个接口来重新实现管程, 其中Lock用于解决互斥问题,Condition用于解决同步问题. 
 #### 2.1.1. 重造管程而不使用自带的synchronized的理由
