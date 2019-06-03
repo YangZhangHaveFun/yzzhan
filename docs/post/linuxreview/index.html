@@ -51,7 +51,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/">
@@ -316,7 +316,23 @@ ssh-add ~/.ssh/id_rsa</code></pre></div>
 <p>然后重启ssh service. 之后别的计算机可以通过user@example.com:9000来访问本地的5984端口.</p>
 
 <p>需要注意的是执行以上ssh命令会同时登陆服务器, 但其实并不需要,我们可以加上以下参数避免同时登陆.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -nNT -R <span style="color:#ae81ff">9000</span>:localhost:5984 user@example.com</code></pre></div></article>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -nNT -R <span style="color:#ae81ff">9000</span>:localhost:5984 user@example.com</code></pre></div>
+<h3 id="vsftpd">vsftpd</h3>
+
+<h4 id="530-login-incorrect-错误">530 Login incorrect 错误</h4>
+
+<h4 id="500">500</h4>
+
+<h3 id="mysql语法">mysql语法</h3>
+
+<h4 id="赋予权限">赋予权限</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">all</span> <span style="color:#66d9ef">privileges</span> <span style="color:#66d9ef">on</span> mmall_learning.<span style="color:#f92672">*</span> <span style="color:#66d9ef">to</span> mmall<span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> identified <span style="color:#66d9ef">by</span> <span style="color:#e6db74">&#39;mmall&#39;</span> <span style="color:#66d9ef">with</span> <span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">option</span>;
+
+flush <span style="color:#66d9ef">privileges</span>;</code></pre></div>
+<p><code>mmall_learning</code>为数据库名, <code>mmall</code>为被赋予权限的MySQL用户名, identified by <code>mall</code>为对应用户名的密码.</p>
+
+<p>具体为赋予mmall对mmall_learning数据库的all privileges权限.</p>
+</article>
     <footer class="post-footer">
       
       <ul class="post-tags">

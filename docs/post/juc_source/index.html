@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Overview For Advanced Python Design Knowledge</title>
+  <title>解析J.U.C源码</title>
 
   
   
@@ -24,22 +24,22 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content=" This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)  3. Tornado : 4. Search Engine Design : ">
+  <meta name="description" content="">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
-    <meta name="twitter:title" content="Overview For Advanced Python Design Knowledge">
-    <meta name="twitter:description" content=" This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)  3. Tornado : 4. Search Engine Design : ">
+    <meta name="twitter:title" content="解析J.U.C源码">
+    <meta name="twitter:description" content="">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Overview For Advanced Python Design Knowledge">
-  <meta property="og:description" content=" This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)  3. Tornado : 4. Search Engine Design : ">
-  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/python/">
+  <meta property="og:title" content="解析J.U.C源码">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/">
   <meta property="og:image" content="/images/avatar.png">
 
 
@@ -48,7 +48,7 @@
 <meta name="generator" content="Hugo 0.54.0">
 
 
-<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/python/">
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -212,46 +212,22 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Overview For Advanced Python Design Knowledge</h1>
-      <p class="post-meta">@Yang Zhang · Jan 11, 2019 · 1 min read</p>
+      <h1 class="post-title">解析J.U.C源码</h1>
+      <p class="post-meta">@Yang Zhang · Jun 2, 2019 · 0 min read</p>
     </header>
-    <article class="post-content">
-
-<h1 id="this-is-the-abstract-page-for-python-relative-knowledge-which-could-be-separated-into-four-part">This is the <strong>Abstract Page</strong> for Python relative knowledge, which could be separated into four part:</h1>
-
-<h2 id="1-django">1. Django :</h2>
-
-<h2 id="2-advanced-python-understanding">2. Advanced Python Understanding :</h2>
-
-<pre><code>### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/)
-
-### Asyncio :
-
-### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/)
-
-### base class :
-
-### Properties :
-
-### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)
-</code></pre>
-
-<h2 id="3-tornado">3. Tornado :</h2>
-
-<h2 id="4-search-engine-design">4. Search Engine Design :</h2>
-</article>
+    <article class="post-content"></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
-          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/python"><span class="tag">Python</span></a></li>
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/java"><span class="tag">Java</span></a></li>
         
-          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/overview"><span class="tag">Overview</span></a></li>
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/concurrency"><span class="tag">Concurrency</span></a></li>
         
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>143</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
       </p>
     </footer>
     

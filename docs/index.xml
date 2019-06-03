@@ -33,6 +33,15 @@ For any issues, you could email via yzzhan@student.unimelb.edu.au.</description>
     </item>
     
     <item>
+      <title>解析J.U.C源码</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</link>
+      <pubDate>Sun, 02 Jun 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>杂记</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/zaji/</link>
       <pubDate>Fri, 17 May 2019 01:37:56 +0800</pubDate>
@@ -69,15 +78,6 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
     </item>
     
     <item>
-      <title>深入理解java并发知识的归纳</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
-      <pubDate>Mon, 13 May 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
-      <description>1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.</description>
-    </item>
-    
-    <item>
       <title>hadoop的归纳</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/hadoop/</link>
       <pubDate>Fri, 03 May 2019 01:37:56 +0800</pubDate>
@@ -97,13 +97,12 @@ Different types of Database Architectures  Centralised Database System Client-Se
     </item>
     
     <item>
-      <title>Notes for distributed system preparation(COMP90024)</title>
+      <title>Notes for Cluster and Cloud Computing(COMP90024)</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/</link>
       <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/</guid>
-      <description>Auto-deploying by Ansible Docker Background Introduction Virtualization vs. Containerization The advantages of virtualization, such as application containment and horizontal scalability come at a cost: resources.
-The containerization allows virtual instances to share a single host OS to reduce wasted resources since each container only holds the application and related binaries. The rest are shared among the containers. Container Container is similar to concept of resouce isolation and allocation as a virtual machine.</description>
+      <description>Information Session Cloud Characteristics: - On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. - Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. - Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.</description>
     </item>
     
     <item>

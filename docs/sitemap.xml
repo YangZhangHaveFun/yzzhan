@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</loc>
+    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/post/zaji/</loc>
     <lastmod>2019-04-17T01:37:56+08:00</lastmod>
   </url>
@@ -20,11 +25,6 @@
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/post/jvm/</loc>
     <lastmod>2019-05-13T01:37:56+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</loc>
-    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
   </url>
   
   <url>
@@ -306,13 +306,13 @@
   
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/java/</loc>
-    <lastmod>2019-05-13T01:37:56+08:00</lastmod>
+    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/categories/java-fundemental-knowledge/</loc>
-    <lastmod>2019-05-13T01:37:56+08:00</lastmod>
+    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -360,7 +360,7 @@
   
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/post/</loc>
-    <lastmod>2019-04-17T01:37:56+08:00</lastmod>
+    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
     <priority>0</priority>
   </url>
   

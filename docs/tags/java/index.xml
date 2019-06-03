@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Mon, 13 May 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Jun 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>解析J.U.C源码</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</link>
+      <pubDate>Sun, 02 Jun 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>对深入理解java虚拟机的读书总结</title>
@@ -24,15 +33,6 @@ JDK(Java Development Kit) 包括Java 程序设计语言, Java虚拟机, JavaAPI�
 JRE(Java Runtime Environment) 包括Java SE API子集和Java虚拟机这两个部分。是支持Java程序运行的标准环境。
 Java的四个平台 - Java Card: 支持一些Java小程序(Applets) 运行在小内存设备（如智能卡）上的平台 - Java ME(Micro Edition): 支持Java程序运行在移动终端上的平台，是对Java API有所精简并加入了针对移动终端支持，以前称为J2ME。 - Java SE（Standard Edition）: 支持面向桌面级应用。 - Java EE (Enterprise Edition) : 支持使用多层架构的企业应用的Java平台，除了提供Java SE API外，还对其做了大量的扩充和部署支持。
 Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运行时的数据区域 Java虚拟机在执行Java程序的过程中会把所管理的内存划分为若干个不同的数据区域. 1. 程序计数器(Program Counter Register) * 当前线程所执行的字节码的行号指示器 * 字节码解释器工作时通过程序计数器来选取下一条需要执行的字节码指令.</description>
-    </item>
-    
-    <item>
-      <title>深入理解java并发知识的归纳</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
-      <pubDate>Mon, 13 May 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
-      <description>1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.</description>
     </item>
     
     <item>

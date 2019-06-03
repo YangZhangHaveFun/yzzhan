@@ -54,7 +54,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">
@@ -290,9 +290,9 @@ Hashtable、HashMap都使用了 Iterator。而由于历史原因，Hashtable还�
 
 <p>源码：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> T <span style="color:#a6e22e">next</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>modCount <span style="color:#f92672">!=</span> expectedModCount<span style="color:#f92672">)</span>
-        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ConcurrentModificationException<span style="color:#f92672">();</span>
-    <span style="color:#66d9ef">return</span> nextElement<span style="color:#f92672">();</span>
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>modCount <span style="color:#f92672">!=</span> expectedModCount<span style="color:#f92672">)</span>
+		<span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> ConcurrentModificationException<span style="color:#f92672">();</span>
+	<span style="color:#66d9ef">return</span> nextElement<span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span></code></pre></div>
 <p>modCount的使用类似于并发编程中的CAS（Compare and Swap）技术。我们可以看到这个方法中，每次在发生增删改的时候都会出现modCount++的动作。而modcount可以理解为是当前hashtable的状态。每发生一次操作，状态就向前走一步。设置这个状态，主要是由于hashtable等容器类在迭代时，判断数据是否过时时使用的。尽管hashtable采用了原生的同步锁来保护数据安全。但是在出现迭代数据的时候，则无法保证边迭代，边正确操作。于是使用这个值来标记状态。一旦在迭代的过程中状态发生了改变，则会快速抛出一个异常，终止迭代行为。</p>
 
@@ -311,8 +311,8 @@ Hashtable默认的初始大小为11，之后每次扩充，容量变为原来的
 </ol>
 
 <p>Hashtable直接使用对象的hashCode。hashCode是JDK根据对象的地址或者字符串或者数字算出来的int类型的数值。然后再使用除留余数发来获得最终的位置。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">    <span style="color:#66d9ef">int</span> hash <span style="color:#f92672">=</span> key<span style="color:#f92672">.</span><span style="color:#a6e22e">hashCode</span><span style="color:#f92672">();</span>
-    <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>hash <span style="color:#f92672">&amp;</span> 0x7FFFFFFF<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> tab<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">	<span style="color:#66d9ef">int</span> hash <span style="color:#f92672">=</span> key<span style="color:#f92672">.</span><span style="color:#a6e22e">hashCode</span><span style="color:#f92672">();</span>
+	<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>hash <span style="color:#f92672">&amp;</span> 0x7FFFFFFF<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> tab<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span></code></pre></div>
 <p>Hashtable在计算元素的位置时需要进行一次除法运算，而除法运算是比较耗时的。</p>
 
 <p>HashMap为了提高计算效率，将哈希表的大小固定为了2的幂，这样在取模预算时，不需要做除法，只需要做位运算。位运算比除法的效率要高很多。</p>
@@ -321,8 +321,8 @@ Hashtable默认的初始大小为11，之后每次扩充，容量变为原来的
 
 <p>为了解决这个问题，HashMap重新根据hashcode计算hash值后，又对hash值做了一些运算来打散数据。使得取得的位置更加分散，从而减少了hash冲突。当然了，为了高效，HashMap只做了一些简单的位处理。从而不至于把使用2 的幂次方带来的效率提升给抵消掉。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">hash</span><span style="color:#f92672">(</span>Object key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">int</span> h<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">?</span> 0 <span style="color:#f92672">:</span> <span style="color:#f92672">(</span>h <span style="color:#f92672">=</span> key<span style="color:#f92672">.</span><span style="color:#a6e22e">hashCode</span><span style="color:#f92672">())</span> <span style="color:#f92672">^</span> <span style="color:#f92672">(</span>h <span style="color:#f92672">&gt;&gt;&gt;</span> 16<span style="color:#f92672">);</span>
+	<span style="color:#66d9ef">int</span> h<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">?</span> 0 <span style="color:#f92672">:</span> <span style="color:#f92672">(</span>h <span style="color:#f92672">=</span> key<span style="color:#f92672">.</span><span style="color:#a6e22e">hashCode</span><span style="color:#f92672">())</span> <span style="color:#f92672">^</span> <span style="color:#f92672">(</span>h <span style="color:#f92672">&gt;&gt;&gt;</span> 16<span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span></code></pre></div>
 <p>针对这个问题大佬的说明如下：</p>
 
@@ -339,7 +339,7 @@ Hashtable默认的初始大小为11，之后每次扩充，容量变为原来的
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>137</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>138</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     

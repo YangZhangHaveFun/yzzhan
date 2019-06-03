@@ -8,8 +8,10 @@ categories: ["Java fundemental knowledge"]
 author: "Yang Zhang"
 ---
 
-<!-- TOC -->
+---
 
+## Contents
+<!-- TOC -->
 - [1. 多线程基础](#1-多线程基础)
     - [1.1. 多线程的三个问题](#11-多线程的三个问题)
     - [1.2. Java内存模型](#12-java内存模型)
@@ -63,6 +65,8 @@ author: "Yang Zhang"
         - [2.13.2. 工作原理](#2132-工作原理)
 
 <!-- /TOC -->
+
+---
 
 ## 1. 多线程基础
 
@@ -297,6 +301,8 @@ interrupt()方法只是通知线程,线程可以选择忽略或者继续执行�
 采用线程封闭的案例非常多,例如在数据库连接池里获取的连接Connection, 在JDBC里没有要求这个Connection必须是线程安全的. 数据库连接池通过线程封闭技术,保证一个Connection一旦被一个线程获取之后,在这个线程关闭Connection之前的这段时间里, 不会再分配给其他线程,从而保证了Connection不会有并发问题.
 
 ## 2. Java.util.Concurrent JUC并发包详解
+### AbstractQueuedSynchronizer -- AQS
+
 ### 2.1. Lock接口
 JUC通过lock和condition这两个接口来重新实现管程, 其中Lock用于解决互斥问题,Condition用于解决同步问题. 
 #### 2.1.1. 重造管程而不使用自带的synchronized的理由
@@ -1510,3 +1516,26 @@ static class Fibonacci extends
 ```
 #### 2.13.2. 工作原理
 
+## 并发设计模式
+### Immutability模式
+### Copy-on-Write模式
+### 线程本地存储模式
+### Guarded Suspension模式
+### Balking模式
+
+安全发布对象的四个方法:
+- 在静态初始化函数中初始化一个对象引用
+- 将对象的引用保存到volatile类型域或者AtomicReference对象中
+- 将对象的引用保存到某个正确构造对象的final类型域中
+- 将对象的引用保存到一个由锁保护的域中.
+
+### Thread-Per-Message模式
+### Worker Thread模式
+### 两阶段终止模式
+### 生产者消费者模式
+
+## 实际并发框架的简要分析
+### Guava RateLimiter 高性能限流器
+### Netty 高性能网络应用框架
+### Disruptor 高性能队列
+### HiKariCP 高性能数据库连接池

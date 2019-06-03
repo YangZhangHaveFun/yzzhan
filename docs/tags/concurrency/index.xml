@@ -7,18 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Mon, 13 May 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Jun 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>深入理解java并发知识的归纳</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</link>
-      <pubDate>Mon, 13 May 2019 01:37:56 +0800</pubDate>
+      <title>解析J.U.C源码</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</link>
+      <pubDate>Sun, 02 Jun 2019 01:37:56 +0800</pubDate>
       
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</guid>
-      <description>1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.</description>
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</guid>
+      <description></description>
     </item>
     
     <item>
