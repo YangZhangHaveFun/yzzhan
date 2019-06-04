@@ -9,14 +9,43 @@ author: "Yang Zhang"
 ---
 ## Information Session
 
-Cloud Characteristics:
+**Cloud Characteristics:**
+
 - **On-demand self-service**: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider.
 - **Networked access**: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms.
 - **Resource pooling**: The provider's computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.
 - **Rapid elasticity**: Capabilities can be elastically provisioned and released, in some cases automatically, to scale rapidly upon demand.
 - **Measured service**: Cloud systems automatically control and optimize resource use by leveraging a metering capability at some level of abstraction appropriate to the type of service. 
 
+**Cloud Computing Flavours:**
+
+- Compute Clouds:
+  - Amazon Elastic Compute Cloud
+  - Azure
+- Data Clouds:
+  - Amazon Simple Storage Service
+  - Google docs
+  - iCloud
+  - Dropbox
+- Application Clouds:
+  - App Store
+  - Virtual Image Factories
+  - Community-specific
+- Public/Private/Hybrid/Mobile/Health Clouds
+
+### History
+
+#### Distributed System
+- The first focus is on **Transparency** and **Heterogeneity** of computer-computer interactions. (Finding -> Binding -> checking -> invoking) in heterogeneous environment.
+
+#### Grid Computing
+- Grid Computing transfer computer-computer focus to organization-organization focus. 
+- Grid computing is distinguished from conventional high-performance computing systems such as cluster computing in that grid computers have each node set to perform a different task/application. Grid computers also tend to be more heterogeneous and geographically dispersed (thus not physically coupled) than cluster computers.
+- Although a single grid can be dedicated to a particular application, commonly a grid is used for a variety of purposes. Grids are often constructed with general-purpose grid middleware software libraries. Grid sizes can be quite large.
+
 ## Domain Driver
+
+
 ## Parallel System, Distributed Computing and HPC/HTC
 ## HPC
 ## Cloud Computing
