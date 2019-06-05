@@ -45,6 +45,52 @@ author: "Yang Zhang"
 
 ## Domain Driver
 
+Challenges happen in multiple perspectives.
+- Big data
+- Big compute
+- Big distribution
+- Big collaboration
+- Big security
+
+The solution to these challenges focus on `Computing Scaling`, `Network Scaling`.
+### Computing Scaling
+#### General Analysis
+Computing Scaling could be divided into:
+- Vertical Computational Scaling:
+  - Have faster processors
+  - Limits of fundamental physics/matter(nanoMOS)
+- Horizontal Computational Scaling:
+  - Have more processors: Easy to add more processors but hard to design, develop, test, debug and delpoy.
+  - HTC is far more important than HPC
+
+Multiple meaning of "add more":
+- Single machine multiple cores
+  - Typical laptop/PC/server these days
+- Loosely coupled cluster of machines
+  - Pooling/Sharing of resources:
+    - Dedicated vs available only when not in use by others
+    - Web services
+- Tightly coupled cluster of machines
+  - Typical HPC/HTC set-up (SPARTAN)
+    - Many servers in same rack/server room(often with fast message passing interconnects)
+- Widely distributed clusters of machines
+- Hybrid combinations of the above
+  - Leads to many challenges with distributed systems
+    - Shared state
+    - Message Passing Paradigms(DANGER of delays/lost messages)
+#### Mathematical Analysis
+Question: If n processors(cores) are thrown at a problem how much faster will it go?
+##### Terminologes:
+- The execution time of the whole task before the improvement of the resources of the system is denoted as T.
+- It is the execution of the part that benefits from the improvement of the resources that is accelerated by the factor {\displaystyle s} s after the improvement of the resources.
+- T(1) = time for serial computation, which could not be enhanced by parallelism.
+- T(N) = time for N parallel computations, which could be enhanced by parallelism.
+- S(N) = speed up
+
+$S(N)=\frac{T(1)}{T(N)}$ => proportion of speed up depends on parts of program that can't be parallelised.
+
+##### Amdahl's Law
+ $\alpha$ is the fraction of running time that sequential program spends on non-parallel parts of a computation then $S = 1/\alpha$.
 
 ## Parallel System, Distributed Computing and HPC/HTC
 ## HPC
