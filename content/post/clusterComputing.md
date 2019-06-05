@@ -9,14 +9,89 @@ author: "Yang Zhang"
 ---
 ## Information Session
 
-Cloud Characteristics:
+**Cloud Characteristics:**
+
 - **On-demand self-service**: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider.
 - **Networked access**: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms.
 - **Resource pooling**: The provider's computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.
 - **Rapid elasticity**: Capabilities can be elastically provisioned and released, in some cases automatically, to scale rapidly upon demand.
 - **Measured service**: Cloud systems automatically control and optimize resource use by leveraging a metering capability at some level of abstraction appropriate to the type of service. 
 
+**Cloud Computing Flavours:**
+
+- Compute Clouds:
+  - Amazon Elastic Compute Cloud
+  - Azure
+- Data Clouds:
+  - Amazon Simple Storage Service
+  - Google docs
+  - iCloud
+  - Dropbox
+- Application Clouds:
+  - App Store
+  - Virtual Image Factories
+  - Community-specific
+- Public/Private/Hybrid/Mobile/Health Clouds
+
+### History
+
+#### Distributed System
+- The first focus is on **Transparency** and **Heterogeneity** of computer-computer interactions. (Finding -> Binding -> checking -> invoking) in heterogeneous environment.
+
+#### Grid Computing
+- Grid Computing transfer computer-computer focus to organization-organization focus. 
+- Grid computing is distinguished from conventional high-performance computing systems such as cluster computing in that grid computers have each node set to perform a different task/application. Grid computers also tend to be more heterogeneous and geographically dispersed (thus not physically coupled) than cluster computers.
+- Although a single grid can be dedicated to a particular application, commonly a grid is used for a variety of purposes. Grids are often constructed with general-purpose grid middleware software libraries. Grid sizes can be quite large.
+
 ## Domain Driver
+
+Challenges happen in multiple perspectives.
+- Big data
+- Big compute
+- Big distribution
+- Big collaboration
+- Big security
+
+The solution to these challenges focus on `Computing Scaling`, `Network Scaling`.
+### Computing Scaling
+#### General Analysis
+Computing Scaling could be divided into:
+- Vertical Computational Scaling:
+  - Have faster processors
+  - Limits of fundamental physics/matter(nanoMOS)
+- Horizontal Computational Scaling:
+  - Have more processors: Easy to add more processors but hard to design, develop, test, debug and delpoy.
+  - HTC is far more important than HPC
+
+Multiple meaning of "add more":
+- Single machine multiple cores
+  - Typical laptop/PC/server these days
+- Loosely coupled cluster of machines
+  - Pooling/Sharing of resources:
+    - Dedicated vs available only when not in use by others
+    - Web services
+- Tightly coupled cluster of machines
+  - Typical HPC/HTC set-up (SPARTAN)
+    - Many servers in same rack/server room(often with fast message passing interconnects)
+- Widely distributed clusters of machines
+- Hybrid combinations of the above
+  - Leads to many challenges with distributed systems
+    - Shared state
+    - Message Passing Paradigms(DANGER of delays/lost messages)
+#### Mathematical Analysis
+Question: If n processors(cores) are thrown at a problem how much faster will it go?
+##### Terminologes:
+- The execution time of the whole task before the improvement of the resources of the system is denoted as T.
+- It is the execution of the part that benefits from the improvement of the resources that is accelerated by the factor {\displaystyle s} s after the improvement of the resources.
+- T(1) = time for serial computation, which could not be enhanced by parallelism.
+- T(N) = time for N parallel computations, which could be enhanced by parallelism.
+- S(N) = speed up
+
+$S(N)=\frac{T(1)}{T(N)}$ => proportion of speed up depends on parts of program that can't be parallelised.
+
+##### Amdahl's Law
+ $\alpha$ is the fraction of running time that sequential program spends on non-parallel parts of a computation then $S = 1/\alpha$.
+
 ## Parallel System, Distributed Computing and HPC/HTC
 ## HPC
 ## Cloud Computing
