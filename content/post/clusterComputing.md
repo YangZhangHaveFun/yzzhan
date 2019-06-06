@@ -81,16 +81,62 @@ Multiple meaning of "add more":
 #### Mathematical Analysis
 Question: If n processors(cores) are thrown at a problem how much faster will it go?
 ##### Terminologes:
-- The execution time of the whole task before the improvement of the resources of the system is denoted as T.
-- It is the execution of the part that benefits from the improvement of the resources that is accelerated by the factor {\displaystyle s} s after the improvement of the resources.
-- T(1) = time for serial computation, which could not be enhanced by parallelism.
-- T(N) = time for N parallel computations, which could be enhanced by parallelism.
-- S(N) = speed up
-
-$S(N)=\frac{T(1)}{T(N)}$ => proportion of speed up depends on parts of program that can't be parallelised.
-
+- Basic terms
+  - $\sigma$: The time that costs by unparallelable part.
+  - $\pi$: The time that costs by parallelable part.
+  - N: The number of processors
+- Derived terms
+  - T(1): Time for serial computation without enhanced by parallelism.
+  - T(N): Time for N parallel computations with max enhanced by parallelism.
+  - S(N)=T(1)/T(N): Time proportion between no parallelism applied and max parallelism applied.
+  - $\pi/\sigma=\frac{1-\alpha}{\alpha}$: Time proportion between cost on parallelable part and unparallelable part.
+  - $\alpha$: The proportion of parallelable part.
+  - $S=T(1)/T(N)=\frac{1}{\alpha+(1-\alpha)/N}\approx\frac{1}{\alpha}$: Speed up proportion.
 ##### Amdahl's Law
- $\alpha$ is the fraction of running time that sequential program spends on non-parallel parts of a computation then $S = 1/\alpha$.
+$S = 1/\alpha$. For example, 95% of paralleled program with infinite numbers of cores will lead to 20 times faster than unparalleled program  
+##### Gustafson-Barsis's Law
+$S(N)=\alpha+N(1-\alpha)$
+Speed up S using N processes is given as a linear formula dependent on the number of processes and the fraction of time to run sequential parts.
+
+##### Comparison
+**Amdahl's Law** suggests that with limited task, speed up could not be too fast. 
+**Gustafson-Barsis's Law** suggests that with enough processors and remaining tasks, speed up will always meet the requirement.
+### Further parallel improvement
+#### Basic Architecture in a simplest level
+A computer comprises:
+- CPU for executing programs
+- Memory that stores/executing programs and related data
+- I/O systems
+- Permanent Storage for read/writing data into out of memory
+
+Important issue is to balance the components especially for HPC systems.
+
+To deal with data, here are four different kinds of combination.
+|               | Single Instruction           | Multi Instruction  |
+| ------------- |:-------------:| -----:|
+| Single Data   | SISD | MISD |
+| Multiple Data | SIMD      |   MIMD |
+
+- Single Instruction, Single Data Stream (SISD): 
+  - Single control unit (CU/CPU) fetches single Instruction Stream from memory.
+  - Sequential computer which exploits no parallelism in either the instruction or data streams
+- Multiple Instruction, Single Data stream (MISD):
+  - **Parallel** computing architecture where many functional units (PU/CPU) perform different operations on the same data 
+  - Example: fault tolerant computer architectures, multiple error checking on the same date source
+-  Single Instruction, Multiple Data stream (SIMD):
+   -  focus is on data level parallelism, only a single process (instruction) at a given moment(**Concurrency**)
+   -  multiple processing elements that perform the same operation on multiple data points simultaneously
+   -  Example: to improve performance of multimedia use such as for image processing
+-  Multiple Instruction, Multiple Data stream (MIMD)
+   -  Number of processors that function **asynchronously** and independently.
+   -  Machines can be shared memory or distributed memory categories.
+   -  Example: HPC.
+
+
+
+
+
+
 
 ## Parallel System, Distributed Computing and HPC/HTC
 ## HPC
