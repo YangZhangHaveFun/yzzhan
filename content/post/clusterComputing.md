@@ -471,10 +471,23 @@ CouchDB uses MVCC and MongoDB uses a mix of two-phase commit(for replicating dat
 - REDUCE:  hierarchically summarizes them until the result is obtained.
 ## Big Data Analytics
 ### Introduction
+Challenges of Big Data Analytics
+- Reading and writing distributed dataset
+- Preserving data in the presence of failing data nodes 
+- Supporting the execution of MapReduce tasks
+- Being fault-tolerant
+- Coordinating the execution of tasks across a cluster.
 ### Apache Hadoop
 Hadoop
 : an open source software platform for distributed storage and distributed processing of very large data sets on computer clusters built fro commodity hardware.
+
+#### Hadoop Distributed File System(HDFS)
+
 ### Apache Spark
+Spark
+: A fast and general engine for large-scale data processing.
+
+Build around one main concept: the Resilient Distributed Dataset(RDD) 
 ## Cloud Underpinning and Other Things
 ## Security and Clouds
 
