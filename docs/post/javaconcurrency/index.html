@@ -24,21 +24,21 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.">
+  <meta name="description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型 1.3. 如果解决并发原子性问题&amp;mdash;互斥锁 1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题. 1.6. 管程 1.7. 线程 1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口 2.2. Condition接口 2.3. 信号量模型 2.4. ReadWriteLock 实现 2.5. StampedLock 2.6. CountDownLatch和CyclicBarrier 2.7. 并发容器 2.8. 原子类 2.9. 线程池Executor 2.10. Future 2.11. CompletableFuture 2.12. CompletionService: 批量异步化操作 2.13. Fork/Join 分治模型  并发设计模式  Immutability模式 Copy-on-Write模式 线程本地存储模式 Guarded Suspension模式 Balking模式 Thread-Per-Message模式 Worker Thread模式 两阶段终止模式 生产者消费者模式  实际并发框架的简要分析  Guava RateLimiter 高性能限流器 Netty 高性能网络应用框架 Disruptor 高性能队列 HiKariCP 高性能数据库连接池   1.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="深入理解java并发知识的归纳">
-    <meta name="twitter:description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.">
+    <meta name="twitter:description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型 1.3. 如果解决并发原子性问题&amp;mdash;互斥锁 1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题. 1.6. 管程 1.7. 线程 1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口 2.2. Condition接口 2.3. 信号量模型 2.4. ReadWriteLock 实现 2.5. StampedLock 2.6. CountDownLatch和CyclicBarrier 2.7. 并发容器 2.8. 原子类 2.9. 线程池Executor 2.10. Future 2.11. CompletableFuture 2.12. CompletionService: 批量异步化操作 2.13. Fork/Join 分治模型  并发设计模式  Immutability模式 Copy-on-Write模式 线程本地存储模式 Guarded Suspension模式 Balking模式 Thread-Per-Message模式 Worker Thread模式 两阶段终止模式 生产者消费者模式  实际并发框架的简要分析  Guava RateLimiter 高性能限流器 Netty 高性能网络应用框架 Disruptor 高性能队列 HiKariCP 高性能数据库连接池   1.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="深入理解java并发知识的归纳">
-  <meta property="og:description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型  1.2.1. Volatile 1.2.2. Happen-Before规则  1.3. 如果解决并发原子性问题&amp;mdash;互斥锁  1.3.1. 死锁  1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.  1.5.1. 安全性问题 1.5.2. 活跃性问题 1.5.3. 性能问题  1.6. 管程  1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型  1.7. 线程  1.7.1. 线程的生命周期 1.7.2. Java中线程的生命周期  1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口  2.1.1. 重造管程而不使用自带的synchronized的理由 2.1.2. 如何保证可见性 2.1.3. 可重入锁 2.">
+  <meta property="og:description" content="1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型 1.3. 如果解决并发原子性问题&amp;mdash;互斥锁 1.4. &amp;ldquo;等待-通知&amp;rdquo;机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题. 1.6. 管程 1.7. 线程 1.8. 并发量 1.9. 局部变量 &amp;ndash; 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口 2.2. Condition接口 2.3. 信号量模型 2.4. ReadWriteLock 实现 2.5. StampedLock 2.6. CountDownLatch和CyclicBarrier 2.7. 并发容器 2.8. 原子类 2.9. 线程池Executor 2.10. Future 2.11. CompletableFuture 2.12. CompletionService: 批量异步化操作 2.13. Fork/Join 分治模型  并发设计模式  Immutability模式 Copy-on-Write模式 线程本地存储模式 Guarded Suspension模式 Balking模式 Thread-Per-Message模式 Worker Thread模式 两阶段终止模式 生产者消费者模式  实际并发框架的简要分析  Guava RateLimiter 高性能限流器 Netty 高性能网络应用框架 Disruptor 高性能队列 HiKariCP 高性能数据库连接池   1.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -213,7 +213,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">深入理解java并发知识的归纳</h1>
-      <p class="post-meta">@Yang Zhang · May 13, 2019 · 15 min read</p>
+      <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 15 min read</p>
     </header>
     <article class="post-content">
 
@@ -224,103 +224,52 @@
 
 <ul>
 <li><a href="#11-多线程的三个问题">1.1. 多线程的三个问题</a></li>
-<li><a href="#12-java内存模型">1.2. Java内存模型</a>
-
-<ul>
-<li><a href="#121-volatile">1.2.1. Volatile</a></li>
-<li><a href="#122-happen-before规则">1.2.2. Happen-Before规则</a></li>
-</ul></li>
-<li><a href="#13-如果解决并发原子性问题---互斥锁">1.3. 如果解决并发原子性问题&mdash;互斥锁</a>
-
-<ul>
-<li><a href="#131-死锁">1.3.1. 死锁</a></li>
-</ul></li>
+<li><a href="#12-java内存模型">1.2. Java内存模型</a></li>
+<li><a href="#13-如果解决并发原子性问题---互斥锁">1.3. 如果解决并发原子性问题&mdash;互斥锁</a></li>
 <li><a href="#14-等待-通知机制">1.4. &ldquo;等待-通知&rdquo;机制</a></li>
-<li><a href="#15-编程中需要注意的三类问题-安全性问题-活跃性问题和性能问题">1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.</a>
-
-<ul>
-<li><a href="#151-安全性问题">1.5.1. 安全性问题</a></li>
-<li><a href="#152-活跃性问题">1.5.2. 活跃性问题</a></li>
-<li><a href="#153-性能问题">1.5.3. 性能问题</a></li>
-</ul></li>
-<li><a href="#16-管程">1.6. 管程</a>
-
-<ul>
-<li><a href="#161-管程的发展-hasen模型-hoare模型-mesa模型">1.6.1. 管程的发展-Hasen模型, Hoare模型, MESA模型</a></li>
-</ul></li>
-<li><a href="#17-线程">1.7. 线程</a>
-
-<ul>
-<li><a href="#171-线程的生命周期">1.7.1. 线程的生命周期</a></li>
-<li><a href="#172-java中线程的生命周期">1.7.2. Java中线程的生命周期</a></li>
-</ul></li>
+<li><a href="#15-编程中需要注意的三类问题-安全性问题-活跃性问题和性能问题">1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题.</a></li>
+<li><a href="#16-管程">1.6. 管程</a></li>
+<li><a href="#17-线程">1.7. 线程</a></li>
 <li><a href="#18-并发量">1.8. 并发量</a></li>
 <li><a href="#19-局部变量----线程封闭">1.9. 局部变量 &ndash; 线程封闭</a></li>
 </ul></li>
 <li><a href="#2-javautilconcurrent-juc并发包详解">2. Java.util.Concurrent JUC并发包详解</a>
 
 <ul>
-<li><a href="#21-lock接口">2.1. Lock接口</a>
-
-<ul>
-<li><a href="#211-重造管程而不使用自带的synchronized的理由">2.1.1. 重造管程而不使用自带的synchronized的理由</a></li>
-<li><a href="#212-如何保证可见性">2.1.2. 如何保证可见性</a></li>
-<li><a href="#213-可重入锁">2.1.3. 可重入锁</a></li>
-<li><a href="#214-公平与非公平锁">2.1.4. 公平与非公平锁</a></li>
-</ul></li>
-<li><a href="#22-condition接口">2.2. Condition接口</a>
-
-<ul>
-<li><a href="#221-dubbo源码分析">2.2.1. Dubbo源码分析</a></li>
-</ul></li>
+<li><a href="#21-lock接口">2.1. Lock接口</a></li>
+<li><a href="#22-condition接口">2.2. Condition接口</a></li>
 <li><a href="#23-信号量模型">2.3. 信号量模型</a></li>
-<li><a href="#24-readwritelock-实现">2.4. ReadWriteLock 实现</a>
-
-<ul>
-<li><a href="#241-读写锁的升级与降级">2.4.1. 读写锁的升级与降级</a></li>
-</ul></li>
-<li><a href="#25-stampedlock">2.5. StampedLock</a>
-
-<ul>
-<li><a href="#251-stampedlock使用注意事项">2.5.1. StampedLock使用注意事项</a></li>
-</ul></li>
+<li><a href="#24-readwritelock-实现">2.4. ReadWriteLock 实现</a></li>
+<li><a href="#25-stampedlock">2.5. StampedLock</a></li>
 <li><a href="#26-countdownlatch和cyclicbarrier">2.6. CountDownLatch和CyclicBarrier</a></li>
 <li><a href="#27-并发容器">2.7. 并发容器</a></li>
-<li><a href="#28-原子类">2.8. 原子类</a>
+<li><a href="#28-原子类">2.8. 原子类</a></li>
+<li><a href="#29-线程池executor">2.9. 线程池Executor</a></li>
+<li><a href="#210-future">2.10. Future</a></li>
+<li><a href="#211-completablefuture">2.11. CompletableFuture</a></li>
+<li><a href="#212-completionservice-批量异步化操作">2.12. CompletionService: 批量异步化操作</a></li>
+<li><a href="#213-forkjoin-分治模型">2.13. Fork/Join 分治模型</a></li>
+</ul></li>
+<li><a href="#并发设计模式">并发设计模式</a>
 
 <ul>
-<li><a href="#281-原理">2.8.1. 原理</a></li>
-<li><a href="#282-aba问题">2.8.2. ABA问题</a></li>
-<li><a href="#283-java实现原子化的count--1">2.8.3. Java实现原子化的count += 1</a></li>
-<li><a href="#284-原子类概览">2.8.4. 原子类概览</a></li>
+<li><a href="#immutability模式">Immutability模式</a></li>
+<li><a href="#copy-on-write模式">Copy-on-Write模式</a></li>
+<li><a href="#线程本地存储模式">线程本地存储模式</a></li>
+<li><a href="#guarded-suspension模式">Guarded Suspension模式</a></li>
+<li><a href="#balking模式">Balking模式</a></li>
+<li><a href="#thread-per-message模式">Thread-Per-Message模式</a></li>
+<li><a href="#worker-thread模式">Worker Thread模式</a></li>
+<li><a href="#两阶段终止模式">两阶段终止模式</a></li>
+<li><a href="#生产者消费者模式">生产者消费者模式</a></li>
 </ul></li>
-<li><a href="#29-线程池executor">2.9. 线程池Executor</a>
+<li><a href="#实际并发框架的简要分析">实际并发框架的简要分析</a>
 
 <ul>
-<li><a href="#291-使用线程池的注意事项">2.9.1. 使用线程池的注意事项</a></li>
-</ul></li>
-<li><a href="#210-future">2.10. Future</a>
-
-<ul>
-<li><a href="#2101-futuretask工具类">2.10.1. FutureTask工具类</a></li>
-</ul></li>
-<li><a href="#211-completablefuture">2.11. CompletableFuture</a>
-
-<ul>
-<li><a href="#2111-创建completablefuture对象">2.11.1. 创建CompletableFuture对象</a></li>
-<li><a href="#2112-如何理解completionstage接口">2.11.2. 如何理解CompletionStage接口</a></li>
-</ul></li>
-<li><a href="#212-completionservice-批量异步化操作">2.12. CompletionService: 批量异步化操作</a>
-
-<ul>
-<li><a href="#2121-completionservice-接口">2.12.1. CompletionService 接口</a></li>
-</ul></li>
-<li><a href="#213-forkjoin-分治模型">2.13. Fork/Join 分治模型</a>
-
-<ul>
-<li><a href="#2131-forkjoin-计算框架">2.13.1. Fork/Join 计算框架</a></li>
-<li><a href="#2132-工作原理">2.13.2. 工作原理</a></li>
-</ul></li>
+<li><a href="#guava-ratelimiter-高性能限流器">Guava RateLimiter 高性能限流器</a></li>
+<li><a href="#netty-高性能网络应用框架">Netty 高性能网络应用框架</a></li>
+<li><a href="#disruptor-高性能队列">Disruptor 高性能队列</a></li>
+<li><a href="#hikaricp-高性能数据库连接池">HiKariCP 高性能数据库连接池</a></li>
 </ul></li>
 </ul>
 
@@ -514,7 +463,7 @@ Java内存模型关于JVM的部分见深入理解JVM的读书总结<span style="
 - 休眠状态: 运行的线程如果调用一个阻塞的API(阻塞的读取文件)或者等待某个事件(条件变量),那么线程状态就会转换到休眠状态,同时释放CPU的使用权. 当等待的时间出现并通知此线程,线程就会从休眠状态转换到可运行状态.
 - 终止状态: 线程执行完或出现异常就会进入终止状态,终止状态的线程不会切换到其他任何状态. 这个状态意味着线程的生命周期结束了.</p>
 
-<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/threadstate.png" alt="monitor illustration" /></p>
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/threadState.png" alt="monitor illustration" /></p>
 
 <h4 id="1-7-2-java中线程的生命周期">1.7.2. Java中线程的生命周期</h4>
 
@@ -1733,6 +1682,42 @@ Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</
   <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span></code></pre></div>
 <h4 id="2-13-2-工作原理">2.13.2. 工作原理</h4>
+
+<h2 id="并发设计模式">并发设计模式</h2>
+
+<h3 id="immutability模式">Immutability模式</h3>
+
+<h3 id="copy-on-write模式">Copy-on-Write模式</h3>
+
+<h3 id="线程本地存储模式">线程本地存储模式</h3>
+
+<h3 id="guarded-suspension模式">Guarded Suspension模式</h3>
+
+<h3 id="balking模式">Balking模式</h3>
+
+<p>安全发布对象的四个方法:
+- 在静态初始化函数中初始化一个对象引用
+- 将对象的引用保存到volatile类型域或者AtomicReference对象中
+- 将对象的引用保存到某个正确构造对象的final类型域中
+- 将对象的引用保存到一个由锁保护的域中.</p>
+
+<h3 id="thread-per-message模式">Thread-Per-Message模式</h3>
+
+<h3 id="worker-thread模式">Worker Thread模式</h3>
+
+<h3 id="两阶段终止模式">两阶段终止模式</h3>
+
+<h3 id="生产者消费者模式">生产者消费者模式</h3>
+
+<h2 id="实际并发框架的简要分析">实际并发框架的简要分析</h2>
+
+<h3 id="guava-ratelimiter-高性能限流器">Guava RateLimiter 高性能限流器</h3>
+
+<h3 id="netty-高性能网络应用框架">Netty 高性能网络应用框架</h3>
+
+<h3 id="disruptor-高性能队列">Disruptor 高性能队列</h3>
+
+<h3 id="hikaricp-高性能数据库连接池">HiKariCP 高性能数据库连接池</h3>
 </article>
     <footer class="post-footer">
       

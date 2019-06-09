@@ -24,28 +24,31 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="">
+  <meta name="description" content=" Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
+//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 &#43; var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; }">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="解析J.U.C源码">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content=" Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
+//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 &#43; var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; }">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="解析J.U.C源码">
-  <meta property="og:description" content="">
+  <meta property="og:description" content=" Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
+//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 &#43; var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; }">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/">
   <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.51">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/">
@@ -213,9 +216,25 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">解析J.U.C源码</h1>
-      <p class="post-meta">@Yang Zhang · Jun 2, 2019 · 0 min read</p>
+      <p class="post-meta">@Yang Zhang · Jun 2, 2019 · 1 min read</p>
     </header>
-    <article class="post-content"></article>
+    <article class="post-content">
+
+<h3 id="atomic-classes">Atomic Classes</h3>
+
+<p>Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">    <span style="color:#75715e">//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getAndAddInt</span><span style="color:#f92672">(</span>Object var1<span style="color:#f92672">,</span> <span style="color:#66d9ef">long</span> var2<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> var4<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//对应例子var1=count, var2=5, var4=1
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> var5<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span>
+            <span style="color:#75715e">//通过对象和offset得到内存中这个对象真正的值.
+</span><span style="color:#75715e"></span>            var5 <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getIntVolatile</span><span style="color:#f92672">(</span>var1<span style="color:#f92672">,</span> var2<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">while</span><span style="color:#f92672">(!</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">compareAndSwapInt</span><span style="color:#f92672">(</span>var1<span style="color:#f92672">,</span> var2<span style="color:#f92672">,</span> var5<span style="color:#f92672">,</span> var5 <span style="color:#f92672">+</span> var4<span style="color:#f92672">));</span>
+        当内存中的值等于对应的偏移量<span style="color:#f92672">(</span>输入的值<span style="color:#f92672">)</span>时<span style="color:#f92672">,</span>执行值的交换操作<span style="color:#f92672">.</span>  
+        <span style="color:#66d9ef">return</span> var5<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span></code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">

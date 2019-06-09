@@ -24,28 +24,31 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="Information Session Cloud Characteristics: - On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. - Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. - Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.">
+  <meta name="description" content="Information Session Cloud Characteristics:
+ On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="Notes for Cluster and Cloud Computing(COMP90024)">
-    <meta name="twitter:description" content="Information Session Cloud Characteristics: - On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. - Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. - Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.">
+    <meta name="twitter:description" content="Information Session Cloud Characteristics:
+ On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="Notes for Cluster and Cloud Computing(COMP90024)">
-  <meta property="og:description" content="Information Session Cloud Characteristics: - On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. - Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. - Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.">
+  <meta property="og:description" content="Information Session Cloud Characteristics:
+ On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/">
   <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.51">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/">
@@ -213,20 +216,297 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Notes for Cluster and Cloud Computing(COMP90024)</h1>
-      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 3 min read</p>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 28 min read</p>
     </header>
     <article class="post-content">
 
 <h2 id="information-session">Information Session</h2>
 
-<p>Cloud Characteristics:
-- <strong>On-demand self-service</strong>: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider.
-- <strong>Networked access</strong>: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms.
-- <strong>Resource pooling</strong>: The provider&rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.
-- <strong>Rapid elasticity</strong>: Capabilities can be elastically provisioned and released, in some cases automatically, to scale rapidly upon demand.
-- <strong>Measured service</strong>: Cloud systems automatically control and optimize resource use by leveraging a metering capability at some level of abstraction appropriate to the type of service.</p>
+<p><strong>Cloud Characteristics:</strong></p>
+
+<ul>
+<li><strong>On-demand self-service</strong>: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider.</li>
+<li><strong>Networked access</strong>: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms.</li>
+<li><strong>Resource pooling</strong>: The provider&rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.</li>
+<li><strong>Rapid elasticity</strong>: Capabilities can be elastically provisioned and released, in some cases automatically, to scale rapidly upon demand.</li>
+<li><strong>Measured service</strong>: Cloud systems automatically control and optimize resource use by leveraging a metering capability at some level of abstraction appropriate to the type of service.</li>
+</ul>
+
+<p><strong>Cloud Computing Flavours:</strong></p>
+
+<ul>
+<li>Compute Clouds:
+
+<ul>
+<li>Amazon Elastic Compute Cloud</li>
+<li>Azure</li>
+</ul></li>
+<li>Data Clouds:
+
+<ul>
+<li>Amazon Simple Storage Service</li>
+<li>Google docs</li>
+<li>iCloud</li>
+<li>Dropbox</li>
+</ul></li>
+<li>Application Clouds:
+
+<ul>
+<li>App Store</li>
+<li>Virtual Image Factories</li>
+<li>Community-specific</li>
+</ul></li>
+<li>Public/Private/Hybrid/Mobile/Health Clouds</li>
+</ul>
+
+<h3 id="history">History</h3>
+
+<h4 id="distributed-system">Distributed System</h4>
+
+<ul>
+<li>The first focus is on <strong>Transparency</strong> and <strong>Heterogeneity</strong> of computer-computer interactions. (Finding -&gt; Binding -&gt; checking -&gt; invoking) in heterogeneous environment.</li>
+</ul>
+
+<h4 id="grid-computing">Grid Computing</h4>
+
+<ul>
+<li>Grid Computing transfer computer-computer focus to organization-organization focus.</li>
+<li>Grid computing is distinguished from conventional high-performance computing systems such as cluster computing in that grid computers have each node set to perform a different task/application. Grid computers also tend to be more heterogeneous and geographically dispersed (thus not physically coupled) than cluster computers.</li>
+<li>Although a single grid can be dedicated to a particular application, commonly a grid is used for a variety of purposes. Grids are often constructed with general-purpose grid middleware software libraries. Grid sizes can be quite large.</li>
+</ul>
 
 <h2 id="domain-driver">Domain Driver</h2>
+
+<p>Challenges happen in multiple perspectives.
+- Big data
+- Big compute
+- Big distribution
+- Big collaboration
+- Big security</p>
+
+<p>The solution to these challenges focus on <code>Computing Scaling</code>, <code>Network Scaling</code>.</p>
+
+<h3 id="computing-scaling">Computing Scaling</h3>
+
+<h4 id="general-analysis">General Analysis</h4>
+
+<p>Computing Scaling could be divided into:
+- Vertical Computational Scaling:
+  - Have faster processors
+  - Limits of fundamental physics/matter(nanoMOS)
+- Horizontal Computational Scaling:
+  - Have more processors: Easy to add more processors but hard to design, develop, test, debug and delpoy.
+  - HTC is far more important than HPC</p>
+
+<p>Multiple meaning of &ldquo;add more&rdquo;:
+- Single machine multiple cores
+  - Typical laptop/PC/server these days
+- Loosely coupled cluster of machines
+  - Pooling/Sharing of resources:
+    - Dedicated vs available only when not in use by others
+    - Web services
+- Tightly coupled cluster of machines
+  - Typical HPC/HTC set-up (SPARTAN)
+    - Many servers in same rack/server room(often with fast message passing interconnects)
+- Widely distributed clusters of machines
+- Hybrid combinations of the above
+  - Leads to many challenges with distributed systems
+    - Shared state
+    - Message Passing Paradigms(DANGER of delays/lost messages)</p>
+
+<h4 id="mathematical-analysis">Mathematical Analysis</h4>
+
+<p>Question: If n processors(cores) are thrown at a problem how much faster will it go?</p>
+
+<h5 id="amdahl-s-law">Amdahl&rsquo;s Law</h5>
+
+<p>Terminologes:
+- Basic terms
+  - $\sigma$: The time that costs by unparallelable part.
+  - $\pi$: The time that costs by parallelable part.
+  - N: The number of processors
+- Derived terms
+  - T(1): Time for serial computation without enhanced by parallelism.
+  - T(N): Time for N parallel computations with max enhanced by parallelism.
+  - S(N)=T(1)/T(N): Time proportion between no parallelism applied and max parallelism applied.
+  - $\pi/\sigma=\frac{1-\alpha}{\alpha}$: Time proportion between cost on parallelable part and unparallelable part.
+  - $\alpha$: The proportion of unparallelable part.
+  - $S=T(1)/T(N)=\frac{1}{\alpha+(1-\alpha)/N}\approx\frac{1}{\alpha}$: Speed up proportion.</p>
+
+<p>Equation:
+$S = 1/\alpha$. For example, 95% of paralleled program with infinite numbers of cores will lead to 20 times faster than unparalleled program</p>
+
+<h5 id="gustafson-barsis-s-law">Gustafson-Barsis&rsquo;s Law</h5>
+
+<p>Different Terminologies:
+- Basic terms:
+  - $\pi$: The time that costs by parallelable part for a single process.
+- Derived terms
+  - $\alpha$: Fraction of running time sequential program spends on parallel parts.</p>
+
+<p>Equation:
+$S(N)=\alpha+N(1-\alpha)$
+Speed up S using N processes is given as a linear formula dependent on the number of processes and the fraction of time to run sequential parts.</p>
+
+<h5 id="comparison">Comparison</h5>
+
+<p><strong>Amdahl&rsquo;s Law</strong> suggests that with limited task, speed up could not be too fast.
+<strong>Gustafson-Barsis&rsquo;s Law</strong> suggests that with enough processors and remaining tasks, speed up will always meet the requirement.</p>
+
+<blockquote>
+<p>Correctness in parallelisation requires synchronisation. Synchronization and atomic operations causes loss of performance and communication latency.</p>
+
+<h3 id="further-parallel-improvement">Further parallel improvement</h3>
+
+<h4 id="basic-architecture-in-a-simplest-level">Basic Architecture in a simplest level</h4>
+
+<p>A computer comprises:
+- CPU for executing programs
+- Memory that stores/executing programs and related data
+- I/O systems
+- Permanent Storage for read/writing data into out of memory</p>
+</blockquote>
+
+<p>Important issue is to balance the components especially for HPC systems.</p>
+
+<p>To deal with data, here are four different kinds of combination.
+|               | Single Instruction           | Multi Instruction  |
+| &mdash;&mdash;&mdash;&mdash;- |:&mdash;&mdash;&mdash;&mdash;-:| &mdash;&ndash;:|
+| Single Data   | SISD | MISD |
+| Multiple Data | SIMD      |   MIMD |</p>
+
+<ul>
+<li>Single Instruction, Single Data Stream (SISD):
+
+<ul>
+<li>Single control unit (CU/CPU) fetches single Instruction Stream from memory.</li>
+<li>Sequential computer which exploits no parallelism in either the instruction or data streams</li>
+</ul></li>
+<li>Multiple Instruction, Single Data stream (MISD):
+
+<ul>
+<li><strong>Parallel</strong> computing architecture where many functional units (PU/CPU) perform different operations on the same data</li>
+<li>Example: fault tolerant computer architectures, multiple error checking on the same date source</li>
+</ul></li>
+<li>Single Instruction, Multiple Data stream (SIMD):
+
+<ul>
+<li>focus is on data level parallelism, only a single process (instruction) at a given moment(<strong>Concurrency</strong>)</li>
+<li>multiple processing elements that perform the same operation on multiple data points simultaneously</li>
+<li>Example: to improve performance of multimedia use such as for image processing</li>
+</ul></li>
+<li>Multiple Instruction, Multiple Data stream (MIMD)
+
+<ul>
+<li>Number of processors that function <strong>asynchronously</strong> and independently.</li>
+<li>Machines can be shared memory or distributed memory categories.</li>
+<li>Example: HPC.</li>
+</ul></li>
+</ul>
+
+<h4 id="approaches-for-parallelism-in-different-level">Approaches for parallelism in different level</h4>
+
+<ul>
+<li>Explicit vs Implicit parallelism
+
+<ul>
+<li>Explicit Parallelism: programmer is responsible for parallelism effort.</li>
+<li>Implicit Parallelism: Compiler is responsible for identifying parallelism and scheduling of calculations and the placement of data.<br /></li>
+</ul></li>
+<li>Hardware: Multiple cores that can process data and perform computational tasks in parallel. To address the issue that CPU not doing anything whilst waiting for caching. Many chips have mixture cache L1 for single core, L2 for pair cores and L3 shared with all cores.</li>
+<li>Operating System:
+
+<ul>
+<li>Compute parallelism</li>
+<li>Processes</li>
+<li>Threads</li>
+<li>Data parallelism</li>
+<li>Caching</li>
+</ul></li>
+<li>Software/Application: Programming language supports a range of parallelisation/concurrency features.</li>
+</ul>
+
+<h4 id="data-parallelism-approaches">Data Parallelism Approaches</h4>
+
+<ul>
+<li>Distributed Data/Distributed File System -&gt; CAP(Consistency, Availability, Partition Tolerance)</li>
+<li>To guarantee the data/transaction is reliable, ACID(Atomicity, Consistency, Integrity, Durability) need to be satisfied.</li>
+</ul>
+
+<h4 id="erroneous-assumptions-of-distributed-systems">Erroneous Assumptions of Distributed Systems</h4>
+
+<ul>
+<li>The network is reliable
+
+<ul>
+<li><strong>Reliable</strong> means that there is guarantee that data can send and arrive successfully over the network.</li>
+<li><strong>Reliable</strong> means that lower layers in the networking stack protect me from these issues</li>
+</ul></li>
+<li>Latency is zero
+
+<ul>
+<li><strong>Latency</strong> means that the time cost by transmission. Latency becomes more and more significant if distance become further.</li>
+</ul></li>
+<li>Bandwidth is infinite
+
+<ul>
+<li><strong>Bandwidth</strong> means that amount of data could be sent in a unit of time.</li>
+</ul></li>
+<li>The network is secure
+
+<ul>
+<li>SQL injections</li>
+<li>Man in the middle attacks</li>
+<li>Masquerade</li>
+<li>Trojans/Viruses</li>
+</ul></li>
+<li>Topology doesn&rsquo;t change
+
+<ul>
+<li><strong>Topology</strong> means that the route taken from source to destination. Routine selected will decide:</li>
+<li>Latency</li>
+<li>IP</li>
+<li>Service</li>
+<li>Routine is not fixed unless specific routing protocols selected.</li>
+</ul></li>
+<li>There is  one administrator
+
+<ul>
+<li><strong>Administrator</strong>: There should be an adiminstrator for every module.</li>
+</ul></li>
+<li>Transport cost is zero</li>
+<li>The network is homogeneous
+
+<ul>
+<li>There are multiple approaches to design parallel or distributed systems</li>
+<li>No single algorithm</li>
+<li>No single technical solution</li>
+<li>Eco-system of approaches explored over time and many open research questions/challenges</li>
+</ul></li>
+<li>Time is ubiquitous
+
+<ul>
+<li>Protocols: NTP synchronizes participating computers to within a few milliseconds of Coordinated Universal Time(UTC).</li>
+</ul></li>
+</ul>
+
+<h4 id="design-of-parallel-program">Design of parallel Program</h4>
+
+<p>The flow of parallel program design could be divided into four key points.
+- Partitioning
+  - Primary idea: decomposition of computational activities and data into smaller tasks
+  - Strategies:
+    - Master-worker/Slave Model: Master decomposes the problem into samll tasks, distributes to workers and gathers partial results to produce the final result.
+    - SPMD: common exploited model(Mapreduce). The main idea is that each process executes the same piece of code, but on different parts of the data.
+    - Pipeline: Suitable for applications involving multiple stages of execution, typically operate on large number of datasets.
+    - Divide and conquer: A problem is divided into two or more sub problems, and each of these sub problems are solved independently, and their results are combined.(eg: merge sort)
+    - Speculation: Used when it is quite difficult to achieve parallelism through the previous paradigms.
+- Communication
+  - informaton stream and coordination among tasks that are created in the partitioning stage.
+- Agglomeration
+  - Tasks and communication created in above stages are evaluated for performance and implementation cost
+- Mapping/Scheduling
+  - Assign tasks to processors such that job completion time is minimized and resource utilization is maximized.</p>
 
 <h2 id="parallel-system-distributed-computing-and-hpc-htc">Parallel System, Distributed Computing and HPC/HTC</h2>
 
@@ -234,15 +514,704 @@
 
 <h2 id="cloud-computing">Cloud Computing</h2>
 
+<h3 id="concepts-development">Concepts &amp; Development</h3>
+
+<p>Before cloud computing, the main issue is that capacity and utilization could not tightly meet.
+- Even if peak load can be correctly anticipated, without <strong>elasticity</strong> we waste resources during nopeak times.
+- Underprovisioning 1: potential revenue from users not serverd
+- Underprovisioning 2: some users desert the site permanently after experiencing poor service; this attrition and possible negative press result in a permanent loss of a portion of the revenue stream.</p>
+
+<p>Then cloud computing starts busting developing.
+&gt; Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources(networks, servers, storage, applications, services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.</p>
+
+<p>Common Cloud Model could be divided into three aspects:
+- Deployment Models:
+  - Private
+    - Pros: 1. Control 2. Consolidation of resources 3. Easier to secure 4. More trust
+    - Cons: 1. Not relevance to core business 2. Staff/Management overheads 3. Hardware obsolescence 4. Over/under utilisation challenges.
+  - Community
+  - Public
+    - Pros: 1. Utility computing 2. Can focus on core business 3. Cost-effective 4. Right-sizing 5.Democratisation of computing
+    - Cons: 1.Security 2. Loss of control 3. Possible lock-in 4. Dependency of Cloud provider continued existence
+  - Hybrid
+    - Pros: 1.Cloud-bursting
+    - Cons: Difficult to 1. move data.resources when needed 2. decide what data can go to public cloud 3. public cloud compliant with PCI-DSS
+- Delivery Models: Separation of Responsibilities
+  <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/delivery_model.png" alt="Delivery Model" /></p>
+
+<p>x-as-a-Service:
+- Testing-as-a-Service
+- Management/Governance-as-a-Service
+- <strong>Software-as-a-Service</strong>
+  - Examples:
+    - Gmail
+    - On-live
+    - Microsoft Office 365
+- Process-as-a-Service
+- Information-as-a-Service
+- Database-as-a-Service
+- Storage-as-a-Service
+- <strong>Infrastructure-as-a-Service</strong>
+  - Examples:
+    - Amazon Web Services
+    - Oracle Public Cloud
+    - Rackspace Cloud
+    - NeCTAR
+- Integration-as-a-Service
+- Security-as-a-Service
+- <strong>Platform-as-a-Service</strong>
+  - Examples:
+    - Google App Engine
+    - Microsoft Azure
+    - Amazon Elastic MapReduce</p>
+
+<h3 id="auto-deployment-ansible">Auto-Deployment &mdash;- Ansible</h3>
+
+<p>Reasons for auto-deployment:
+- Esay to forget what software you installed, and what steps you took to configure the system
+- Manual process is error-prone, can be non-repeatable
+- Snapshots are monolithic - provide no record of what has changed.</p>
+
+<p>Automation provides:
+- A record of what you did
+- Codifes knowledge about the system
+- Makes process repeatable
+- Makes it programmable &ndash; &ldquo;Infrastructure as Code&rdquo;</p>
+
+<p><strong>Configuration management(CM) tools</strong>
+&gt; Configuration management refers to the process of systematically hadnling changes to a system in a way that it maintains integrity over time.</p>
+
+<p>Automation is the mechanism used to make servers reach a desirable state.</p>
+
+<h4 id="ansible">Ansible</h4>
+
+<blockquote>
+<p>Ansible is an automation tool for configuring and managing computers.</p>
+</blockquote>
+
+<p>Pros:
+- Easy to learn
+- Minimal requirements
+- Idempotent(repeatable)
+- Extensible
+- Supports push or pull
+- Rolling updates
+- Inventory management
+- Ansible Vault for encrypted data</p>
+
 <h2 id="rest-and-docker-containalization">ReST and Docker(Containalization)</h2>
+
+<h3 id="web-service">Web Service</h3>
+
+<h4 id="basic-idea-service-oriented-architecture">Basic Idea &ndash; Service-oriented Architecture</h4>
+
+<p>When an architecture is completely contained within the same machine. components can communicate directly. However, when components are distributed such a direct approach typically can not be used.</p>
+
+<p><strong>Service</strong>(combination and commonality) are often used to form a <strong>Service-oriented Architecture(SoA)</strong>.</p>
+
+<p><strong>Service-oriented Architecture(SoA) Core Ideas</strong>:
+- A set of externally facing services that a business wants to provide to their customers or partners/collaborators.
+- An architectural pattern based on service providers, one or more brokers, and service requestors based on agreed service descriptions.
+- A set of architectural principles, patterns and criteria that support modularity, encapsulation, loose coupling, separation of concerns, reuse and composability.
+- A programming model complete with standards, tools and technologies that supports development and support of services(could be many flavours of service)
+- A middleware solution optimized for service assembly, orchestration, monitoring, and management. Can include tools and approaches that combine services together.</p>
+
+<p><strong>Service-oriented Architecture(SoA) Design Principle</strong>:
+- Standardized service contract: Services adhere to a communications agreement as defined collectively by one or more service-description documents.
+- Service loose coupling: Services maintain a relationship that minimizes dependencies and only requires that they maintain an awareness of each other.
+- Service abstraction: Beyond descriptions in the service contract, services hide logic from the outside world.
+- Service autonomy: Services have control over the logic they encapsulate.
+- Service statelessness: Services minimize resource consumption by deferring the management of state information when necessary.
+- Service discoverability: Services are supplemented with communicative meta data by which they can be effectively discovered and interpreted.
+- Service composability: Services are effective composition participants, regardless of the size and complexityh of the composition.
+- Service Granularity: A design consideration to provide optimal scope at the right granular level of the business functionality in a service operation.
+- Service normalization
+- Service optimization
+- Service relevance
+- Service encapsulation
+- Service location transparency</p>
+
+<h4 id="soa-for-web">SoA for Web</h4>
+
+<p>Web services implement SoA with two main flavours
+- SOAP-based Web Services
+- ReST-based Web Services
+- (Both flavours to call services over HTTP)</p>
+
+<p>and many other flavous
+- Geospatial Services(WFS, WMS, WPS)
+- Health services(HL7)
+- SDMX(Statistical Data Markup exchange)</p>
+
+<h5 id="soap-ws">SOAP/WS</h5>
+
+<p><strong>SOAP(Simple Object Access Protocol)</strong> is built upon Remote Procedure Call paradigm, a language independent function call that spans other system.</p>
+
+<p>SOAP/WS is a stack of protocols that covers every aspect of using a remote service, from service discovery, to service description, to the actual request/response.</p>
+
+<h5 id="restful-ws-and-roa-architecture">RESTful/WS and ROA Architecture</h5>
+
+<blockquote>
+<p><strong>ReST(Representation State Transfer)</strong> is intended to evoke an image of how a well-designed Web app behaves. A network for web pages, where the user progresses through an application by selecting links and resulting in next page then being transferred to the user and rendered for their use.
+- REST leverages less bandwidth, making it more suitable for internet usage.</p>
+</blockquote>
+
+<p>Steps For $Client \rightleftharpoons Resource$, Client sends &ldquo;<a href="http://amazon.com/product/123&quot;">http://amazon.com/product/123&quot;</a> and Resource return Product.html:
+1. Client requests Resource through Identifier(URL)
+2. Server/proxy sends representation of Resource
+3. This puts the client in a certain state.
+4. Representation contains URLS allowing navigation.
+5. Client follows URL to fetch another resource.
+6. This transitions client into yet another state.
+7. Representational State Transfer</p>
+
+<blockquote>
+<p><strong>A ROA(Resource-Oriented Architecture) is a way of turning a problem into a RESTful web service: an arrangement of URIs, HTTP, and XML that works like the rest of the Web.</strong></p>
+</blockquote>
+
+<p>A resource is anything that&rsquo;s important enough to be referenced as a thing in itself.</p>
+
+<ul>
+<li><strong>PUT</strong> should be used when target resource URL is known by the client.</li>
+<li><strong>POST</strong> should be used when target resource URL is server generated</li>
+</ul>
+
+<p><strong>ReST</strong> - Uniform Interface
+- <strong>Identification of Resources</strong>: All important resources are identified by one(uniform) resource identifier mechanism(HTTP URL)
+- <strong>Manipulation of Resources through representations</strong>: Each resource can have one or more representations. Such as application/xml, application/json, text/html. Clients and Servers negotiate to select representation.
+- <strong>Self-descriptive messages</strong>: Requests and resources contain not only data but additional headers describing how the content should be handled. Such as if it should be cached, authentication requirements, etc. Access methods mean the same for all resources
+- Keywords: <strong>HTTP</strong>, <strong>GET</strong>, <strong>HEAD</strong>, <strong>OPTIONS</strong>, <strong>PUT</strong>, <strong>POST</strong>, <strong>DELETE</strong>, <strong>CONNECTION</strong>, <strong>TRACE</strong>, <strong>PATCH</strong>.</p>
+
+<blockquote>
+<p>HTTP Methods can be
+- <strong>safe</strong>: Do not change, repeating a call is equivalent to not making a call at all $GET, OPTION, HEAD$
+- <strong>Idempotent</strong>: Effect of repeating a call is equivalent to making a single call. $PUT, DELETE$
+- <strong>Neither</strong>: Effect of repeating a call is equivalent to operate repeatedly. $POST$</p>
+</blockquote>
+
+<h5 id="rest-2-0">ReST 2.0</h5>
+
+<p>Motivation: Everything as a service(EaaS) paradigm, Vast number of entities and services, Link services together to create workflows and mashups.</p>
+
+<p>Extend the API(Application Programming Interface) notation to facilitate the sharing and usage of services among developers, testers, and in some cases end users.</p>
 
 <h2 id="big-data-and-related-technologies">Big Data and Related Technologies</h2>
 
+<h3 id="dbms-design-in-big-data-environment">DBMS design in Big Data Environment</h3>
+
+<p>Four &ldquo;Vs&rdquo; relates to Big data:
+- <strong>Volume</strong>: volume is one of most important criteria.
+- <strong>Velocity</strong>: the frequency at which new data is being brought into system and analytics performed.
+- <strong>Variety</strong>: the variability and complexity of data schema. The more complex the data schemas you have, the higher the probability of them changing along the way, adding more complexity.
+- <strong>Veracity</strong>: the level of trust in the data accuracy(provenance); the more diverse sources you have, the more unstructured they are, the less veracity you have.</p>
+
+<p>Why Big Data need special database rather than Relational DBMSs
+- RDBMS finds it challenging to handle such huge data volumes. To address this, RDBMS added more central processing units (or CPUs) or more memory to the database management system to scale up vertically.
+- the majority of the data comes in a semi-structured or unstructured format from social media, audio, video, texts, and emails. However, the second problem related to unstructured data is outside the purview of RDBMS because relational databases just can’t categorize unstructured data. They’re designed and structured to accommodate structured data such as weblog sensor and financial data.
+- “big data” is generated at a very high velocity. RDBMS lacks in high velocity because it’s designed for steady data retention rather than rapid growth.</p>
+
+<p>DBMSs for Distributed Environment
+- A key-value store is a DBMS that allows the retrieval of a chunk of data given a key: fast but crude. (Redis, PostgreSQL,Hstore)
+- A BigTable DBMS stores data in columns grouped into column families, with rows potentially containing different columns of the same family.(Apache Cassandra, Apache Accumulo)
+- A Document-oriented DBMS stores data as structured documents, usually expressed as XML or JSON. (Apache CouchDB, MongoDB)</p>
+
+<h3 id="clustered-nosql-dbms-comparison">Clustered NoSQL DBMS Comparison</h3>
+
+<p>Clusters needs to
+- Distribute the computing load over multiple computers. (eg. for availability)
+- Store multiple copies of data. (eg. to achieve redundancy)</p>
+
+<h4 id="sharding">Sharding</h4>
+
+<blockquote>
+<p>Sharding is the partitioning of a database &ldquo;horizontally&rdquo;(ie. the database rows or documents) are partitioned into subsets that are stored on different servers. Every subset of rows is called a shard.</p>
+</blockquote>
+
+<ul>
+<li>Number of shards:
+
+<ul>
+<li>larger than the numebr of replica</li>
+<li>the max number of nodes is equal to the number of shards</li>
+</ul></li>
+<li>Advanage of shards:
+
+<ul>
+<li>Improve the performance through the distribution of computing load across nodes.</li>
+<li>Make it easier to move data files around(eg. when adding new nodes to cluster)</li>
+</ul></li>
+<li>Strategy of shards:
+
+<ul>
+<li>Hash sharding: distribute evenly across the cluster.</li>
+<li>Range sharding: similar rows are stored on the same node.</li>
+</ul></li>
+</ul>
+
+<h4 id="replication">Replication</h4>
+
+<blockquote>
+<p>Replication is the action of storing the same row(or document) on different nodes to make the database fault-tolerant.</p>
+</blockquote>
+
+<p>Combined relication and sharding aim to maximize the availability while maintaining a minimum level of data safety.</p>
+
+<h4 id="couchdb-cluster-architecture">CouchDB Cluster Architecture</h4>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/couchdb.png" alt="CouchDb Cluster" />
+CouchDB sharding process:
+- Sharding is done on every node(One node contains multiple shards)
+- All nodes answer requests(read or write) at the same time
+- Nodes can be added/removed easily, and their shards are re-balanced automatically upon addition/deletion of nodes.
+- If node request don&rsquo;t have respective node, node will request another node for document and return it to client.</p>
+
+<h4 id="mongodb-cluster-architecture">MongoDB Cluster Architecture</h4>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/mongodb.png" alt="MongoDb Cluster" />
+A mongoDB sharded cluster consists of three components:
+- shard: Each shard contains a subset of the sharded data. Each shard can be deployed as a replica set.
+- mongos: The mongos acts as a query router, providing an interface between client application and the sharded cluster.
+- config server: Config servers store metadata and configuration settings for the cluster.</p>
+
+<p>Sharding process:
+- Sharding is done at the replica set level(One node contains one shard).
+- Write requests is based on primary node in a replica set, Read requests depends on configuration, be answered by every node.
+- Updates flow only from primary to secondary.</p>
+
+<h4 id="mongodb-vs-couchdb-clusters">MongoDB vs CouchDB Clusters</h4>
+
+<ul>
+<li>MongoDB cluster is considerably more complex.</li>
+<li>MongoDB cluster is less available(only primary nodes can talk to client)</li>
+<li>MongoDB software routers(Mongos) must be embedded in application servers, while any HTTP client can connect to CouchDB.</li>
+<li>Losing two nodes out of three
+
+<ul>
+<li>in CouchDB, losing access to one quarter of data.</li>
+<li>in MongoDB, losing access to half the data.(Actually there are 10 nodes.)</li>
+</ul></li>
+</ul>
+
+<h4 id="cap-theorem">CAP Theorem</h4>
+
+<blockquote>
+<p>Consisteny: every client receiving an answer receivers the same answer from all nodes in the cluster.</p>
+
+<p>Aailability: every client receives an answer from any node in the cluster</p>
+
+<p>Partition-tolerance: the cluster keeps on operating when one or more nodes cannot communicate with rest of the cluster.</p>
+</blockquote>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/cap.png" alt="CAP" /></p>
+
+<h5 id="consistency-and-availability-two-phase-commit">Consistency and Availability: Two phase commit</h5>
+
+<blockquote>
+<p>A two-phase commit is a standardized protocol that ensures that a database commit is implementing in the situation where a commit operation must be broken into two separate parts.</p>
+</blockquote>
+
+<p>The two-phase commit is implemented as follows:
+ - Phase 1: Each server that needs to commit data writes its data records to the log. If a server is unsuccessful, it responds with a failure message. If successful, the server replies with an OK message.
+ - Phase 2:  This phase begins after all participants respond OK. Then, the coordinator sends a signal to each server with commit instructions. After committing, each writes the commit as part of its log record for reference and sends the coordinator a message that its commit has been successfully implemented. If a server fails, the coordinator sends instructions to all servers to roll back the transaction. After the servers roll back, each sends feedback that this has been completed.</p>
+
+<p>Two-Phase Commit <strong>enforce consistency</strong> and <strong>reduce availability</strong>. It is a good solution when the cluster is co-located, less good when it is distributed.</p>
+
+<h5 id="consistency-and-partition-tolerance-paxos">Consistency and Partition-Tolerance: Paxos</h5>
+
+<p>In Paxos, every node is either a proposer or an accepter:
+- a proposer proposes a value (with a timestamp)
+- an accepter can accept or refuse it</p>
+
+<p>Paxos clusters can recover from partitions and maintain consistency, but the smaller part of a partition will not send responses, hence the availability is compromised.</p>
+
+<h5 id="availability-and-partition-tolerance-mvcc">Availability and Partition-Tolerance: MVCC</h5>
+
+<p>In MVCC, concurrent updates are possible without distributed locks, since the updates will have different revision number; the transaction that completes last will get a higher revision number, hence will be considered as the current value.</p>
+
+<p>CouchDB uses MVCC and MongoDB uses a mix of two-phase commit(for replicating data from primary to secondary nodes) and Paxos-like(to elect a primary node in a replica-set)</p>
+
+<h3 id="mapreduce-algorithm">MapReduce Algorithm</h3>
+
+<ul>
+<li>MAP: distributes data across machines</li>
+
+<li><p>REDUCE:  hierarchically summarizes them until the result is obtained.</p>
+
 <h2 id="big-data-analytics">Big Data Analytics</h2>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Challenges of Big Data Analytics</p></li>
+
+<li><p>Reading and writing distributed dataset</p></li>
+
+<li><p>Preserving data in the presence of failing data nodes</p></li>
+
+<li><p>Supporting the execution of MapReduce tasks</p></li>
+
+<li><p>Being fault-tolerant</p></li>
+
+<li><p>Coordinating the execution of tasks across a cluster.</p>
+
+<h3 id="apache-hadoop">Apache Hadoop</h3>
+
+<p>Hadoop</p></li>
+
+<li><p>an open source software platform for distributed storage and distributed processing of very large data sets on computer clusters built fro commodity hardware.</p></li>
+</ul>
+
+<p>The core of Hadoop is a fault tolerant file system that has been explicitly designed to span many nodes.</p>
+
+<h4 id="hadoop-distributed-file-system-hdfs">Hadoop Distributed File System(HDFS)</h4>
+
+<p>HDFS break large file into smaller blocks. However, HDFS blocks are much larger than blocks used by an ordinary file system.
+Reansons:
+- Reduced need for memory to store information about where the blocks are(some kind of metadata)
+- More efficient use of the network(with a large block, a reduced number network connections needs to be kept open)
+- Reduced need for seek operations on big files
+- Efficient when most data of a block have to be processed</p>
+
+<p>A HDFS file is a collection of blocks stored in <strong>datanodes</strong>, the corresponding metadata is stored in <strong>namenodes</strong>.</p>
+
+<h4 id="hadoop-resource-manager-yarn-mapreduce-task-manager">Hadoop Resource Manager(YARN) &mdash; MapReduce Task Manager</h4>
+
+<p>YARN deals with executing MapReduce jobs on a cluster.
+- Central Resource Manager (on the master)
+- Node Manager (on slave machines)</p>
+
+<p>When a MapReduce job is scheduled for execution on a Hadoop cluster, YARN starts Application Master that negotiates resources with the Resource Manager and starts Containers on the slave nodes.</p>
+
+<h3 id="apache-spark">Apache Spark</h3>
+
+<dl>
+<dt>Spark</dt>
+<dd>A fast and general engine for large-scale data processing.</dd>
+</dl>
+
+<p>Hadoop MadpReduce works well towards performing relatively simple jobs on large datasets. Complex jobs requires strong incentive for caching data in memory and in having finer-grained control on the execuion of jobs.</p>
+
+<p>Spark can operate within the Hadoop architecture, using YARN and Zookeeper to manage computing resources, and storing data on HDFS.</p>
+
+<p>One of the strong points of Spark is the tightly-coupled nature of its main components:</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/spark_ar.png" alt="Biased Locking" /></p>
+
+<h4 id="spark-runtime-architecture">Spark Runtime Architecture</h4>
+
+<h5 id="included-components">Included Components:</h5>
+
+<ul>
+<li>Job: the data processing that has to be performed on a dataset.</li>
+<li>Task: a single operation on a dataset</li>
+<li>Executors: the processes in which tasks are executed</li>
+<li>Cluster Manager: the process assigning tasks to executors</li>
+<li>Driver program: the main logic of the application</li>
+<li>Spark application: Driver program + Executors</li>
+<li>Spark Context: the general configuration of the job</li>
+</ul>
+
+<h5 id="local-mode">Local Mode</h5>
+
+<p>In local mode, every Spark component runs within the same JVM. However, the Spark application can still run in parallel, as there may be more than one executor active.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/spark_lm.png" alt="Biased Locking" /></p>
+
+<h5 id="cluster-mode">Cluster Mode</h5>
+
+<p>In cluster mode, every component is executed on the cluster. Job can run autonomously. This is the common way of running non-interactive Spark jobs.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/spark_cluster.PNG" alt="Biased Locking" /></p>
+
+<h5 id="client-mode">Client Mode</h5>
+
+<p>In client mode, the driver program talks directly to the executors on the worker nodes. Therefore, the machine hosting the driver program has to be connected to the cluster until job completion. Client mode must be used when the applications are interactive.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/spark_client.png" alt="Biased Locking" /></p>
+
+<h4 id="resilient-distributed-dataset-rdd">Resilient Distributed Dataset(RDD)</h4>
+
+<ul>
+<li>Resilient: data are stored redundantly</li>
+<li>Distributed: data are split into chunks, and these chunks are sent to different nodes</li>
+<li>Dataset: a dataset is just a collection of objects, hence very generic</li>
+</ul>
+
+<p>Properties of RDD:
+- immutable
+- transient
+- lazily-evaluated</p>
 
 <h2 id="cloud-underpinning-and-other-things">Cloud Underpinning and Other Things</h2>
 
+<h3 id="virtualization">Virtualization</h3>
+
+<dl>
+<dt>Virtual Machine Monitor/Hypervisor</dt>
+<dd>The virtualisation layer between the underlying hardware the virtual machines and guest operating systems it supports.</dd>
+<dt>Virtual Machine</dt>
+<dd>A representation of a real machine using hardware/software that can host a guest operating system</dd>
+<dt>Guest Operating System</dt>
+<dd>An operating system that runs in a virtual machine environment that would otherwise run directly on a separate physical system.</dd>
+</dl>
+
+<p>$User\ space\rightleftharpoons Kernel\ Space$ by context switch.</p>
+
+<p>Inside the virtual machine, there are Virtual Network Device, VHD(Virtual Hard disk), VMDK(Virtual Machinie Disk), qcow2(QEMU Copy on Write)</p>
+
+<h4 id="motivation">Motivation</h4>
+
+<ul>
+<li>Server Consolidation: to improve utilization and reduce energy consumption</li>
+<li>Personal virtual machines can be created on demand</li>
+<li>Security/Isolation</li>
+
+<li><p>Hardware independency</p>
+
+<h4 id="classification-of-instructions">Classification of Instructions</h4></li>
+
+<li><p>Privileged Instructions: Instructions that trap if the processor is in user mode and do not trap in kernel mode</p></li>
+
+<li><p>Sensitive Instructions: Instructions whose behaviour depends on the mode or configuration of the hardware.(different behaviour in different mode)</p></li>
+
+<li><p>Innocuous Instructions: instructions that are neither Privileged nor Sensitive</p></li>
+</ul>
+
+<blockquote>
+<p>For any conventional third generation computer, a virtual machine monitor may be constructed if the set of <strong>sensitive instructions</strong> for that computer is a subset of the set of of <strong>privileged instructions</strong>.</p>
+</blockquote>
+
+<h4 id="aspect-of-vmms">Aspect of VMMs</h4>
+
+<h5 id="full-virtualisation">Full virtualisation</h5>
+
+<p>Intercept every system-level calls and try to process and deal with it.</p>
+
+<ul>
+<li>User Apps directly executes code with host hardware</li>
+<li>Privileged instruction by Guest OS is translated to hardware specific instructions.</li>
+</ul>
+
+<p>. Guest OS uses extra rings, VMM traps privileged instructions and translates to hardware specific instructions.</p>
+
+<p>Pros:
+- Guest is unware it is executing within a VM
+- Guest OS need not be modified
+- No hardware or OS assistance required
+- Can run legacy OS</p>
+
+<p>Cons:
+- can be less efficient</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/fv.png" alt="Biased Locking" /></p>
+
+<h5 id="para-virtualisation">Para-virtualisation</h5>
+
+<p>provide some available interface for sensitive calls.
+Pros:
+- Lower virtualisation overheads
+- Performance</p>
+
+<p>Cons:
+- Need to modify guest OS
+- Less portable
+- Less compatibility</p>
+
+<h5 id="hardware-assisted-virtualisation">Hardware-assisted virtualisation</h5>
+
+<p>Hardware provides architectural support for running a Hypervisor
+- New processors typically have this
+- Requires that all sensitive instructions trappable</p>
+
+<p>Pros:
+- Good performance
+- Easier to implement
+- Advanced implementation supports hardware assisted DMA, memory virtualization</p>
+
+<p>Cons:
+- Needs hardware support</p>
+
+<h5 id="binary-translation">Binary Translation</h5>
+
+<p>Trap and execute occurs by scanning guest instruction stream and replacing sensitive instruction with emulated code
+Pros:
+- Guest OS need not be modified
+- No hardware or OS assistance required
+- Can run legacy OS</p>
+
+<p>Cons:
+- Overhead
+- Complicated
+- Need to replace instructions &ldquo;on-the-fly&rdquo;</p>
+
+<h5 id="bare-metal-hyperviosr">Bare Metal Hyperviosr</h5>
+
+<p>VMM runs directly on actual hardware
+- Boots up and runs on actual physical machine
+- VMM has to support device driver</p>
+
+<h5 id="hosted-virtualization">Hosted Virtualization</h5>
+
+<p>VMM runs on top of another operating system</p>
+
+<h5 id="operating-system-level-virtualisation">Operating System Level Virtualisation</h5>
+
+<p>It&rsquo;s a lightweight VMs. Instead of whole-system virtualisation, the OS creates mini-containers
+- A subset of the OS is often good enough for many use cases
+- Similar to an advanced version of &ldquo;chroot&rdquo;</p>
+
+<p>Pros:
+- Lightweight
+- Many more VMs on same hardware
+- Can be used to package applications and all OS dependencies into container.
+- Uses same resources as other containers</p>
+
+<p>Cons:
+- Can only run apps designed for the same OS
+- Cannot host a different guest OS
+- Can only use native file systems
+- Uses same resources as other containers</p>
+
+<h4 id="memory-virtualisation">Memory Virtualisation</h4>
+
+<ul>
+<li>Conventional case, page tables store the logical page number and physical page number mappings</li>
+<li>In VMM case, VMM maintains shadow page tables in lock-step with the page tables. Additional management overhead is added.</li>
+</ul>
+
+<h3 id="openstack-components">OpenStack Components</h3>
+
+<p>Services:
+- Compute Service(code-named Nova)
+- Image Service(code-named Glance)
+- Block Service(code-named Cinder)
+- Object Service(code-named Swift)
+- Security Service(code-named Keystone)
+- Orchestration Service(code-named Heat)
+- Network Service(code-named Neutron)
+- Container Service(code-named Zun)
+- Database Service(code-named Trove)
+- Dashboard Service(code-named Horizon)
+- Search Service(code-named Searchlight)</p>
+
+<p>Nova
+- Manages the lifecycle of compute instances in an OpenStack environment
+- Responsibilities include spawning, scheduling and decommissioning of virtual machines on demand
+- Virtualisation agnostic</p>
+
+<h3 id="serverless-function-as-a-service-faas">Serverless(Function as a Service&mdash;FaaS)</h3>
+
+<p>FaaS is also know as Serverless computing. The idea behind Serverless/Faas is to develop software applications without bothering with the infrastructure.</p>
+
+<p>It&rsquo;s Server-unseen rather than Server-less. A FaaS service allows functions to be added, removed, updated, executed, and auto-scaled. FaaS is an extreme form of microservice architecture.</p>
+
+<p>Pros:
+- Simpler deployment
+- Reduced computing costs
+- Reduced application complexity due to loosely-coupled architecture</p>
+
+<p>A function that does not modify the state of the system is said to be side-effect free. A function that changes the system somehow is not side-effect free(eg. a function that writes to the file system the thumbnail of an image)</p>
+
+<p>Side-effect free functions can be run in parallel. However, side-effect function is inevitable in complex system.</p>
+
+<h4 id="stateful-stateless-function">Stateful/Stateless Function</h4>
+
+<dl>
+<dt>Stateful Function</dt>
+<dd>is one whose output changes in relation to internally stored information(its input cannot entirely predict its output).</dd>
+<dt>Stateless Function</dt>
+<dd>is one that does not store information internally.</dd>
+</dl>
+
+<h4 id="synchronous-asynchronous-function">Synchronous/Asynchronous Function</h4>
+
+<p>By default functons in FaaS are synchronous, hence they return their result immediately.</p>
+
+<p>Asynchronous functions return a code that informs the client that the execution has started, and then trigger an event when the execution completes.</p>
+
 <h2 id="security-and-clouds">Security and Clouds</h2>
+
+<h3 id="authentication">Authentication</h3>
+
+<dl>
+<dt>Authentication</dt>
+<dd><p>is the establishment and propagation of a user&rsquo;s identity in the system.</p></dd>
+<dd><p>Does not check what user is allowed to do, only that we know who they are.</p></dd>
+<dd><p>Masquerading danger</p></dd>
+<dd><p>Public Key Infrastructures(PKI)</p></dd>
+</dl>
+
+<p>Certification Authority &ndash; Central component of PKI
+CA&rsquo;s responsibilities:
+- policy and procedures
+  - Processes that should be followed by users, organisations, service providers.
+- Issuing certificates
+  - Often need to delegate to local Registration Authority(Prove who you are)
+- Revoking certificates
+  - Certificate Revocation List(CRL) for expired/compromised certificates
+- Storing, archiving
+  - Keeping  track of existing certificates, various other information</p>
+
+<ul>
+<li>PKI is an arrangement that binds public key with respective identities of entities(like people and organization).</li>
+<li>The binding is established through a process of registration and issurance of certificates at and by a certificate authority</li>
+<li>The PKI role that assures valid and correct registration is called a registration authority(RA). RA is responsible for accepting requests for digital certificates and authenticating the entity making the request.</li>
+</ul>
+
+<h3 id="authorisation">Authorisation</h3>
+
+<dl>
+<dt>Authorisation</dt>
+<dd>is concerned with controlling access to resources based on policy.</dd>
+</dl>
+
+<p>There are many approaches for authorisation
+- Group Based Access Control
+- Role Based Access Control
+- Identity Based Access Control
+- Attribute Based Access Control</p>
+
+<p>Authorization defines what they can do and define and enforce rules. It is realized through <strong>Virtual Organization(VO)</strong>.</p>
+
+<ul>
+<li>Provide conceptual framework for rules and regulations for resources to be offered/shared between VO members.</li>
+<li>Different domains place greater/lesser emphasis on expression and enforcement of rules and regulations</li>
+</ul>
+
+<p>RBAC
+- Basic idea is to define:
+  - Roles: roles are often hierachical
+  - Actions: allowed/not allowed for VO members
+  - Resources: comprising VO infrastructure(computer, data)
+- Policy consists sets of these rules: $Role\times Action \times Target$
+  - eg. Can user with VO role X invoke service Y on resource Z
+- Policy engines consume this information to make access decisions</p>
+
+<h3 id="other-cloud-security-challenges">Other Cloud Security Challenges</h3>
+
+<ul>
+<li>Single sign-on
+
+<ul>
+<li>The grid model needed but not solved for Cloud-based IaaS currently.</li>
+</ul></li>
+<li>Auditing: logging, instrusion detection, auditing of security in external computer facilities.
+
+<ul>
+<li>well established in theory and practice and for local systems.</li>
+</ul></li>
+<li>Deletion and Encryption
+
+<ul>
+<li>Data deletion with no direct hard disk</li>
+</ul></li>
+<li>Liability</li>
+<li>Licensing
+
+<ul>
+<li>Challenges with the Cloud delivery model</li>
+</ul></li>
+<li>Workflows</li>
+<li>The Ever Changing Techinal/Legal Landscape</li>
+</ul>
+
+<hr />
 
 <h3 id="auto-deploying-by-ansible">Auto-deploying by Ansible</h3>
 

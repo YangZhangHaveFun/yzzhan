@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/web/</link>
+    <description>Recent content in Web on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Tue, 04 Jun 2019 01:37:56 +0800</lastBuildDate>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>深入理解java网络开发知识的归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/</link>
+      <pubDate>Tue, 04 Jun 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/</guid>
+      <description>JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&amp;#34;execution(public String getName())&amp;#34;) public void LoggingAdvice(){ System.out.println(&amp;#34;LOG: Get method called.&amp;#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
+我们也可以创造一个切点,应用于其他的AOP方法
+@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点执行后执行  @After(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&amp;#34;allGetters()&amp;#34;, returning=&amp;#34;returnString&amp;#34;) public void LoggingAdvice() { System.</description>
+    </item>
+    
+  </channel>
+</rss>

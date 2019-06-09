@@ -46,7 +46,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.51">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/">
@@ -213,6 +213,20 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javadatastructureandalgorithm/" class="post-link">Data Structures and Algorithm in Java</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 12, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">Data Structure and Algorithm Iterators Suppose we want to traverse a list, performing some operations on certain links.
+As users of a list, what we need is access to reference that can point to any arbitray link. This allows us to examine or modify the link. We should be able to increment the reference so we can traverse along the list, looking at each link in turn, and we should be able to access the link pointed to by the reference.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javadatastructureandalgorithm/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/" class="post-link">对用过的Linux(Centos7.0&#43;)指令的总结</a></h3>
     <p class="post-meta">@yang zhang · Apr 11, 2019 · 2 min read</p>
   </header>
@@ -222,6 +236,21 @@
 # It is possible to go back to a more classic iptables setup. First, stop and mask the firewalld service: systemctl stop firewalld systemctl mask firewalld # Then, install the iptables-services package: yum install iptables-services # Enable the service at boot-time: systemctl enable iptables # Managing the service systemctl [stop|start|restart] iptables # Saving your firewall rules can be done as follows: service iptables save # check your listenning ports with: netstat -nat |grep :3306 重装mariadb 重装database server的时候, 任何残留的mysql文件都会导致新安装的mariadb.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/linuxreview/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/websecurity/" class="post-link">对学习过的Web Security的总结</a></h3>
+    <p class="post-meta">@yang zhang · Apr 11, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> 横向越权和纵向越权  横向越权: 攻击者尝试访问与他拥有相同权限的用户的资源.
+纵向越权: 低级别攻击者尝试访问高级别用户的资源.
+ </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/websecurity/">Read More →</a>
   </footer>
 </article>
 
@@ -301,23 +330,6 @@ ElasticSearch 概念  集群： 一个或多个节点组织在一起 节点： �
       
         <article class="post-entry">
   <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/generator/" class="post-link">对生成器和协程的理解</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">迭代器和迭代协议 我们知道实现下标的操作是基于getitem这个协议
- 可迭代类型
- 迭代器 #
-  http://39.96.12.43:8000/alipay/return/?charset=utf-8&amp;out_trade_no=201702022ssswq&amp;method=alipay.trade.page.pay.return&amp;total_amount=100.00&amp;sign=X59PxIrSunlz4IqhjBbHb1dzoPCChJbRN720AMn74kyDT54wkSCt1XIK%2B55PiWWU%2F3ytN7yn6Imt%2BaODtjPRF15VCCYrxDdby8tnBCxI3A7owvU9urvH5CwbHuvxE047ceHmVx44lA5%2BE9RUtUwd%2B%2Ba0omTdi83%2Fc6CPWlKLJPq1d5HIbJg8HEnPGqHObJadOkmpEpDcVRQyy74TibmAau9ZfHc4u4%2BuWyIzPJpnsEqjlhsaYraJdIUIEuG5qnO4dpNS66wyX%2FP7Ri3eb1JufklIl3CX9718XYf6IxQ5vrTjmw0PzieAH6ZvavYm2o%2BrH4H01D71mtVzQVJUc3Bqqg%3D%3D&amp;trade_no=2019021722001471690500769031&amp;auth_app_id=2016092400589241&amp;version=1.0&amp;app_id=2016092400589241&amp;sign_type=RSA2&amp;seller_id=2088102177131773&amp;timestamp=2019-02-17&#43;12%3A34%3A09
-https://openapi.alipaydev.com/gateway.do?app_id=&amp;biz_content=%7B%22subject%22%3A%2220190217220809366%22%2C%22out_trade_no%22%3A%2220190217220809366%22%2C%22total_amount%22%3A200.0%2C%22product_code%22%3A%22FAST_INSTANT_TRADE_PAY%22%7D&amp;charset=utf-8&amp;method=alipay.trade.page.pay&amp;notify_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;return_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;sign_type=RSA2&amp;timestamp=2019-02-17&#43;22%3A26%3A09&amp;version=1.0&amp;sign=UuoIjRxBAdVb67zQzLPmZxO3OrDkJvlsh0UCw3OzLDre2HrIrNJaPCbWvtqC7RRvVwMVKnAaCeXGSU9HTHEvnP9Bi4oEevpeMZIcOtMBO9EMKbB1nzk84ROtP4rC6lEqZOeyvOJsi4NHFEh4bO8OXVvK2%2Fb34J9YtplSo5Ucl6qJDHTREjWf3mJ%2FwU4knougrSR269ze0dTGr%2FkjppldVJWjKtbcI5MOy1BrymInhw6qNq9zWQxAS7xpdNpUEWA0DESTK%2B5KQVzRvavGlgqHeFCUCkGH8UoVhMx2wRiLF9ylX4QpZ85kfbQb3uZ%2FmpBHjOjlunEjy5Vj3xypfGGlqg%3D%3D</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/generator/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/multithreads/" class="post-link">对多线程的理解和深入理解Future源码</a></h3>
     <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 1 min read</p>
   </header>
@@ -361,20 +373,6 @@ task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(
   <p class="post-summary">概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 — 回调 &#43; 事件循环 &#43; select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&#34;https://www.baidu.com&#34;, &#34;https://www.baidu.com&#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&#34;.format(self.path, self.host).encode(&#34;utf8&#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data &#43;= d else: selector.unregister(key.fd) data = self.data.decode(&#34;utf8&#34;) html_data = data.split(&#34;\r\n\r\n&#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/" class="post-link">Detailed algorithm For Hash Function</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 12, 2019 · 4 min read</p>
-  </header>
-  
-  <p class="post-summary">Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
- MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/">Read More →</a>
   </footer>
 </article>
 

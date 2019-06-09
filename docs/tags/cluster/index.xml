@@ -18,7 +18,8 @@
       <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/</guid>
-      <description>Information Session Cloud Characteristics: - On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. - Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. - Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.</description>
+      <description>Information Session Cloud Characteristics:
+ On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. Resource pooling: The provider&amp;rsquo;s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.</description>
     </item>
     
   </channel>

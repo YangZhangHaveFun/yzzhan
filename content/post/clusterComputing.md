@@ -481,15 +481,277 @@ Challenges of Big Data Analytics
 Hadoop
 : an open source software platform for distributed storage and distributed processing of very large data sets on computer clusters built fro commodity hardware.
 
+The core of Hadoop is a fault tolerant file system that has been explicitly designed to span many nodes.
 #### Hadoop Distributed File System(HDFS)
+HDFS break large file into smaller blocks. However, HDFS blocks are much larger than blocks used by an ordinary file system. 
+Reansons:
+- Reduced need for memory to store information about where the blocks are(some kind of metadata)
+- More efficient use of the network(with a large block, a reduced number network connections needs to be kept open)
+- Reduced need for seek operations on big files
+- Efficient when most data of a block have to be processed
+
+A HDFS file is a collection of blocks stored in **datanodes**, the corresponding metadata is stored in **namenodes**.
+#### Hadoop Resource Manager(YARN) --- MapReduce Task Manager
+YARN deals with executing MapReduce jobs on a cluster.
+- Central Resource Manager (on the master)
+- Node Manager (on slave machines)
+
+When a MapReduce job is scheduled for execution on a Hadoop cluster, YARN starts Application Master that negotiates resources with the Resource Manager and starts Containers on the slave nodes.
 
 ### Apache Spark
 Spark
 : A fast and general engine for large-scale data processing.
 
-Build around one main concept: the Resilient Distributed Dataset(RDD) 
+Hadoop MadpReduce works well towards performing relatively simple jobs on large datasets. Complex jobs requires strong incentive for caching data in memory and in having finer-grained control on the execuion of jobs. 
+
+Spark can operate within the Hadoop architecture, using YARN and Zookeeper to manage computing resources, and storing data on HDFS.
+
+One of the strong points of Spark is the tightly-coupled nature of its main components:
+
+![Biased Locking](/media/posts/spark_ar.png)
+
+#### Spark Runtime Architecture
+##### Included Components:
+- Job: the data processing that has to be performed on a dataset.
+- Task: a single operation on a dataset
+- Executors: the processes in which tasks are executed
+- Cluster Manager: the process assigning tasks to executors
+- Driver program: the main logic of the application
+- Spark application: Driver program + Executors
+- Spark Context: the general configuration of the job
+
+##### Local Mode
+In local mode, every Spark component runs within the same JVM. However, the Spark application can still run in parallel, as there may be more than one executor active.
+![Biased Locking](/media/posts/spark_lm.png)
+##### Cluster Mode
+In cluster mode, every component is executed on the cluster. Job can run autonomously. This is the common way of running non-interactive Spark jobs.
+![Biased Locking](/media/posts/spark_cluster.PNG)
+##### Client Mode
+In client mode, the driver program talks directly to the executors on the worker nodes. Therefore, the machine hosting the driver program has to be connected to the cluster until job completion. Client mode must be used when the applications are interactive.
+![Biased Locking](/media/posts/spark_client.png)
+#### Resilient Distributed Dataset(RDD)
+- Resilient: data are stored redundantly
+- Distributed: data are split into chunks, and these chunks are sent to different nodes
+- Dataset: a dataset is just a collection of objects, hence very generic
+
+Properties of RDD:
+- immutable
+- transient
+- lazily-evaluated
+
 ## Cloud Underpinning and Other Things
+### Virtualization
+Virtual Machine Monitor/Hypervisor
+: The virtualisation layer between the underlying hardware the virtual machines and guest operating systems it supports.
+
+Virtual Machine
+: A representation of a real machine using hardware/software that can host a guest operating system
+
+Guest Operating System
+: An operating system that runs in a virtual machine environment that would otherwise run directly on a separate physical system.
+
+$User\ space\rightleftharpoons Kernel\ Space$ by context switch.
+
+Inside the virtual machine, there are Virtual Network Device, VHD(Virtual Hard disk), VMDK(Virtual Machinie Disk), qcow2(QEMU Copy on Write)
+
+#### Motivation
+- Server Consolidation: to improve utilization and reduce energy consumption
+- Personal virtual machines can be created on demand
+- Security/Isolation
+- Hardware independency
+#### Classification of Instructions
+- Privileged Instructions: Instructions that trap if the processor is in user mode and do not trap in kernel mode
+- Sensitive Instructions: Instructions whose behaviour depends on the mode or configuration of the hardware.(different behaviour in different mode)
+- Innocuous Instructions: instructions that are neither Privileged nor Sensitive
+
+> For any conventional third generation computer, a virtual machine monitor may be constructed if the set of **sensitive instructions** for that computer is a subset of the set of of **privileged instructions**.
+
+#### Aspect of VMMs
+##### Full virtualisation
+Intercept every system-level calls and try to process and deal with it.
+
+- User Apps directly executes code with host hardware
+- Privileged instruction by Guest OS is translated to hardware specific instructions.
+
+. Guest OS uses extra rings, VMM traps privileged instructions and translates to hardware specific instructions.
+
+Pros:
+- Guest is unware it is executing within a VM
+- Guest OS need not be modified
+- No hardware or OS assistance required
+- Can run legacy OS
+
+Cons:
+- can be less efficient
+
+![Biased Locking](/media/posts/fv.png)
+##### Para-virtualisation
+provide some available interface for sensitive calls.
+Pros:
+- Lower virtualisation overheads
+- Performance
+
+Cons:
+- Need to modify guest OS
+- Less portable
+- Less compatibility
+##### Hardware-assisted virtualisation
+Hardware provides architectural support for running a Hypervisor
+- New processors typically have this
+- Requires that all sensitive instructions trappable
+
+Pros:
+- Good performance
+- Easier to implement
+- Advanced implementation supports hardware assisted DMA, memory virtualization
+
+Cons:
+- Needs hardware support
+
+##### Binary Translation
+Trap and execute occurs by scanning guest instruction stream and replacing sensitive instruction with emulated code
+Pros:
+- Guest OS need not be modified
+- No hardware or OS assistance required
+- Can run legacy OS
+
+Cons:
+- Overhead
+- Complicated
+- Need to replace instructions "on-the-fly"
+##### Bare Metal Hyperviosr
+VMM runs directly on actual hardware
+- Boots up and runs on actual physical machine
+- VMM has to support device driver
+##### Hosted Virtualization
+VMM runs on top of another operating system
+##### Operating System Level Virtualisation
+It's a lightweight VMs. Instead of whole-system virtualisation, the OS creates mini-containers
+- A subset of the OS is often good enough for many use cases
+- Similar to an advanced version of "chroot"
+
+Pros:
+- Lightweight
+- Many more VMs on same hardware
+- Can be used to package applications and all OS dependencies into container.
+- Uses same resources as other containers
+
+Cons:
+- Can only run apps designed for the same OS
+- Cannot host a different guest OS
+- Can only use native file systems
+- Uses same resources as other containers
+
+#### Memory Virtualisation
+- Conventional case, page tables store the logical page number and physical page number mappings
+- In VMM case, VMM maintains shadow page tables in lock-step with the page tables. Additional management overhead is added.
+
+### OpenStack Components
+Services:
+- Compute Service(code-named Nova)
+- Image Service(code-named Glance)
+- Block Service(code-named Cinder)
+- Object Service(code-named Swift)
+- Security Service(code-named Keystone)
+- Orchestration Service(code-named Heat)
+- Network Service(code-named Neutron)
+- Container Service(code-named Zun)
+- Database Service(code-named Trove)
+- Dashboard Service(code-named Horizon)
+- Search Service(code-named Searchlight)
+
+Nova
+- Manages the lifecycle of compute instances in an OpenStack environment
+- Responsibilities include spawning, scheduling and decommissioning of virtual machines on demand 
+- Virtualisation agnostic
+
+### Serverless(Function as a Service---FaaS)
+FaaS is also know as Serverless computing. The idea behind Serverless/Faas is to develop software applications without bothering with the infrastructure.
+
+It's Server-unseen rather than Server-less. A FaaS service allows functions to be added, removed, updated, executed, and auto-scaled. FaaS is an extreme form of microservice architecture.
+
+Pros: 
+- Simpler deployment
+- Reduced computing costs
+- Reduced application complexity due to loosely-coupled architecture
+
+A function that does not modify the state of the system is said to be side-effect free. A function that changes the system somehow is not side-effect free(eg. a function that writes to the file system the thumbnail of an image)
+
+Side-effect free functions can be run in parallel. However, side-effect function is inevitable in complex system.
+
+#### Stateful/Stateless Function 
+Stateful Function
+: is one whose output changes in relation to internally stored information(its input cannot entirely predict its output).
+
+Stateless Function
+: is one that does not store information internally.
+
+#### Synchronous/Asynchronous Function
+By default functons in FaaS are synchronous, hence they return their result immediately. 
+
+Asynchronous functions return a code that informs the client that the execution has started, and then trigger an event when the execution completes.
 ## Security and Clouds
+### Authentication
+Authentication
+: is the establishment and propagation of a user's identity in the system.
+
+- Does not check what user is allowed to do, only that we know who they are.
+- Masquerading danger
+- Public Key Infrastructures(PKI)
+
+Certification Authority -- Central component of PKI
+CA's responsibilities:
+- policy and procedures
+  - Processes that should be followed by users, organisations, service providers.
+- Issuing certificates
+  - Often need to delegate to local Registration Authority(Prove who you are)
+- Revoking certificates
+  - Certificate Revocation List(CRL) for expired/compromised certificates
+- Storing, archiving
+  - Keeping  track of existing certificates, various other information
+
+- PKI is an arrangement that binds public key with respective identities of entities(like people and organization). 
+- The binding is established through a process of registration and issurance of certificates at and by a certificate authority
+- The PKI role that assures valid and correct registration is called a registration authority(RA). RA is responsible for accepting requests for digital certificates and authenticating the entity making the request.
+
+### Authorisation
+Authorisation
+: is concerned with controlling access to resources based on policy.
+
+There are many approaches for authorisation
+- Group Based Access Control
+- Role Based Access Control
+- Identity Based Access Control
+- Attribute Based Access Control
+
+Authorization defines what they can do and define and enforce rules. It is realized through **Virtual Organization(VO)**.
+
+- Provide conceptual framework for rules and regulations for resources to be offered/shared between VO members.
+- Different domains place greater/lesser emphasis on expression and enforcement of rules and regulations
+
+RBAC
+- Basic idea is to define:
+  - Roles: roles are often hierachical
+  - Actions: allowed/not allowed for VO members
+  - Resources: comprising VO infrastructure(computer, data)
+- Policy consists sets of these rules: $Role\times Action \times Target$ 
+  - eg. Can user with VO role X invoke service Y on resource Z
+- Policy engines consume this information to make access decisions
+
+### Other Cloud Security Challenges
+- Single sign-on
+  - The grid model needed but not solved for Cloud-based IaaS currently.
+- Auditing: logging, instrusion detection, auditing of security in external computer facilities.
+  - well established in theory and practice and for local systems.
+- Deletion and Encryption
+  - Data deletion with no direct hard disk
+- Liability
+- Licensing
+  - Challenges with the Cloud delivery model
+- Workflows
+- The Ever Changing Techinal/Legal Landscape
+
+---
 
 ### Auto-deploying by Ansible
 ### Docker

@@ -43,7 +43,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.51">
 
 
 <link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/">
@@ -208,11 +208,36 @@
   
    <article class="post-entry">
   <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/" class="post-link">解析J.U.C源码</a></h3>
-    <p class="post-meta">@Yang Zhang · Jun 2, 2019 · 0 min read</p>
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/" class="post-link">深入理解java网络开发知识的归纳</a></h3>
+    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 1 min read</p>
   </header>
   
-  <p class="post-summary"></p>
+  <p class="post-summary">JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&#34;execution(public String getName())&#34;) public void LoggingAdvice(){ System.out.println(&#34;LOG: Get method called.&#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
+我们也可以创造一个切点,应用于其他的AOP方法
+@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&#34;allGetters()&#34;) public void LoggingAdvice() { System.out.println(&#34;Advice run. Get Method called&#34;); } //切点执行后执行  @After(&#34;allGetters()&#34;) public void LoggingAdvice() { System.out.println(&#34;Advice run. Get Method called&#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&#34;allGetters()&#34;, returning=&#34;returnString&#34;) public void LoggingAdvice() { System.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/" class="post-link">深入理解java并发知识的归纳</a></h3>
+    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 15 min read</p>
+  </header>
+  
+  <p class="post-summary">1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型 1.3. 如果解决并发原子性问题—互斥锁 1.4. “等待-通知”机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题. 1.6. 管程 1.7. 线程 1.8. 并发量 1.9. 局部变量 – 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口 2.2. Condition接口 2.3. 信号量模型 2.4. ReadWriteLock 实现 2.5. StampedLock 2.6. CountDownLatch和CyclicBarrier 2.7. 并发容器 2.8. 原子类 2.9. 线程池Executor 2.10. Future 2.11. CompletableFuture 2.12. CompletionService: 批量异步化操作 2.13. Fork/Join 分治模型  并发设计模式  Immutability模式 Copy-on-Write模式 线程本地存储模式 Guarded Suspension模式 Balking模式 Thread-Per-Message模式 Worker Thread模式 两阶段终止模式 生产者消费者模式  实际并发框架的简要分析  Guava RateLimiter 高性能限流器 Netty 高性能网络应用框架 Disruptor 高性能队列 HiKariCP 高性能数据库连接池   1.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/" class="post-link">解析J.U.C源码</a></h3>
+    <p class="post-meta">@Yang Zhang · Jun 2, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
+//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 &#43; var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; }</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/">Read More →</a>
   </footer>
@@ -283,10 +308,11 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
   <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/" class="post-link">Notes for Cluster and Cloud Computing(COMP90024)</a></h3>
-    <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 3 min read</p>
+    <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 28 min read</p>
   </header>
   
-  <p class="post-summary">Information Session Cloud Characteristics: - On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. - Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. - Resource pooling: The provider’s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.</p>
+  <p class="post-summary">Information Session Cloud Characteristics:
+ On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. Resource pooling: The provider’s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/">Read More →</a>
   </footer>
@@ -312,31 +338,6 @@ Different types of Database Architectures  Centralised Database System Client-Se
   <p class="post-summary"></p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javadatastructureandalgorithm/" class="post-link">Data Structures and Algorithm in Java</a></h3>
-    <p class="post-meta">@Yang Zhang · Apr 12, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">Data Structure and Algorithm Iterators Suppose we want to traverse a list, performing some operations on certain links.
-As users of a list, what we need is access to reference that can point to any arbitray link. This allows us to examine or modify the link. We should be able to increment the reference so we can traverse along the list, looking at each link in turn, and we should be able to access the link pointed to by the reference.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javadatastructureandalgorithm/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/websecurity/" class="post-link">对学习过的Web Security的总结</a></h3>
-    <p class="post-meta">@yang zhang · Apr 11, 2019 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary"> 横向越权和纵向越权  横向越权: 攻击者尝试访问与他拥有相同权限的用户的资源.
-纵向越权: 低级别攻击者尝试访问高级别用户的资源.
- </p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/websecurity/">Read More →</a>
   </footer>
 </article>
  

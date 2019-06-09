@@ -13,6 +13,16 @@
   </url>
   
   <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/</loc>
+    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/</loc>
+    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</loc>
     <lastmod>2019-04-14T01:37:56+08:00</lastmod>
   </url>
@@ -427,6 +437,12 @@
   <url>
     <loc>https://yangzhanghavefun.github.io/yzzhan/tags/thread/</loc>
     <lastmod>2019-01-16T01:37:56+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://yangzhanghavefun.github.io/yzzhan/tags/web/</loc>
+    <lastmod>2019-04-14T01:37:56+08:00</lastmod>
     <priority>0</priority>
   </url>
   
