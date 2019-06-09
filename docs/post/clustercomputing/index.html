@@ -216,7 +216,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Notes for Cluster and Cloud Computing(COMP90024)</h1>
-      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 28 min read</p>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 29 min read</p>
     </header>
     <article class="post-content">
 
@@ -355,6 +355,7 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <blockquote>
 <p>Correctness in parallelisation requires synchronisation. Synchronization and atomic operations causes loss of performance and communication latency.</p>
+</blockquote>
 
 <h3 id="further-parallel-improvement">Further parallel improvement</h3>
 
@@ -365,15 +366,34 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 - Memory that stores/executing programs and related data
 - I/O systems
 - Permanent Storage for read/writing data into out of memory</p>
-</blockquote>
 
 <p>Important issue is to balance the components especially for HPC systems.</p>
 
-<p>To deal with data, here are four different kinds of combination.
-|               | Single Instruction           | Multi Instruction  |
-| &mdash;&mdash;&mdash;&mdash;- |:&mdash;&mdash;&mdash;&mdash;-:| &mdash;&ndash;:|
-| Single Data   | SISD | MISD |
-| Multiple Data | SIMD      |   MIMD |</p>
+<p>To deal with data, here are four different kinds of combination.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center">Single Instruction</th>
+<th align="right">Multi Instruction</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Single Data</td>
+<td align="center">SISD</td>
+<td align="right">MISD</td>
+</tr>
+
+<tr>
+<td>Multiple Data</td>
+<td align="center">SIMD</td>
+<td align="right">MIMD</td>
+</tr>
+</tbody>
+</table>
 
 <ul>
 <li>Single Instruction, Single Data Stream (SISD):
@@ -537,7 +557,7 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
     - Pros: 1.Cloud-bursting
     - Cons: Difficult to 1. move data.resources when needed 2. decide what data can go to public cloud 3. public cloud compliant with PCI-DSS
 - Delivery Models: Separation of Responsibilities
-  <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/delivery_model.png" alt="Delivery Model" /></p>
+  <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/delivery_models.png" alt="Delivery Model" /></p>
 
 <p>x-as-a-Service:
 - Testing-as-a-Service
@@ -938,6 +958,52 @@ Reansons:
 - transient
 - lazily-evaluated</p>
 
+<p><strong>Transformation is executed only after action is executed.</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">/* 
+</span><span style="color:#75715e"> *  Example of Transformations of RDDs
+</span><span style="color:#75715e">*/</span>
+
+<span style="color:#75715e">//selects elements from an RDD
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">filter</span><span style="color:#f92672">(</span>lambda<span style="color:#f92672">);</span> 
+
+<span style="color:#75715e">//returns an RDD without duplicated elements
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">distinct</span><span style="color:#f92672">();</span>
+
+<span style="color:#75715e">//merges two RDDs
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">union</span><span style="color:#f92672">(</span>otherRdd<span style="color:#f92672">);</span>
+
+<span style="color:#75715e">//returns elements common to both 
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">intersection</span><span style="color:#f92672">(</span>otherRdd<span style="color:#f92672">)</span>
+
+<span style="color:#75715e">//removes elements of otherRdd
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">substract</span><span style="color:#f92672">(</span>otherRdd<span style="color:#f92672">)</span>
+
+<span style="color:#75715e">//returns the Cartesian product of both RDDs
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">cartesian</span><span style="color:#f92672">(</span>otherRdd<span style="color:#f92672">)</span>
+
+rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>lambda<span style="color:#f92672">)</span>
+rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">flatMap</span><span style="color:#f92672">(</span>lambda<span style="color:#f92672">)</span>
+rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">reduceByKey</span><span style="color:#f92672">(</span>lambda<span style="color:#f92672">)</span>
+rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">(</span>otherRdd<span style="color:#f92672">)</span></code></pre></div>
+<hr />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">/* 
+</span><span style="color:#75715e"> *  Example of Action of RDDs
+</span><span style="color:#75715e">*/</span>
+
+<span style="color:#75715e">//returns all elements in an RDD
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">collect</span><span style="color:#f92672">();</span>
+
+<span style="color:#75715e">//returns the number of elements in an RDD
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">count</span><span style="color:#f92672">();</span>
+
+<span style="color:#75715e">//applies the function to all elements repeatedly, resulting in one result(say, the sum of all elements)
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">reduce</span><span style="color:#f92672">(</span>lambda<span style="color:#f92672">)</span>
+
+<span style="color:#75715e">//applies lambda to all elements of an RDD
+</span><span style="color:#75715e"></span>rdd<span style="color:#f92672">.</span><span style="color:#a6e22e">foreach</span><span style="color:#f92672">(</span>lambda<span style="color:#f92672">)</span>
+
+<span style="color:#75715e">//save files
+</span><span style="color:#75715e"></span>sf<span style="color:#f92672">.</span><span style="color:#a6e22e">saveAsTextFile</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;./counts&#34;</span><span style="color:#f92672">);</span></code></pre></div>
 <h2 id="cloud-underpinning-and-other-things">Cloud Underpinning and Other Things</h2>
 
 <h3 id="virtualization">Virtualization</h3>

@@ -112,6 +112,7 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 **Gustafson-Barsis's Law** suggests that with enough processors and remaining tasks, speed up will always meet the requirement.
 
 > Correctness in parallelisation requires synchronisation. Synchronization and atomic operations causes loss of performance and communication latency.
+
 ### Further parallel improvement
 #### Basic Architecture in a simplest level
 A computer comprises:
@@ -123,6 +124,7 @@ A computer comprises:
 Important issue is to balance the components especially for HPC systems.
 
 To deal with data, here are four different kinds of combination.
+
 |               | Single Instruction           | Multi Instruction  |
 | ------------- |:-------------:| -----:|
 | Single Data   | SISD | MISD |
@@ -233,7 +235,7 @@ Common Cloud Model could be divided into three aspects:
     - Pros: 1.Cloud-bursting
     - Cons: Difficult to 1. move data.resources when needed 2. decide what data can go to public cloud 3. public cloud compliant with PCI-DSS
 - Delivery Models: Separation of Responsibilities
-  ![Delivery Model](/media/posts/delivery_model.png)
+  ![Delivery Model](/media/posts/delivery_models.png)
 
 x-as-a-Service:
 - Testing-as-a-Service
@@ -538,6 +540,59 @@ Properties of RDD:
 - immutable
 - transient
 - lazily-evaluated
+
+**Transformation is executed only after action is executed.**
+```Java
+/* 
+ *  Example of Transformations of RDDs
+*/
+
+//selects elements from an RDD
+rdd.filter(lambda); 
+
+//returns an RDD without duplicated elements
+rdd.distinct();
+
+//merges two RDDs
+rdd.union(otherRdd);
+
+//returns elements common to both 
+rdd.intersection(otherRdd)
+
+//removes elements of otherRdd
+rdd.substract(otherRdd)
+
+//returns the Cartesian product of both RDDs
+rdd.cartesian(otherRdd)
+
+rdd.map(lambda)
+rdd.flatMap(lambda)
+rdd.reduceByKey(lambda)
+rdd.join(otherRdd)
+```
+
+---
+
+```Java
+/* 
+ *  Example of Action of RDDs
+*/
+
+//returns all elements in an RDD
+rdd.collect();
+
+//returns the number of elements in an RDD
+rdd.count();
+
+//applies the function to all elements repeatedly, resulting in one result(say, the sum of all elements)
+rdd.reduce(lambda)
+
+//applies lambda to all elements of an RDD
+rdd.foreach(lambda)
+
+//save files
+sf.saveAsTextFile("./counts");
+```
 
 ## Cloud Underpinning and Other Things
 ### Virtualization
