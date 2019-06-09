@@ -43,6 +43,13 @@ author: "Yang Zhang"
 - Grid computing is distinguished from conventional high-performance computing systems such as cluster computing in that grid computers have each node set to perform a different task/application. Grid computers also tend to be more heterogeneous and geographically dispersed (thus not physically coupled) than cluster computers.
 - Although a single grid can be dedicated to a particular application, commonly a grid is used for a variety of purposes. Grids are often constructed with general-purpose grid middleware software libraries. Grid sizes can be quite large.
 
+#### Hard of compute Grid
+- Information System: What resources are available
+- Monitoring and Discovery Systems: What status of those resources
+- Job scheduling/resource brokering: 
+- Virtual organization support
+- Security
+
 ## Domain Driver
 
 Challenges happen in multiple perspectives.
