@@ -52,7 +52,7 @@ author: "Yang Zhang"
 
 ## Domain Driver
 
-Challenges happen in multiple perspectives.
+Challenges happen in multiple perspectives in research domains.
 - Big data
 - Big compute
 - Big distribution
@@ -94,8 +94,8 @@ Terminologes:
   - $\pi$: The time that costs by parallelable part.
   - N: The number of processors
 - Derived terms
-  - T(1): Time for serial computation without enhanced by parallelism.
-  - T(N): Time for N parallel computations with max enhanced by parallelism.
+  - $T(1)=\sigma+\pi$: Time for serial computation without enhanced by parallelism.
+  - $T(N)=\sigma+\frac{\pi}{N}$: Time for N parallel computations with max enhanced by parallelism.
   - S(N)=T(1)/T(N): Time proportion between no parallelism applied and max parallelism applied.
   - $\pi/\sigma=\frac{1-\alpha}{\alpha}$: Time proportion between cost on parallelable part and unparallelable part.
   - $\alpha$: The proportion of unparallelable part.
@@ -170,6 +170,7 @@ To deal with data, here are four different kinds of combination.
 - To guarantee the data/transaction is reliable, ACID(Atomicity, Consistency, Integrity, Durability) need to be satisfied.
 
 #### Erroneous Assumptions of Distributed Systems
+
 - The network is reliable
   - **Reliable** means that there is guarantee that data can send and arrive successfully over the network.
   - **Reliable** means that lower layers in the networking stack protect me from these issues
@@ -201,6 +202,7 @@ To deal with data, here are four different kinds of combination.
 
 #### Design of parallel Program
 The flow of parallel program design could be divided into four key points.
+
 - Partitioning
   - Primary idea: decomposition of computational activities and data into smaller tasks
   - Strategies: 
@@ -222,6 +224,7 @@ The flow of parallel program design could be divided into four key points.
 HTC jobs generally involve running multiple independent instances of the software on multiple processors, at the same time. Serial systems are suitable for these requirements.
 
 HTC is worthwhile when one needs to:
+
 - run many jobs that are typically similar but not highly parallel;
 - run the same program with varying inputs;
 - run jobs that do not communicate with each other;
@@ -232,6 +235,7 @@ HTC is worthwhile when one needs to:
 HPC jobs generally involve running a single instance of parallel software over many processors. Results at various instances throughout the computation are communicated among the processors, requiring a parallel environment.
 
 HPC: use when one needs to:
+
 - run jobs where rapid communication of intermediate results is required to perform the computations;
 - make intense use of large amounts of computing resources in relatively short time periods.
 ## Cloud Computing
@@ -245,6 +249,7 @@ Then cloud computing starts busting developing.
 > Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources(networks, servers, storage, applications, services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.
 
 Common Cloud Model could be divided into three aspects:
+
 - Deployment Models:
   - Private
     - Pros: 1. Control 2. Consolidation of resources 3. Easier to secure 4. More trust
@@ -408,6 +413,7 @@ Extend the API(Application Programming Interface) notation to facilitate the sha
 
 ### DBMS design in Big Data Environment
 Four "Vs" relates to Big data:
+
 - **Volume**: volume is one of most important criteria.
 - **Velocity**: the frequency at which new data is being brought into system and analytics performed.
 - **Variety**: the variability and complexity of data schema. The more complex the data schemas you have, the higher the probability of them changing along the way, adding more complexity.

@@ -216,7 +216,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Notes for Cluster and Cloud Computing(COMP90024)</h1>
-      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 31 min read</p>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 30 min read</p>
     </header>
     <article class="post-content">
 
@@ -287,7 +287,7 @@
 
 <h2 id="domain-driver">Domain Driver</h2>
 
-<p>Challenges happen in multiple perspectives.
+<p>Challenges happen in multiple perspectives in research domains.
 - Big data
 - Big compute
 - Big distribution
@@ -336,8 +336,8 @@
   - $\pi$: The time that costs by parallelable part.
   - N: The number of processors
 - Derived terms
-  - T(1): Time for serial computation without enhanced by parallelism.
-  - T(N): Time for N parallel computations with max enhanced by parallelism.
+  - $T(1)=\sigma+\pi$: Time for serial computation without enhanced by parallelism.
+  - $T(N)=\sigma+\frac{\pi}{N}$: Time for N parallel computations with max enhanced by parallelism.
   - S(N)=T(1)/T(N): Time proportion between no parallelism applied and max parallelism applied.
   - $\pi/\sigma=\frac{1-\alpha}{\alpha}$: Time proportion between cost on parallelable part and unparallelable part.
   - $\alpha$: The proportion of unparallelable part.
@@ -522,21 +522,36 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <h4 id="design-of-parallel-program">Design of parallel Program</h4>
 
-<p>The flow of parallel program design could be divided into four key points.
-- Partitioning
-  - Primary idea: decomposition of computational activities and data into smaller tasks
-  - Strategies:
-    - Master-worker/Slave Model: Master decomposes the problem into samll tasks, distributes to workers and gathers partial results to produce the final result.
-    - SPMD: common exploited model(Mapreduce). The main idea is that each process executes the same piece of code, but on different parts of the data.
-    - Pipeline: Suitable for applications involving multiple stages of execution, typically operate on large number of datasets.
-    - Divide and conquer: A problem is divided into two or more sub problems, and each of these sub problems are solved independently, and their results are combined.(eg: merge sort)
-    - Speculation: Used when it is quite difficult to achieve parallelism through the previous paradigms.
-- Communication
-  - informaton stream and coordination among tasks that are created in the partitioning stage.
-- Agglomeration
-  - Tasks and communication created in above stages are evaluated for performance and implementation cost
-- Mapping/Scheduling
-  - Assign tasks to processors such that job completion time is minimized and resource utilization is maximized.</p>
+<p>The flow of parallel program design could be divided into four key points.</p>
+
+<ul>
+<li>Partitioning
+
+<ul>
+<li>Primary idea: decomposition of computational activities and data into smaller tasks</li>
+<li>Strategies:</li>
+<li>Master-worker/Slave Model: Master decomposes the problem into samll tasks, distributes to workers and gathers partial results to produce the final result.</li>
+<li>SPMD: common exploited model(Mapreduce). The main idea is that each process executes the same piece of code, but on different parts of the data.</li>
+<li>Pipeline: Suitable for applications involving multiple stages of execution, typically operate on large number of datasets.</li>
+<li>Divide and conquer: A problem is divided into two or more sub problems, and each of these sub problems are solved independently, and their results are combined.(eg: merge sort)</li>
+<li>Speculation: Used when it is quite difficult to achieve parallelism through the previous paradigms.</li>
+</ul></li>
+<li>Communication
+
+<ul>
+<li>informaton stream and coordination among tasks that are created in the partitioning stage.</li>
+</ul></li>
+<li>Agglomeration
+
+<ul>
+<li>Tasks and communication created in above stages are evaluated for performance and implementation cost</li>
+</ul></li>
+<li>Mapping/Scheduling
+
+<ul>
+<li>Assign tasks to processors such that job completion time is minimized and resource utilization is maximized.</li>
+</ul></li>
+</ul>
 
 <h2 id="parallel-system-distributed-computing-and-hpc-htc">Parallel System, Distributed Computing and HPC/HTC</h2>
 
@@ -544,47 +559,63 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <p>HTC jobs generally involve running multiple independent instances of the software on multiple processors, at the same time. Serial systems are suitable for these requirements.</p>
 
-<p>HTC is worthwhile when one needs to:
-- run many jobs that are typically similar but not highly parallel;
-- run the same program with varying inputs;
-- run jobs that do not communicate with each other;
-- execute on physically distributed resources using grid-enabled technologies;
-- make use of many computing resources over long periods of time to accomplish a computational task.</p>
+<p>HTC is worthwhile when one needs to:</p>
+
+<ul>
+<li>run many jobs that are typically similar but not highly parallel;</li>
+<li>run the same program with varying inputs;</li>
+<li>run jobs that do not communicate with each other;</li>
+<li>execute on physically distributed resources using grid-enabled technologies;</li>
+<li>make use of many computing resources over long periods of time to accomplish a computational task.</li>
+</ul>
 
 <h3 id="hpc-high-performance-computing">HPC (high performance computing)</h3>
 
 <p>HPC jobs generally involve running a single instance of parallel software over many processors. Results at various instances throughout the computation are communicated among the processors, requiring a parallel environment.</p>
 
-<p>HPC: use when one needs to:
-- run jobs where rapid communication of intermediate results is required to perform the computations;
-- make intense use of large amounts of computing resources in relatively short time periods.</p>
+<p>HPC: use when one needs to:</p>
+
+<ul>
+<li>run jobs where rapid communication of intermediate results is required to perform the computations;</li>
+
+<li><p>make intense use of large amounts of computing resources in relatively short time periods.</p>
 
 <h2 id="cloud-computing">Cloud Computing</h2>
 
 <h3 id="concepts-development">Concepts &amp; Development</h3>
 
-<p>Before cloud computing, the main issue is that capacity and utilization could not tightly meet.
-- Even if peak load can be correctly anticipated, without <strong>elasticity</strong> we waste resources during nopeak times.
-- Underprovisioning 1: potential revenue from users not serverd
-- Underprovisioning 2: some users desert the site permanently after experiencing poor service; this attrition and possible negative press result in a permanent loss of a portion of the revenue stream.</p>
+<p>Before cloud computing, the main issue is that capacity and utilization could not tightly meet.</p></li>
+
+<li><p>Even if peak load can be correctly anticipated, without <strong>elasticity</strong> we waste resources during nopeak times.</p></li>
+
+<li><p>Underprovisioning 1: potential revenue from users not serverd</p></li>
+
+<li><p>Underprovisioning 2: some users desert the site permanently after experiencing poor service; this attrition and possible negative press result in a permanent loss of a portion of the revenue stream.</p></li>
+</ul>
 
 <p>Then cloud computing starts busting developing.
 &gt; Cloud computing is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources(networks, servers, storage, applications, services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.</p>
 
-<p>Common Cloud Model could be divided into three aspects:
-- Deployment Models:
-  - Private
-    - Pros: 1. Control 2. Consolidation of resources 3. Easier to secure 4. More trust
-    - Cons: 1. Not relevance to core business 2. Staff/Management overheads 3. Hardware obsolescence 4. Over/under utilisation challenges.
-  - Community
-  - Public
-    - Pros: 1. Utility computing 2. Can focus on core business 3. Cost-effective 4. Right-sizing 5.Democratisation of computing
-    - Cons: 1.Security 2. Loss of control 3. Possible lock-in 4. Dependency of Cloud provider continued existence
-  - Hybrid
-    - Pros: 1.Cloud-bursting
-    - Cons: Difficult to 1. move data.resources when needed 2. decide what data can go to public cloud 3. public cloud compliant with PCI-DSS
-- Delivery Models: Separation of Responsibilities
-  <img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/delivery_models.png" alt="Delivery Model" /></p>
+<p>Common Cloud Model could be divided into three aspects:</p>
+
+<ul>
+<li>Deployment Models:
+
+<ul>
+<li>Private</li>
+<li>Pros: 1. Control 2. Consolidation of resources 3. Easier to secure 4. More trust</li>
+<li>Cons: 1. Not relevance to core business 2. Staff/Management overheads 3. Hardware obsolescence 4. Over/under utilisation challenges.</li>
+<li>Community</li>
+<li>Public</li>
+<li>Pros: 1. Utility computing 2. Can focus on core business 3. Cost-effective 4. Right-sizing 5.Democratisation of computing</li>
+<li>Cons: 1.Security 2. Loss of control 3. Possible lock-in 4. Dependency of Cloud provider continued existence</li>
+<li>Hybrid</li>
+<li>Pros: 1.Cloud-bursting</li>
+<li>Cons: Difficult to 1. move data.resources when needed 2. decide what data can go to public cloud 3. public cloud compliant with PCI-DSS</li>
+</ul></li>
+<li>Delivery Models: Separation of Responsibilities
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/delivery_models.png" alt="Delivery Model" /></li>
+</ul>
 
 <p>x-as-a-Service:
 - Testing-as-a-Service
@@ -763,11 +794,14 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <h3 id="dbms-design-in-big-data-environment">DBMS design in Big Data Environment</h3>
 
-<p>Four &ldquo;Vs&rdquo; relates to Big data:
-- <strong>Volume</strong>: volume is one of most important criteria.
-- <strong>Velocity</strong>: the frequency at which new data is being brought into system and analytics performed.
-- <strong>Variety</strong>: the variability and complexity of data schema. The more complex the data schemas you have, the higher the probability of them changing along the way, adding more complexity.
-- <strong>Veracity</strong>: the level of trust in the data accuracy(provenance); the more diverse sources you have, the more unstructured they are, the less veracity you have.</p>
+<p>Four &ldquo;Vs&rdquo; relates to Big data:</p>
+
+<ul>
+<li><strong>Volume</strong>: volume is one of most important criteria.</li>
+<li><strong>Velocity</strong>: the frequency at which new data is being brought into system and analytics performed.</li>
+<li><strong>Variety</strong>: the variability and complexity of data schema. The more complex the data schemas you have, the higher the probability of them changing along the way, adding more complexity.</li>
+<li><strong>Veracity</strong>: the level of trust in the data accuracy(provenance); the more diverse sources you have, the more unstructured they are, the less veracity you have.</li>
+</ul>
 
 <p>Why Big Data need special database rather than Relational DBMSs
 - RDBMS finds it challenging to handle such huge data volumes. To address this, RDBMS added more central processing units (or CPUs) or more memory to the database management system to scale up vertically.
