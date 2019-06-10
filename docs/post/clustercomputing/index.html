@@ -216,7 +216,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Notes for Cluster and Cloud Computing(COMP90024)</h1>
-      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 29 min read</p>
+      <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 31 min read</p>
     </header>
     <article class="post-content">
 
@@ -273,6 +273,16 @@
 <li>Grid Computing transfer computer-computer focus to organization-organization focus.</li>
 <li>Grid computing is distinguished from conventional high-performance computing systems such as cluster computing in that grid computers have each node set to perform a different task/application. Grid computers also tend to be more heterogeneous and geographically dispersed (thus not physically coupled) than cluster computers.</li>
 <li>Although a single grid can be dedicated to a particular application, commonly a grid is used for a variety of purposes. Grids are often constructed with general-purpose grid middleware software libraries. Grid sizes can be quite large.</li>
+</ul>
+
+<h4 id="hard-of-compute-grid">Hard of compute Grid</h4>
+
+<ul>
+<li>Information System: What resources are available</li>
+<li>Monitoring and Discovery Systems: What status of those resources</li>
+<li>Job scheduling/resource brokering: Please run these {jobs}</li>
+<li>Virtual organization support</li>
+<li>Security</li>
 </ul>
 
 <h2 id="domain-driver">Domain Driver</h2>
@@ -530,7 +540,24 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <h2 id="parallel-system-distributed-computing-and-hpc-htc">Parallel System, Distributed Computing and HPC/HTC</h2>
 
-<h2 id="hpc">HPC</h2>
+<h3 id="htc-high-throughput-computing">HTC (high throughput computing)</h3>
+
+<p>HTC jobs generally involve running multiple independent instances of the software on multiple processors, at the same time. Serial systems are suitable for these requirements.</p>
+
+<p>HTC is worthwhile when one needs to:
+- run many jobs that are typically similar but not highly parallel;
+- run the same program with varying inputs;
+- run jobs that do not communicate with each other;
+- execute on physically distributed resources using grid-enabled technologies;
+- make use of many computing resources over long periods of time to accomplish a computational task.</p>
+
+<h3 id="hpc-high-performance-computing">HPC (high performance computing)</h3>
+
+<p>HPC jobs generally involve running a single instance of parallel software over many processors. Results at various instances throughout the computation are communicated among the processors, requiring a parallel environment.</p>
+
+<p>HPC: use when one needs to:
+- run jobs where rapid communication of intermediate results is required to perform the computations;
+- make intense use of large amounts of computing resources in relatively short time periods.</p>
 
 <h2 id="cloud-computing">Cloud Computing</h2>
 
@@ -669,12 +696,21 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <p>SOAP/WS is a stack of protocols that covers every aspect of using a remote service, from service discovery, to service description, to the actual request/response.</p>
 
+<ul>
+<li>Can use HTTP and other protocols</li>
+<li>Build up on remote procedure call (a language independent function call that spans another system)</li>
+<li>Covers all aspects of a remote services including discovery, description, request/response.</li>
+
+<li><p>WS-* (security) goes into SOAP headers for additional functionality.</p>
+
 <h5 id="restful-ws-and-roa-architecture">RESTful/WS and ROA Architecture</h5>
 
 <blockquote>
-<p><strong>ReST(Representation State Transfer)</strong> is intended to evoke an image of how a well-designed Web app behaves. A network for web pages, where the user progresses through an application by selecting links and resulting in next page then being transferred to the user and rendered for their use.
-- REST leverages less bandwidth, making it more suitable for internet usage.</p>
-</blockquote>
+<p><strong>ReST(Representation State Transfer)</strong> is intended to evoke an image of how a well-designed Web app behaves. A network for web pages, where the user progresses through an application by selecting links and resulting in next page then being transferred to the user and rendered for their use.</p>
+</blockquote></li>
+
+<li><p>REST leverages less bandwidth, making it more suitable for internet usage.</p></li>
+</ul>
 
 <p>Steps For $Client \rightleftharpoons Resource$, Client sends &ldquo;<a href="http://amazon.com/product/123&quot;">http://amazon.com/product/123&quot;</a> and Resource return Product.html:
 1. Client requests Resource through Identifier(URL)
@@ -715,7 +751,15 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <p>Extend the API(Application Programming Interface) notation to facilitate the sharing and usage of services among developers, testers, and in some cases end users.</p>
 
-<h2 id="big-data-and-related-technologies">Big Data and Related Technologies</h2>
+<h5 id="comparison-between-soa-and-roa">Comparison between SOA and ROA</h5>
+
+<ul>
+<li>An application built with a Service Oriented Architecture is more a &lsquo;Facade&rsquo;, e.g. it combines or composes its outgoing functionality based on functionality that is in the services it uses &lsquo;behind the screens&rsquo; (possibly over the network). E.g. its core processing consists of calling external services, supplying them with parameters, and combining the results with possibly some extra processing or algorithms for the user.</li>
+
+<li><p>An application built with a Resource Oriented Architecture does more of its processing internally (e.g. as opposed to calling external components) but uses external resources as input. E.g. its core processing consists of retrieving static resources and then doing more calculating internally.</p>
+
+<h2 id="big-data-and-related-technologies">Big Data and Related Technologies</h2></li>
+</ul>
 
 <h3 id="dbms-design-in-big-data-environment">DBMS design in Big Data Environment</h3>
 
@@ -796,7 +840,8 @@ A mongoDB sharded cluster consists of three components:
 <p>Sharding process:
 - Sharding is done at the replica set level(One node contains one shard).
 - Write requests is based on primary node in a replica set, Read requests depends on configuration, be answered by every node.
-- Updates flow only from primary to secondary.</p>
+- Updates flow only from primary to secondary.
+- Read request <strong>by default</strong> bases on primary node, it can be changed by modifying the configuration.</p>
 
 <h4 id="mongodb-vs-couchdb-clusters">MongoDB vs CouchDB Clusters</h4>
 
@@ -956,7 +1001,7 @@ Reansons:
 <p>Properties of RDD:
 - immutable
 - transient
-- lazily-evaluated</p>
+- lazily-evaluated: Declared transformation will no be executed immediately. Until the action found and executed, the tranformation will start executing.</p>
 
 <p><strong>Transformation is executed only after action is executed.</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">/* 

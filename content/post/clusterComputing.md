@@ -46,7 +46,7 @@ author: "Yang Zhang"
 #### Hard of compute Grid
 - Information System: What resources are available
 - Monitoring and Discovery Systems: What status of those resources
-- Job scheduling/resource brokering: 
+- Job scheduling/resource brokering: Please run these {jobs}
 - Virtual organization support
 - Security
 
@@ -218,7 +218,22 @@ The flow of parallel program design could be divided into four key points.
 
 
 ## Parallel System, Distributed Computing and HPC/HTC
-## HPC
+### HTC (high throughput computing)
+HTC jobs generally involve running multiple independent instances of the software on multiple processors, at the same time. Serial systems are suitable for these requirements.
+
+HTC is worthwhile when one needs to:
+- run many jobs that are typically similar but not highly parallel;
+- run the same program with varying inputs;
+- run jobs that do not communicate with each other;
+- execute on physically distributed resources using grid-enabled technologies;
+- make use of many computing resources over long periods of time to accomplish a computational task.
+
+### HPC (high performance computing)
+HPC jobs generally involve running a single instance of parallel software over many processors. Results at various instances throughout the computation are communicated among the processors, requiring a parallel environment.
+
+HPC: use when one needs to:
+- run jobs where rapid communication of intermediate results is required to perform the computations;
+- make intense use of large amounts of computing resources in relatively short time periods.
 ## Cloud Computing
 ### Concepts & Development
 Before cloud computing, the main issue is that capacity and utilization could not tightly meet. 
@@ -345,6 +360,10 @@ and many other flavous
 
 SOAP/WS is a stack of protocols that covers every aspect of using a remote service, from service discovery, to service description, to the actual request/response.
 
+- Can use HTTP and other protocols
+- Build up on remote procedure call (a language independent function call that spans another system)
+- Covers all aspects of a remote services including discovery, description, request/response.
+- WS-* (security) goes into SOAP headers for additional functionality. 
 ##### RESTful/WS and ROA Architecture
 > **ReST(Representation State Transfer)** is intended to evoke an image of how a well-designed Web app behaves. A network for web pages, where the user progresses through an application by selecting links and resulting in next page then being transferred to the user and rendered for their use.
 - REST leverages less bandwidth, making it more suitable for internet usage.
@@ -381,6 +400,10 @@ A resource is anything that's important enough to be referenced as a thing in it
 Motivation: Everything as a service(EaaS) paradigm, Vast number of entities and services, Link services together to create workflows and mashups.
 
 Extend the API(Application Programming Interface) notation to facilitate the sharing and usage of services among developers, testers, and in some cases end users.
+
+##### Comparison between SOA and ROA
+- An application built with a Service Oriented Architecture is more a 'Facade', e.g. it combines or composes its outgoing functionality based on functionality that is in the services it uses 'behind the screens' (possibly over the network). E.g. its core processing consists of calling external services, supplying them with parameters, and combining the results with possibly some extra processing or algorithms for the user.
+- An application built with a Resource Oriented Architecture does more of its processing internally (e.g. as opposed to calling external components) but uses external resources as input. E.g. its core processing consists of retrieving static resources and then doing more calculating internally.
 ## Big Data and Related Technologies
 
 ### DBMS design in Big Data Environment
@@ -440,6 +463,7 @@ Sharding process:
 - Sharding is done at the replica set level(One node contains one shard).
 - Write requests is based on primary node in a replica set, Read requests depends on configuration, be answered by every node.
 - Updates flow only from primary to secondary.
+- Read request **by default** bases on primary node, it can be changed by modifying the configuration.
 
 #### MongoDB vs CouchDB Clusters
 - MongoDB cluster is considerably more complex.
@@ -546,7 +570,7 @@ In client mode, the driver program talks directly to the executors on the worker
 Properties of RDD:
 - immutable
 - transient
-- lazily-evaluated
+- lazily-evaluated: Declared transformation will no be executed immediately. Until the action found and executed, the tranformation will start executing.  
 
 **Transformation is executed only after action is executed.**
 ```Java
