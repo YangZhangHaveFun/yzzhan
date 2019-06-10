@@ -328,6 +328,7 @@ When an architecture is completely contained within the same machine. components
 **Service**(combination and commonality) are often used to form a **Service-oriented Architecture(SoA)**.
 
 **Service-oriented Architecture(SoA) Core Ideas**:
+
 - A set of externally facing services that a business wants to provide to their customers or partners/collaborators.
 - An architectural pattern based on service providers, one or more brokers, and service requestors based on agreed service descriptions.
 - A set of architectural principles, patterns and criteria that support modularity, encapsulation, loose coupling, separation of concerns, reuse and composability.
@@ -335,6 +336,7 @@ When an architecture is completely contained within the same machine. components
 - A middleware solution optimized for service assembly, orchestration, monitoring, and management. Can include tools and approaches that combine services together.
 
 **Service-oriented Architecture(SoA) Design Principle**:
+
 - Standardized service contract: Services adhere to a communications agreement as defined collectively by one or more service-description documents.
 - Service loose coupling: Services maintain a relationship that minimizes dependencies and only requires that they maintain an awareness of each other.
 - Service abstraction: Beyond descriptions in the service contract, services hide logic from the outside world.
@@ -351,6 +353,7 @@ When an architecture is completely contained within the same machine. components
 
 #### SoA for Web
 Web services implement SoA with two main flavours
+
 - SOAP-based Web Services
 - ReST-based Web Services
 - (Both flavours to call services over HTTP)
@@ -374,6 +377,7 @@ SOAP/WS is a stack of protocols that covers every aspect of using a remote servi
 - REST leverages less bandwidth, making it more suitable for internet usage.
 
 Steps For $Client \rightleftharpoons Resource$, Client sends "http://amazon.com/product/123" and Resource return Product.html:
+
 1. Client requests Resource through Identifier(URL)
 2. Server/proxy sends representation of Resource
 3. This puts the client in a certain state.
