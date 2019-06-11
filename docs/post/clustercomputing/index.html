@@ -330,29 +330,49 @@
 
 <h5 id="amdahl-s-law">Amdahl&rsquo;s Law</h5>
 
-<p>Terminologes:
-- Basic terms
-  - $\sigma$: The time that costs by unparallelable part.
-  - $\pi$: The time that costs by parallelable part.
-  - N: The number of processors
-- Derived terms
-  - $T(1)=\sigma+\pi$: Time for serial computation without enhanced by parallelism.
-  - $T(N)=\sigma+\frac{\pi}{N}$: Time for N parallel computations with max enhanced by parallelism.
-  - S(N)=T(1)/T(N): Time proportion between no parallelism applied and max parallelism applied.
-  - $\pi/\sigma=\frac{1-\alpha}{\alpha}$: Time proportion between cost on parallelable part and unparallelable part.
-  - $\alpha$: The proportion of unparallelable part.
-  - $S=T(1)/T(N)=\frac{1}{\alpha+(1-\alpha)/N}\approx\frac{1}{\alpha}$: Speed up proportion.</p>
+<p>Terminologes:</p>
+
+<ul>
+<li>Basic terms
+
+<ul>
+<li>$\sigma$: The time that costs by unparallelable part.</li>
+<li>$\pi$: The time that costs by parallelable part.</li>
+<li>N: The number of processors</li>
+</ul></li>
+<li>Derived terms
+
+<ul>
+<li>$T(1)=\sigma+\pi$: Time for serial computation without enhanced by parallelism.</li>
+<li>$T(N)=\sigma+\frac{\pi}{N}$: Time for N parallel computations with max enhanced by parallelism.</li>
+<li>S(N)=T(1)/T(N): Time proportion between no parallelism applied and max parallelism applied.</li>
+<li>$\pi/\sigma=\frac{1-\alpha}{\alpha}$: Time proportion between cost on parallelable part and unparallelable part.</li>
+<li>$\alpha$: The proportion of unparallelable part.</li>
+<li>$S=T(1)/T(N)=\frac{1}{\alpha+(1-\alpha)/N}\approx\frac{1}{\alpha}$: Speed up proportion.</li>
+</ul></li>
+</ul>
 
 <p>Equation:
 $S = 1/\alpha$. For example, 95% of paralleled program with infinite numbers of cores will lead to 20 times faster than unparalleled program</p>
 
 <h5 id="gustafson-barsis-s-law">Gustafson-Barsis&rsquo;s Law</h5>
 
-<p>Different Terminologies:
-- Basic terms:
-  - $\pi$: The time that costs by parallelable part for a single process.
-- Derived terms
-  - $\alpha$: Fraction of running time sequential program spends on parallel parts.</p>
+<p>Different Terminologies:</p>
+
+<ul>
+<li>Basic terms:
+
+<ul>
+<li>$\pi$: The time that costs by parallelable part for a single process.</li>
+</ul></li>
+<li>Derived terms
+
+<ul>
+<li>$T(1)=\sigma+N\pi$: Time for serial computation without enhanced by parallelism.</li>
+<li>$T(N)=\sigma+\pi$: Time for N parallel computations with max enhanced by parallelism.</li>
+<li>$\alpha$: Fraction of running time sequential program spends on parallel parts.</li>
+</ul></li>
+</ul>
 
 <p>Equation:
 $S(N)=\alpha+N(1-\alpha)$

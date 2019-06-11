@@ -88,7 +88,9 @@ Multiple meaning of "add more":
 #### Mathematical Analysis
 Question: If n processors(cores) are thrown at a problem how much faster will it go?
 ##### Amdahl's Law
+
 Terminologes:
+
 - Basic terms
   - $\sigma$: The time that costs by unparallelable part.
   - $\pi$: The time that costs by parallelable part.
@@ -104,10 +106,14 @@ Terminologes:
 Equation:
 $S = 1/\alpha$. For example, 95% of paralleled program with infinite numbers of cores will lead to 20 times faster than unparalleled program  
 ##### Gustafson-Barsis's Law
+
 Different Terminologies:
+
 - Basic terms:
   - $\pi$: The time that costs by parallelable part for a single process.
 - Derived terms
+  - $T(1)=\sigma+N\pi$: Time for serial computation without enhanced by parallelism.
+  - $T(N)=\sigma+\pi$: Time for N parallel computations with max enhanced by parallelism.
   - $\alpha$: Fraction of running time sequential program spends on parallel parts. 
 
 Equation:
