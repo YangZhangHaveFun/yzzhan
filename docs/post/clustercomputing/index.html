@@ -640,28 +640,44 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 <p>x-as-a-Service:
 - Testing-as-a-Service
 - Management/Governance-as-a-Service
-- <strong>Software-as-a-Service</strong>
-  - Examples:
-    - Gmail
-    - On-live
-    - Microsoft Office 365
-- Process-as-a-Service
-- Information-as-a-Service
-- Database-as-a-Service
-- Storage-as-a-Service
-- <strong>Infrastructure-as-a-Service</strong>
-  - Examples:
-    - Amazon Web Services
-    - Oracle Public Cloud
-    - Rackspace Cloud
-    - NeCTAR
-- Integration-as-a-Service
-- Security-as-a-Service
-- <strong>Platform-as-a-Service</strong>
-  - Examples:
-    - Google App Engine
-    - Microsoft Azure
-    - Amazon Elastic MapReduce</p>
+- <strong>Software-as-a-Service</strong></p>
+
+<ul>
+<li>Examples:
+
+<ul>
+<li>Gmail</li>
+<li>On-live</li>
+<li>Microsoft Office 365</li>
+</ul></li>
+<li>Process-as-a-Service</li>
+<li>Information-as-a-Service</li>
+<li>Database-as-a-Service</li>
+<li>Storage-as-a-Service</li>
+
+<li><p><strong>Infrastructure-as-a-Service</strong></p>
+
+<ul>
+<li>Examples:</li>
+<li>Amazon Web Services</li>
+<li>Oracle Public Cloud</li>
+<li>Rackspace Cloud</li>
+<li>NeCTAR</li>
+</ul></li>
+
+<li><p>Integration-as-a-Service</p></li>
+
+<li><p>Security-as-a-Service</p></li>
+
+<li><p><strong>Platform-as-a-Service</strong></p>
+
+<ul>
+<li>Examples:</li>
+<li>Google App Engine</li>
+<li>Microsoft Azure</li>
+<li>Amazon Elastic MapReduce</li>
+</ul></li>
+</ul>
 
 <h3 id="auto-deployment-ansible">Auto-Deployment &mdash;- Ansible</h3>
 
@@ -752,7 +768,7 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 
 <h5 id="soap-ws">SOAP/WS</h5>
 
-<p><strong>SOAP(Simple Object Access Protocol)</strong> is built upon Remote Procedure Call paradigm, a language independent function call that spans other system.</p>
+<p><strong>SOAP(Simple Object Access Protocol)</strong> is built upon Remote Procedure Call paradigm, a language independent function call that spans another system.</p>
 
 <p>SOAP/WS is a stack of protocols that covers every aspect of using a remote service, from service discovery, to service description, to the actual request/response.</p>
 
@@ -795,17 +811,21 @@ Speed up S using N processes is given as a linear formula dependent on the numbe
 <li><strong>POST</strong> should be used when target resource URL is server generated</li>
 </ul>
 
-<p><strong>ReST</strong> - Uniform Interface
-- <strong>Identification of Resources</strong>: All important resources are identified by one(uniform) resource identifier mechanism(HTTP URL)
-- <strong>Manipulation of Resources through representations</strong>: Each resource can have one or more representations. Such as application/xml, application/json, text/html. Clients and Servers negotiate to select representation.
-- <strong>Self-descriptive messages</strong>: Requests and resources contain not only data but additional headers describing how the content should be handled. Such as if it should be cached, authentication requirements, etc. Access methods mean the same for all resources
-- Keywords: <strong>HTTP</strong>, <strong>GET</strong>, <strong>HEAD</strong>, <strong>OPTIONS</strong>, <strong>PUT</strong>, <strong>POST</strong>, <strong>DELETE</strong>, <strong>CONNECTION</strong>, <strong>TRACE</strong>, <strong>PATCH</strong>.</p>
+<p><strong>ReST</strong> - Uniform Interface</p>
+
+<ul>
+<li><strong>Identification of Resources</strong>: All important resources are identified by one(uniform) resource identifier mechanism(HTTP URL)</li>
+<li><strong>Manipulation of Resources through representations</strong>: Each resource can have one or more representations. Such as application/xml, application/json, text/html. Clients and Servers negotiate to select representation.</li>
+<li><strong>Self-descriptive messages</strong>: Requests and resources contain not only data but additional headers describing how the content should be handled. Such as if it should be cached, authentication requirements, etc. Access methods mean the same for all resources</li>
+<li>Keywords: <strong>HTTP</strong>, <strong>GET</strong>, <strong>HEAD</strong>, <strong>OPTIONS</strong>, <strong>PUT</strong>, <strong>POST</strong>, <strong>DELETE</strong>, <strong>CONNECTION</strong>, <strong>TRACE</strong>, <strong>PATCH</strong>.
+<br /></li>
+</ul>
 
 <blockquote>
 <p>HTTP Methods can be
 - <strong>safe</strong>: Do not change, repeating a call is equivalent to not making a call at all $GET, OPTION, HEAD$
 - <strong>Idempotent</strong>: Effect of repeating a call is equivalent to making a single call. $PUT, DELETE$
-- <strong>Neither</strong>: Effect of repeating a call is equivalent to operate repeatedly. $POST$</p>
+- <strong>Neither</strong>: $POST$</p>
 </blockquote>
 
 <h5 id="rest-2-0">ReST 2.0</h5>
@@ -996,11 +1016,14 @@ A mongoDB sharded cluster consists of three components:
 <h4 id="hadoop-distributed-file-system-hdfs">Hadoop Distributed File System(HDFS)</h4>
 
 <p>HDFS break large file into smaller blocks. However, HDFS blocks are much larger than blocks used by an ordinary file system.
-Reansons:
-- Reduced need for memory to store information about where the blocks are(some kind of metadata)
-- More efficient use of the network(with a large block, a reduced number network connections needs to be kept open)
-- Reduced need for seek operations on big files
-- Efficient when most data of a block have to be processed</p>
+Reansons:</p>
+
+<ul>
+<li>Reduced need for memory to store information about where the blocks are(some kind of metadata)</li>
+<li>More efficient use of the network(with a large block, a reduced number network connections needs to be kept open)</li>
+<li>Reduced need for seek operations on big files</li>
+<li>Efficient when most data of a block have to be processed</li>
+</ul>
 
 <p>A HDFS file is a collection of blocks stored in <strong>datanodes</strong>, the corresponding metadata is stored in <strong>namenodes</strong>.</p>
 

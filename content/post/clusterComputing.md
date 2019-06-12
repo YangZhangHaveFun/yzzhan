@@ -274,6 +274,7 @@ x-as-a-Service:
 - Testing-as-a-Service
 - Management/Governance-as-a-Service
 - **Software-as-a-Service**
+  
   - Examples: 
     - Gmail
     - On-live
@@ -283,6 +284,7 @@ x-as-a-Service:
 - Database-as-a-Service
 - Storage-as-a-Service
 - **Infrastructure-as-a-Service**
+  
   - Examples:
     - Amazon Web Services
     - Oracle Public Cloud
@@ -291,6 +293,7 @@ x-as-a-Service:
 - Integration-as-a-Service
 - Security-as-a-Service
 - **Platform-as-a-Service**
+  
   - Examples:
     - Google App Engine
     - Microsoft Azure
@@ -370,7 +373,7 @@ and many other flavous
 - SDMX(Statistical Data Markup exchange)
 
 ##### SOAP/WS
-**SOAP(Simple Object Access Protocol)** is built upon Remote Procedure Call paradigm, a language independent function call that spans other system.
+**SOAP(Simple Object Access Protocol)** is built upon Remote Procedure Call paradigm, a language independent function call that spans another system.
 
 SOAP/WS is a stack of protocols that covers every aspect of using a remote service, from service discovery, to service description, to the actual request/response.
 
@@ -400,6 +403,7 @@ A resource is anything that's important enough to be referenced as a thing in it
 - **POST** should be used when target resource URL is server generated
 
 **ReST** - Uniform Interface
+
 - **Identification of Resources**: All important resources are identified by one(uniform) resource identifier mechanism(HTTP URL)
 - **Manipulation of Resources through representations**: Each resource can have one or more representations. Such as application/xml, application/json, text/html. Clients and Servers negotiate to select representation.
 - **Self-descriptive messages**: Requests and resources contain not only data but additional headers describing how the content should be handled. Such as if it should be cached, authentication requirements, etc. Access methods mean the same for all resources
@@ -408,7 +412,7 @@ A resource is anything that's important enough to be referenced as a thing in it
 > HTTP Methods can be 
 > - **safe**: Do not change, repeating a call is equivalent to not making a call at all $GET, OPTION, HEAD$
 > - **Idempotent**: Effect of repeating a call is equivalent to making a single call. $PUT, DELETE$
-> - **Neither**: Effect of repeating a call is equivalent to operate repeatedly. $POST$ 
+> - **Neither**: $POST$ 
 
 
 ##### ReST 2.0
@@ -534,6 +538,7 @@ The core of Hadoop is a fault tolerant file system that has been explicitly desi
 #### Hadoop Distributed File System(HDFS)
 HDFS break large file into smaller blocks. However, HDFS blocks are much larger than blocks used by an ordinary file system. 
 Reansons:
+
 - Reduced need for memory to store information about where the blocks are(some kind of metadata)
 - More efficient use of the network(with a large block, a reduced number network connections needs to be kept open)
 - Reduced need for seek operations on big files
@@ -561,6 +566,7 @@ One of the strong points of Spark is the tightly-coupled nature of its main comp
 
 #### Spark Runtime Architecture
 ##### Included Components:
+
 - Job: the data processing that has to be performed on a dataset.
 - Task: a single operation on a dataset
 - Executors: the processes in which tasks are executed
