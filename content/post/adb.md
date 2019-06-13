@@ -7,9 +7,68 @@ tags: ["Concurrency", "Database"]
 categories: ["Databased related"]
 author: "Yang Zhang"
 ---
+## Database Architecture
+
+Database technologies:
+
+- Simple file systems linke Unix file system
+- Relational database systems
+- Object Oriented Systems
+- Deductive Database System
+- Key-Value pair based Database System
+- NoSQL
+
+Database architectures:
+
+- Centralised Database systems
+- Client-Server
+- Distributed Database systems
+- World Wide Web
+- Grid Computing/Database & Cloud Computing/Data Centres
+
+## Hardware Structure
+
+### Memory Hierarchy
+
+> RAID (Redundant Array of Inexpensive Disks[1] or Drives, or Redundant Array of Independent Disks) is a data storage virtualization technology that combines multiple physical disk drive components into one or more logical units for the purposes of data redundancy, performance improvement, or both. This was in contrast to the previous concept of highly reliable mainframe disk drives referred to as "single large expensive disk" (SLED).
+
+## Fault Tolerance \& Database Reliability
+
+> **Mean Time To Failure (MTTF)** is a very basic measure of reliability used for non-repairable systems.
+
+
+## ACID Properties
+
+## Type of transaction model
+
+## Isolation concepts, degree of isolation and their usefulness
+
+## Lock compatibility
+
+## Granular Locks
+
+## DeadLocks
+
+## Optimistic Locking and its relationship to Snapshot
+
+## Database Recovery
+
+## Distributed committed protocols for Database recovery
+
+
+## Database Architecture
+
+## Indexing structures
+
+## Relational operators
+
+## Transaction processing
+
+## Performace benchmarks: TPC
 
 #### Different types of Database System
 There are multiple database technologies related to database structure.
+
 - Simple file systems like Unix File System
 - Relational Database System(RDBS)
 - Object Oriented(oo) Database System
@@ -18,6 +77,7 @@ There are multiple database technologies related to database structure.
 - NoSQL
 
 #### Different types of Database Architectures
+
 - Centralised Database System
 - Client-Server
 - Distributed Database System
