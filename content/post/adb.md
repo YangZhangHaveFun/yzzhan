@@ -30,7 +30,25 @@ Database architectures:
 
 ### Memory Hierarchy
 
-> RAID (Redundant Array of Inexpensive Disks[1] or Drives, or Redundant Array of Independent Disks) is a data storage virtualization technology that combines multiple physical disk drive components into one or more logical units for the purposes of data redundancy, performance improvement, or both. This was in contrast to the previous concept of highly reliable mainframe disk drives referred to as "single large expensive disk" (SLED).
+The design and chip and cache is relatively similar. Cache design aims to catch several stage of 
+
+![On chip for single chip](/media/posts/single-core.png)
+
+![On chip for two chip](/media/posts/two-core.png)
+
+> In computing, a cache is a hardware or software component that stores data so future requests for that data can be served faster; the data stored in a cache might be the result of an earlier computation, or the duplicate of data stored elsewhere.
+
+> A **cache hit** occurs when the requested data can be found in a cache, while a **cache miss** occurs when it cannot. 
+> Cache hits are served by reading data from the cache, which is faster than recomputing a result or reading from a slower data store; thus, the more requests can be served from the cache, the faster the system performs.
+
+> The percentage of accesses that result in cache hits is known as the hit rate or hit ratio of the cache.
+
+Hit ratio = 
+
+### Storage System
+
+> RAID (Redundant Array of Inexpensive Disks or Drives, or Redundant Array of Independent Disks) is a data storage virtualization technology that combines multiple physical disk drive components into one or more logical units for the purposes of data redundancy, performance improvement, or both. This was in contrast to the previous concept of highly reliable mainframe disk drives referred to as "single large expensive disk" (SLED).
+
 
 ## Fault Tolerance \& Database Reliability
 
