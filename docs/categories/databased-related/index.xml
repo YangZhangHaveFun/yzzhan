@@ -18,8 +18,9 @@
       <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/adb/</guid>
-      <description>Different types of Database System There are multiple database technologies related to database structure. - Simple file systems like Unix File System - Relational Database System(RDBS) - Object Oriented(oo) Database System - Deductive Database System(DDBS) - Key-Value pair based Database System - NoSQL
-Different types of Database Architectures  Centralised Database System Client-Server Distributed Database System World Wide Web Grid Computing/Databases that lead to Cloud Computing/Data Centres P2P Databases  Basic Memory Knowledge Memory Hierarchy In single core circumstance, the CPU communication case is : In muliple cores circumstance, the CPU communication case is : In Inter i7 Block Diagram, the CPU interaction is: Transaction Processing  A transaction is collection of operations that need to be performed on the physical and abstract application state.</description>
+      <description>Database Architecture Database technologies:
+ Simple file systems linke Unix file system Relational database systems Object Oriented Systems Deductive Database System Key-Value pair based Database System NoSQL  Database architectures:
+ Centralised Database systems Client-Server Distributed Database systems World Wide Web Grid Computing/Database &amp;amp; Cloud Computing/Data Centres  Hardware Structure Memory Hierarchy The design and chip and cache is relatively similar. Cache design aims to catch several stage of</description>
     </item>
     
   </channel>

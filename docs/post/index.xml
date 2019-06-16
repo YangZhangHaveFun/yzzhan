@@ -93,8 +93,9 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
       <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/adb/</guid>
-      <description>Different types of Database System There are multiple database technologies related to database structure. - Simple file systems like Unix File System - Relational Database System(RDBS) - Object Oriented(oo) Database System - Deductive Database System(DDBS) - Key-Value pair based Database System - NoSQL
-Different types of Database Architectures  Centralised Database System Client-Server Distributed Database System World Wide Web Grid Computing/Databases that lead to Cloud Computing/Data Centres P2P Databases  Basic Memory Knowledge Memory Hierarchy In single core circumstance, the CPU communication case is : In muliple cores circumstance, the CPU communication case is : In Inter i7 Block Diagram, the CPU interaction is: Transaction Processing  A transaction is collection of operations that need to be performed on the physical and abstract application state.</description>
+      <description>Database Architecture Database technologies:
+ Simple file systems linke Unix file system Relational database systems Object Oriented Systems Deductive Database System Key-Value pair based Database System NoSQL  Database architectures:
+ Centralised Database systems Client-Server Distributed Database systems World Wide Web Grid Computing/Database &amp;amp; Cloud Computing/Data Centres  Hardware Structure Memory Hierarchy The design and chip and cache is relatively similar. Cache design aims to catch several stage of</description>
     </item>
     
     <item>
@@ -174,7 +175,7 @@ s. In particular, we will look at a language called Finite State Processes (FSP)
       <pubDate>Tue, 02 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/javashiyi/</guid>
-      <description>Content: 面向对象和面向过程 什么是fast-fail和fail-safe Java是如何做到平台无关的 面向对象和面向过程的区别与面向对象的三大基本特征和五大基本原则  面向过程指把task分解成一个一个的步骤, 每个步骤用函数来实现,依次调用即可.
+      <description>面向对象和面向过程的区别与面向对象的三大基本特征和五大基本原则 面向过程指把task分解成一个一个的步骤, 每个步骤用函数来实现,依次调用即可.
 进一步解释:在软件开发初期,程序编写都是以算法为核心,程序员会把数据和过程分别作为独立的部分来考虑, 数据代表空间中的客体,程序代码则用于处理这些数据,这种直接站在计算机的角度去抽象问题和解决问题的思想称为面向过程的编程思想.
 面向对象指把task分解成一个一个的步骤之后, 并对各个步骤进行相应的抽象, 形成对象, 同时建立对象之间的联系. 随后组合解决问题. 在面向对象编程的过程中,要把步骤进行相应的抽象形成对象, 对象封装了相应的属性和方法. 最后基于对象和对象的能力来完成业务逻辑的实现.
 进一步解释:面向对象的编程思想是站在现实角度去抽象和解决问题,它把数据和行为都看做是对象的一部分, 这样可以让程序员能以符合现实世界的思维方式来编写和组织程序.
@@ -253,19 +254,6 @@ task_group_1 = [get_html(&amp;#34;www.bilibili.com/{}&amp;#34;.format(i))for i i
     </item>
     
     <item>
-      <title>对生成器和协程的理解</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/generator/</link>
-      <pubDate>Wed, 16 Jan 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/generator/</guid>
-      <description>迭代器和迭代协议 我们知道实现下标的操作是基于getitem这个协议
- 可迭代类型
- 迭代器 #
-  http://39.96.12.43:8000/alipay/return/?charset=utf-8&amp;amp;out_trade_no=201702022ssswq&amp;amp;method=alipay.trade.page.pay.return&amp;amp;total_amount=100.00&amp;amp;sign=X59PxIrSunlz4IqhjBbHb1dzoPCChJbRN720AMn74kyDT54wkSCt1XIK%2B55PiWWU%2F3ytN7yn6Imt%2BaODtjPRF15VCCYrxDdby8tnBCxI3A7owvU9urvH5CwbHuvxE047ceHmVx44lA5%2BE9RUtUwd%2B%2Ba0omTdi83%2Fc6CPWlKLJPq1d5HIbJg8HEnPGqHObJadOkmpEpDcVRQyy74TibmAau9ZfHc4u4%2BuWyIzPJpnsEqjlhsaYraJdIUIEuG5qnO4dpNS66wyX%2FP7Ri3eb1JufklIl3CX9718XYf6IxQ5vrTjmw0PzieAH6ZvavYm2o%2BrH4H01D71mtVzQVJUc3Bqqg%3D%3D&amp;amp;trade_no=2019021722001471690500769031&amp;amp;auth_app_id=2016092400589241&amp;amp;version=1.0&amp;amp;app_id=2016092400589241&amp;amp;sign_type=RSA2&amp;amp;seller_id=2088102177131773&amp;amp;timestamp=2019-02-17+12%3A34%3A09
-https://openapi.alipaydev.com/gateway.do?app_id=&amp;amp;biz_content=%7B%22subject%22%3A%2220190217220809366%22%2C%22out_trade_no%22%3A%2220190217220809366%22%2C%22total_amount%22%3A200.0%2C%22product_code%22%3A%22FAST_INSTANT_TRADE_PAY%22%7D&amp;amp;charset=utf-8&amp;amp;method=alipay.trade.page.pay&amp;amp;notify_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;return_url=http%3A%2F%2F39.96.12.43%3A8000%2Falipay%2Freturn%2F&amp;amp;sign_type=RSA2&amp;amp;timestamp=2019-02-17+22%3A26%3A09&amp;amp;version=1.0&amp;amp;sign=UuoIjRxBAdVb67zQzLPmZxO3OrDkJvlsh0UCw3OzLDre2HrIrNJaPCbWvtqC7RRvVwMVKnAaCeXGSU9HTHEvnP9Bi4oEevpeMZIcOtMBO9EMKbB1nzk84ROtP4rC6lEqZOeyvOJsi4NHFEh4bO8OXVvK2%2Fb34J9YtplSo5Ucl6qJDHTREjWf3mJ%2FwU4knougrSR269ze0dTGr%2FkjppldVJWjKtbcI5MOy1BrymInhw6qNq9zWQxAS7xpdNpUEWA0DESTK%2B5KQVzRvavGlgqHeFCUCkGH8UoVhMx2wRiLF9ylX4QpZ85kfbQb3uZ%2FmpBHjOjlunEjy5Vj3xypfGGlqg%3D%3D</description>
-    </item>
-    
-    <item>
       <title>Detailed algorithm For Hash Function</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/hash_function/</link>
       <pubDate>Sat, 12 Jan 2019 01:37:56 +0800</pubDate>
@@ -273,25 +261,6 @@ https://openapi.alipaydev.com/gateway.do?app_id=&amp;amp;biz_content=%7B%22subje
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/hash_function/</guid>
       <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
  MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
-    </item>
-    
-    <item>
-      <title>Overview For Advanced Cryptography A</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/</link>
-      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/cryptography_and_security/</guid>
-      <description>This is the overview about what I have done related with Cryptography and Security. Here I have introduced the algorithm for SHA-1 and SHA-3.
-The corresponding pages shows below. -SHA-1/SHA-3 : Algorithms for Hash Function</description>
-    </item>
-    
-    <item>
-      <title>Overview For Advanced Python Design Knowledge</title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/python/</link>
-      <pubDate>Fri, 11 Jan 2019 01:37:56 +0800</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/python/</guid>
-      <description> This is the Abstract Page for Python relative knowledge, which could be separated into four part: 1. Django : 2. Advanced Python Understanding : ### Toroutine : [Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/coroutine/) ### Asyncio : ### Multithreading: [Multithreading and Future object](https://yangzhanghavefun.github.io/yzzhan/post/multithreads/) ### base class : ### Properties : ### iterator and generator: [Iterator, Generator and Basic understanding of Coroutine](https://yangzhanghavefun.github.io/yzzhan/post/generator/)  3. Tornado : 4. Search Engine Design : </description>
     </item>
     
     <item>
@@ -346,15 +315,6 @@ Follow the following steps:
       <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
 ▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
 ▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://yangzhanghavefun.github.io/yzzhan/post/ai_planing/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://yangzhanghavefun.github.io/yzzhan/post/ai_planing/</guid>
-      <description></description>
     </item>
     
     <item>
