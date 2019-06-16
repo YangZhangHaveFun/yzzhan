@@ -322,7 +322,7 @@ Reason:
 - **Mutual exclusion**: At least one resource must be held in a non-shareable mode. Otherwise, the processes would not be prevented from using the resource when necessary. Only one process can use the resource at any given instant of time.
 - **Hold and wait or resource holding**: a process is currently holding at least one resource and requesting additional resources which are being held by other processes.
 - **No preemption**: a resource can be released only voluntarily by the process holding it.
-- **Circular wait**: each process must be waiting for a resource which is being held by another process, which in turn is waiting for the first process to release the resource. In general, there is a set of waiting processes, P = {$P_{1}$, $P_{2}$, …, $p_{N}$}, such that $P_{1}$ is waiting for a resource held by $P_{2}$, $P_{2}$ is waiting for a resource held by P3 and so on until $p_{N}$ is waiting for a resource held by $P_{1}$.
+- **Circular wait**: each process must be waiting for a resource which is being held by another process, which in turn is waiting for the first process to release the resource. In general, there is a set of waiting processes, P = \{$P_{1}$, $P_{2}$, …, $p_{N}$\}, such that $P_{1}$ is waiting for a resource held by $P_{2}$, $P_{2}$ is waiting for a resource held by P3 and so on until $p_{N}$ is waiting for a resource held by $P_{1}$.
 
 solutions:
 - enough resources provided
