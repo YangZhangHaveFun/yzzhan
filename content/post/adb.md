@@ -399,8 +399,11 @@ The 2PL guarantees the conflict serialibility. However, there are two problems.
 
 > A schedule is **strict** if a value written by a txn is not read or overwritten by other txns until it finishes. 
 > The advantanges:
+> 
 > - Does not incur cascading aborts
 > - Aborted txns can be undone by just restoring original values of modified tuples
+
+
 #### Optimistic Lock
 The DBMS creates a private workspace for each txn.
 - Any object read is copied into workspace
