@@ -215,12 +215,13 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/" class="post-link">深入理解java网络开发知识的归纳</a></h3>
-    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 1 min read</p>
+    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 4 min read</p>
   </header>
   
-  <p class="post-summary">JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&#34;execution(public String getName())&#34;) public void LoggingAdvice(){ System.out.println(&#34;LOG: Get method called.&#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
-我们也可以创造一个切点,应用于其他的AOP方法
-@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&#34;allGetters()&#34;) public void LoggingAdvice() { System.out.println(&#34;Advice run. Get Method called&#34;); } //切点执行后执行  @After(&#34;allGetters()&#34;) public void LoggingAdvice() { System.out.println(&#34;Advice run. Get Method called&#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&#34;allGetters()&#34;, returning=&#34;returnString&#34;) public void LoggingAdvice() { System.</p>
+  <p class="post-summary">计算机网络 OSI 七层模型  应用层(Application Layer): 文件传输, 电子邮件, 文件服务, 虚拟终端 表示层(Presentation Layer): 信息的语法语义以及它们的关联, 如加密解密, 转化翻译, 压缩解压缩. 会话层(Session Layer): 不同机器上的用户之间建立及管理会话 传输层(Transport Layer): 接受上一层的数据, 在必要的时候把数据进行分割, 并将这些数据交给网络层, 且保证这些数据段有效到达对端 网络层(Network Layer): 控制子网的运行, 如逻辑编址, 分组传输, 路由选择 数据链路层(Linked Layer): 物理寻址, 同时将原始比特流转变为逻辑传输线路 物理层(Physical Layer): 机械,电子,定时接口通信信道上的原始比特流传输.  TCP相关 IP协议是无连接的通信协议,他不会占用正在通信的两个计算机的通信线路, IP极大降低了对网络线路的需求. IP的作用仅仅是将每个包路由至他的目的地. 它没有机制去检查或保证数据包的顺序性和准确性.
+TCP(Transmission Control Protocol) 传输控制协议简介
+ 面向连接的,可靠的,基于字节流的传输层通信协议 将应用层的数据流分割成报文段并发送给目标节点的TCP层. 数据包都有序号,对方收到则发送ACK确认,未收到则重传.使用校验和来检验数据在传输过程中是否有误.   两台电脑的两个进程能互相通信的最基本的要求是能唯一表示一个进程, 通过这个唯一标识可以找到对应的线程. 我们可以在传输层中使用协议端口号, IP可以唯一标识一个主机, TCP协议和端口号可以唯一标识一个进程. IP&#43;TCP&#43;PORT这种唯一标识的模式也被称为套接字(socket). 也就是说我们只需要把数据传送到某一个合适的端口, 剩下的过程由TCP来负责
+ socket通信题 TCP Flags  URG: 紧急指针标志 ACK: 确认序号标志 PSH: push标志 RST: 重置连接标志 SYN: 同步序号, 用于建立连接的过程 FIN: finish标志, 用于释放连接  三次握手过程  第一次握手: 建立连接时, 客户端发送SYN包(seq=x)到服务器, 并进入SYN_SEND状态, 等待服务器确认.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/">Read More →</a>
   </footer>

@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Modelling Complex System(SWEN90005)</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  
+  <meta name="description" content="Concurrency Concurrent programming needs to handle two types of difficulties.
+ Communication: Process generally need to communicate with each other, either by accessing shared data, or by message passing. Synchronization: Process may need to synchronize certain events, such as &amp;ldquo;P must not reach point P until after Q has reached point Q&amp;rdquo;.  Here are two solutions to solve the difficulites.
+ Shared memory: utilising the concept of monitor. Message Passing: based on Hoare&amp;rsquo;s idea of Communication Sequential Processes(CSP)  Shared Memorry &amp;mdash; Java The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle.">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="Modelling Complex System(SWEN90005)">
+    <meta name="twitter:description" content="Concurrency Concurrent programming needs to handle two types of difficulties.
+ Communication: Process generally need to communicate with each other, either by accessing shared data, or by message passing. Synchronization: Process may need to synchronize certain events, such as &amp;ldquo;P must not reach point P until after Q has reached point Q&amp;rdquo;.  Here are two solutions to solve the difficulites.
+ Shared memory: utilising the concept of monitor. Message Passing: based on Hoare&amp;rsquo;s idea of Communication Sequential Processes(CSP)  Shared Memorry &amp;mdash; Java The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle.">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Modelling Complex System(SWEN90005)">
+  <meta property="og:description" content="Concurrency Concurrent programming needs to handle two types of difficulties.
+ Communication: Process generally need to communicate with each other, either by accessing shared data, or by message passing. Synchronization: Process may need to synchronize certain events, such as &amp;ldquo;P must not reach point P until after Q has reached point Q&amp;rdquo;.  Here are two solutions to solve the difficulites.
+ Shared memory: utilising the concept of monitor. Message Passing: based on Hoare&amp;rsquo;s idea of Communication Sequential Processes(CSP)  Shared Memorry &amp;mdash; Java The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle.">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/swen90005/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.51">
+
+
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/swen90005/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Yzzhan Tech Repo">
+<meta name="msapplication-tooltip" content="Yzzhan Tech Repo">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://yangzhanghavefun.github.io/yzzhan/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-152x152.png">
+<link rel="manifest" href="https://yangzhanghavefun.github.io/yzzhan/manifest.json">
+
+
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css" as="style">
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" as="image">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" alt="Avatar">
+  
+  <h2 class="title">Yzzhan Tech Repo</h2>
+  
+  <p class="subtitle">~ Keep Simple &amp; Stupid ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/">Home</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/categories/">Categories</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/tags/">Tags</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/links/">Links</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/about/">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:yzzhan@student.unimelb.edu.au" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/YangZhangHaveFun" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//weibo.com/%e5%88%b9%e9%82%a3%e7%81%ac%e8%a1%8c%e5%b9%b4" title="Weibo" aria-label="Weibo">
+            <span class="icon icon-weibo" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/images/qrcode.jpg" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Modelling Complex System(SWEN90005)</h1>
+      <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 19 min read</p>
+    </header>
+    <article class="post-content">
+
+<h2 id="concurrency">Concurrency</h2>
+
+<p>Concurrent programming needs to handle two types of difficulties.</p>
+
+<ul>
+<li>Communication: Process generally need to communicate with each other, either by accessing shared data, or by message passing.</li>
+<li>Synchronization: Process may need to synchronize certain events, such as &ldquo;P must not reach point P until after Q has reached point Q&rdquo;.</li>
+</ul>
+
+<p>Here are two solutions to solve the difficulites.</p>
+
+<ul>
+<li>Shared memory: utilising the concept of monitor.</li>
+<li>Message Passing: based on Hoare&rsquo;s idea of Communication Sequential Processes(CSP)</li>
+</ul>
+
+<h3 id="shared-memorry-java">Shared Memorry &mdash; Java</h3>
+
+<p>The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle. This is known as <strong>interference</strong> or a <strong>race condition</strong>. It justifies our interest in <strong>mutual exclusion</strong>. A concurrent program must be correct for all possible interleavings.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UseMyThread</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">){</span>
+        Thread myThread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyThread<span style="color:#f92672">();</span>
+        myThread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>The call to start() causes the new Thread to call its run() method and execute it independently of the caller.</p>
+
+<p>Java thread state
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/th_state.png" alt="" /></p>
+
+<ul>
+<li>yield(): causes the current thread to pause, going from <em>RUNNING</em> to <em>RUNNABLE</em></li>
+<li>t.join(): suspends the caller until thread t has completed.</li>
+<li>wait(): waits for a lock to be released</li>
+</ul>
+
+<p>A thread can be interrupted through Thread.interrupt(). If interrupted in one of the three states above, it will return to <em>RUNNABLE</em> state, and then sleep(), or join(), or wait() will throw an InterruptedException.</p>
+
+<p>Desirable properties of a Mutex solution</p>
+
+<ul>
+<li>Mutual exclusion: only one process may be active in its critical section at a time.</li>
+<li>No deadlock: if one or more processor are trying to enter their critical section, one must eventually succeed.</li>
+<li>No starvation:</li>
+<li>Handles lack of contention: if only one process is trying to enter its critical section, it must succeed with minimal overhead.</li>
+</ul>
+
+<p><strong>Semaphore</strong></p>
+
+<p>Semaphore is a simple but versatile concurrent device for managing access to a shared resource. It consist of a value V which is currently available access permits, and a wait set W of processes currently waiting for access.</p>
+
+<p><strong>Synchronization and Monitors</strong>
+Synchronized is keyword in Java, which aims to declare that there is only one process can execute or modify it at any one time.</p>
+
+<p>Monitors are a set of synchronized methods and data(an object or module) that queue processes trying to access the data. critical section is a synchronized part of code.</p>
+
+<p>Monitors are language features that helps with providing mutual exclusion to shared data. In Java, a monitor is an object that encapsulates some (private) data, with access to the data only via synchronized methods.</p>
+
+<p>Every object in java contains a monitor and three methods to operate, wait(), notify() and notifyAll().</p>
+
+<p>Therefore, a more detailed state digram for java thread shows here.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/detailed_state_java.png" alt="" /></p>
+
+<h3 id="message-passing-go">Message Passing &mdash; Go</h3>
+
+<p>Communication requires two processes: one to send a message and one to receive it.</p>
+
+<p>In Go,</p>
+
+<ul>
+<li>processes are called go-routines. A go-routine is a function that is executed independently.</li>
+<li>allows for go-routines to communicate via shared viariables but not recommand</li>
+<li>go-routines usually communicate by sending and receiving data on <strong>named channels</strong>.</li>
+<li><strong>Channel</strong> is a communication pipe; it can be one-way or two-way. A Channel is typed and can carry data of all sorts of type.</li>
+
+<li><p>A &ldquo;&lt;-&rdquo; indicates how a channel is being used</p>
+
+<h2 id="concurrency-modelling-fsp">Concurrency Modelling &mdash; FSP</h2></li>
+</ul>
+
+<h3 id="fundamental-concepts">Fundamental concepts</h3>
+
+<h4 id="input-and-output">input and output</h4>
+
+<h4 id="non-deterministic-choice">non-deterministic choice</h4>
+
+<h4 id="indexed-processes">indexed processes</h4>
+
+<h4 id="constants-and-ranges">constants and ranges</h4>
+
+<h4 id="guarded-actions">guarded actions</h4>
+
+<h4 id="parallel-composition">parallel composition</h4>
+
+<h4 id="shared-actions">shared actions</h4>
+
+<h4 id="action-relabelling">action relabelling</h4>
+
+<h4 id="process-labelling">process labelling</h4>
+
+<h4 id="liveness-and-safety">Liveness and Safety</h4>
+
+<h5 id="deadlock">Deadlock</h5>
+
+<p>Causes:</p>
+
+<ul>
+<li><strong>Serially resusable resources</strong>: the processes involved must have some reusable resources between themselves under mutual exclusion.</li>
+<li><strong>Incremental acquisition</strong>:  process hold on to resources that have been allocated to them while waiting for additional resources.</li>
+<li>No preemption: once a process has acquired a resource, it can only release it voluntarily &ndash; it cannot be forced to release it</li>
+
+<li><p>Wait-for cycle: a cycle exists in which each process holds a resource which its successor in the cycle is waiting for.</p></li>
+
+<li><p>Safety property: is that the system satisfies some assertion each time a given program point is reached.</p></li>
+
+<li><p>Liveness property: is that the system terminates for a sequential system.</p></li>
+</ul>
+
+<h5 id="safety-property-deadlock">Safety &mdash; property &mdash; deadlock</h5>
+
+<h5 id="liveness-progress-livelock">Liveness &mdash; progress &mdash; livelock</h5>
+
+<p>We assert progress in FSP using a <strong>progress</strong> property
+&gt; progress P = {a1, a2, &hellip;, aN} defines a progress property P that asserts that, in an infinite execution of a target system, at least one of the actions a1, a2, &hellip;, aN will be executed infinitely often.</p>
+
+<h4 id="action-priority">Action Priority</h4>
+
+<p>The high priority operator P&lt;&lt;{a1,&hellip;aN} specifies that actions a1,&hellip;,aN have a higher priority than all other actions in P.
+The low priority operator P&gt;&gt;{a1,&hellip;aN} specifies that actions a1,&hellip;,aN have a lower priority than all other actions in P.</p>
+
+<h4 id="temporal-logic">Temporal logic</h4>
+
+<p>We are interested in properties about sequences of actions over time, not just one instant of time.</p>
+
+<p>Temporal logics allow us to talk about durations and the relative times of events.</p>
+
+<p>A <strong>fluent</strong> is a property that can change over time. Fluents allow us to describe properties of a system over its lifetime, rather than at just one instant. Fluents are used heavily in logic, especially artificial in logic, especially artificial intelligence.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">fluent <span style="color:#66d9ef">FL</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>{s1,<span style="color:#f92672">...</span>,sN}, {e1,<span style="color:#f92672">...</span>,eN}<span style="color:#f92672">&gt;</span></code></pre></div>
+<p>s1,&hellip;,sN and e1,&hellip;,eN are actions. The fluent FL is the proposition, and FL becomes true when any of the actions in {s1,&hellip;,sN} occur, and then false again when any of the actions in {e1,&hellip;,eN} occur. FL is initially false.</p>
+
+<p>If we want a fluent that is initially true, we can describe it using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">fluent <span style="color:#66d9ef">FL</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>{s1,<span style="color:#f92672">...</span>,sN}, {e1,<span style="color:#f92672">...</span>,eN}<span style="color:#f92672">&gt;</span> initially <span style="color:#ae81ff">1</span></code></pre></div>
+<p><strong>indexed fluents</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">fluent <span style="color:#66d9ef">GREEN</span><span style="color:#f92672">[</span><span style="color:#e6db74">i</span>:<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>{green<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>}, {yellow<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>,red<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>}<span style="color:#f92672">&gt;</span> initially <span style="color:#ae81ff">1</span></code></pre></div>
+<p><strong>Fluent expressions</strong>
+We want to express that we do not want the two lights to be green at the same time</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby"><span style="color:#f92672">!</span>forall<span style="color:#f92672">[</span><span style="color:#e6db74">i</span>:<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span> <span style="color:#66d9ef">GREEN</span><span style="color:#f92672">[</span>i<span style="color:#f92672">]</span>
+
+<span style="color:#f92672">!</span>(<span style="color:#66d9ef">GREEN</span><span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">GREEN</span><span style="color:#f92672">[</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span>)
+
+exists<span style="color:#f92672">[</span><span style="color:#e6db74">i</span>:<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span> <span style="color:#f92672">!</span><span style="color:#66d9ef">GREEN</span><span style="color:#f92672">[</span>i<span style="color:#f92672">]</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">fluent <span style="color:#66d9ef">GREEN</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>{green}, {yellow, red}<span style="color:#f92672">&gt;</span> initially <span style="color:#ae81ff">1</span>
+fluent <span style="color:#66d9ef">YELLOW</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>{yellow}, {green, red}<span style="color:#f92672">&gt;</span> initially <span style="color:#ae81ff">0</span>
+fluent <span style="color:#66d9ef">RED</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;</span>{red}, {yellow, green}<span style="color:#f92672">&gt;</span> initially <span style="color:#ae81ff">0</span></code></pre></div>
+<p><strong>Tomporal Logic &ndash; always</strong>
+Now to say that the light is always green, yellow, or red</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">assert <span style="color:#66d9ef">ALWAYS_A_COLOUR</span> <span style="color:#f92672">=</span> <span style="color:#f92672">[]</span>(<span style="color:#66d9ef">GREEN</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">YELLOW</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">RED</span>)</code></pre></div>
+<p><strong>Tomporal Logic &ndash; eventually</strong>
+This fluent says that the light will eventually become red:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">assert <span style="color:#66d9ef">EVENTUALLY_RED</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&lt;&gt;</span><span style="color:#66d9ef">RED</span></code></pre></div>
+<p>The <strong>always</strong> operator is used to describe safety properties.
+The <strong>eventually</strong> operator is used to describe liveness properties.</p>
+
+<p><strong>Tomporal Logic &ndash; until</strong>
+The <strong>until</strong> operator allows us to specify that a certain property is true until another property becomes true</p>
+
+<p>In our traffic system, the light is initially green, and stays green until the button is pushed.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">assert <span style="color:#66d9ef">INITIALLY_GREEN</span> <span style="color:#f92672">=</span> (<span style="color:#66d9ef">GREEN</span> U button)</code></pre></div>
+<p><strong>Tomporal Logic &ndash; next</strong>
+The <strong>next</strong> operator allows us to specify that a certain property is true at the next instant.</p>
+
+<p>We can specify that when the button is pushedm the light will go  yellow at the next time instant.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ruby" data-lang="Ruby">assert <span style="color:#66d9ef">BUTTON_TO_YELLOW</span> <span style="color:#f92672">=</span> (button <span style="color:#f92672">-&gt;</span> X <span style="color:#66d9ef">YELLOW</span>)</code></pre></div>
+<h2 id="complex-system">Complex System</h2>
+
+<dl>
+<dt>Complex system</dt>
+<dd><p>A set of things working together as parts of a mechanism or an interconnecting network</p></dd>
+<dd><p>two body problem:</p>
+
+<ul>
+<li>can be solved analytically</li>
+<li>produces regular trajectories</li>
+</ul></dd>
+<dd><p>three body problem:</p>
+
+<ul>
+<li>no exact mathematical solution</li>
+<li>produce chaotic trajectories</li>
+</ul></dd>
+<dd><p>low-dimensional chaos</p>
+
+<ul>
+<li>the logistic equation: $x<em>{n+1}=rx</em>{n}$</li>
+<li>The logic mao is an example of a relatively simple dynamical equation that can give rise to broad range of complex emergent behaviors.</li>
+</ul></dd>
+<dd><p>crystals and gases</p>
+
+<ul>
+<li>highly ordered and regular(crystal)</li>
+<li>highly disordered but statistically homogeneous(gas)</li>
+<li>In contrast to the preceding systems, these examples consist of many interacting parts. The rules for thier interaction are relatively simple</li>
+</ul></dd>
+</dl>
+
+<h3 id="dynamic-system">Dynamic system</h3>
+
+<p>A dynamic system consists of:
+- a set of possible states(the state space)
+- time t
+- a rule that determines the state at the present time($x<em>{t}$) in terms of states at earlier times($x</em>{t-1},x<em>{t-2},x</em>{t-3}$)</p>
+
+<p>To model a dynamic system, we define:
+- our system variables and the states they can take
+- the function that computes the next state</p>
+
+<p>This will usually involve simplifying assumptions about the real world. When exploring the behaviour of our model, we need to evaluate it against what we know about the real system. This may result in us refining our model.</p>
+
+<ul>
+<li>assumptions</li>
+<li>states</li>
+<li>update rules</li>
+</ul>
+
+<p>Dynamical systems have several different types of characteristic behaviours.</p>
+
+<ul>
+<li>fixed points</li>
+<li>limit cycles</li>
+<li>aperiodic orbits(chaos)</li>
+</ul>
+
+<p>Dynamic systems that a system exhibits can depend critically on the values of system parameters.</p>
+
+<h4 id="functions-and-iteration">Functions and Iteration</h4>
+
+<p>A function takes a number as an input, does sth to it, and produces a number as an output.</p>
+
+<p>Iteration is simply using the output of the previous application of a function as the input for the next application.</p>
+
+<h4 id="chaos">Chaos</h4>
+
+<p>A system is chaotic if it displays all of the following our properties:</p>
+
+<ul>
+<li>The dynamical update rule is deterministic.</li>
+<li>The system behaviour is aperiodic.</li>
+<li>The system behaviour is bounded.</li>
+<li>The system displays sensitivity to initial condition.</li>
+</ul>
+
+<h3 id="ode-model-i-predator-prey">ODE Model I &ndash; Predator-Prey</h3>
+
+<ul>
+<li>building a mathematical model
+
+<ul>
+<li>starting with a simple model</li>
+<li>extending models to include additional aspects of real world</li>
+</ul></li>
+<li>Models
+
+<ul>
+<li>population growth</li>
+<li>spcies interation(predator-prey)</li>
+</ul></li>
+<li>representing behaviour of dynamic systems
+
+<ul>
+<li>time series plots(how system changes over time)</li>
+<li>phase portraits(how state variables change with respect to each other)</li>
+</ul></li>
+
+<li><p>exploring behaviour</p>
+
+<ul>
+<li>numerically</li>
+
+<li><p>analytically</p>
+
+<h4 id="the-lotka-volterra-model">The Lotka-Volterra Model</h4></li>
+</ul></li>
+</ul>
+
+<p>Model formulation</p>
+
+<ul>
+<li>Prey(rabbits): $\frac{dR}{dt} = \alpha R - \beta RF$</li>
+
+<li><p>Predator(red foxes): $\frac{dF}{dt}= \delta RF - \gamma F$</p></li>
+
+<li><p>$\alpha$: growth rate of the rabbit population</p></li>
+
+<li><p>$\beta$: rate at which foxes predate upon (eat) rabbits</p></li>
+
+<li><p>$\delta$: growth rate of the fox population</p></li>
+
+<li><p>$\gamma$: decay rate of the fox population due to death and migration</p></li>
+</ul>
+
+<blockquote>
+<p>Solving ODE(ordinary differential equations)
+First approach: Euler method
+Second approach: Runge-Kutta method</p>
+</blockquote>
+
+<ul>
+<li>The lag between the peaks in the predator and prey population</li>
+</ul>
+
+<dl>
+<dt>equilibria</dt>
+<dd>points at which the system variables(the population level R and F)do not change ie. where $\frac{dF}{dt}=0$ and $\frac{dR}{dt}=0$</dd>
+</dl>
+
+<p>There are two equilibria:
+- R = 0, F = 0
+  - saddle point ?
+  - both populations are extinct
+  - it is unstable; it can only arise if the prey level is set to zero, at which point the predators also die out.
+- R = $\gamma / \delta$ F = $\alpha / \beta$
+  - both populations sustained at non-zero levels indefinitely.
+  - It is stable specifically, it is neutrally stable, and surrounded by infinitely many periodic orbits</p>
+
+<ul>
+<li>The amplititude of the environment constantly changes, with the result that the system location in the phase plane will consistently switch from one orbit to another. This is unrealistic.</li>
+<li>Real cycles tend to have a &lsquo;characteristic&rsquo; amplitude.</li>
+</ul>
+
+<h5 id="lotka-volterra-model-with-competition">Lotka-Volterra model with competition</h5>
+
+<ul>
+<li>The logistic equation captured intraspecific competition</li>
+<li>The base Lotka-Volterra model captures interspecific competition</li>
+</ul>
+
+<p>new equation should be:
+$\frac{dR}{dt} = \alpha R - \beta RF - aR^{2}$
+$\frac{dF}{dt} = \delta RF - \gamma F - bF^{2}$</p>
+
+<p>Other possible issue:
+- The relation between the predator&rsquo;s consumption rate and prey density
+- The efficiency with which extra food is tranformed into extra predators
+- The spatial distribution of species will play a role.</p>
+
+<p>The n-species competitive model can be written as:
+$\frac{dx<em>{i}}{dt} = r</em>{i}x<em>{i}(1- \sum^{N}</em>{j=1}a<em>{ij}x</em>{j}/K_{i})$</p>
+
+<p>where $x<em>{i}$ represents the i-th species and $a</em>{ij}$ is a matrix of interaction terms.</p>
+
+<p>Dynamic systems can exhibit different types of long-term behaviour, including <strong>fixed points</strong> and <strong>limit cycles</strong></p>
+
+<p>Fixed points and limit cycles can be:</p>
+
+<ul>
+<li>stable and attracting</li>
+<li>unstable and repelling</li>
+</ul>
+
+<p>A single dynamic system can exhibit multiple stable and unstable fixed points.</p>
+
+<p>In a system with more than one stable fixed point, the lont-term behaviour will depend on the initial conditions</p>
+
+<p>The set of initial conditions that approach an attractor are known as a basin of attraction.</p>
+
+<h3 id="ode-model-ii-epidemics">ODE Model II &ndash; Epidemics</h3>
+
+<p>Infectious disease models are dynamic models.</p>
+
+<p>A model has a state, which describes all relevant aspects of the system at a particular point in time</p>
+
+<p>A model has update rules, which describe how the state of a model changes over time.</p>
+
+<p>These rules often involve parameters.</p>
+
+<p>The SIR(Susceptible, Infectious, Recovered) model is one of the simplest disease models</p>
+
+<ul>
+<li>Susceptible: can be infected</li>
+<li>Infectious: can infect others</li>
+<li>Recovered: can not be infected nor infect others</li>
+</ul>
+
+<h4 id="basic-model">basic model</h4>
+
+<ol>
+<li>If they are susceptible, and they encounter an infectious person, they may be infected.</li>
+<li>If they are infectious, they may recover</li>
+</ol>
+
+<ul>
+<li>State: N=10 people with a state S,I or R</li>
+<li>Initial condition: Day 0, 9 S and 1 I</li>
+<li>Rules: Everyday, everybody will meet each other.
+
+<ul>
+<li>Infection: each time a susceptible person meets an infectious person, they have a probability q of becoming on the next day.</li>
+<li>Recovery: an infectious person will recover on the next day with probability $\gamma$</li>
+</ul></li>
+<li>Parameters: q and $\gamma$</li>
+</ul>
+
+<p>A key concept in infectious disease epidemiology is the reproduction number R, often defined as the average numebr of secondary cases infected by a typical primary case.</p>
+
+<p>The basic reproduction number $R_{0}$ is the average number of secondary cases infected by a typical primary case in a totally susceptible population.</p>
+
+<p>The reproduction number can tell us whether an outbreak can occur:</p>
+
+<ul>
+<li>if $R_{0}$ &lt; 1, then the outbreak will die out</li>
+<li>if $R_{0}$ &gt; 1, then the outbreak may take off.</li>
+</ul>
+
+<p>Comparison between stochastic models and deterministic models.</p>
+
+<ul>
+<li>Stochastic models
+
+<ul>
+<li>non-deterministic in that a state does not fully determine the next state</li>
+<li>Each time we observe a different outcome.</li>
+<li>as population size increases, the influence of chance diminishes.</li>
+<li>more computation - more suited to small populations (or small number of infectious people)</li>
+<li>provides information on distribution of outcomes</li>
+</ul></li>
+<li>Deterministic models
+
+<ul>
+<li>generate unique outcomes based on a given set of parameters and initial condition.</li>
+<li>for each state of a deterministic model, there is only one possible future state.</li>
+<li>more efficient to run - can explore more parameters</li>
+<li>analysis can provide more general insights</li>
+<li>only applicable when certain conditions hold</li>
+</ul></li>
+</ul>
+
+<h3 id="from-macro-to-micro">From macro to micro</h3>
+
+<p>Complex systems are systems whose behaviour emerges from interactions between many individual parts.</p>
+
+<p>The ODE models of these systems requried us to represent their state in terms of global variables, and to define update rules in terms of how these global variables changed over time.</p>
+
+<p>In discussing possible problems with thees models, these assumptions kept coming up as limitations.</p>
+
+<p>We could extend our ODE models to reflect this heterogeneity(variation between individuals), but the number of equations and parameters requried would explode rapidly.</p>
+
+<p>Therefore, we are going to explore approaches to modelling that are capable of representing this heterogeneity in populations.</p>
+
+<h3 id="cellular-automata">Cellular Automata</h3>
+
+<p>Cellular Automata are a type of discrete dynamical system that exhibit complex behaviour based on simple, local rules.</p>
+
+<dl>
+<dt>Automation</dt>
+<dd>a theoretical machine that updates its internal state based on external inputs and its own previous state.</dd>
+<dt>Cellular automation</dt>
+<dd>an array of automata(cells), where the inputs to one cell are the current states of nearby cells</dd>
+</dl>
+
+<p>In a CA:</p>
+
+<ul>
+<li>time is discrete</li>
+<li>space is discrete</li>
+<li>system state is discrete</li>
+<li>update rules are defined in terms of local interactions between components</li>
+</ul>
+
+<p>Each finite automata consists of a finite set of cell states $\sum$, a finite input alphabet $\alpha$ and a transition function $\triangle$, which is a mapping from the set of neighbourhood states to the set of cell states:</p>
+
+<p>$\triangle=\sum^{N} \rightarrow N$</p>
+
+<p>The size of $\alpha$ is equal to the number of possible neighbourhood states:
+$|\alpha|=|\triangle|=|\sum^{N}|=K^{N}$</p>
+
+<p>Since there are K = $|\sum|$ choices of states to assign as the next state for each of the $|\sum^{N}|$ possible neighbour states, there are $K^{K^{N}}$ possible transitions functions $\triangle$ that can be defined.</p>
+
+<p>Cellar Automata(CA) as a formalism for modelling complex systems.</p>
+
+<ul>
+<li>Compared to the ODE models, they are bottom up rather than top down.</li>
+<li>Complex system characteristics:
+
+<ul>
+<li>many interacting parts</li>
+<li>parallel distributed processing</li>
+<li>state updates are determined by local rules and interactions</li>
+<li>complex global behaviour emerges</li>
+</ul></li>
+<li>Can be suited for modelling systems where &ldquo;macro-rules&rdquo; are hard to identify.</li>
+<li>But, not straight forward to analyse behaviour</li>
+<li>Good to test if local mechanism X generate phenomenon Y.</li>
+</ul>
+
+<h4 id="model-implementation">Model Implementation</h4>
+
+<ul>
+<li>Space
+
+<ul>
+<li>discrete vs. continuous space</li>
+<li>single vs. multiple occupancy of cells</li>
+<li>proximate vs long-range interaction</li>
+</ul></li>
+<li>Time
+
+<ul>
+<li>the order of updation(Sychronous updating/Asynchronous updating)</li>
+<li>discrete vs. continuous time</li>
+</ul></li>
+<li>Information
+
+<ul>
+<li>Scope of variable</li>
+<li>range of sensing</li>
+</ul></li>
+<li>State updating
+
+<ul>
+<li>stochastic: randomness involved</li>
+<li>deterministic: future state of a component be uniquely specified by its current inputs.</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<ul>
+<li>Asychronous CA: The basic CA updates all cells synchronously (at the same time) at every time step. We could also update cells at different times.</li>
+<li>Probabilistic CA: The basic CA update rules are deterministic (Cx.05 examples). We could also use update rules that are probabilistic/stochastic (Cx.06 examples).</li>
+<li>Non-homogeneous CA: The basic CA applies the same update rule to every cell. We could also use context-sensitive rules.</li>
+<li>Network-structured CA: The basic CA defines neighbourhood in terms of grid adjacency. We could also use a more complex network topology of neighbours.
+&mdash;</li>
+<li>Advantages:
+
+<ul>
+<li>they are simple and easy to implement</li>
+<li>they can represent interactions and behaviours that are difficult to model using ODEs</li>
+<li>they reflect the intrinsic individuality of system components</li>
+</ul></li>
+<li>Disadvantages:
+
+<ul>
+<li>they are relatively constrained (topology, interactions, individual behaviour)</li>
+<li>the global behaviour may be difficult to interpret</li>
+</ul></li>
+</ul>
+
+<h3 id="agent-based-model">Agent-based Model</h3>
+
+<p>Like cellular(CA), agent-based models(ABMs) are an approach to modelling complex systems taht focuses on the components of the system and the interactions between them</p>
+
+<p>The goal of ABMs is often to provide explanatory insight into the way real world complex systems work.</p>
+
+<p>An ABM typically has three elements:</p>
+
+<ul>
+<li>agents</li>
+<li>environment</li>
+<li>interactions</li>
+</ul>
+
+<p>Agent-based models consist of agents, an environment, and interactions between agents and other agents and the environments.</p>
+
+<p>ABMs feature decentralised information and decision making. ABMs can be much more elaborate than CAs.</p>
+
+<p>Rules for flocking behaviour</p>
+
+<ol>
+<li>Seperation: birds will steer to avoid crowding nearby birds &mdash; collision avoidance</li>
+<li>Cohesion: birds will steer towards the average location of nearby birds &mdash; safety in numbers</li>
+<li>Alignment: Birds will steer toward the average bearing of nearby birds.</li>
+</ol>
+
+<h4 id="characteristics-of-agents">Characteristics of Agents</h4>
+
+<h5 id="essential-characteristics-self-contained">Essential characteristics: Self-contained</h5>
+
+<p>An agent is a modular component of a system, which has a boundary and can be clearly distinguished from and recognized by other agents.</p>
+
+<h5 id="essential-characteristics-autonomous">Essential characteristics: Autonomous</h5>
+
+<p>An agent can function independently in its environment, and in its interactions with other agents</p>
+
+<h5 id="essential-characteristics-dynamic-state">Essential characteristics: Dynamic State</h5>
+
+<p>An agent has attributes or variables, that can change over time. An agents current state is what determines its future action and behaviour</p>
+
+<h5 id="essential-characteristics-social">Essential characteristics: Social</h5>
+
+<p>An agent dynamic interactions with other agents: that influence their behaviour.</p>
+
+<h5 id="other-characteristics-adaptive">Other characteristics: adaptive</h5>
+
+<p>An agent may have the ability to learn and adapt its bahaviour on the basis of its past experiences</p>
+
+<h5 id="other-characteristics-goal-directed">Other characteristics: goal-directed</h5>
+
+<p>An agent may have goals that it is attempting to achieve via its behaviours</p>
+
+<h5 id="other-characteristics-heterogeneous">Other characteristics: heterogeneous</h5>
+
+<p>A system may be comprised of agents of different types: these differences may be by design or a result of an agents&rsquo; past history.</p>
+
+<h4 id="environments">Environments</h4>
+
+<ul>
+<li>Agents monitor and react to their environment</li>
+<li>Environments may be static, or they may change as a result of agent behaviour, or they may be independently dynamic</li>
+<li>Real environments are typically dynamic. Therefore we may not be able to foresee all possibel &lsquo;state&rsquo; of the environment and how agents will respond to them.</li>
+<li>Richer environments may be continuous and involve multiple layer detailing and complex feedback loops.</li>
+</ul>
+
+<h4 id="interactions">Interactions</h4>
+
+<ul>
+<li>direct or indirect</li>
+<li>agent neighbourhood: local interaction between agents</li>
+<li>composition of agent&rsquo;s neighbourhood could be dynamic depending on the structure of the system.</li>
+</ul>
+
+<h4 id="agent-decision-making">Agent decision making</h4>
+
+<p>Agents are often designed to make rational recisions: they act to maximise the expected value of their  behaviour given the information they have received so far.</p>
+
+<p>Agent decision making may be:</p>
+
+<ul>
+<li>probabilistic: representing decisions using distributions</li>
+<li>rule-based: modelling the decision making process</li>
+<li>adaptive: agents may learn via reinforcment or evolution.</li>
+</ul>
+
+<h4 id="agent-types">Agent types</h4>
+
+<ul>
+<li>Reflective agents: percieve some aspect of their environment via sensors and acting according to some set of rules, choose some behaviour or action.</li>
+<li>Reflective agents wtih internal state</li>
+<li>Goal-driven agents: select their action based not only on the current and past states of the world, but also in accordance to some desired future state of world.</li>
+<li>Utilitarian agents: is a refinement of a goal-driven agent, where possible future states are not necessarily assessed against a specific goal state, but rather evaluated according to some utility function.</li>
+<li>Learning agent: is able to adapt the rules that it uses to make choices, in response to some feedback on its past performance. There are a wide variety of approaches to implementing learning in ABMs.</li>
+</ul>
+
+<h3 id="complex-networks-network-structure">Complex Networks &mdash; Network Structure</h3>
+
+<p>Why study networks:</p>
+
+<ul>
+<li>more and more data on patterns of interaction is becoming available.</li>
+<li>Network science offers tools to help make sense of this data.</li>
+<li>We can learn something about the functional properties of these systems by studying their structural properties.</li>
+<li>Insights developed in one domain may generalise to other domains.</li>
+</ul>
+
+<p>Doing network allows us to quantify and analyse system structure in terms of relatively simple properties.</p>
+
+<h4 id="network-properties">Network properties</h4>
+
+<p>A network consists of:</p>
+
+<ul>
+<li>A set of nodes or vertices</li>
+<li>A set of edges or links</li>
+<li>Data about nodes and edges</li>
+</ul>
+
+<h5 id="structural-property">Structural Property</h5>
+
+<ul>
+<li>bipartite networks: directors and the companies whose boards they site on; actors and the movies they have appeared in.</li>
+<li>directed network: web pages and the (directed) links between them; food webs with directed edges indicating predation.</li>
+</ul>
+
+<h5 id="density">Density</h5>
+
+<p>The density D of a network is the ratio of the number of edges in the network to the numebr of possible edges</p>
+
+<p>A network with N nodes and E edges could have up to $\frac{N(N-1)}{2}$ possible edges, therefore:
+$D=\frac{2E}{N(N-1)}$</p>
+
+<h5 id="degree">Degree</h5>
+
+<p>The degree $k_{i}$ is the number of edges between node i and other nodes in the network. Nodes with high degree are often considered to be more &ldquo;important&rdquo;.</p>
+
+<p>The average degree &lt;K&gt; of a network, where &lt;K&gt;=2E/N</p>
+
+<p>The degree distribution P(k) of a network is the probability distribution of degrees over all nodes in the network. $P(k)=N<em>{k}/N$ where $N</em>{k} us the number of nodes of degree k</p>
+
+<h5 id="distance">Distance</h5>
+
+<p>The distance $d_{ij}$ between nodes i and j is the length of the shortest path between those two nodes.</p>
+
+<p>The characteristic path length L is the average distance between all pair of nodes in the network:
+$L = \frac{1}{N(N-1)}\sum<em>{i\neq j}d</em>{i,j}$</p>
+
+<p>The <strong>diameter</strong> of a network is the longest shortest path between any two nodes.</p>
+
+<h5 id="clustering">Clustering</h5>
+
+<p>The clustering coefficient C is a measure of &ldquo;cliquishness&rdquo; in a network.</p>
+
+<p>$C = \frac{T<em>{c}}{T</em>{c}+T_{o}}$</p>
+
+<p>$T_{c}$ is the number of closed triplets, sets of three nodes each of which is connected to the other two.</p>
+
+<p>$T_{o}$ is the number of open triplets, sets of three nodes in which exactly node is linked the other two.</p>
+
+<p>The clustering coefficient $C<em>{i}$ of node defined between the number of edges $E</em>{i}$  that actually do exist between these $k<em>{i}$ nodes and the total number $k</em>{i}(k_{i}-1)/2$ possible</p>
+
+<p>$C<em>{i} = \frac{2E</em>{i}}{k<em>{i}(k</em>{i}-1)}$</p>
+
+<h5 id="centrality-and-assortativity">Centrality and assortativity</h5>
+
+<p>Centrality is another approach to measuring which are the most important nodes or edges in a network. There are many different definitions including</p>
+
+<p>Assortativity measures the extent to which similar nodes tend to be connected to each other.</p>
+
+<h4 id="types-of-network">Types of network</h4>
+
+<ul>
+<li>Regular lattices</li>
+<li>Random networks</li>
+<li>Small world networks</li>
+<li>Scale free networks: A scale free network is one whose degree distribution follows a power law distribution
+
+<ul>
+<li>An interesting property of scale free networks is that they are highly robust to random error</li>
+<li>However, a trade-off is that they are highly sensitive to targeted attack.</li>
+</ul></li>
+</ul>
+
+<h3 id="complex-networks-network-dynamics">Complex Networks &mdash; Network Dynamics</h3>
+
+<p>Two types of network dynamic:</p>
+
+<ul>
+<li>the network structure may remain static, but the state of nodes changes — dynamics on networks</li>
+<li>the network structure changes — dynamics of networks</li>
+</ul>
+
+<h4 id="dynamics-on-networks">Dynamics on networks</h4>
+
+<h4 id="dynamics-of-networks">Dynamics of networks</h4>
+
+<p>The growth model we used for creating scale-free networks and the rewiring model we used for creating small world networks are simple examples of network dynamics</p>
+
+<h4 id="networks-and-abms">Networks and ABMs</h4>
+
+<p>In the simplest case, agents are mapped to the nodes of a network, and the network topology determines patterns of interaction between agents.</p>
+
+<p>Network (as opposed to spatial) models are useful when:</p>
+
+<ul>
+<li>the relationships among agents are more important than their physical locations; eg, a model of information spreading through a population (potentially via phone or email), versus a model of a fire spreading through a forest</li>
+<li>interactions between agents are not grounded in physical proximity; eg, a model of interacting software agents, versus a predator-prey model.</li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/java"><span class="tag">Java</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/fsp"><span class="tag">FSP</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/complex-system"><span class="tag">Complex System</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>737257</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 Yzzhan Tech Repo</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://yangzhanghavefun.github.io/yzzhan/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

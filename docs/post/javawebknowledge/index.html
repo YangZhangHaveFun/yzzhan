@@ -24,27 +24,30 @@
 
   
   <meta name="author" content="Yang Zhang">
-  <meta name="description" content="JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&amp;#34;execution(public String getName())&amp;#34;) public void LoggingAdvice(){ System.out.println(&amp;#34;LOG: Get method called.&amp;#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
-我们也可以创造一个切点,应用于其他的AOP方法
-@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点执行后执行  @After(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&amp;#34;allGetters()&amp;#34;, returning=&amp;#34;returnString&amp;#34;) public void LoggingAdvice() { System.">
+  <meta name="description" content="计算机网络 OSI 七层模型  应用层(Application Layer): 文件传输, 电子邮件, 文件服务, 虚拟终端 表示层(Presentation Layer): 信息的语法语义以及它们的关联, 如加密解密, 转化翻译, 压缩解压缩. 会话层(Session Layer): 不同机器上的用户之间建立及管理会话 传输层(Transport Layer): 接受上一层的数据, 在必要的时候把数据进行分割, 并将这些数据交给网络层, 且保证这些数据段有效到达对端 网络层(Network Layer): 控制子网的运行, 如逻辑编址, 分组传输, 路由选择 数据链路层(Linked Layer): 物理寻址, 同时将原始比特流转变为逻辑传输线路 物理层(Physical Layer): 机械,电子,定时接口通信信道上的原始比特流传输.  TCP相关 IP协议是无连接的通信协议,他不会占用正在通信的两个计算机的通信线路, IP极大降低了对网络线路的需求. IP的作用仅仅是将每个包路由至他的目的地. 它没有机制去检查或保证数据包的顺序性和准确性.
+TCP(Transmission Control Protocol) 传输控制协议简介
+ 面向连接的,可靠的,基于字节流的传输层通信协议 将应用层的数据流分割成报文段并发送给目标节点的TCP层. 数据包都有序号,对方收到则发送ACK确认,未收到则重传.使用校验和来检验数据在传输过程中是否有误.   两台电脑的两个进程能互相通信的最基本的要求是能唯一表示一个进程, 通过这个唯一标识可以找到对应的线程. 我们可以在传输层中使用协议端口号, IP可以唯一标识一个主机, TCP协议和端口号可以唯一标识一个进程. IP&#43;TCP&#43;PORT这种唯一标识的模式也被称为套接字(socket). 也就是说我们只需要把数据传送到某一个合适的端口, 剩下的过程由TCP来负责
+ socket通信题 TCP Flags  URG: 紧急指针标志 ACK: 确认序号标志 PSH: push标志 RST: 重置连接标志 SYN: 同步序号, 用于建立连接的过程 FIN: finish标志, 用于释放连接  三次握手过程  第一次握手: 建立连接时, 客户端发送SYN包(seq=x)到服务器, 并进入SYN_SEND状态, 等待服务器确认.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="深入理解java网络开发知识的归纳">
-    <meta name="twitter:description" content="JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&amp;#34;execution(public String getName())&amp;#34;) public void LoggingAdvice(){ System.out.println(&amp;#34;LOG: Get method called.&amp;#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
-我们也可以创造一个切点,应用于其他的AOP方法
-@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点执行后执行  @After(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&amp;#34;allGetters()&amp;#34;, returning=&amp;#34;returnString&amp;#34;) public void LoggingAdvice() { System.">
+    <meta name="twitter:description" content="计算机网络 OSI 七层模型  应用层(Application Layer): 文件传输, 电子邮件, 文件服务, 虚拟终端 表示层(Presentation Layer): 信息的语法语义以及它们的关联, 如加密解密, 转化翻译, 压缩解压缩. 会话层(Session Layer): 不同机器上的用户之间建立及管理会话 传输层(Transport Layer): 接受上一层的数据, 在必要的时候把数据进行分割, 并将这些数据交给网络层, 且保证这些数据段有效到达对端 网络层(Network Layer): 控制子网的运行, 如逻辑编址, 分组传输, 路由选择 数据链路层(Linked Layer): 物理寻址, 同时将原始比特流转变为逻辑传输线路 物理层(Physical Layer): 机械,电子,定时接口通信信道上的原始比特流传输.  TCP相关 IP协议是无连接的通信协议,他不会占用正在通信的两个计算机的通信线路, IP极大降低了对网络线路的需求. IP的作用仅仅是将每个包路由至他的目的地. 它没有机制去检查或保证数据包的顺序性和准确性.
+TCP(Transmission Control Protocol) 传输控制协议简介
+ 面向连接的,可靠的,基于字节流的传输层通信协议 将应用层的数据流分割成报文段并发送给目标节点的TCP层. 数据包都有序号,对方收到则发送ACK确认,未收到则重传.使用校验和来检验数据在传输过程中是否有误.   两台电脑的两个进程能互相通信的最基本的要求是能唯一表示一个进程, 通过这个唯一标识可以找到对应的线程. 我们可以在传输层中使用协议端口号, IP可以唯一标识一个主机, TCP协议和端口号可以唯一标识一个进程. IP&#43;TCP&#43;PORT这种唯一标识的模式也被称为套接字(socket). 也就是说我们只需要把数据传送到某一个合适的端口, 剩下的过程由TCP来负责
+ socket通信题 TCP Flags  URG: 紧急指针标志 ACK: 确认序号标志 PSH: push标志 RST: 重置连接标志 SYN: 同步序号, 用于建立连接的过程 FIN: finish标志, 用于释放连接  三次握手过程  第一次握手: 建立连接时, 客户端发送SYN包(seq=x)到服务器, 并进入SYN_SEND状态, 等待服务器确认.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="深入理解java网络开发知识的归纳">
-  <meta property="og:description" content="JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&amp;#34;execution(public String getName())&amp;#34;) public void LoggingAdvice(){ System.out.println(&amp;#34;LOG: Get method called.&amp;#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
-我们也可以创造一个切点,应用于其他的AOP方法
-@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点执行后执行  @After(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&amp;#34;allGetters()&amp;#34;, returning=&amp;#34;returnString&amp;#34;) public void LoggingAdvice() { System.">
+  <meta property="og:description" content="计算机网络 OSI 七层模型  应用层(Application Layer): 文件传输, 电子邮件, 文件服务, 虚拟终端 表示层(Presentation Layer): 信息的语法语义以及它们的关联, 如加密解密, 转化翻译, 压缩解压缩. 会话层(Session Layer): 不同机器上的用户之间建立及管理会话 传输层(Transport Layer): 接受上一层的数据, 在必要的时候把数据进行分割, 并将这些数据交给网络层, 且保证这些数据段有效到达对端 网络层(Network Layer): 控制子网的运行, 如逻辑编址, 分组传输, 路由选择 数据链路层(Linked Layer): 物理寻址, 同时将原始比特流转变为逻辑传输线路 物理层(Physical Layer): 机械,电子,定时接口通信信道上的原始比特流传输.  TCP相关 IP协议是无连接的通信协议,他不会占用正在通信的两个计算机的通信线路, IP极大降低了对网络线路的需求. IP的作用仅仅是将每个包路由至他的目的地. 它没有机制去检查或保证数据包的顺序性和准确性.
+TCP(Transmission Control Protocol) 传输控制协议简介
+ 面向连接的,可靠的,基于字节流的传输层通信协议 将应用层的数据流分割成报文段并发送给目标节点的TCP层. 数据包都有序号,对方收到则发送ACK确认,未收到则重传.使用校验和来检验数据在传输过程中是否有误.   两台电脑的两个进程能互相通信的最基本的要求是能唯一表示一个进程, 通过这个唯一标识可以找到对应的线程. 我们可以在传输层中使用协议端口号, IP可以唯一标识一个主机, TCP协议和端口号可以唯一标识一个进程. IP&#43;TCP&#43;PORT这种唯一标识的模式也被称为套接字(socket). 也就是说我们只需要把数据传送到某一个合适的端口, 剩下的过程由TCP来负责
+ socket通信题 TCP Flags  URG: 紧急指针标志 ACK: 确认序号标志 PSH: push标志 RST: 重置连接标志 SYN: 同步序号, 用于建立连接的过程 FIN: finish标志, 用于释放连接  三次握手过程  第一次握手: 建立连接时, 客户端发送SYN包(seq=x)到服务器, 并进入SYN_SEND状态, 等待服务器确认.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -219,19 +222,448 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">深入理解java网络开发知识的归纳</h1>
-      <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 1 min read</p>
+      <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 4 min read</p>
     </header>
     <article class="post-content">
 
-<h2 id="jsp-and-serverlet">JSP and Serverlet</h2>
+<h2 id="计算机网络">计算机网络</h2>
+
+<h3 id="osi-七层模型">OSI 七层模型</h3>
+
+<ul>
+<li>应用层(Application Layer): 文件传输, 电子邮件, 文件服务, 虚拟终端</li>
+<li>表示层(Presentation Layer): 信息的语法语义以及它们的关联, 如加密解密, 转化翻译, 压缩解压缩.</li>
+<li>会话层(Session Layer): 不同机器上的用户之间建立及管理会话</li>
+<li>传输层(Transport Layer): 接受上一层的数据, 在必要的时候把数据进行分割, 并将这些数据交给网络层, 且保证这些数据段有效到达对端</li>
+<li>网络层(Network Layer): 控制子网的运行, 如逻辑编址, 分组传输, 路由选择</li>
+<li>数据链路层(Linked Layer): 物理寻址, 同时将原始比特流转变为逻辑传输线路</li>
+<li>物理层(Physical Layer): 机械,电子,定时接口通信信道上的原始比特流传输.</li>
+</ul>
+
+<h4 id="tcp相关">TCP相关</h4>
+
+<p>IP协议是无连接的通信协议,他不会占用正在通信的两个计算机的通信线路, IP极大降低了对网络线路的需求. IP的作用仅仅是将每个包路由至他的目的地. 它没有机制去检查或保证数据包的顺序性和准确性.</p>
+
+<p>TCP(Transmission Control Protocol) 传输控制协议简介</p>
+
+<ul>
+<li>面向连接的,可靠的,基于字节流的传输层通信协议</li>
+<li>将应用层的数据流分割成报文段并发送给目标节点的TCP层.</li>
+<li>数据包都有序号,对方收到则发送ACK确认,未收到则重传.使用校验和来检验数据在传输过程中是否有误.</li>
+</ul>
+
+<blockquote>
+<p>两台电脑的两个进程能互相通信的最基本的要求是能唯一表示一个进程, 通过这个唯一标识可以找到对应的线程. 我们可以在传输层中使用协议端口号, IP可以唯一标识一个主机, TCP协议和端口号可以唯一标识一个进程. IP+TCP+PORT这种唯一标识的模式也被称为套接字(socket). 也就是说我们只需要把数据传送到某一个合适的端口, 剩下的过程由TCP来负责</p>
+</blockquote>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/socket.png" alt="" />
+socket通信题
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/socket1.png" alt="" /></p>
+
+<h5 id="tcp-flags">TCP Flags</h5>
+
+<ul>
+<li>URG: 紧急指针标志</li>
+<li><strong>ACK</strong>: 确认序号标志</li>
+<li>PSH: push标志</li>
+<li>RST: 重置连接标志</li>
+<li><strong>SYN</strong>: 同步序号, 用于建立连接的过程</li>
+<li><strong>FIN</strong>: finish标志, 用于释放连接</li>
+</ul>
+
+<h5 id="三次握手过程">三次握手过程</h5>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/threehandshake.png" alt="" /></p>
+
+<ul>
+<li>第一次握手: 建立连接时, 客户端发送SYN包(seq=x)到服务器, 并进入SYN_SEND状态, 等待服务器确认.</li>
+<li>第二次握手: 服务器收到SYN包, 必须确认客户的SYN(ack=x+1), 同时自己也发送一个SYN包(seq=y), 即SYN+ACK包,此时服务器进入SYN_RECV状态.</li>
+<li>第三次握手: 客户端收到服务器的SYN+ACK包, 此时服务器进入SYN_RECV状态.</li>
+</ul>
+
+<h5 id="四次挥手过程">四次挥手过程</h5>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/fourshake.png" alt="" />
+- 第一次挥手: Client发送一个FIN, 用来关闭Client到Server的数据传送,Client进入FIN_WAIT_1状态:
+- 第二次挥手: Server收到FIN后, 发送一个ACK给Client, 确认序号为收到序号+1(与SYN相同, 一个FIN占用一个序号), Server进入CLOSE_WAIT状态
+- 第三次挥手: Server发送一个FIN,用来关闭Server到Client的数据传送, Server进入LAST_ACK状态
+- 第四次挥手: Client收到FIN后, Client进入TIME_WAIT状态,接着发送一个ACK给Server,确认序号为收到序号+1, Server进入CLOSED状态, 完成四次挥手.
+  - 确保有足够的时间让对方收到ACK包
+  - 避免新旧连接混淆</p>
+
+<p>Linux查看连接数:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">netstat -n | awk <span style="color:#e6db74">&#39;/^tcp/{++S[$NF]}END{for(a in S) print a,S[a]}&#39;</span></code></pre></div>
+<h5 id="滑窗-sliding-window-规则">滑窗(Sliding window)规则</h5>
+
+<ul>
+<li>RTT(Round Transimission Time): 发送一个数据包到收到对应的ACK, 所花费的时间</li>
+<li>RTO(Retranm): 重传时间间隔</li>
+</ul>
+
+<p>TCP使用滑动窗口做流量控制与乱序重排</p>
+
+<ul>
+<li>保证TCP的可靠性</li>
+<li>保证TCP的流控特性</li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/slidingwindow.png" alt="" /></p>
+
+<p>AdvertisedWindow = MaxRcvBuffer - (LastByteRcvd - LastByteRead)</p>
+
+<p>EffectiveWindow = AdvertisedWindow - (LastByteSent - LastByteAcked)</p>
+
+<h4 id="udp">UDP</h4>
+
+<p>UDP的特点:</p>
+
+<ul>
+<li>面向非连接</li>
+<li>不维护连接状态, 支持同时向多个客户端传输相同的消息</li>
+<li>数据包报头只有8个字节,额外开销较小.</li>
+<li>吞吐量只受限于数据生成速率,传输速率以及机器性能</li>
+<li>尽最大努力交付, 不保证可靠交付, 不需要维持复杂的链接状态表</li>
+<li>面向报文,不对应用程序提交的报文信息进行拆分或者合并</li>
+</ul>
+
+<h4 id="http-hyper-text-transmission-protocol">HTTP(Hyper text transmission protocol)</h4>
+
+<p>特点:</p>
+
+<ul>
+<li>支持客户/服务器模式</li>
+<li>简单快速</li>
+<li>灵活</li>
+<li>无连接</li>
+</ul>
+
+<p>请求/相应的步骤:</p>
+
+<ul>
+<li>客户端连接到Web服务器</li>
+<li>发送HTTP请求</li>
+<li>服务器接收请求并返回HTTP响应</li>
+<li>释放连接TCP连接</li>
+<li>哭护短浏览器解析HTML内容</li>
+</ul>
+
+<blockquote>
+<p>在浏览器地址栏键入URL, 按下回车后经历的流程</p>
+
+<ul>
+<li>DNS解析, 查询到IP</li>
+<li>根据IP地址, 和服务器建立TCP连接</li>
+<li>浏览器发送HTTP请求</li>
+<li>服务器处理请求并返回HTTP报文</li>
+<li>浏览器收到HTML解析渲染页面</li>
+<li>连接结束</li>
+</ul>
+</blockquote>
+
+<h5 id="http状态码">HTTP状态码</h5>
+
+<ul>
+<li>1xx: 指示信息, 表示请求已接收, 需要继续处理</li>
+<li>2xx: 成功, 表示请求已被成功接收, 理解, 接受</li>
+<li>3xx: 重定向, 要完成请求必须进行更进一步的操作</li>
+<li>4xx: 服务端错误, 请求有语法错误或请求无法实现</li>
+<li>5xx: 服务器端错误, 服务器未能实现合法的请求</li>
+</ul>
+
+<h5 id="get与post请求的区别">GET与POST请求的区别</h5>
+
+<ul>
+<li>HTTP报文层面: GET将请求信息放在URL, POST放在报文体中</li>
+<li>数据库层面: GET符合幂等性和安全性, POST不符合</li>
+<li>其他层面: GET可以被缓存, 被存储, 而POST不行</li>
+</ul>
+
+<h5 id="cookie和session的区别">Cookie和Session的区别</h5>
+
+<p><strong>Cookie</strong></p>
+
+<ul>
+<li>Cookie是由服务器发送给客户端的特殊信息, 以文本的形式存放在客户端 (RESPONSE_HEADER).</li>
+<li>客户端再次请求的时候, 会把Cookie回发</li>
+<li>服务器接收到后, 会解析Cookie生成与客户端相对应的内容</li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/cookie.png" alt="" /></p>
+
+<p><strong>Session</strong>
+- 服务器端的机制, 在服务器上保存的信息.
+- 解析客户端请求并操作session id, 按需保存状态信息.</p>
+
+<p>session的实现方式:</p>
+
+<ul>
+<li>使用Cookie来实现</li>
+<li>使用URL会写来实现</li>
+</ul>
+
+<p>Cookie和Session的区别</p>
+
+<ul>
+<li>Cookie数据存放在客户的浏览器上</li>
+<li>Session相对于Cookie更安全</li>
+
+<li><p>若考虑减轻服务器负担, 应当使用Cookie</p>
+
+<h2 id="jsp-and-serverlet">JSP and Serverlet</h2></li>
+</ul>
 
 <h2 id="spring-family">Spring Family</h2>
 
 <h3 id="spring-framework">Spring Framework</h3>
 
+<h4 id="ioc-inverse-of-control">IOC(Inverse of Control)</h4>
+
+<p>IOC是Spring Core最核心的部分. 在理解IOC原理之前需要先了解DI(Dependency Inversion)</p>
+
+<h5 id="di-dependency-inversion">DI(Dependency Inversion)</h5>
+
+<p>例如实现 行李箱类</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/depen.png" alt="reactor model" /></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Luggage</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> Framework framework<span style="color:#f92672">;</span>
+    Luggage<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> size<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">framework</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Framework<span style="color:#f92672">(</span>size<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">move</span><span style="color:#f92672">(){}</span>
+<span style="color:#f92672">}</span> 
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Framework</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> Bottom bottom<span style="color:#f92672">;</span>
+    Framework<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> size<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">bottom</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Bottom<span style="color:#f92672">(</span>size<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bottom</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> Tire tire<span style="color:#f92672">;</span>
+    Bottom<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> size<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tire</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Tire<span style="color:#f92672">(</span>size<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tire</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> size<span style="color:#f92672">;</span>
+    Tire<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> size<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">=</span> size<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+
+ psvm<span style="color:#f92672">{</span>
+     Luggage luggage <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Luggage<span style="color:#f92672">();</span>
+     luggage<span style="color:#f92672">.</span><span style="color:#a6e22e">move</span><span style="color:#f92672">()</span> 
+ <span style="color:#f92672">}</span></code></pre></div>
+<p>这种实现方法基于上层建筑依赖下层建筑的设计模式, 这种模式基本是不可维护的.</p>
+
+<p>我们需要用依赖注入的思想, 把底层类作为参数传递给上层类, 实现上层对下层的控制.
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/injec.png" alt="reactor model" /></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Luggage</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> Framework framework<span style="color:#f92672">;</span>
+    Luggage<span style="color:#f92672">(</span>Framework framework<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">framework</span> <span style="color:#f92672">=</span> framework<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">move</span><span style="color:#f92672">(){}</span>
+<span style="color:#f92672">}</span> 
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Framework</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> Bottom bottom<span style="color:#f92672">;</span>
+    Framework<span style="color:#f92672">(</span>Bottom bottom<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">bottom</span> <span style="color:#f92672">=</span> bottom<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bottom</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> Tire tire<span style="color:#f92672">;</span>
+    Bottom<span style="color:#f92672">(</span>Tire tire<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tire</span> <span style="color:#f92672">=</span> tire<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tire</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> size<span style="color:#f92672">;</span>
+    Tire<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> size<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">=</span> size<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+
+ psvm<span style="color:#f92672">{</span>
+     Luggage luggage <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Luggage<span style="color:#f92672">();</span>
+     luggage<span style="color:#f92672">.</span><span style="color:#a6e22e">move</span><span style="color:#f92672">()</span> 
+ <span style="color:#f92672">}</span></code></pre></div>
+<p>简单的说就是上层对象不依赖下层的构造参数,而应该将所依赖的下层的对象的实例注入进上层的参数中.</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/iocdidl.png" alt="reactor model" />
+依赖注入可以分为四种:</p>
+
+<ul>
+<li>Set注入(Setter injection)</li>
+<li>接口注入(Interface injection)</li>
+<li>注解注入(annotation injection)</li>
+<li>构造器注入(construction injection)</li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/ioc.png" alt="reactor model" /></p>
+
+<blockquote>
+<p>依赖倒置原则(Dependency Inversion Principle): 高层模块不应依赖底层模块, 两者都应依赖其抽象.</p>
+</blockquote>
+
+<p>控制反转容器(Inverse of Control Container)管理Bean的生命周期.</p>
+
+<p>IoC容器的优势</p>
+
+<ul>
+<li>避免在各处使用new来创建类,可以做到统一维护. 只需要维护一个configuration.</li>
+<li>创建实例时不需要了解其中的细节.</li>
+</ul>
+
+<h5 id="spring-ioc">Spring IOC</h5>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/springioc.png" alt="reactor model" /></p>
+
+<p>Spring IOC支持的功能</p>
+
+<ul>
+<li>依赖注入</li>
+<li>依赖检查</li>
+<li>自动装配</li>
+<li>支持集合</li>
+<li>指定初始化方法和销毁方法</li>
+<li>支持回调某些方法(略带侵入性)</li>
+</ul>
+
+<p>Spring IOC容器核心接口</p>
+
+<ul>
+<li>BeanFactory</li>
+
+<li><p>ApplicationContext</p>
+
 <h4 id="bean">Bean</h4>
 
-<h4 id="aop">AOP</h4>
+<h5 id="beandefinition">BeanDefinition</h5>
+
+<p>BeanDefinition主要用来描述Bean的含义, Spring容器在启动的时候会将xml文件里的或者注解里的Bean的定义解析成Spring内部的BeanDefinition.</p>
+
+<h5 id="beandefinitionregistry">BeanDefinitionRegistry</h5>
+
+<p>BeanDefinitionRegistry提供向IoC容器手工注册BeanDefinition对象的方法.</p>
+
+<h5 id="beanfactory-spring框架最核心的部分">BeanFactory: Spring框架最核心的部分</h5></li>
+
+<li><p>提供IOC的配置机制</p></li>
+
+<li><p>包含Bean的各种定义,便于实例化Bean</p></li>
+
+<li><p>建立Bean之间的依赖关系</p></li>
+
+<li><p>Bean生命周期的控制</p></li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/beanfac.png" alt="reactor model" /></p>
+
+<p>BeanFactory与ApplicationContext的比较</p>
+
+<ul>
+<li>BeanFactory是Spring框架的基础设施,面向Spring</li>
+<li>ApplicationContext面向使用Spring框架的开发者
+
+<ul>
+<li>ApplicationContext的功能(继承多个接口)</li>
+<li>BeanFactory:能够管理,装配Bean</li>
+<li>ResourcePatternResolver:能够加载资源文件</li>
+<li>MessageSource:能够实现国际化等功能</li>
+<li>ApplicationEventPublisher:能够注册监听器,实现监听机制</li>
+</ul></li>
+</ul>
+
+<h5 id="getbean方法的代码逻辑">getBean方法的代码逻辑</h5>
+
+<ul>
+<li>转换beanName</li>
+<li>从缓存中加载实例</li>
+<li>实例化Bean</li>
+<li>检测parentBeanFactory</li>
+<li>初始化依赖的Bean</li>
+<li>创建Bean</li>
+</ul>
+
+<h5 id="spring-bean的五个作用域">Spring Bean的五个作用域</h5>
+
+<ul>
+<li>singleton: Spring的默认作用域, 容器里拥有唯一的Bean实例</li>
+<li>prototype: 针对每个getBean请求, 容器都会创建一个Bean实例</li>
+<li>request: 会为每个HTTP请求创建一个Bean实例</li>
+<li>session: 会为每个session创建一个Bean实例</li>
+<li>globalSession: 会为每个全局Http Session创建一个Bean实例, 该作用域仅对Portlet有效</li>
+</ul>
+
+<h5 id="spring-bean的生命周期">Spring Bean的生命周期</h5>
+
+<ul>
+<li>创建过程:
+
+<ul>
+<li>实例化bean</li>
+<li>Aware(注入 ID, BeanFactory和AppCtx)</li>
+<li>BeanPostProcessor.postProcessBeforeInitialization</li>
+<li>InitializingBean.afterPropertiesSet</li>
+<li>定制的Bean init方法</li>
+<li>BeanPostPorcessor.postProcessAfterInitialization</li>
+<li>Bean初始化完毕</li>
+</ul></li>
+<li>销毁过程:
+
+<ul>
+<li>若实现了DisposableBean接口,则会调用destroy方法</li>
+<li>若配置了destry-method属性,则会调用其配置的销毁方法.</li>
+</ul></li>
+</ul>
+
+<h4 id="aop-aspect-oriented-programming">AOP(Aspect Oriented Programming)</h4>
+
+<ul>
+<li>本质上是一种关注点分离(不同的问题交给不同的部分解决)的技术.</li>
+<li>通用化功能代码的实现, 对应的就是所谓的切面(Aspect)</li>
+<li>业务功能代码和切面代码分开后, 架构会变的高内聚和低耦合.</li>
+<li>确保功能的完整性: 切面最终需要被合并到业务中(Weave)</li>
+</ul>
+
+<h5 id="aop的主要名词">AOP的主要名词</h5>
+
+<ul>
+<li>Aspect: 通用功能的代码实现</li>
+<li>Target: 被织入Aspect的对象</li>
+<li>Join Point: 可以作为切入点的机会,所有方法都可以作为切入点</li>
+<li>Pointcut: Aspect实际被应用在的Join Point, 支持正则</li>
+<li>Advice: 类里的方法以及这个方法如何织入到目标方法的方式
+
+<ul>
+<li>前置通知(Before)</li>
+<li>后置通知(AfterReturning)</li>
+<li>异常通知(AfterThrowing)</li>
+<li>最终通知(After)</li>
+<li>环绕通知(Around)</li>
+</ul></li>
+<li>WeAVing: AOP的实现过程</li>
+</ul>
+
+<h5 id="aop的三种织入方式">AOP的三种织入方式</h5>
+
+<ul>
+<li>编译时织入:需要特殊的Java编译器, 如AspectJ</li>
+<li>类加载时织入:需要特殊的Java编译器, 如AspectJ和AspectWerkz</li>
+<li>运行时织入:Spring采用的方式,通过动态代理的方式, 实现简单</li>
+</ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#a6e22e">@Aspect</span>
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoggingAspect</span> <span style="color:#f92672">{</span>
     <span style="color:#a6e22e">@Before</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;execution(public String getName())&#34;</span><span style="color:#f92672">)</span>
@@ -308,9 +740,42 @@
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">allCircleMethods</span><span style="color:#f92672">(){}</span></code></pre></div>
 <p>对于切点的信息,我们可以通过传入JoinPoint joinPoint参数,来使用切点的相关数据.</p>
 
+<h5 id="spring-aop的原理">Spring AOP的原理</h5>
+
+<p>AOP的实现: JdkProxy和Cglib(Code generation lib)</p>
+
+<ul>
+<li>由AopProxyFactory根据AdvisedSupport对象的配置来决定</li>
+<li>默认策略如果目标是接口,则用JdkProxy来实现,否则使用Cglib</li>
+<li>JDKProxy的核心: InvocationHandler接口和Proxy类
+
+<ul>
+<li>通过Java内部的反射机制来实现</li>
+<li>反射机制在生成类的过程中比较高效</li>
+</ul></li>
+<li>Cglib:以继承的方式动态生成目标类代理
+
+<ul>
+<li>借助ASM实现</li>
+<li>ASM在生成类之后的执行过程比较高效</li>
+</ul></li>
+</ul>
+
+<h6 id="代理模式">代理模式</h6>
+
+<p>代理模式是由 接口, 真实实现类, 代理类三部分组成</p>
+
 <h4 id="data-support">Data Support</h4>
 
 <h5 id="jdbc-dao-pojo">JDBC-DAO-POJO</h5>
+
+<h3 id="spring事务">Spring事务</h3>
+
+<h4 id="acid">ACID</h4>
+
+<h4 id="隔离级别">隔离级别</h4>
+
+<h4 id="事务传播">事务传播</h4>
 
 <h3 id="springmvc">SpringMVC</h3>
 

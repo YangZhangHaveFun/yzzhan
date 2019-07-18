@@ -1500,12 +1500,25 @@ static class Fibonacci extends
 
 ## 并发设计模式
 ### Immutability模式
+Immutability模式, 简单来说指,对象创建后状态就不再改变, 没有修改操作则没有并发问题.
+
+将一个类的所有属性都设置成final, 并且只允许存在只读方法. 甚至设置类为final不允许继承. 例如String, Double等类.
+
+具有不可变性的类, 需要提供类似修改的功能, 就是提供类似修改的功能. 然后通过**享元模式(Flyweight Pattern)**来避免创建重复的对象. 享元模式本质上是一个对象池, 创建对象之前会先检查对象池里有没有符合要求的对象. 也因此, 具有享元模式的类型的对象不适合做锁.
+
 ### Copy-on-Write模式
+Copy-on-Write模式背后的思想就是copy on write, 通过创造副本来隔离读写冲突, 使读操作无锁,达到最大化读操作性能的目的.
+
+本质上讲, copy on write是一种延时策略. 只有在真正需要时才会复制, 并不是提前复制好.
 ### 线程本地存储模式
+另一种避免线程安全的方法着眼于避免共享. 可供的选择有线程封闭或者线程本地存储(ThreadLocal).
+
+
 ### Guarded Suspension模式
 ### Balking模式
 
 安全发布对象的四个方法:
+
 - 在静态初始化函数中初始化一个对象引用
 - 将对象的引用保存到volatile类型域或者AtomicReference对象中
 - 将对象的引用保存到某个正确构造对象的final类型域中
@@ -1514,10 +1527,144 @@ static class Fibonacci extends
 ### Thread-Per-Message模式
 ### Worker Thread模式
 ### 两阶段终止模式
-### 生产者消费者模式
+两阶段终止模式主要针对线程的终止方案. 顾名思义,就是将终止过程分为两个阶段, 第一个阶段, 主要是线程T1向线程T2发出终止指令, 第二个阶段, T2响应终止指令.
 
+根据线程流程转换图, 我们发现想要把线程转换到TERMINATED状态, 首先要使其处于RUNNABLE状态. 通过interupt()方法, 可以使线程处于RUNNABLE状态. 这对应第一阶段.
+
+对于第二阶段, 一般我们会设置一个标志位. 然后让线程在合适的时间去检查这个状态. 如果发现符合终止条件, 则自动退出run()方法.这个步骤对应第二阶段.
+```Java
+class Proxy {
+  boolean started = false;
+  // 采集线程
+  Thread rptThread;
+  // 启动采集功能
+  synchronized void start(){
+    // 不允许同时启动多个采集线程
+    if (started) {
+      return;
+    }
+    started = true;
+    rptThread = new Thread(()->{
+      while (true) {
+        // 省略采集、回传实现
+        report();
+        // 每隔两秒钟采集、回传一次数据
+        try {
+          Thread.sleep(2000);
+        } catch (InterruptedException e) {  
+        }
+      }
+      // 执行到此处说明线程马上终止
+      started = false;
+    });
+    rptThread.start();
+  }
+  // 终止采集功能
+  synchronized void stop(){
+    rptThread.interrupt();
+  }
+}  
+```
+### 生产者消费者模式
+生产消费者模式核心是一个任务队列, 生产者线程生产任务并将其放置入队列. 消费者线程从任务队列中获取任务并执行.
+
+从架构设计的角度, 生产者消费者模式一个重要的优点就是**解耦**. 另一个重要的优点就是**支持异步**, 它可以平衡生产者和消费者之间速率的差异.
+
+下面提供例子为生产者消费者模式实现批量执行SQL语句.
+```Java
+// 任务队列
+BlockingQueue<Task> bq=new LinkedBlockingQueue<>(2000);
+// 启动 5 个消费者线程
+// 执行批量任务  
+void start() {
+  ExecutorService es=executors.newFixedThreadPool(5);
+  for (int i=0; i<5; i++) {
+    es.execute(()->{
+      try {
+        while (true) {
+          // 获取批量任务
+          List<Task> ts=pollTasks();
+          // 执行批量任务
+          execTasks(ts);
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+  }
+}
+// 从任务队列中获取批量任务
+List<Task> pollTasks() throws InterruptedException{
+  List<Task> ts=new LinkedList<>();
+  // 阻塞式获取一条任务
+  Task t = bq.take();
+  while (t != null) {
+    ts.add(t);
+    // 非阻塞式获取一条任务
+    t = bq.poll();
+  }
+  return ts;
+}
+// 批量执行任务
+execTasks(List<Task> ts) {
+  // 省略具体代码无数
+}
+
+```
 ## 实际并发框架的简要分析
 ### Guava RateLimiter 高性能限流器
+#### 令牌桶算法
+令牌桶算法核心思想是想要通过限流器,必须拿到令牌.
+> 1. 令牌以固定速率添加到令牌桶中,假设限流的速率是r/秒, 则令牌每1/r秒会添加一个;
+> 2. 假设令牌桶的容量是b, 如果令牌桶已满, 则新的令牌会被丢弃.
+> 3. 请求能够通过限流器的前提是令牌桶中有令牌.
+
+但令牌桶算法并不适合使用生产者-消费者模式. 原因在于生产者的定时器, 因为当系统压力临近极限时, 定时器的精度误差会非常大,同时定时器本身会创建调度线程, 也会系统的性能产生影响.
+
+处理这个问题的方法是记录并动态计算下一个令牌发放的时间.
 ### Netty 高性能网络应用框架
+网络程序一般会使用BIO模型和NIO模型.
+- BIO模型: 一般会为每个socket分配一个独立的线程, 这样可以避免一个socket的阻塞影响其他socket的读写.
+- NIO模型: 非阻塞式API能够实现一个线程处理多个连接, 现在普遍是采用Reactor模式. 
+  - REACTOR模式:
+    ![reactor model](/media/posts/reactor.png)
+      - Handle在网络编程里本质上是一个网络连接.
+      - Event Handler就是一个事件处理器, handle_event()方法处理I/O事件, 每个Event Handler处理一个I/O Handle; get_handle()方法可以返回这个I/O的Handle.
+      - Synchronous Event Demuliplexer可以理解为操作系统提供的I/O多路复用API, 例如POSIX标准里的select()以及Linux里面的epoll().
+      - Reactor类是Reactor模式的核心. register_handler()和remove_handler()这两个方法可以注册和删除一个事件处理器. handle_events()方法是核心,逻辑是首先通过同步事件多路选择器提供的select()方法监听网络事件,当有网络事件就绪后,就遍历事件处理器来处理该网络事件.
+
+```Java
+void Reactor::handle_event(){
+  //通过同步事件多路选择器提供的select()方法监听网络事件
+  select(handlers);
+  //处理网络事件
+  for(h in handlers){
+    h.handle_event();
+  }
+}
+
+while (true) {
+  handle_events();
+}
+```
+
+在Netty中最核心的概念是事件循环(EventLoop), 也就是Reactor模式中的Reactor, 负责监听网络事件并调用事件处理器进行处理. 在4.x版本的Netty中, 网络连接和EventLoop是**稳定**的多对一关系,而EventLoop和Java线程时一对一关系. 这里的稳定指一个网络连接只会对应唯一的一个EventLoop, 因此一个网络连接只会对应到一个Java线程.
+
+Netty中另一个核心概念EventLoopGroup, 一个EventLoopGroup由一租EventLoop组成. 实际使用中, 一般有一个bossGroup, 一个workGroup. 这是由于socket处理网络请求的机制, socket处理TCP网络请求是在一个独立的socket中,每当有一个TCP连接成功建立, 都会创建一个新的socket, 之后对TCP的读写都是由新创建处理的socket完成的. 也就是说处理TCP连接请求和读写请求是通过两个不同的socket完成的. 于是在Netty中, bossGroup就是用来处理连接请求, 而workerGroup用来处理读写请求.
+
+bossGroup处理完连接请求后, 会将这个连接提交给workerGroup来处理, workerGroup里面有多个EventLoop, 那新的连接会交给某个EventLoop来处理通过一个负载均衡的算法,Net他要目前使用的是轮询算法.
 ### Disruptor 高性能队列
+提升性能的关键处在于:
+
+- 内存分配更合理,使用RingBuffer数据结构,数组元素在初始化时一次性全部创建, 提升缓存命中率; 对象循环利用, 避免频繁GC.
+- 能够避免伪共享, 提升缓存利用率.
+- 采用无锁算法, 避免频繁加锁, 解锁的性能消耗
+- 支持批量消费, 消费者可以无锁方式消费多个消息.
+
+#### RingBuffer
+RingBuffer 本质上也是数组, 
+
+> 程序的局部性原理: 指在一段时间内程序的执行会限定在一个局部范围内. 时间局部性指的是程序中的某条指令一旦被执行, 不久之后这条指令很可能被再次执行, 空间局部性指某块内存一旦被访问, 不久后附近的内存课很可能被访问.
+
+#### 避免"伪共享"
 ### HiKariCP 高性能数据库连接池

@@ -1165,3 +1165,4 @@ The point at the end of the growing phase, when a transaction owns all the locks
 ##### Basic 2PL Implementation
 
 A distributed database management system (DDBMS) is a collection of sites interconnected by a network. Each site is a computer running one or both of the following software modules: a transaction manager (TM) or a data manager (DM). TMs supervise interactions between users and the DDBMS while DMs manage the actual database.
+

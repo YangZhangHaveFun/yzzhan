@@ -287,6 +287,42 @@ Follow the following steps:
 </article>
   <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/swen90005/" class="post-link">Modelling Complex System(SWEN90005)</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 19 min read</p>
+  </header>
+  
+  <p class="post-summary">Concurrency Concurrent programming needs to handle two types of difficulties.
+ Communication: Process generally need to communicate with each other, either by accessing shared data, or by message passing. Synchronization: Process may need to synchronize certain events, such as “P must not reach point P until after Q has reached point Q”.  Here are two solutions to solve the difficulites.
+ Shared memory: utilising the concept of monitor. Message Passing: based on Hoare’s idea of Communication Sequential Processes(CSP)  Shared Memorry — Java The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/swen90005/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/netty/" class="post-link">Java Netty框架源码分析</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">两个问题  服务端的socket在哪里启动  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel() configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).  在哪里accept连接  netty服务端的启动  创建服务端Channel  bind(): 用户代码接口 initAndRegister(): 初始化并注册 newChannel(): 创建服务端Channel  初始化服务端Channel 注册selector 端口绑定  创建服务端Channel  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel()  configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).   初始化服务端Channel  init() 初始化的入口  set ChannelOptions, ChannelAttrs set ChildOptions, ChildAtrrs config handler 配置服务端pipeline add ServerBootstrapAcceptor 用于接收到accept()的请求时分配一个nio的服务端的线程.   总的来说, 初始化的功能就是保存用户的配置, 并用其建立一个连接器.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/netty/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/" class="post-link">HashMap 源码解析</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Construction An instance of has two parameters that affect its performance: initial capacity and load factor.
+ capacity is the number of buckets in the hash table, and the initial capacity is simply the capacity at the time the hash table is created. load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased.  When the number of entries in the hash table exceeds the product of the load factor and the current capacity, the hash table is rehashed (that is, internal data structures are rebuilt) so that the hash table has approximately twice the number of buckets.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/iteratorandgenerator/" class="post-link"></a></h3>
     <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 0 min read</p>
   </header>
@@ -306,6 +342,10 @@ Follow the following steps:
         >← Newer Posts</a
       >
        
+      <a class="pagination-next" href="https://yangzhanghavefun.github.io/yzzhan/page/4/"
+        >Older Posts →</a
+      >
+      
     </nav>
   </footer>
   

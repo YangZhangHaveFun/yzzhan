@@ -7,6 +7,8 @@ tags: ["SWEN90004", "Learning"]
 categories: ["Subjects reviews in Uni Melb"]
 author: "Yang Zhang"
 ---
+
+
 ## Introduction to FSP
 When dealing with large code bases, identifying, locating, and removing concurrency problems can be a nightmare. The size of the system and the number of possible interleavings and synchronisations become so large that it is difficult to even understand a single problem, isolate it, figure out how to fix it, or prevent it in the first place.
 
@@ -28,7 +30,7 @@ Non-termination is common in concurrent, real-time systems.
 The “->” operator always has an atomic action as the left operand, and a process as the right operand.
 
 eg:
-```Java
+```Ruby
 TRAFFIC_LIGHT = ( green - > yellow - >red - > TRAFFIC_LIGHT ).
 ```
 
@@ -36,7 +38,7 @@ TRAFFIC_LIGHT = ( green - > yellow - >red - > TRAFFIC_LIGHT ).
 
 The traffic light behaviour could be modelled using more than one
 process names.
-```Java
+```Ruby
 TRAFFIC_LIGHT = GREEN ,
 GREEN = ( green -> YELLOW ) ,
 YELLOW = ( yellow -> RED ) ,
@@ -50,7 +52,7 @@ RED = ( red -> GREEN ).
 > “If x and y are actions, then (x -> P | y -> Q) describes a process which initially engages in either of the actions x or y. After the first action has occurred, the subsequent behaviour is described by P if the first action was x and Q if the first action was y.”
 
 example: This describes a traffic light with a button for a pedestrian, which turns the light red. If the button is not pushed, the light remains green:
-```Java
+```Ruby
 TRAFFIC_LIGHT = ( button -> YELLOW | none -> GREEN ) ,
 GREEN = ( green -> TRAFFIC_LIGHT) ,
 YELLOW = ( yellow -> RED ) ,
@@ -68,7 +70,7 @@ To complicate matters regarding input, output, and choice, FSP allows non-determ
 
 **Note that x is the prefix in both options of the choice.** In this instance, the choice is made by the process, not the environment. Therefore, **x could be an input from the environment, but the choice of P or Q is not controlled by the environment.**
 
-```Java
+```Ruby
 TRAFFIC_LIGHT = ( button -> YELLOW
                 | button -> green -> YELLOW
                 | none -> GREEN
@@ -81,11 +83,11 @@ RED = ( red -> TRAFFIC_LIGHT ).
 ### Indexed processes
 Consider a buffer that can contain a single value. The value is input into the buffer, and can be then output. Values range from 0 to 3:
 
-```Java
+```Ruby
 BUFF = ( in [i :0..3] -> out[ i] -> BUFF ).
 ```
 This is equivalent to:
-```Java
+```Ruby
 BUFF = ( in [0] -> out [0] -> BUFF
         | in [1] -> out [1] -> BUFF
         | in [2] -> out [2] -> BUFF
@@ -94,7 +96,7 @@ BUFF = ( in [0] -> out [0] -> BUFF
 ```
 
 ### Constants and Ranges
-```Java
+```Ruby
 const N = 3
 range T = 0.. N
 BUFF = ( in [i: T] -> STORE [i ]) ,
@@ -106,7 +108,7 @@ STORE [i :T] = ( out [i] -> BUFF ).
 
 > “The choice (when B x -> P | y -> Q) means that when the guard B is true, then the actions x and y are both eligible to be chosen, otherwise if B is false, then action x cannot be chosen.”
 
-```Java
+```Ruby
 COUNT ( N =3) = COUNT [0] ,
 COUNT [i :0.. N] = ( when (i <N) inc - > COUNT [i +1]
                     | when (i >0) dec - > COUNT [i -1]
@@ -117,7 +119,7 @@ COUNT [i :0.. N] = ( when (i <N) inc - > COUNT [i +1]
 ### The STOP Process
 The STOP process is a special, pre-defined process that engages in no further actions. It is used for defining processes that terminate.
 
-```Java
+```FSP
 ONESHOT = ( once -> STOP ).
 ```
 
@@ -127,7 +129,7 @@ The parallel composition operator allows us to describe the concurrent execution
 > “If P and Q are processes, then (P || Q) represents the concurrent execution of P and Q.”
 
 example:
-```Java
+```Ruby
 ITCH = ( scratch - > STOP ).
 CONVERSE = ( think - > talk - > STOP ).
 || CONVERSE_ITCH = ( ITCH || CONVERSE ).
@@ -135,7 +137,7 @@ CONVERSE = ( think - > talk - > STOP ).
 **FSP insists that when a process P is defined by parallel composition, the name of the composite process is prefixed with vertical bars: ||P.**
 
 Currently, the combined processes have not interacted with each other yet. How can the pedestrian interact with our traffic light?
-```Java
+```Ruby
 TRAFFIC_LIGHT = ( button -> YELLOW | idle -> GREEN ) ,
 GREEN = ( green -> TRAFFIC_LIGHT ) ,
 YELLOW = ( yellow -> RED ) ,
@@ -147,7 +149,7 @@ Interaction happens through shared actions:
 > “If the processes in a composition have actions in common, these actions are said to be shared. This is how process interaction is modelled. While unshared actions may be arbitrarily interleaved, a shared action must be executed at the same time by all processes that participate in that shared action.”
 
 
-```Java
+```Ruby
 TRAFFIC_LIGHT = ( button -> YELLOW | idle -> GREEN ) ,
 GREEN = ( green -> TRAFFIC_LIGHT ) ,
 YELLOW = ( yellow -> RED ) ,
@@ -163,7 +165,7 @@ PEDESTRIAN = ( button -> PEDESTRIAN
 > “Given a process P, the process P/{new1/old1, ..., newN/oldN} is the same as P but with action old1 renamed to new1, etc.”
 
 We can re-label wander in PEDESTRIAN to idle:
-```Java
+```Ruby
 TRAFFIC_LIGHT = ( button -> YELLOW | idle -> GREEN ) ,
 GREEN = ( green -> TRAFFIC_LIGHT ) ,
 YELLOW = ( yellow -> RED ) ,
@@ -176,7 +178,7 @@ PEDESTRIAN = ( button -> PEDESTRIAN
 ```
 
 another example---client and server
-```Java
+```Ruby
 CLIENT = ( call -> wait -> continue -> CLIENT ).
 SERVER = ( request -> service -> reply -> SERVER ).
 || CLIENT_SERVER = ( CLIENT || SERVER ) /{ call / request , reply / wait }.
@@ -186,18 +188,18 @@ We must instead have different action labels in both clients. Writing a number o
 
 > “a:P prefixes each action label in P with a”
 
-```Java
+```Ruby
 || TWO_CLIENTS = ( a : CLIENT || b : CLIENT ).
 ```
 
 ### Parameterised Processes and Labelling
 An array of prefix labelled processes can be described using parameterised processes:
 
-```Java
+```Ruby
 || N_CLIENTS ( N =3) = ( c [ i :1.. N ]: CLIENT ).
 ```
 
-```Java
+```Ruby
 || N_CLIENTS ( M =3) = ( forall [ i :1.. M ] c [ i ]: CLIENT ).
 ```
 
@@ -210,13 +212,13 @@ replaced with the transitions ({a1.n,..,ax.n} -> X)”
 
 ({a1,..,ax} -> X) is just shorthand for the set of transitions (a1 -> X), ..., (ax -> X).
 
-```Java
+```Ruby
 || TWO_CLIENT_SERVER
   = ( a : CLIENT || b : CLIENT ||
     {a , b }::( SERVER /{ call / request , wait / reply })).
 ```
 more generally,
-```Java
+```Ruby
 || N_CLIENT_SERVER ( N =2) =
     (( c [ i :1.. N ]: CLIENT )
     ||
@@ -245,7 +247,7 @@ An alternative is to list the variables that are not to be hidden:
 > ‘Given a process P, the process P@{a1,..,aN} is the same as P, but with actions names other than a1,..,aN removed from P”.
 
 The following two codes result in the same situation.
-```java
+```Ruby
 SERVER_1 = ( request -> service -> reply -> SERVER_1 )
 @ { request , reply }.
 
@@ -272,11 +274,11 @@ FSP monitors map well to Java monitors. In particular, the design
 template for waiting in Java monitors can be mapped directly from
 FSP guarded processes, such as below.
 
-```Java
+```Ruby
 when cond act -> NEWSTAT
 ```
 becomes
-```Java
+```Ruby
 public synchronized void act () throws InterruptedException {
     while (! cond ) wait ();
         // modify monitor data
@@ -299,7 +301,7 @@ alphabet extension focuses on extending the actions of process.
 
 To prevent the interference, we need a solution similar to the solutions seen in earlier lectures for mutual exclusion. One advantage of working with FSP instead of Java is that we can disregard all irrelevant details.
 
-```Java
+```Ruby
 LOCK = ( acquire -> release -> LOCK ).
 ```
 
@@ -319,7 +321,7 @@ The most common liveness property for a sequential system is that the system ter
 Concurrent systems are often designed to be non-terminating, and liveness properties are most commonly related to resource access.
 
 #### Safety Property in FSP
-```Java
+```Ruby
 AN_ERROR = ( start -> do_something -> ERROR ).
 ```
 `Note:`The state labelled -1 is a special state that indicates the ERROR process. It has no outgoing transitions.
@@ -329,7 +331,7 @@ When modelling complex systems, it is better practice to consider only the desir
 
 In many formalisms, safety properties are used for this purpose. In FSP, a safety property is just a process, but to identify it clearly as a safety property, FSP uses the property keyword:
 
-```Java
+```Ruby
 property SAFE_ACTUATOR
 = ( command -> respond -> SAFE_ACTUATOR ).
 ```
@@ -345,7 +347,7 @@ An LTS generated from a property process allows every possible combination of ac
 ##### Safe Property for Mutual Exclusion
 
 ### Liveness
-```JAVASCRIPT
+```Ruby
 range M = 0..4
 
 SEND(E=3) = (chan[3] -> STOP).

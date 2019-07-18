@@ -215,12 +215,13 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/" class="post-link">深入理解java网络开发知识的归纳</a></h3>
-    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 1 min read</p>
+    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 4 min read</p>
   </header>
   
-  <p class="post-summary">JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&#34;execution(public String getName())&#34;) public void LoggingAdvice(){ System.out.println(&#34;LOG: Get method called.&#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
-我们也可以创造一个切点,应用于其他的AOP方法
-@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&#34;allGetters()&#34;) public void LoggingAdvice() { System.out.println(&#34;Advice run. Get Method called&#34;); } //切点执行后执行  @After(&#34;allGetters()&#34;) public void LoggingAdvice() { System.out.println(&#34;Advice run. Get Method called&#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&#34;allGetters()&#34;, returning=&#34;returnString&#34;) public void LoggingAdvice() { System.</p>
+  <p class="post-summary">计算机网络 OSI 七层模型  应用层(Application Layer): 文件传输, 电子邮件, 文件服务, 虚拟终端 表示层(Presentation Layer): 信息的语法语义以及它们的关联, 如加密解密, 转化翻译, 压缩解压缩. 会话层(Session Layer): 不同机器上的用户之间建立及管理会话 传输层(Transport Layer): 接受上一层的数据, 在必要的时候把数据进行分割, 并将这些数据交给网络层, 且保证这些数据段有效到达对端 网络层(Network Layer): 控制子网的运行, 如逻辑编址, 分组传输, 路由选择 数据链路层(Linked Layer): 物理寻址, 同时将原始比特流转变为逻辑传输线路 物理层(Physical Layer): 机械,电子,定时接口通信信道上的原始比特流传输.  TCP相关 IP协议是无连接的通信协议,他不会占用正在通信的两个计算机的通信线路, IP极大降低了对网络线路的需求. IP的作用仅仅是将每个包路由至他的目的地. 它没有机制去检查或保证数据包的顺序性和准确性.
+TCP(Transmission Control Protocol) 传输控制协议简介
+ 面向连接的,可靠的,基于字节流的传输层通信协议 将应用层的数据流分割成报文段并发送给目标节点的TCP层. 数据包都有序号,对方收到则发送ACK确认,未收到则重传.使用校验和来检验数据在传输过程中是否有误.   两台电脑的两个进程能互相通信的最基本的要求是能唯一表示一个进程, 通过这个唯一标识可以找到对应的线程. 我们可以在传输层中使用协议端口号, IP可以唯一标识一个主机, TCP协议和端口号可以唯一标识一个进程. IP&#43;TCP&#43;PORT这种唯一标识的模式也被称为套接字(socket). 也就是说我们只需要把数据传送到某一个合适的端口, 剩下的过程由TCP来负责
+ socket通信题 TCP Flags  URG: 紧急指针标志 ACK: 确认序号标志 PSH: push标志 RST: 重置连接标志 SYN: 同步序号, 用于建立连接的过程 FIN: finish标志, 用于释放连接  三次握手过程  第一次握手: 建立连接时, 客户端发送SYN包(seq=x)到服务器, 并进入SYN_SEND状态, 等待服务器确认.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/">Read More →</a>
   </footer>
@@ -230,7 +231,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javaconcurrency/" class="post-link">深入理解java并发知识的归纳</a></h3>
-    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 15 min read</p>
+    <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 17 min read</p>
   </header>
   
   <p class="post-summary">1. 多线程基础  1.1. 多线程的三个问题 1.2. Java内存模型 1.3. 如果解决并发原子性问题—互斥锁 1.4. “等待-通知”机制 1.5. 编程中需要注意的三类问题: 安全性问题, 活跃性问题和性能问题. 1.6. 管程 1.7. 线程 1.8. 并发量 1.9. 局部变量 – 线程封闭  2. Java.util.Concurrent JUC并发包详解  2.1. Lock接口 2.2. Condition接口 2.3. 信号量模型 2.4. ReadWriteLock 实现 2.5. StampedLock 2.6. CountDownLatch和CyclicBarrier 2.7. 并发容器 2.8. 原子类 2.9. 线程池Executor 2.10. Future 2.11. CompletableFuture 2.12. CompletionService: 批量异步化操作 2.13. Fork/Join 分治模型  并发设计模式  Immutability模式 Copy-on-Write模式 线程本地存储模式 Guarded Suspension模式 Balking模式 Thread-Per-Message模式 Worker Thread模式 两阶段终止模式 生产者消费者模式  实际并发框架的简要分析  Guava RateLimiter 高性能限流器 Netty 高性能网络应用框架 Disruptor 高性能队列 HiKariCP 高性能数据库连接池   1.</p>
@@ -343,7 +344,44 @@ Liskov替换原则(Liskov-Substituion Principle): 其核心思想是：子类必
 </article>
 
       
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/netty/" class="post-link">Java Netty框架源码分析</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">两个问题  服务端的socket在哪里启动  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel() configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).  在哪里accept连接  netty服务端的启动  创建服务端Channel  bind(): 用户代码接口 initAndRegister(): 初始化并注册 newChannel(): 创建服务端Channel  初始化服务端Channel 注册selector 端口绑定  创建服务端Channel  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel()  configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).   初始化服务端Channel  init() 初始化的入口  set ChannelOptions, ChannelAttrs set ChildOptions, ChildAtrrs config handler 配置服务端pipeline add ServerBootstrapAcceptor 用于接收到accept()的请求时分配一个nio的服务端的线程.   总的来说, 初始化的功能就是保存用户的配置, 并用其建立一个连接器.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/netty/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/" class="post-link">HashMap 源码解析</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Construction An instance of has two parameters that affect its performance: initial capacity and load factor.
+ capacity is the number of buckets in the hash table, and the initial capacity is simply the capacity at the time the hash table is created. load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased.  When the number of entries in the hash table exceeds the product of the load factor and the current capacity, the hash table is rehashed (that is, internal data structures are rebuilt) so that the hash table has approximately twice the number of buckets.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/">Read More →</a>
+  </footer>
+</article>
+
+      
     
+    
+      <footer class="list-footer">
+        <nav class="pagination">
+          <h3 class="offscreen">Pagination</h3>
+          
+          
+            <a class="pagination-next" href="https://yangzhanghavefun.github.io/yzzhan/tags/java/page/2/">Older Posts →</a>
+          
+        </nav>
+      </footer>
     
   </section>
   

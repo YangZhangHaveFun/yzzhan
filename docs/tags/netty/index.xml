@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Netty on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/netty/</link>
+    <description>Recent content in Netty on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/netty/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java Netty框架源码分析</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/netty/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/netty/</guid>
+      <description>两个问题  服务端的socket在哪里启动  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel() configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).  在哪里accept连接  netty服务端的启动  创建服务端Channel  bind(): 用户代码接口 initAndRegister(): 初始化并注册 newChannel(): 创建服务端Channel  初始化服务端Channel 注册selector 端口绑定  创建服务端Channel  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel()  configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).   初始化服务端Channel  init() 初始化的入口  set ChannelOptions, ChannelAttrs set ChildOptions, ChildAtrrs config handler 配置服务端pipeline add ServerBootstrapAcceptor 用于接收到accept()的请求时分配一个nio的服务端的线程.   总的来说, 初始化的功能就是保存用户的配置, 并用其建立一个连接器.</description>
+    </item>
+    
+    <item>
+      <title>数据库重点知识归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/database/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/database/</guid>
+      <description>Database Index 常见问题:
+ 为什么要使用索引 什么样的信息能成为索引 索引的数据结构 密集索引和稀疏索引  索引的数据结构  生成索引,建立二叉查找树进行二分查找 生成索引,建立B-Tree结构进行查找  B-Tree定义 根节点至少包括两个孩子 树中每个节点最多含有m个孩子(m&amp;gt;=2) 除根节点和叶节点外,其他每个节点至少有ceil(m/2)个孩子 所有叶子节点都位于同一层 假设每个非终端节点中包含有n个关键字信息, 其中  Ki(i=1&amp;hellip;n)为关键字, 且关键字按顺序升序排序Ki-1&amp;lt;Ki 关键字的个数n必须满足: [ceil(m/2)-1]&amp;lt;=n&amp;lt;=m-1 非叶子结点的指针: P[1], P[2], &amp;hellip;, P[M]指向关键字大于K[M-1]的子树,其他P[i]指向关键字属于(K[i-1], K[i])的子树   生成索引,建立B+-Tree结构进行查找  定义 非叶子节点的子树指针与关键字个数相同 非叶子节点的子树指针P[i],指向关键字值(K[i],K[i+1])的子树 非叶子节点仅用来索引,数据都保存在叶子节点中 所有叶子节点均有一个链指针指向下一个叶子节点 优点 B+树的磁盘读写代价更低 B+树的查询效率更加稳定 B+树更有利于对数据库的扫描  Hash索引  缺点 仅仅能满足&amp;rdquo;=&amp;ldquo;, &amp;ldquo;IN&amp;rdquo;, 不能使用范围查询 无法被用来避免数据的排序操作 不能利用部分索引键查询 不能避免表扫描 遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高   密集索引和稀疏索引  密集索引: 文件中的每个搜索码值都对应一个索引值,就是叶子节点保存了整行, innodb只有一个 稀疏索引: 文件只为索引码的某些值建立索引项, 比如 innodb的其他索引只存了键位信息和主键, myisam的所有索引都是  以MySQL为例</description>
+    </item>
+    
+  </channel>
+</rss>

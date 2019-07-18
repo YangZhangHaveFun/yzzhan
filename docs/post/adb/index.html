@@ -704,16 +704,19 @@ The result of successfully committing a group of transactions is inconsistent wi
 
 <blockquote>
 <p>A schedule is <strong>strict</strong> if a value written by a txn is not read or overwritten by other txns until it finishes.
-The advantanges:
-- Does not incur cascading aborts
-- Aborted txns can be undone by just restoring original values of modified tuples</p>
+The advantanges:</p>
+
+<ul>
+<li>Does not incur cascading aborts</li>
+<li>Aborted txns can be undone by just restoring original values of modified tuples</li>
+</ul>
+</blockquote>
 
 <h4 id="optimistic-lock">Optimistic Lock</h4>
 
 <p>The DBMS creates a private workspace for each txn.
 - Any object read is copied into workspace
 - Modifications are applied to workspace.</p>
-</blockquote>
 
 <p>When a txn commits, the DBMS compares workspace write set to see whether it conflicts with other txns.</p>
 

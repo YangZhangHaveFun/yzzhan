@@ -47,9 +47,10 @@ For any issues, you could email via yzzhan@student.unimelb.edu.au.</description>
       <pubDate>Tue, 04 Jun 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/</guid>
-      <description>JSP and Serverlet Spring Family Spring Framework Bean AOP @Aspect public class LoggingAspect { @Before(&amp;#34;execution(public String getName())&amp;#34;) public void LoggingAdvice(){ System.out.println(&amp;#34;LOG: Get method called.&amp;#34;); } } 通过一个Aspect方法可以起到任何类调用他们自己的public String getName()方法之前都会调用LoggingAdvice()方法.
-我们也可以创造一个切点,应用于其他的AOP方法
-@Aspect public class LoggingAspect{ //切点执行前执行  @Before(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点执行后执行  @After(&amp;#34;allGetters()&amp;#34;) public void LoggingAdvice() { System.out.println(&amp;#34;Advice run. Get Method called&amp;#34;); } //切点方法执行完成返回后再执行, 同时可以通过执行返回类型来限制  @AfterReturning(pointcut=&amp;#34;allGetters()&amp;#34;, returning=&amp;#34;returnString&amp;#34;) public void LoggingAdvice() { System.</description>
+      <description>计算机网络 OSI 七层模型  应用层(Application Layer): 文件传输, 电子邮件, 文件服务, 虚拟终端 表示层(Presentation Layer): 信息的语法语义以及它们的关联, 如加密解密, 转化翻译, 压缩解压缩. 会话层(Session Layer): 不同机器上的用户之间建立及管理会话 传输层(Transport Layer): 接受上一层的数据, 在必要的时候把数据进行分割, 并将这些数据交给网络层, 且保证这些数据段有效到达对端 网络层(Network Layer): 控制子网的运行, 如逻辑编址, 分组传输, 路由选择 数据链路层(Linked Layer): 物理寻址, 同时将原始比特流转变为逻辑传输线路 物理层(Physical Layer): 机械,电子,定时接口通信信道上的原始比特流传输.  TCP相关 IP协议是无连接的通信协议,他不会占用正在通信的两个计算机的通信线路, IP极大降低了对网络线路的需求. IP的作用仅仅是将每个包路由至他的目的地. 它没有机制去检查或保证数据包的顺序性和准确性.
+TCP(Transmission Control Protocol) 传输控制协议简介
+ 面向连接的,可靠的,基于字节流的传输层通信协议 将应用层的数据流分割成报文段并发送给目标节点的TCP层. 数据包都有序号,对方收到则发送ACK确认,未收到则重传.使用校验和来检验数据在传输过程中是否有误.   两台电脑的两个进程能互相通信的最基本的要求是能唯一表示一个进程, 通过这个唯一标识可以找到对应的线程. 我们可以在传输层中使用协议端口号, IP可以唯一标识一个主机, TCP协议和端口号可以唯一标识一个进程. IP+TCP+PORT这种唯一标识的模式也被称为套接字(socket). 也就是说我们只需要把数据传送到某一个合适的端口, 剩下的过程由TCP来负责
+ socket通信题 TCP Flags  URG: 紧急指针标志 ACK: 确认序号标志 PSH: push标志 RST: 重置连接标志 SYN: 同步序号, 用于建立连接的过程 FIN: finish标志, 用于释放连接  三次握手过程  第一次握手: 建立连接时, 客户端发送SYN包(seq=x)到服务器, 并进入SYN_SEND状态, 等待服务器确认.</description>
     </item>
     
     <item>
@@ -353,6 +354,46 @@ Follow the following steps:
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/iteratorandgenerator/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>HashMap 源码解析</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/</guid>
+      <description>Construction An instance of has two parameters that affect its performance: initial capacity and load factor.
+ capacity is the number of buckets in the hash table, and the initial capacity is simply the capacity at the time the hash table is created. load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased.  When the number of entries in the hash table exceeds the product of the load factor and the current capacity, the hash table is rehashed (that is, internal data structures are rebuilt) so that the hash table has approximately twice the number of buckets.</description>
+    </item>
+    
+    <item>
+      <title>Java Netty框架源码分析</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/netty/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/netty/</guid>
+      <description>两个问题  服务端的socket在哪里启动  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel() configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).  在哪里accept连接  netty服务端的启动  创建服务端Channel  bind(): 用户代码接口 initAndRegister(): 初始化并注册 newChannel(): 创建服务端Channel  初始化服务端Channel 注册selector 端口绑定  创建服务端Channel  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel()  configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).   初始化服务端Channel  init() 初始化的入口  set ChannelOptions, ChannelAttrs set ChildOptions, ChildAtrrs config handler 配置服务端pipeline add ServerBootstrapAcceptor 用于接收到accept()的请求时分配一个nio的服务端的线程.   总的来说, 初始化的功能就是保存用户的配置, 并用其建立一个连接器.</description>
+    </item>
+    
+    <item>
+      <title>Modelling Complex System(SWEN90005)</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/swen90005/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/swen90005/</guid>
+      <description>Concurrency Concurrent programming needs to handle two types of difficulties.
+ Communication: Process generally need to communicate with each other, either by accessing shared data, or by message passing. Synchronization: Process may need to synchronize certain events, such as &amp;ldquo;P must not reach point P until after Q has reached point Q&amp;rdquo;.  Here are two solutions to solve the difficulites.
+ Shared memory: utilising the concept of monitor. Message Passing: based on Hoare&amp;rsquo;s idea of Communication Sequential Processes(CSP)  Shared Memorry &amp;mdash; Java The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle.</description>
+    </item>
+    
+    <item>
+      <title>数据库重点知识归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/database/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/database/</guid>
+      <description>Database Index 常见问题:
+ 为什么要使用索引 什么样的信息能成为索引 索引的数据结构 密集索引和稀疏索引  索引的数据结构  生成索引,建立二叉查找树进行二分查找 生成索引,建立B-Tree结构进行查找  B-Tree定义 根节点至少包括两个孩子 树中每个节点最多含有m个孩子(m&amp;gt;=2) 除根节点和叶节点外,其他每个节点至少有ceil(m/2)个孩子 所有叶子节点都位于同一层 假设每个非终端节点中包含有n个关键字信息, 其中  Ki(i=1&amp;hellip;n)为关键字, 且关键字按顺序升序排序Ki-1&amp;lt;Ki 关键字的个数n必须满足: [ceil(m/2)-1]&amp;lt;=n&amp;lt;=m-1 非叶子结点的指针: P[1], P[2], &amp;hellip;, P[M]指向关键字大于K[M-1]的子树,其他P[i]指向关键字属于(K[i-1], K[i])的子树   生成索引,建立B+-Tree结构进行查找  定义 非叶子节点的子树指针与关键字个数相同 非叶子节点的子树指针P[i],指向关键字值(K[i],K[i+1])的子树 非叶子节点仅用来索引,数据都保存在叶子节点中 所有叶子节点均有一个链指针指向下一个叶子节点 优点 B+树的磁盘读写代价更低 B+树的查询效率更加稳定 B+树更有利于对数据库的扫描  Hash索引  缺点 仅仅能满足&amp;rdquo;=&amp;ldquo;, &amp;ldquo;IN&amp;rdquo;, 不能使用范围查询 无法被用来避免数据的排序操作 不能利用部分索引键查询 不能避免表扫描 遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高   密集索引和稀疏索引  密集索引: 文件中的每个搜索码值都对应一个索引值,就是叶子节点保存了整行, innodb只有一个 稀疏索引: 文件只为索引码的某些值建立索引项, 比如 innodb的其他索引只存了键位信息和主键, myisam的所有索引都是  以MySQL为例</description>
     </item>
     
   </channel>
