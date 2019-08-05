@@ -90,3 +90,259 @@ Liskov替换原则能够保证系统具有良好的拓展性，同时实现基�
 这种方法避免了ConcurrentModificationException 但缺点也很明显, 迭代器不能访问到修改后的内容,即在迭代器遍历期间,原集合发生的修改迭代器是不知道的.
 
 java.util.concurrent包下的容器都是安全失败, 可以在多线程下并发使用, 并发修改.
+
+
+### Java反射机制与类加载机制
+#### 反射
+基础类
+```Java
+package edu.unimelb.learningspringboots.javabasic;
+
+public class Robot {
+    private String name;
+
+    public void PublicSayHello(String welcomeSentence){
+        System.out.println(welcomeSentence + this.name);
+    }
+
+    private String throwHello(String name){
+        return "hello" + name;
+    }
+
+    private static String staticSayHello() {
+        return "Hello Static";
+    }
+}
+```
+调用目标类的方法首先要加载一个目标类对象通过Class.forName()
+```java
+Class robotClass = Class.forName("edu.unimelb.learningspringboots.javabasic.Robot");
+```
+若不是静态方法, 则还需通过这个类新建一个实例
+```java
+Robot robot = (Robot) robotClass.getDeclaredConstructor().newInstance();
+```
+当调用类里的方法时, 若是静态方法, 则getDeclaredMethod的第一个参数传null, 若是实例方法, 第一个参数传对应的实例
+```java
+    Method prSayHello = robotClass.getDeclaredMethod("throwHello", String.class);
+    prSayHello.setAccessible(true);
+    String str = (String) prSayHello.invoke(robot, "NoN");
+    Field field = robotClass.getDeclaredField("name");
+    field.setAccessible(true);
+    field.set(robot, "Alice");
+    log.info("Current Reflected Class is {}, invoked method is {}, result is {}, related field is {}",
+            robotClass.getName(), prSayHello.getName(), str, field.getName());
+
+    Method staticMethod = robotClass.getDeclaredMethod("staticSayHello");
+    staticMethod.setAccessible(true);
+    String res2 = (String) staticMethod.invoke(null);
+    log.info(res2);
+```
+
+#### ClassLoader
+ClassLoader在Java中有着非常重要的作用, 它主要工作在Class装载的加载阶段, 其主要作用是从系统外部获得Class二进制数据流. 它是Java的核心组件, 所有的Class都是由ClassLoader进行加载的, ClassLoader负责通过将Class文件里的二进制数据流装载进系统, 然后交给Java虚拟机进行连接,初始化等操作.
+
+##### ClassLoader的种类
+
+- BootStrapClassLoader: C++编写, 加载核心java.*
+- ExtClassLoader: Java编写, 加载扩展库javax.*
+- AppClassLoader: Java编写, 加载程序所在目录
+- 自定义ClassLoader: Java编写, 定制化加载
+
+##### 双亲加载机制
+
+#### 类的加载方式
+
+- 隐式加载: 
+- 显式加载: 
+  - LoadClass: 得到的class是还没有链接的
+  - forName: 得到的class是已经初始化完成的
+
+
+### JVM
+
+#### 调制参数
+- -Xss: 规定了每个线程虚拟机栈的大小
+- -Xms: 堆的初始值
+- -Xmx: 堆能达到的最大值
+
+#### 堆栈的区别
+- 静态存储: 编译时确定每个数据目标在运行时的存储空间需求
+- 栈式存储: 数据区需求在编译时未知,运行时模块入口前确定
+- 堆式存储: 编译时或运行时模块入口都无法确定,动态分配
+
+##### 栈
+- 管理方式: 栈自动释放,堆需要GC
+- 空间大小: 栈比堆小
+- 碎片相关: 栈产生的碎片远小于堆
+- 分配方式: 栈支持静态和动态分配
+- 效率: 栈的效率比堆高
+
+### HashMap源码分析
+![](/mdeia.posts/hashmapillu.png)
+
+#### 基本结构
+HashMap继承AbstractMap, 实现Map, Cloneable, Serializable. HashMap有 
+
+#### 基本属性
+##### 静态属性
+```java
+    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
+    static final int MAXIMUM_CAPACITY = 1 << 30;
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+    static final int TREEIFY_THRESHOLD = 8;
+    static final int UNTREEIFY_THRESHOLD = 6;
+    static final int MIN_TREEIFY_CAPACITY = 64;
+```
+##### 实例属性
+```java
+    transient Node<K,V>[] table;
+    transient Set<Map.Entry<K,V>> entrySet;
+    transient int size;
+    transient int modCount;
+    int threshold;
+    final float loadFactor;
+```
+
+#### 构造器方法
+```java
+public HashMap(int initialCapacity, float loadFactor)
+
+public HashMap(int initialCapacity)
+
+public HashMap()
+
+public HashMap(Map<? extends K, ? extends V> m)
+```
+#### 内部类
+##### 静态内部类
+```java
+static class Node<K,V> implements Map.Entry<K,V>{}
+static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V>{}
+```
+##### 实例内部类
+```java
+//
+final class EntrySet extends AbstractSet<Map.Entry<K,V>>{}
+//Returns a set view of the keys contained in this map.
+final class KeySet extends AbstractSet<K>{}
+final class Values extends AbstractCollection<V>{}
+```
+
+#### 基本方法
+##### 静态方法
+```java
+    static final int hash(Object key) {
+        int h;
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    }
+
+    static final int tableSizeFor(int cap) {
+        int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
+        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+    }
+```
+hash方法通过一次异或运算使数据更加均匀分布. tableSizeFor方法用来获取size为大于cap的第一个2的n次方的值.
+##### 实例操作方法
+###### Public Actions
+**GET方法**
+
+```java
+public V get(Object key) {
+    Node<K,V> e;
+    return (e = getNode(hash(key), key)) == null ? null : e.value;
+}
+```
+get方法通过输入的key和其hashcode来取得对应的node.
+```java
+final Node<K,V> getNode(int hash, Object key) {
+    Node<K,V>[] tab; Node<K,V> first, e; int n; K k;
+    if ((tab = table) != null && (n = tab.length) > 0 &&
+        (first = tab[(n - 1) & hash]) != null) {
+        if (first.hash == hash && // always check first node
+            ((k = first.key) == key || (key != null && key.equals(k))))
+            return first;
+        if ((e = first.next) != null) {
+            if (first instanceof TreeNode)
+                return ((TreeNode<K,V>)first).getTreeNode(hash, key);
+            do {
+                if (e.hash == hash &&
+                    ((k = e.key) == key || (key != null && key.equals(k))))
+                    return e;
+            } while ((e = e.next) != null);
+        }
+    }
+    return null;
+}
+```
+在具体的实现逻辑中, 通过tab.length-1和hashcode的与计算来找到数组的索引, 由于初始化HashMap时, 通过tableForSize方法确使HashMap的初始长度都设置成了2的n次方,所以tab.length-1则后面(n-1)位数都是1. 因此key的hash值的n-1位确定了这组key,value对在table数组里的位置. 
+
+但只通过这个hash值找到的是entrySet, 然后通过key值本身找到对应的Node. 这时可能有三种情况, 一种情况第一个就是要找的Node, 第二种情况是后继节点为链表结构,通过next找到对应的值, 第三种后继节点为红黑树结构, 通过对应的搜索方法找到对应的Node.
+
+**PUT方法**
+```java
+public V put(K key, V value) {
+    return putVal(hash(key), key, value, false, true);
+}
+```
+
+```java
+final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                boolean evict) {
+    Node<K,V>[] tab; Node<K,V> p; int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    if ((p = tab[i = (n - 1) & hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node<K,V> e; K k;
+        if (p.hash == hash &&
+            ((k = p.key) == key || (key != null && key.equals(k))))
+            e = p;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &&
+                    ((k = e.key) == key || (key != null && key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size > threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+```
+
+首先介绍后两个boolean值, 这两个值默认都是false.
+
+- @param onlyIfAbsent if true, don't change existing value
+- @param evict if false, the table is in creation mode.
+
+接着是putValue的逻辑.
+
+1. 首先判断table的长度, 如果长度是0或者table不存在执行resize()操作生成新的table.
+2. 然后通过hash & table.length-1来计算出索引值
+   1. 如果当前索引没有node, 就在此索引处创建一个node.
+   2. 如果当前索引有node
+      1. 判断当前第一个node的key值和要添加的node的key值相同,并且onlyIfAbsent的值是false,则更新当前Node的val. 添加过程结束
+      2. 判断当前索引的数据结构是不是红黑树结构, 如果是, 通过树结构的添加操作填加val.
+      3. 否则则证明当前索引的数据结构是链表结构.在链表的尾部添加node,并判断是否到达需要树化的阈值来决定是否把链表结构转化为树形结构.
+3. 最后判断table的结构是否够用和

@@ -121,3 +121,8 @@ alter table person_info_large add index idx_name(name)
 - 通常与GROUP BY子句一起使用
 - WHERE过滤行, HAVING过滤组
 - 出现在同一sql的顺序: WHERE>GROUP BY> HAVING
+
+## 分库与分表实现策略
+数据库分表可以解决单表海量数据的查询性能问题，分库可以解决单台数据库的并发访问压力问题。
+
+hash本身就是一种分库分表的策略，使用hash进行路由策略的时候，我们需要知道的是，也就是hash路由策略的优缺点，优点是：数据分布均匀；缺点是：数据迁移的时候麻烦，不能按照机器性能分摊数据。
