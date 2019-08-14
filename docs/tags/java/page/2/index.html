@@ -214,6 +214,25 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/designpattern/" class="post-link">设计原则与设计模式归纳</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">开闭原则 一个软件实体如类, 模块和函数都应该对扩展开放,对修改关闭. - 用抽象构建框架, 用实现扩展细节 - 优点: 提高软件系统的可复用性及可维护性
+依赖倒置原则 高层模块不应该依赖低层模块, 两者都应该依赖其抽象 - 抽象不应该依赖细节; 细节应该依赖抽象 - 针对接口编程,不要针对实现编程 - 优点: 可以减少类间的耦合性, 提高系统稳定性, 提高代码可读性和可维护性, 可降低修改程序所造成的风险
+单一职责原则 不要存在多于一个导致类变更的原因 - 一个类/接口/方法只负责一项职责 - 优点: 降低类的复杂度, 提高类的可读性, 提高系统的可维护性, 降低变更引起的风险.
+接口隔离原则 用多个专门的接口, 而不使用单一的总接口, 客户端不应该依赖它不需要的接口 - 优点: 符合我们常说的高内聚低耦合的设计思想. 从而使得类具有很好的可读性, 可扩展性和可维护性
+迪米特原则 一个对象应该对其他对象保持最少的了解. 又叫最少知道原则 - 尽量降低类与类之间的耦合
+创建型 简单工厂模式 工厂模式 定义一个创建对象的接口但让实现这个接口的类来决定实例化哪个类, 工厂方法让类的实例化推迟到子类中进行
+ 适用场景:  创建对象需要大量重复的代码 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节 一个类通过子类来制定创建对象  优点:  用户只需要关心所需要产品对应的工厂,无须关心创建细节 加入新产品符合开闭原则,提高可扩展性  缺点:  类的个数容易过多, 增加复杂度 增加了系统的抽象性和理解难度   ###抽象工厂 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/designpattern/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/database/" class="post-link">数据库重点知识归纳</a></h3>
     <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
   </header>
@@ -237,6 +256,19 @@
  Shared memory: utilising the concept of monitor. Message Passing: based on Hoare’s idea of Communication Sequential Processes(CSP)  Shared Memorry — Java The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/swen90005/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/netty/" class="post-link">Java Netty框架源码分析</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">两个问题  服务端的socket在哪里启动  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel() configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).  在哪里accept连接  netty服务端的启动  创建服务端Channel  bind(): 用户代码接口 initAndRegister(): 初始化并注册 newChannel(): 创建服务端Channel  初始化服务端Channel 注册selector 端口绑定  创建服务端Channel  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel()  configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).   初始化服务端Channel  init() 初始化的入口  set ChannelOptions, ChannelAttrs set ChildOptions, ChildAtrrs config handler 配置服务端pipeline add ServerBootstrapAcceptor 用于接收到accept()的请求时分配一个nio的服务端的线程.   总的来说, 初始化的功能就是保存用户的配置, 并用其建立一个连接器.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/netty/">Read More →</a>
   </footer>
 </article>
 

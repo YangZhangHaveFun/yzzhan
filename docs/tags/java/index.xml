@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Tue, 04 Jun 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spring Analysis</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/springframework/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/springframework/</guid>
+      <description>JDBC的简单操作  JdbcTemplate  query queryForObject queryForList update execute   ####事务抽象的核心接口 - PlatformTransactionManager - DataSourceTransactionManager - HibernateTransactionManager - JtaTransactionManger - TransactionDefition - Propagation - Isolation - Timeout - Read-only status</description>
+    </item>
     
     <item>
       <title>深入理解java并发知识的归纳</title>
@@ -39,8 +48,11 @@ TCP(Transmission Control Protocol) 传输控制协议简介
       <pubDate>Sun, 02 Jun 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/juc_source/</guid>
-      <description> Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
-//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 + var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; }</description>
+      <description>Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
+//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 + var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; } 队列同步器AQS(AbstractQueuedSynchronizer) AQS是用来构建锁或其他同步组件的基本框架, 其中成员变量有两个
+ int型表示同步状态: 果我们使用锁同步共享变量的时候，我们首先应该要知道这个共享变量的状态（是否已经被其他线程锁住等），这也是这个int成员变量的作用； 内置的FIFO队列: 第二个就是既然是同步访问共享资源，肯定会有一些线程无法获取到共享资源等待获取锁而进入一个容器中进行保存而这容器就是这个内置的FIFO队列。  子类推荐被定义为自定义同步组件的静态内部类，同步器自身没有实现任何同步接口，它仅仅是定义了若干同步状态获取和释放的方法来供自定义同步组件使用，同步器既可以支持独占式地获取同步状态，也可以支持共享式地获取同步状态，这样就可以方便实现不同类型的同步组（ ReentrantLock、ReentrantReadWriteLock、CountDownLatch 等）。 同步器是实现锁（也可以是任意同步组件）的关键，在锁的实现中聚合同步器，利用同步器实现锁的语义。可以这样理解二者之间的关系：
+ 锁是面向使用者的，它定义了使用者与锁交互的接口（比如可以允许两个线程并行访问），隐藏了实现细节； 同步器面向的是锁的实现者，它简化了锁的实现方式，屏蔽了同步状态管理、线程的排队、等待与唤醒等底层操作。或者可以把AQS认为是锁的实现者的一个父类。  AQS的主要方法 按照可见性和继承性可分成四类:
+ public final protected final private protected  protected /** * Attempts to acquire in exclusive mode.</description>
     </item>
     
     <item>
@@ -150,6 +162,21 @@ Liskov替换原则(Liskov-Substituion Principle): 其核心思想是：子类必
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/database/</guid>
       <description>Database Index 常见问题:
  为什么要使用索引 什么样的信息能成为索引 索引的数据结构 密集索引和稀疏索引  索引的数据结构  生成索引,建立二叉查找树进行二分查找 生成索引,建立B-Tree结构进行查找  B-Tree定义 根节点至少包括两个孩子 树中每个节点最多含有m个孩子(m&amp;gt;=2) 除根节点和叶节点外,其他每个节点至少有ceil(m/2)个孩子 所有叶子节点都位于同一层 假设每个非终端节点中包含有n个关键字信息, 其中  Ki(i=1&amp;hellip;n)为关键字, 且关键字按顺序升序排序Ki-1&amp;lt;Ki 关键字的个数n必须满足: [ceil(m/2)-1]&amp;lt;=n&amp;lt;=m-1 非叶子结点的指针: P[1], P[2], &amp;hellip;, P[M]指向关键字大于K[M-1]的子树,其他P[i]指向关键字属于(K[i-1], K[i])的子树   生成索引,建立B+-Tree结构进行查找  定义 非叶子节点的子树指针与关键字个数相同 非叶子节点的子树指针P[i],指向关键字值(K[i],K[i+1])的子树 非叶子节点仅用来索引,数据都保存在叶子节点中 所有叶子节点均有一个链指针指向下一个叶子节点 优点 B+树的磁盘读写代价更低 B+树的查询效率更加稳定 B+树更有利于对数据库的扫描  Hash索引  缺点 仅仅能满足&amp;rdquo;=&amp;ldquo;, &amp;ldquo;IN&amp;rdquo;, 不能使用范围查询 无法被用来避免数据的排序操作 不能利用部分索引键查询 不能避免表扫描 遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高   密集索引和稀疏索引  密集索引: 文件中的每个搜索码值都对应一个索引值,就是叶子节点保存了整行, innodb只有一个 稀疏索引: 文件只为索引码的某些值建立索引项, 比如 innodb的其他索引只存了键位信息和主键, myisam的所有索引都是  以MySQL为例</description>
+    </item>
+    
+    <item>
+      <title>设计原则与设计模式归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/designpattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/designpattern/</guid>
+      <description>开闭原则 一个软件实体如类, 模块和函数都应该对扩展开放,对修改关闭. - 用抽象构建框架, 用实现扩展细节 - 优点: 提高软件系统的可复用性及可维护性
+依赖倒置原则 高层模块不应该依赖低层模块, 两者都应该依赖其抽象 - 抽象不应该依赖细节; 细节应该依赖抽象 - 针对接口编程,不要针对实现编程 - 优点: 可以减少类间的耦合性, 提高系统稳定性, 提高代码可读性和可维护性, 可降低修改程序所造成的风险
+单一职责原则 不要存在多于一个导致类变更的原因 - 一个类/接口/方法只负责一项职责 - 优点: 降低类的复杂度, 提高类的可读性, 提高系统的可维护性, 降低变更引起的风险.
+接口隔离原则 用多个专门的接口, 而不使用单一的总接口, 客户端不应该依赖它不需要的接口 - 优点: 符合我们常说的高内聚低耦合的设计思想. 从而使得类具有很好的可读性, 可扩展性和可维护性
+迪米特原则 一个对象应该对其他对象保持最少的了解. 又叫最少知道原则 - 尽量降低类与类之间的耦合
+创建型 简单工厂模式 工厂模式 定义一个创建对象的接口但让实现这个接口的类来决定实例化哪个类, 工厂方法让类的实例化推迟到子类中进行
+ 适用场景:  创建对象需要大量重复的代码 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节 一个类通过子类来制定创建对象  优点:  用户只需要关心所需要产品对应的工厂,无须关心创建细节 加入新产品符合开闭原则,提高可扩展性  缺点:  类的个数容易过多, 增加复杂度 增加了系统的抽象性和理解难度   ###抽象工厂 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节</description>
     </item>
     
   </channel>

@@ -1691,7 +1691,7 @@ Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</
 
 <p>将一个类的所有属性都设置成final, 并且只允许存在只读方法. 甚至设置类为final不允许继承. 例如String, Double等类.</p>
 
-<p>具有不可变性的类, 需要提供类似修改的功能, 就是提供类似修改的功能. 然后通过<strong>享元模式(Flyweight Pattern)</strong>来避免创建重复的对象. 享元模式本质上是一个对象池, 创建对象之前会先检查对象池里有没有符合要求的对象. 也因此, 具有享元模式的类型的对象不适合做锁.</p>
+<p>��有不可变性的类, 需要提供类似修改的功能, 就是提供类似修改的功能. 然后通过<strong>享元模式(Flyweight Pattern)</strong>来避免创建重复的对象. 享元模式本质上是一个对象池, 创建对象之前会先检查对象池里有没有符合要求的对象. 也因此, 具有享元模式的类型的对象不适合做锁.</p>
 
 <h3 id="copy-on-write模式">Copy-on-Write模式</h3>
 
@@ -1868,6 +1868,42 @@ Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</
 <h4 id="避免-伪共享">避免&rdquo;伪共享&rdquo;</h4>
 
 <h3 id="hikaricp-高性能数据库连接池">HiKariCP 高性能数据库连接池</h3>
+
+<p>HiKariCP是spring2.x默认的数据库连接池.</p>
+
+<h4 id="数据库连接池">数据库连接池</h4>
+
+<p>本质上数据库连接池和线程池一样都是池化资源, 作用都是避免重量级资源的频繁创建和销毁.服务端会在运行期持有一定数量的数据库连接, 当需要执行SQL时, 并不是直接创建一个数据库连接,而是从连接池中获取一个; 当SQL执行完, 也并不是将数据库连接真的关掉, 而是将其归还到连接池中.</p>
+
+<p>执行数据库操作基本上是一系列规范化的步骤:</p>
+
+<ol>
+<li>通过数据源获取一个数据库连接</li>
+<li>创建Statement</li>
+<li>执行SQL</li>
+<li>通过ResultSet获取SQL执行结果</li>
+<li>释放ResultSet</li>
+<li>释放Statement</li>
+<li>释放数据库连接</li>
+</ol>
+
+<h4 id="优化性能的方面">优化性能的方面</h4>
+
+<ol>
+<li>字节码方面优化</li>
+<li>FastList: 执行完数据库操作后,需要依次关闭ResultSet, Statement, Connection. 我们需要能够自动关闭Statement, 为了达到这个目标, Connection就需要跟踪创建的Statement, 最简单的办法就是将创建的Statement保存在数组ArrayList里, 这样当关闭Connection的时候,就可以依次将数组中的所有Statement关闭. 但是ArrayList有可以提升的空间
+
+<ul>
+<li>由于关闭Connection时, 数组中的Statement需要倒序删除,然而ArrayList中remove()是正序检索删除的, 因此HiKariCP自己定义的FastList的remove方法定义为逆序查找, 并且不进行越界检查</li>
+</ul></li>
+<li>ConcurrentBag:
+
+<ul>
+<li>add()</li>
+<li>borrow()</li>
+<li>require()</li>
+</ul></li>
+</ol>
 </article>
     <footer class="post-footer">
       
@@ -1880,7 +1916,7 @@ Future<span style="color:#f92672">&lt;</span>V<span style="color:#f92672">&gt;</
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>122</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     

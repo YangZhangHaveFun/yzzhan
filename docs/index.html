@@ -208,6 +208,17 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/springframework/" class="post-link">Spring Analysis</a></h3>
+    <p class="post-meta">@Yang Zhang · Jul 29, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">JDBC的简单操作  JdbcTemplate  query queryForObject queryForList update execute   ####事务抽象的核心接口 - PlatformTransactionManager - DataSourceTransactionManager - HibernateTransactionManager - JtaTransactionManger - TransactionDefition - Propagation - Isolation - Timeout - Read-only status</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/springframework/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javawebknowledge/" class="post-link">深入理解java网络开发知识的归纳</a></h3>
     <p class="post-meta">@Yang Zhang · Jun 4, 2019 · 4 min read</p>
   </header>
@@ -234,11 +245,14 @@ TCP(Transmission Control Protocol) 传输控制协议简介
   <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/" class="post-link">解析J.U.C源码</a></h3>
-    <p class="post-meta">@Yang Zhang · Jun 2, 2019 · 1 min read</p>
+    <p class="post-meta">@Yang Zhang · Jun 2, 2019 · 4 min read</p>
   </header>
   
-  <p class="post-summary"> Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
-//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 &#43; var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; }</p>
+  <p class="post-summary">Atomic Classes Atomic包的实现主要依赖硬件原子指令CAS的支持.例如在getAndIncrement()方法中调用了unsafe.getAndAddInt()方法. 其中调用了native的compareAndSwapInt方法.
+//例如要在并发环境中对count这个对象执行加一的操作,count原有指为5.  public final int getAndAddInt(Object var1, long var2, int var4) { //var1 指被操作的对象, var2指被操作对象的偏移量, var4值要加的值  //对应例子var1=count, var2=5, var4=1  int var5; do { //通过对象和offset得到内存中这个对象真正的值.  var5 = this.getIntVolatile(var1, var2); } while(!this.compareAndSwapInt(var1, var2, var5, var5 &#43; var4)); 当内存中的值等于对应的偏移量(输入的值)时,执行值的交换操作. return var5; } 队列同步器AQS(AbstractQueuedSynchronizer) AQS是用来构建锁或其他同步组件的基本框架, 其中成员变量有两个
+ int型表示同步状态: 果我们使用锁同步共享变量的时候，我们首先应该要知道这个共享变量的状态（是否已经被其他线程锁住等），这也是这个int成员变量的作用； 内置的FIFO队列: 第二个就是既然是同步访问共享资源，肯定会有一些线程无法获取到共享资源等待获取锁而进入一个容器中进行保存而这容器就是这个内置的FIFO队列。  子类推荐被定义为自定义同步组件的静态内部类，同步器自身没有实现任何同步接口，它仅仅是定义了若干同步状态获取和释放的方法来供自定义同步组件使用，同步器既可以支持独占式地获取同步状态，也可以支持共享式地获取同步状态，这样就可以方便实现不同类型的同步组（ ReentrantLock、ReentrantReadWriteLock、CountDownLatch 等）。 同步器是实现锁（也可以是任意同步组件）的关键，在锁的实现中聚合同步器，利用同步器实现锁的语义。可以这样理解二者之间的关系：
+ 锁是面向使用者的，它定义了使用者与锁交互的接口（比如可以允许两个线程并行访问），隐藏了实现细节； 同步器面向的是锁的实现者，它简化了锁的实现方式，屏蔽了同步状态管理、线程的排队、等待与唤醒等底层操作。或者可以把AQS认为是锁的实现者的一个父类。  AQS的主要方法 按照可见性和继承性可分成四类:
+ public final protected final private protected  protected /** * Attempts to acquire in exclusive mode.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/juc_source/">Read More →</a>
   </footer>
@@ -329,17 +343,6 @@ Part 2（自动内存管理机制） Java内存区域与内存溢出异常 运�
  Centralised Database systems Client-Server Distributed Database systems World Wide Web Grid Computing/Database &amp; Cloud Computing/Data Centres  Hardware Structure Memory Hierarchy The design and chip and cache is relatively similar. Cache design aims to catch several stage of</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/adb/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/" class="post-link">Java知识点杂记</a></h3>
-    <p class="post-meta">@Yang Zhang · Apr 15, 2019 · 0 min read</p>
-  </header>
-  
-  <p class="post-summary"></p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/">Read More →</a>
   </footer>
 </article>
  

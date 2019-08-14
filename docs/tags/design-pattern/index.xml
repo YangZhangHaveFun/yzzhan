@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Design Pattern on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/design-pattern/</link>
+    <description>Recent content in Design Pattern on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/design-pattern/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>设计原则与设计模式归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/designpattern/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/designpattern/</guid>
+      <description>开闭原则 一个软件实体如类, 模块和函数都应该对扩展开放,对修改关闭. - 用抽象构建框架, 用实现扩展细节 - 优点: 提高软件系统的可复用性及可维护性
+依赖倒置原则 高层模块不应该依赖低层模块, 两者都应该依赖其抽象 - 抽象不应该依赖细节; 细节应该依赖抽象 - 针对接口编程,不要针对实现编程 - 优点: 可以减少类间的耦合性, 提高系统稳定性, 提高代码可读性和可维护性, 可降低修改程序所造成的风险
+单一职责原则 不要存在多于一个导致类变更的原因 - 一个类/接口/方法只负责一项职责 - 优点: 降低类的复杂度, 提高类的可读性, 提高系统的可维护性, 降低变更引起的风险.
+接口隔离原则 用多个专门的接口, 而不使用单一的总接口, 客户端不应该依赖它不需要的接口 - 优点: 符合我们常说的高内聚低耦合的设计思想. 从而使得类具有很好的可读性, 可扩展性和可维护性
+迪米特原则 一个对象应该对其他对象保持最少的了解. 又叫最少知道原则 - 尽量降低类与类之间的耦合
+创建型 简单工厂模式 工厂模式 定义一个创建对象的接口但让实现这个接口的类来决定实例化哪个类, 工厂方法让类的实例化推迟到子类中进行
+ 适用场景:  创建对象需要大量重复的代码 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节 一个类通过子类来制定创建对象  优点:  用户只需要关心所需要产品对应的工厂,无须关心创建细节 加入新产品符合开闭原则,提高可扩展性  缺点:  类的个数容易过多, 增加复杂度 增加了系统的抽象性和理解难度   ###抽象工厂 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节</description>
+    </item>
+    
+  </channel>
+</rss>
