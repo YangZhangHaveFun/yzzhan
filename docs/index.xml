@@ -445,7 +445,7 @@ MDPs have been successfully applied to planning in many domains: robot navigatio
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/swen30006/</guid>
-      <description></description>
+      <description>UML Related Some Definitions  SuD: system-under-discussion actor: something with behaviour, such as a person, computer system or organisation (e.g. a cashier).  types: primary: has user goals fulfilled through using services of the SuD provides a service (e.g. information) to the SuD(e.g. an automated payment authorization service). Often a computer system, but could be an organization or person. (user goals drive the use case) supporting: provides a service (e.</description>
     </item>
     
     <item>

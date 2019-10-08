@@ -24,21 +24,21 @@
 
   
   
-  <meta name="description" content="">
+  <meta name="description" content="UML Related Some Definitions  SuD: system-under-discussion actor: something with behaviour, such as a person, computer system or organisation (e.g. a cashier).  types: primary: has user goals fulfilled through using services of the SuD provides a service (e.g. information) to the SuD(e.g. an automated payment authorization service). Often a computer system, but could be an organization or person. (user goals drive the use case) supporting: provides a service (e.">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="SWEN-30006 Software Modelling and Design">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="UML Related Some Definitions  SuD: system-under-discussion actor: something with behaviour, such as a person, computer system or organisation (e.g. a cashier).  types: primary: has user goals fulfilled through using services of the SuD provides a service (e.g. information) to the SuD(e.g. an automated payment authorization service). Often a computer system, but could be an organization or person. (user goals drive the use case) supporting: provides a service (e.">
     <meta name="twitter:image" content="/images/avatar.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="SWEN-30006 Software Modelling and Design">
-  <meta property="og:description" content="">
+  <meta property="og:description" content="UML Related Some Definitions  SuD: system-under-discussion actor: something with behaviour, such as a person, computer system or organisation (e.g. a cashier).  types: primary: has user goals fulfilled through using services of the SuD provides a service (e.g. information) to the SuD(e.g. an automated payment authorization service). Often a computer system, but could be an organization or person. (user goals drive the use case) supporting: provides a service (e.">
   <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/swen30006/">
   <meta property="og:image" content="/images/avatar.png">
 
@@ -213,9 +213,657 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">SWEN-30006 Software Modelling and Design</h1>
-      <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 0 min read</p>
+      <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 13 min read</p>
     </header>
-    <article class="post-content"></article>
+    <article class="post-content">
+
+<h2 id="uml-related">UML Related</h2>
+
+<h4 id="some-definitions">Some Definitions</h4>
+
+<ul>
+<li>SuD: system-under-discussion</li>
+<li>actor: something with behaviour, such as a person, computer system or organisation (e.g. a cashier).
+
+<ul>
+<li>types:</li>
+<li>primary: has user goals fulfilled through using services of the SuD provides a service (e.g. information) to the SuD(e.g. an automated payment authorization service). Often a computer system, but could be an organization or person. (user goals drive the use case)</li>
+<li>supporting: provides a service (e.g. information) to the SuD(e.g. an automated payment authorization service). Often a computer system, but could be an organization or person. (clarifies external interfaces and protocols)</li>
+<li>offstage: has an interest in the behaviour of the use case, but is not primary or supporting (ensure all interests identified/satisfied)</li>
+</ul></li>
+<li>scenario: a specific sequence of actions and interactions between actors and the SuD.</li>
+<li>use case: a collection of related success and failure scenarios that describe an actor using the SuDto support a goal.
+
+<ul>
+<li>use cases are text, not diagrams.</li>
+<li>use cases are not object-oriented.</li>
+</ul></li>
+</ul>
+
+<h5 id="use-case-characteristics">Use Case Characteristics</h5>
+
+<ul>
+<li>Use Cases are text descriptions of an actorusing the system to achieve a goal.</li>
+<li>Use Cases cover both success and failure scenarios.</li>
+<li>Use cases can be at different levels of detail.</li>
+<li>Use Case Diagrams summarise use cases and show some relationships between them.</li>
+</ul>
+
+<h3 id="oo-analysis">OO Analysis</h3>
+
+<h4 id="definitions">Definitions</h4>
+
+<ul>
+<li>Analysis: : investigation of the problem &amp; requirements</li>
+
+<li><p>Object oriented analysis:  : emphases finding and describing objects and concepts in the problem domain</p></li>
+
+<li><p>Design: : a conceptual solution to a problem that meets the requirements.</p></li>
+
+<li><p>Object oriented design: : emphasises defining software objects and their collaboration.</p></li>
+
+<li><p>Implementation: : a concrete solution to a problem that meets the requirements.</p></li>
+
+<li><p>Object oriented implementation: implementation in object oriented languages and technologies.</p></li>
+</ul>
+
+<dl>
+<dt>OO Analysis(Object oriented analysis)</dt>
+<dd>emphases finding anddescribing objects and related concepts in theproblem domain</dd>
+</dl>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/ooanalysis.PNG" alt="reactor model" /></p>
+
+<p>Here we show the relationships between requirements, domain model and design model.</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/req.PNG" alt="reactor model" /></p>
+
+<ul>
+<li>we can extract useful info(Conceptual classes terms, concepts attributes, associations) from requirements.</li>
+<li>The domain objects, attributes, and associations undergo state changes</li>
+<li>conceptual classes in domain model inspire the names of some software classes in the design.</li>
+</ul>
+
+<h4 id="domain-model-procedure">Domain Model Procedure</h4>
+
+<ol>
+<li>Find the conceptual classes</li>
+<li>Draw them as classes in a UML class diagram</li>
+<li>Add associations and attributes</li>
+</ol>
+
+<h5 id="find-the-conceptual-classes">Find the conceptual classes</h5>
+
+<p>it&rsquo;s visualization of a real-world concept in the domain of interest. it is a not a picture of a software class.</p>
+
+<ul>
+<li>software artifact is not part of domain model such as database</li>
+<li>software class is not part of domain model such as interval classes</li>
+</ul>
+
+<p>There are three strategies:</p>
+
+<ul>
+<li><strong>Reuse or modify existing models</strong>
+
+<ul>
+<li>Standardised/adopted domain model</li>
+<li>Organisational domain model</li>
+</ul></li>
+<li><strong>Use a category list</strong>: make a list of candidate conceptual classes in the domain, based on commonly occurring categories.</li>
+<li><strong>Identify noun phrases</strong>: Make a list of candidate conceptual classes or attributes by identifying nouns in textual domain descriptions.</li>
+</ul>
+
+<h5 id="associations">Associations</h5>
+
+<p>An association represents some meaningful and significant relationship between classes.</p>
+
+<ul>
+<li>Knowledge of the relationship needs to be preserved</li>
+<li>Derived from the Common Associations List</li>
+<li>Significant in the domain</li>
+</ul>
+
+<h5 id="description-class">Description Class</h5>
+
+<p>A description class contains information that describes something else; it should be used when:</p>
+
+<ul>
+<li>Groups of items share the same description</li>
+<li>Items need to be described even when there are currently no examples.</li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/desc.PNG" alt="reactor model" /></p>
+
+<h4 id="design-model-procedure">Design Model Procedure</h4>
+
+<p>Transfer from Domain Model to Design Model
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/oomodel.PNG" alt="reactor model" /></p>
+
+<h3 id="ssd-system-sequence-diagram">SSD(system sequence diagram)</h3>
+
+<dl>
+<dt>System Sequence Diagram (SSD)</dt>
+<dd>In software engineering, a system sequence diagram (SSD) is a sequence diagram that shows, for a particular scenario of a use case, the events that external actors generate, their order, and possible inter-system events.</dd>
+</dl>
+
+<h5 id="lifelines-different-participants">Lifelines: Different Participants</h5>
+
+<ul>
+<li>objectslifeline box representing an unnamed instance of class: <code>:Sale</code></li>
+<li>lifeline box representing a named instance: <code>s1:Sale</code></li>
+<li>lifeline box representing an instance of an ArrayList class, parameterized (templatized) to hold Sale objects：<code>sales: ArrayList&lt;Sale&gt;</code></li>
+<li>lifeline box representing one instance of class Sale, selected from the salesArrayList: <code>&lt;Sale&gt;collectionx</code></li>
+<li>lifeline box representing the class Font, or more precisely, that Font is an instance of class Class – an instance of a metaclass: <code>«metaclass» Font</code></li>
+<li>exampleList is an interfacein UML 1.x we could not use an interface here, but in UML 2, this (or an abstract class) is legal: <code>x : List</code></li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/lifeline.PNG" alt="reactor model" /></p>
+
+<h5 id="messages-and-the-execution-specification-bar">Messages and the Execution Specification Bar</h5>
+
+<ul>
+<li>a found message whose sender will not be specified</li>
+<li>execution specification bar indicates <strong>focus of control</strong></li>
+
+<li><p>typical synchronous message shown with a filled-arrow line
+<img src="https://images.cnblogs.com/cnblogs_com/ywqu/Sequence%20Diagram/Message.gif" alt="reactor model" /></p>
+
+<h6 id="message">Message</h6></li>
+
+<li><p>Synchronous message: a synchronous message is used when the sender waits for the receiver to process the message and return before carrying on with another message.</p></li>
+
+<li><p>Asynchronous message: An asynchronous message is used when the message caller does not wait for the receiver to process the message and return before sending other messages to other objects within the system.
+<img src="https://d3n817fwly711g.cloudfront.net/uploads/2017/01/Asynchronous-Message-example.png" alt="" /></p></li>
+
+<li><p>Return message: A return message is used to indicate that the message receiver is done processing the message and is returning control over to the message caller. Return messages are optional notation pieces, for an activation bar that is triggered by a synchronous message always implies a return message.
+<img src="https://d3n817fwly711g.cloudfront.net/uploads/2017/01/Return-Message-Example.png" alt="" /></p></li>
+
+<li><p>Participant  creation message: Objects do not necessarily live for the entire duration of the sequence of events. Objects or participants can be created according to the message that is being sent.
+<img src="https://d3n817fwly711g.cloudfront.net/uploads/2017/01/Participant-creation-example.png" alt="" /></p></li>
+
+<li><p>Participant destruction message: Likewise, participants when no longer needed can also be deleted from a sequence diagram. This is done by adding an ‘X’ at the end of the lifeline of the said participant.
+<img src="https://d3n817fwly711g.cloudfront.net/uploads/2017/01/Participation-Destruction-Message.png" alt="" /></p></li>
+
+<li><p>Reflexive message: When an object sends a message to itself, it is called a reflexive message.
+<img src="https://d3n817fwly711g.cloudfront.net/blog/wp-content/uploads/2017/01/Reflexive-message.png" alt="" /></p></li>
+</ul>
+
+<h6 id="activation-bars">Activation Bars</h6>
+
+<p>Activation bar is the box placed on the lifeline.  It is used to indicate that an object is active (or instantiated) during an interaction between two objects. The length of the rectangle indicates the duration of the objects staying active.</p>
+
+<h5 id="uml-frames">UML Frames</h5>
+
+<ul>
+<li><code>loop</code>: (loop) [condition or items]</li>
+<li><code>if/then</code>: (opt) [condition]</li>
+<li><code>if/then/else</code>: (alt) [condition or else] with dashed separator</li>
+<li><code>sd</code>: Indicates that the frame contains an interaction diagram, usually a UML sequence diagram although UML communication diagrams are also common options.</li>
+<li><code>ref</code>: References another diagram or a method definition.</li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/sdref.PNG" alt="reactor model" /></p>
+
+<h3 id="designing-for-visibility">DESIGNING FOR VISIBILITY</h3>
+
+<dl>
+<dt>VISIBILITY</dt>
+<dd>Ability of an object to “see” or refer to another object</dd>
+</dl>
+
+<p>Four types of visibility:</p>
+
+<ul>
+<li>Attribute Visibility</li>
+<li>Parameter Visibility
+
+<ul>
+<li>Parameter to Attribute Visibility</li>
+</ul></li>
+<li>Local Visibility</li>
+<li>Global Visibility</li>
+</ul>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/vis.PNG" alt="reactor model" /></p>
+
+<h3 id="communication-diagram">Communication Diagram</h3>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/seqcom.PNG" alt="reactor model" /></p>
+
+<h3 id="object-oriented-software-design">Object Oriented Software Design</h3>
+
+<dl>
+<dt>OOD</dt>
+<dd><p>emphasises defining software objects and their collaboration.</p></dd>
+<dd><p>Assignment of responsibilities: Principles and Patterns</p></dd>
+<dd><p>Structure and connectedness: Levels, including Architecture</p></dd>
+<dd><p>Interfaces: methods, data types, and protocols: External and Internal</p></dd>
+</dl>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/sampleLayers.PNG" alt="reactor model" /></p>
+
+<p>OO technology can be applied throughout an application but we mainly focus on application logic layer.</p>
+
+<ul>
+<li>Other layers tend to be technology/platform dependent.</li>
+<li>Design approach/patterns for other layers tends to be technology constrained and changeable.</li>
+<li>OO design of core logic layer similar across technologies.</li>
+<li>Essential OO design skills are applicable to other layers.</li>
+</ul>
+
+<h5 id="contents">Contents</h5>
+
+<p>Design Class Diagram contains:</p>
+
+<ul>
+<li>Software Types</li>
+<li>Methods</li>
+<li>Navigation</li>
+<li>Software only Classes</li>
+<li>Visibility Annotations</li>
+</ul>
+
+<h5 id="visibility-in-design">Visibility in Design</h5>
+
+<p>Design requires assigning responsibilities and objects cooperating to achieve required outcomes</p>
+
+<ul>
+<li>grouping highly related responsibilities</li>
+<li>minimising dependency on other elements</li>
+</ul>
+
+<h3 id="responsibility-driven-design">Responsibility Driven Design</h3>
+
+<p>RDD sees an OO Design as a community of collaborating responsible objects.</p>
+
+<p>RDD involves:</p>
+
+<ul>
+<li>assigning responsibilities to classes</li>
+<li>which should be based on proven principles.</li>
+</ul>
+
+<h2 id="design-pattern">Design Pattern</h2>
+
+<dl>
+<dt>Pattern</dt>
+<dd>is a recurring successful application
+of expertise in a particular domain.</dd>
+</dl>
+
+<h4 id="advantages-of-patterns">Advantages of patterns</h4>
+
+<ul>
+<li>Capture expertise and make it accessible to non experts in a standard form.</li>
+<li>Facilitate communication among practitioners by providing a common language.</li>
+<li>Make it easier to reuse successful applications of expertise.</li>
+<li>Facilitate generating modified applications</li>
+<li>Improve understandability.</li>
+<li>Simplify documentation.</li>
+</ul>
+
+<h4 id="responsibility">Responsibility</h4>
+
+<dl>
+<dt>Responsibility</dt>
+<dd>A contract or obligation of a classifier</dd>
+</dl>
+
+<p>Doing responsibilities include:</p>
+
+<ul>
+<li>directly e.g. create object, perform calculation</li>
+<li>initiate action in other objects</li>
+<li>control and coordinate activities in other objects</li>
+</ul>
+
+<p>Knowing responsibilities include knowledge of:</p>
+
+<ul>
+<li>Private encapsulated data</li>
+<li>Related objects</li>
+<li>Derivable or calculable items</li>
+</ul>
+
+<h3 id="grasp-designing-objects-with-responsibilities">GRASP: DESIGNING OBJECTS WITH RESPONSIBILITIES</h3>
+
+<p>GRASP(General Responsibility Assignment Software Patterns) contains five principles:</p>
+
+<ul>
+<li>Creator</li>
+<li>Information Expert</li>
+<li>Low Coupling</li>
+<li>Controller (in WS)</li>
+<li>High Cohesion</li>
+</ul>
+
+<p>GRASP principles as a generalization of other design patterns.</p>
+
+<h4 id="creator">Creator</h4>
+
+<p>Creator prinple aims to address the problem that who Who should be responsible for creating a new instance of some class?</p>
+
+<p>Creation of objects:</p>
+
+<ul>
+<li>One of the most common OO activities</li>
+<li>Useful to have a general principle to deal with this</li>
+<li>Want outcomes with low coupling, increased clarity, encapsulation, and reusability</li>
+</ul>
+
+<p>Assign class B responsibility to create instances of class A if one of these is true (the more the better):</p>
+
+<ul>
+<li>B “contains” or compositely aggregates A.</li>
+<li>B records A.</li>
+<li>B closely uses A.</li>
+<li>B has the initializing data for A that will be passed to A when it is created. Thus B is an Expert with respect to creating A.</li>
+</ul>
+
+<p>If &gt;1 applies, choose B which aggregates contains A.</p>
+
+<p>Creator Pattern applied, the dynamic model and static model should look as follow to illustrate the creator pattern.</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/cre-dm.PNG" alt="reactor model" />
+<img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/cre-sm.PNG" alt="reactor model" /></p>
+
+<h4 id="information-expert">Information Expert</h4>
+
+<p>Problem: What is a general principle of assigning  responsibilities to objects?</p>
+
+<ul>
+<li>Useful to have a general principle to guide choice of assignment</li>
+<li>Want outcomes that are easier to understand, maintain, extend, and reuse</li>
+</ul>
+
+<p>Solution: Assign responsibility to the information expert the class that has the information necessary to fulfil the responsibility.</p>
+
+<ul>
+<li>Start assigning responsibilities by clearly stating the responsibility.</li>
+<li>Look in Domain Model or Design Model?
+
+<ul>
+<li>If relevant classes in Design, look there first.</li>
+<li>Otherwise look in Domain, and use or expand to inspire creation of design classes.</li>
+</ul></li>
+</ul>
+
+<h4 id="low-coupling">Low Coupling</h4>
+
+<p>Problem: How to support low dependency, low change impact, and increased reuse?</p>
+
+<p>Measure of how strongly one element is connected to, has knowledge of or relies on others.</p>
+
+<p>Solution: Assign responsibility so that coupling remains low. Use this principle to evaluate alternatives.</p>
+
+<h4 id="high-cohesion">High Cohesion</h4>
+
+<p><strong>Problem</strong>: How to keep objects focussed, understandable, and manageable, and as a side effect, support Low Coupling?</p>
+
+<p>The functionality of cohession is: A measure of how strongly (functionally) related and focussed the responsibilities of an element are.</p>
+
+<p><strong>Solution</strong>: Assign a responsibility so that cohesion remains high. Use this to evaluate alternatives.</p>
+
+<p><strong>Contraindications</strong>: Lower cohesion is sometimes justified to meet nonfunctional requirements</p>
+
+<blockquote>
+<p>Note: Coupling and cohesion are fundamental design properties which are interdependent: both must be considered together.</p>
+</blockquote>
+
+<h3 id="grasp-patterns-the-other-four-patterns">GRASP PATTERNS(The other four patterns)</h3>
+
+<ul>
+<li>Polymorphism</li>
+<li>Indirection</li>
+<li>Pure fabrication</li>
+<li>Protected Variation</li>
+</ul>
+
+<h4 id="polymorphism">Polymorphism</h4>
+
+<p><strong>Problem</strong>: How to handle alternatives based on type? How to create pluggable software components?</p>
+
+<p><strong>Solution</strong>:</p>
+
+<ul>
+<li>use operations with the same interface</li>
+<li>to assign responsibilities for the behaviour</li>
+<li>to the types for which the behaviour varies.</li>
+</ul>
+
+<h5 id="generalization-specialization-class-hierarchy-1">Generalization Specialization Class Hierarchy (1)</h5>
+
+<p>Generalization Steps:</p>
+
+<ul>
+<li>Identify commonality among concepts</li>
+<li>Define superclass (general concepts)</li>
+<li>Define relationships with subclasses (specialized concepts)</li>
+</ul>
+
+<p>Reasons:</p>
+
+<ul>
+<li>Economy of expression</li>
+<li>Reduction in repeated information</li>
+<li>Improved comprehension</li>
+</ul>
+
+<h6 id="subclasses">Subclasses</h6>
+
+<p>Guideline for creating subclasses:</p>
+
+<ol>
+<li>Subclass has additional attributes of interest</li>
+<li>Subclass has additional associations of interest</li>
+<li>Subclass is operated on, handled, reacted to, or manipulated differently to the other classes in noteworthy ways</li>
+</ol>
+
+<p>Overall Guideline for modelling:</p>
+
+<ol>
+<li>Declare superclasses abstract</li>
+<li>Append the superclass name to the subclass</li>
+</ol>
+
+<h4 id="pure-fabrication">Pure Fabrication</h4>
+
+<p><strong>Problem</strong>: Which object should have responsibility when solutions offered by (e.g.) Expert violate High Cohesion and Low Coupling?</p>
+
+<ul>
+<li>Use domain objects in design to lower representational gap</li>
+<li>Sometimes using only domain objects in design result in poor coupling, cohesion, or reuse</li>
+</ul>
+
+<p><strong>Solution</strong>: Assign a highly cohesive set of responsibilities to a class not in the problem domain:</p>
+
+<ul>
+<li>Made up to support high cohesion, low coupling, and reuse.</li>
+<li>Fabrication of the imagination, for the purpose of ensuring that the design is very pure</li>
+<li>Name is also an English idiom for an intentional lie, something you do when desperate!</li>
+</ul>
+
+<h4 id="indirection">Indirection</h4>
+
+<p><strong>Problem</strong>: Where to assign a responsibility to avoid direct coupling between two (or more) s/w elements? How to de couple objects so that low coupling is supported and reuse potential remains higher?</p>
+
+<p><strong>Solution</strong>: Assign the responsibility to an intermediate object to mediate between the other components or services so that they are not directly coupled.</p>
+
+<ul>
+<li>Intermediary creates an indirection between the other components.</li>
+</ul>
+
+<p><strong>Contraindications</strong>: Higher complexity in design needs to be justified by the lower coupling</p>
+
+<h4 id="protected-variations">Protected Variations</h4>
+
+<p><strong>Problem</strong>: How to design objects, subsystems, and systems so that the variations or instability in these elements does not have an undesirable impact on other elements?</p>
+
+<p>Points of change include:</p>
+
+<ul>
+<li>variation point: variations in existing system or requirements (e.g. multiple tax calculators)</li>
+<li>evolution point: speculative variations that may arise in the future</li>
+</ul>
+
+<p><strong>Solution</strong>:</p>
+
+<ul>
+<li>Identify points of known or predicted variation or instability</li>
+<li>Assign responsibilities to create a stable interface around them</li>
+</ul>
+
+<blockquote>
+<p>Open Closed Principle (OCP): Modules should be both open (for extension; adaptable) and closed (to modification that affects clients).</p>
+</blockquote>
+
+<p><strong>Contraindications</strong>: Cost of speculative “future proofing” at evolution points can outweigh the benefits</p>
+
+<p>Final relationship of GRASP patterns</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/grasp.PNG" alt="reactor model" /></p>
+
+<h3 id="uml-state-machine-diagrams-and-modelling">UML STATE MACHINE DIAGRAMS AND MODELLING</h3>
+
+<dl>
+<dt>State Machine</dt>
+<dd>describes the behaviour of an object in terms of <strong>events that affect the object</strong> and the <strong>state of the object between events</strong>.</dd>
+</dl>
+
+<p>Example:</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/telephone.PNG" alt="reactor model" /></p>
+
+<h4 id="definitions-1">Definitions</h4>
+
+<ul>
+<li>Event: a significant or noteworthy occurrence.</li>
+<li>State: condition of the object at a moment in time.</li>
+<li>Transition: directed relationship between two states such that an event can cause the object to change from the prior state to the subsequent state.</li>
+<li>state-dependent object: Reacts differently to events depending on the object’s state</li>
+<li>state-independent object: For all events of interest, an object always reacts to the event the same way</li>
+</ul>
+
+<h4 id="guidelines-for-applying-state-machine-diagrams">Guidelines for Applying State Machine Diagrams</h4>
+
+<ul>
+<li>Guideline 1: consider state machines for statedependent objects with complex behaviour.</li>
+<li>Guideline 2: complex state-dependent classes are less common for business information systems, and more common in communications and control applications.</li>
+</ul>
+
+<h5 id="nested-state">Nested State</h5>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/tele.PNG" alt="reactor model" /></p>
+
+<ul>
+<li>Transition into Active (via off hook) transitions into substate PlayingDialTone</li>
+<li>All substates of Active inherit the onhook transition.</li>
+</ul>
+
+<h5 id="choice-pseudostate">Choice Pseudostate</h5>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/enterpin.PNG" alt="reactor model" /></p>
+
+<h3 id="gof-design-patterns">GOF DESIGN PATTERNS</h3>
+
+<p>Gang of Four Design Patterns:</p>
+
+<ul>
+<li>Creational Patterns (5): abstract the object instantiation process.</li>
+<li>Structural Patterns (7): describe how classes and objects can be combined to form larger structures.</li>
+<li>Behavioural Patterns (11): are most specifically concerned with communication between objects.</li>
+</ul>
+
+<h4 id="adapter-pattern">Adapter Pattern</h4>
+
+<p><strong>Problem</strong>: How to resolve incompatible interfaces, or provide a stable interface to similar components with different interfaces?</p>
+
+<p><strong>Solution</strong>: Convert the original interface of a component into another interface, through an intermediate adapter object.</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/disney.PNG" alt="reactor model" /></p>
+
+<p>After Adapter Pattern applied, the design diagram should be:</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/disney_design.PNG" alt="reactor model" /></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IDisneyAdapter</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">move</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SlothAdapter</span> <span style="color:#66d9ef">implements</span> IDisneyAdapter <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> Sloth theSloth<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">SlothAdapter</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        theSloth <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Sloth<span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">move</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        theSloth<span style="color:#f92672">.</span><span style="color:#a6e22e">wake</span><span style="color:#f92672">();</span>
+        theSloth<span style="color:#f92672">.</span><span style="color:#a6e22e">pushToClimb</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DisneyMadess</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//With adapter
+</span><span style="color:#75715e"></span>        IDisneyAdapter slothAdt <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SlothAdapter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Flash&#34;</span><span style="color:#f92672">);</span>
+        slothAdt<span style="color:#f92672">.</span><span style="color:#a6e22e">move</span><span style="color:#f92672">();</span>
+        IDisneyAdapter ironManAdt <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IronManAdapter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Tony&#34;</span><span style="color:#f92672">);</span>
+        ironManAdt<span style="color:#f92672">.</span><span style="color:#a6e22e">move</span><span style="color:#f92672">();</span>
+        IDisneyAdapter trooperAdt <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrooperAdapter<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Storm&#34;</span><span style="color:#f92672">);</span>
+        trooperAdt<span style="color:#f92672">.</span><span style="color:#a6e22e">move</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h5 id="adapter-in-relation-to-grasp-principles">Adapter in relation to GRASP Principles</h5>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/adaptor.PNG" alt="reactor model" /></p>
+
+<h4 id="factory-design-pattern">Factory Design Pattern</h4>
+
+<p><strong>Problem</strong>: Who should be responsible for creating objects when there are special considerations, such as complex creation logic, a desire to separate the creation responsibilities for better cohesion, and so forth?</p>
+
+<p><strong>Solution</strong>: Create a Pure Fabrication object called a Factory that handles the creation.</p>
+
+<h5 id="simple-factory">Simple Factory</h5>
+
+<p>Simplified GoF Abstract Factory pattern</p>
+
+<p>Advantages:</p>
+
+<ul>
+<li>Separate responsibility of complex creation into cohesive helper objects.</li>
+<li>Hide potentially complex creation logic.</li>
+<li>Allow introduction of performance-enhancing memory management strategies, such as object caching or recycling.</li>
+</ul>
+
+<p><strong>Issues</strong>: How is Factory accessed? How to get visibility to this single ServicesFactory instance? Use <strong>Singleton pattern</strong> to provide a single access point through global visibility</p>
+
+<h4 id="singleton-design-pattern">Singleton Design Pattern</h4>
+
+<p><strong>Problem</strong>: Exactly one instance of a class is allowed—it is a “singleton.” Objects need a global and single point of access.</p>
+
+<p><strong>Solution</strong>: Define a static method of the class that returns the singleton.</p>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/singleton.PNG" alt="reactor model" /></p>
+
+<blockquote>
+<p>UML notation: in a class box, an underlined attribute or method indicates a static (class level) member, rather than an instance member</p>
+
+<p>UML notation: this &lsquo;1&rsquo; can optionally be used to indicate that only one instance will be created (a singleton)</p>
+</blockquote>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/singleton_seq.PNG" alt="reactor model" /></p>
+
+<h4 id="strategy-design-pattern">Strategy Design Pattern</h4>
+
+<p><strong>Problem</strong>: How to design for varying, but related, algorithms or policies? How to design for the ability to change these algorithms or policies?</p>
+
+<p><strong>Solution</strong>: Define each algorithm/policy/strategy in a separate class, with a common interface.</p>
+
+<h4 id="composite-design-pattern">Composite Design Pattern</h4>
+
+<p><strong>Problem</strong>: How to treat a group or composition structure of objects the same way (polymorphically) as a noncomposite (atomic) object?</p>
+
+<p><strong>Solution</strong>: Define classes for composite and atomic objects so that they implement the same interface.</p>
+
+<blockquote>
+<p>UML notation: An abstract class is shown with an italicised name,  abstract methods are also shown with italics</p>
+</blockquote>
+</article>
     <footer class="post-footer">
       
       <ul class="post-tags">
