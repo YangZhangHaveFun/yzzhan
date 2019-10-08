@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>COMP-90054 AI Planning</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  
+  <meta name="description" content="Markov Decision Processes  Classical Planning tools can produce solutions quickly in large search space; but assume:
+ Deterministic events Environments change only as result of an action Perfect knowledge (omniscience) Single actor (omniscience)   Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.
+MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="COMP-90054 AI Planning">
+    <meta name="twitter:description" content="Markov Decision Processes  Classical Planning tools can produce solutions quickly in large search space; but assume:
+ Deterministic events Environments change only as result of an action Perfect knowledge (omniscience) Single actor (omniscience)   Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.
+MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="COMP-90054 AI Planning">
+  <meta property="og:description" content="Markov Decision Processes  Classical Planning tools can produce solutions quickly in large search space; but assume:
+ Deterministic events Environments change only as result of an action Perfect knowledge (omniscience) Single actor (omniscience)   Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.
+MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/ai/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.51">
+
+
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/ai/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Yzzhan Tech Repo">
+<meta name="msapplication-tooltip" content="Yzzhan Tech Repo">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://yangzhanghavefun.github.io/yzzhan/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-152x152.png">
+<link rel="manifest" href="https://yangzhanghavefun.github.io/yzzhan/manifest.json">
+
+
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css" as="style">
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" as="image">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" alt="Avatar">
+  
+  <h2 class="title">Yzzhan Tech Repo</h2>
+  
+  <p class="subtitle">~ Keep Simple &amp; Stupid ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/">Home</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/categories/">Categories</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/tags/">Tags</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/links/">Links</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/about/">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:yzzhan@student.unimelb.edu.au" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/YangZhangHaveFun" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//weibo.com/%e5%88%b9%e9%82%a3%e7%81%ac%e8%a1%8c%e5%b9%b4" title="Weibo" aria-label="Weibo">
+            <span class="icon icon-weibo" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/images/qrcode.jpg" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">COMP-90054 AI Planning</h1>
+      <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 3 min read</p>
+    </header>
+    <article class="post-content">
+
+<h3 id="markov-decision-processes">Markov Decision Processes</h3>
+
+<blockquote>
+<p>Classical Planning tools can produce solutions quickly in large search space; but assume:</p>
+
+<ul>
+<li>Deterministic events</li>
+<li>Environments change only as result of an action</li>
+<li>Perfect knowledge (omniscience)</li>
+<li>Single actor (omniscience)</li>
+</ul>
+</blockquote>
+
+<p>Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.</p>
+
+<p>MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.</p>
+
+<h4 id="markov-property">Markov Property</h4>
+
+<dl>
+<dt>Markov Property</dt>
+<dd>&ldquo;The future is independent of the past given the present&rdquo;</dd>
+</dl>
+
+<p>Relative Equation:  $P(S_{t+1}|S<em>t) = P(S</em>{t+1}|S_1,&hellip;.,S_t)$</p>
+
+<ul>
+<li>$S_t$状态能够捕获历史状态的相关信息</li>
+<li>当当前状态$S_t$已知，历史可以被忽视</li>
+</ul>
+
+<h4 id="markov-process">Markov Process</h4>
+
+<blockquote>
+<p>A Markov process is a memoryless random process, i.e. a sequence of random states $S_1$, $S_2$,&hellip; with the Markov property.</p>
+
+<ul>
+<li>S is a (finite) set of states</li>
+<li>P is a state transition probability matrix, $P<em>{ss&rsquo;} = P[S</em>{t+1}=s&rsquo;|S_t=s]$</li>
+</ul>
+</blockquote>
+
+<p>Markov Process是一个无记忆的随机过程, 是一些具有Markov Property的<strong>随机状态队列</strong>构成, 可以用一个元组$<S,P>$表示, 其中S是有限数量的状态集, P是状态转移概率矩阵.</p>
+
+<h4 id="markov-reward-process">Markov Reward Process</h4>
+
+<p>在Markov Process的基础上增加了奖励R和衰减系数$\gamma$. 此时的元组为: $<S,P,R,\gamma>$</p>
+
+<blockquote>
+<p>R是一个奖励函数, S状态下的奖励是某一时刻(t)处在状态s下在下一时刻(t+1)能获得的奖励期望.</p>
+</blockquote>
+
+<dl>
+<dt>Markov Reward Process</dt>
+<dd><p>contains a tuple $<S,P,R,\gamma>$</p></dd>
+<dd><p>S is a finite set of states</p></dd>
+<dd><p>P is a state transition probability matrix $P<em>{ss&rsquo;} = P[S</em>{t+1}=s&rsquo;|S_t=s]$</p></dd>
+<dd><p>R is a reward function, $R<em>s = E[R</em>{t+1|S_t=s}]$</p></dd>
+<dd><p>$\gamma$ is a discount factor, $\gamma \in [0,1]$</p></dd>
+</dl>
+
+<ul>
+<li>$\gamma$ is a discount factor, $\gamma \in [0,1]$</li>
+</ul>
+
+<h5 id="return">Return</h5>
+
+<p>收获$G_t$为在一个Markov Reward Chain上从t时刻开始往后所有的奖励的有衰减的收益总和.</p>
+
+<p>$G<em>t = R</em>{t+1} + \gamma R<em>{t+2} + \gamma^2R</em>{t+3} +&hellip;=\sum^{\infty}<em>{k=0} \gamma^k R</em>{t+k+1}$</p>
+
+<p>$\gamma$接近0表示趋向于&rdquo;近视&rdquo;性评估, $\gamma$接近1表明偏重考虑远期的利益.</p>
+
+<h4 id="bellman-equations-for-mdps">Bellman Equations for MDPs</h4>
+
+<blockquote>
+<p>Bellman Equations decribe the condition that must hold for a policy to be optimal.</p>
+</blockquote>
+
+<p>For discounted-reward MDPs, the Bellman equation is:
+$V(s)=max<em>{a\in A(s)}\sum</em>{s&rsquo;\in S}P_a(s&rsquo;|s)[r(s,a,s&rsquo;)+\gamma V(s&rsquo;)]$</p>
+
+<p>the reward of an action is : sum of immediate reward for all state possibly + discounted future reward of those states</p>
+
+<p>Another representation of Bellman equation for discounted-reward MDPs. If V(s) is the expected value of being in state s and acting optimally according to our policy, then we can also describe the Q-value of being in a state s, choosing action a and then acting optimally according to our policy as:</p>
+
+<ul>
+<li>Q(s,a) = $\sum_{s&rsquo;\in S}P_a(s&rsquo;|s)[r(s,a,s&rsquo;)+\gamma V(s&rsquo;)]$</li>
+<li>V(s) = $max_{a\in A(s)} Q(s,a)$</li>
+</ul>
+
+<h4 id="value-iteration">Value Iteration</h4>
+
+<blockquote>
+<p>Value Iteration find the optimal function V* solving the Bellman equations iteratively, using the following algorithm:
+- Set $V_0$ to arbitrary value function; eg. $V<em>0$ = 0 for all s.
+- Set $V</em>{i+1}$ to result of Bellman&rsquo;s right hand side using $V<em>i$ in place of V:
+$V</em>{i+1}(s)=max<em>{a\in A(s)}\sum</em>{s&rsquo;\in S}P_a(s&rsquo;|s)[r(s,a,s&rsquo;)+ \gamma V_i(s&rsquo;)]$</p>
+</blockquote>
+
+<p>When $V<em>i$ converges to $V</em>{\infty}$. That is, given an infinite amount of iterations, it will be optimal.</p>
+
+<h3 id="q-learning">Q-Learning</h3>
+
+<ul>
+<li>offline-policy learning(Q-learning): estimates the policy($Q(s&rsquo;,a&rsquo;)$ for the best estimated future state) independent of the current behaviour.</li>
+<li>on-policy learning(SARSA): estimate $Q^\pi(s,a)$ for the current behaviour policy $\pi$. Use the action chosen by the policy for the update.</li>
+</ul>
+
+<h4 id="q-learning-off-policy-learning">Q-learning(off-policy learning)</h4>
+
+<p>Process:</p>
+
+<ol>
+<li>selects an action a;</li>
+<li>takes that actions and observes the reward &amp; next state s&rsquo;</li>
+<li>updates optimistically by assuming the future reward is $max_{a&rsquo;}Q(s&rsquo;, a&rsquo;)$&ndash;that is, it assumes that future behaviour will be optimal</li>
+</ol>
+
+<h4 id="sarsa-on-policy-learning">SARSA(on-policy learning)</h4>
+
+<p>Process:</p>
+
+<ol>
+<li>selects action a&rsquo; for the next loop iteration</li>
+<li>in the next iteration, takes that action and observes the reward &amp; next state s&rsquo;</li>
+<li>only then chooses a&rsquo; for the next action chosen</li>
+<li>updates using the estimate for the actual next action chosen - which may not be the greediest one</li>
+</ol>
+
+<p>On-policy learning is more appropriate when we want to optimise the behaviour of an agent who learns while operating in its environment.</p>
+
+<ul>
+<li>If we know the MDP:
+
+<ul>
+<li>Offline: Value Iteration, Policy Iteration</li>
+<li>Online: Monte Carlo Search Tree and related</li>
+</ul></li>
+<li>If we do not know MDP:
+
+<ul>
+<li>Offline: Reinforcement learning</li>
+<li>Online: Monte Carlo Tree Search/ SARSA</li>
+</ul></li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/algorithm"><span class="tag">Algorithm</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/ai"><span class="tag">AI</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/planning"><span class="tag">Planning</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>737339</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 Yzzhan Tech Repo</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://yangzhanghavefun.github.io/yzzhan/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

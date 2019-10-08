@@ -7,15 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Sat, 12 Jan 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 29 Aug 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Ai</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/ai/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Algorithm</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</link>
-      <pubDate>Sat, 12 Jan 2019 01:37:56 +0800</pubDate>
+      <pubDate>Thu, 29 Aug 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/</guid>
       <description></description>
@@ -69,9 +78,18 @@
     <item>
       <title>Concurrency</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/tags/concurrency/</link>
-      <pubDate>Tue, 04 Jun 2019 01:37:56 +0800</pubDate>
+      <pubDate>Thu, 05 Sep 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/concurrency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Container</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/container/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/container/</guid>
       <description></description>
     </item>
     
@@ -81,6 +99,15 @@
       <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design Modelling</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/design-modelling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/design-modelling/</guid>
       <description></description>
     </item>
     
@@ -108,6 +135,15 @@
       <pubDate>Wed, 17 Apr 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/distributed/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Domain Model</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/domain-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/domain-model/</guid>
       <description></description>
     </item>
     
@@ -186,7 +222,7 @@
     <item>
       <title>Java</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/tags/java/</link>
-      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 05 Sep 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/java/</guid>
       <description></description>
@@ -198,6 +234,15 @@
       <pubDate>Mon, 13 May 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/jvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kube</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/kube/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/kube/</guid>
       <description></description>
     </item>
     
@@ -256,6 +301,24 @@
     </item>
     
     <item>
+      <title>Paas</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/paas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/paas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Planning</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/planning/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/planning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/tags/python/</link>
       <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
@@ -270,6 +333,15 @@
       <pubDate>Sat, 16 Mar 2019 01:37:56 +0800</pubDate>
       
       <guid>https://yangzhanghavefun.github.io/yzzhan/tags/search-engine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sequence Model</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/tags/sequence-model/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/tags/sequence-model/</guid>
       <description></description>
     </item>
     

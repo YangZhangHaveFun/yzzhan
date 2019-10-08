@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Sat, 12 Jan 2019 01:37:56 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 29 Aug 2019 01:37:56 +0800</lastBuildDate>
     
 	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>对算法笔试题的总结</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/alg/</link>
+      <pubDate>Thu, 29 Aug 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/alg/</guid>
+      <description>算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&amp;lt;int&amp;gt; map(128,0); for(auto c: t) map[c]++; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&amp;lt;s.size()){ if(map[s[end++]]--&amp;gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&amp;lt;d) d=end-(head=begin); if(map[s[begin++]]++==0) counter++; //make it invalid  } } return d==INT_MAX? &amp;#34;&amp;#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.</description>
+    </item>
     
     <item>
       <title>Detailed algorithm For Hash Function</title>
@@ -20,6 +31,17 @@
       <guid>https://yangzhanghavefun.github.io/yzzhan/post/hash_function/</guid>
       <description>Hash Function There will be three topics related to HASH FUNCTION in this article. Generally, Hash Function could be divided into two part, Block cipher construct and dedicated hash function. Our focus is on dedicated function, which contains three aspects.
  MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</description>
+    </item>
+    
+    <item>
+      <title>COMP-90054 AI Planning</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/ai/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/ai/</guid>
+      <description>Markov Decision Processes  Classical Planning tools can produce solutions quickly in large search space; but assume:
+ Deterministic events Environments change only as result of an action Perfect knowledge (omniscience) Single actor (omniscience)   Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.
+MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.</description>
     </item>
     
   </channel>

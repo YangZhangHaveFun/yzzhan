@@ -208,6 +208,30 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/" class="post-link">对操作系统中并发的读书总结</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> 这篇文章是对&lt;&gt;关于进程,线程等并发相关的知识点的总结. 以下内容分为四个部分, 进程的描述和控制, 线程, 并发性, 并发中的死锁和饥饿.
+进程的描述和控制 线程 并发性 并发中的死锁和饥饿 </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/concurrencyinoperatingsystem/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/" class="post-link">Notes for Cluster and Cloud Computing(COMP90024)</a></h3>
+    <p class="post-meta">@Yang Zhang · Apr 17, 2019 · 30 min read</p>
+  </header>
+  
+  <p class="post-summary">Information Session Cloud Characteristics:
+ On-demand self-service: A consumer can provision computing capabilities as needed without requiring human interaction with each service provider. Networked access: Capabilities are available over the network and accessed through standard mechanisms that promote use by hetergeneous client platforms. Resource pooling: The provider’s computing resources are pooled to serve multiple consumers using a multi-tenant model potentially with different physical and virtual resources that can be dynamically assigned and reassigned according to consumer demand.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/clustercomputing/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/javarandomnote/" class="post-link">Java知识点杂记</a></h3>
     <p class="post-meta">@Yang Zhang · Apr 15, 2019 · 0 min read</p>
   </header>
@@ -318,38 +342,6 @@ ElasticSearch 概念  集群： 一个或多个节点组织在一起 节点： �
 * @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/" class="post-link">实现高并发并深入理解asyncio内置包</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">Package Asynic 实现协程和io多路复用，python提供了一个内置包—asyncio去简化 回调&#43;事件循环(核心)&#43;select(poll,epoll)这个流程。
-在async包的内部，已经实现了事件循环，并且为了把generator和coroutine方法区分开，python引入了两个关键词 async和await
--async用于方法开头，声明此方法为协程方法
--await用于方法中，声明需要异步处理的地方，类似于生成器里的yield from
--同时方法末尾可提供一个返回值。
--在协程方法中不可以使用同步/阻塞的方法或函数(eg: time.sleep() —&gt; async.sleep())，否则会使异步编程无意义
-Adding tasks into loop  我们实例化loop —&gt; loop = asyncio.get_event_loop()
- 然后列出需要异步实现的Tasks. 此时我们有两种实现方法。第一我们可以把我们的task转成Future object eg: ``python futures = [asyncio.ensure_future(get_html(&#34;www.baidu.com/{}&#34;.format(i))) for i in range(100)]
-  for future in futures: future.add_done_callback(callbakck)
- 这个方法与线程池的实现方法和原理相同，在future object里存着返回的值，并用result()可以调出。并且，future object支持增加回调函数.当我们的回调函数需要输入参数时，我们需要用到包装函数partial ---- from functools import partial ```python for future in futures: future.add_done_callback(partial(callbakck, &#34;www.baidu.com&#34;))  或者用async.wait, async.gather包装
-task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(10)] task_group_2 = [get_html(&#34;www.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/" class="post-link">如何在python环境实现并发和一些对并发的理解</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 — 回调 &#43; 事件循环 &#43; select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&#34;https://www.baidu.com&#34;, &#34;https://www.baidu.com&#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&#34;.format(self.path, self.host).encode(&#34;utf8&#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data &#43;= d else: selector.unregister(key.fd) data = self.data.decode(&#34;utf8&#34;) html_data = data.split(&#34;\r\n\r\n&#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/">Read More →</a>
   </footer>
 </article>
  

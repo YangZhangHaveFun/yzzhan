@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>对算法笔试题的总结</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  <meta name="author" content="Yang Zhang">
+  <meta name="description" content="算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&amp;lt;int&amp;gt; map(128,0); for(auto c: t) map[c]&#43;&#43;; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&amp;lt;s.size()){ if(map[s[end&#43;&#43;]]--&amp;gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&amp;lt;d) d=end-(head=begin); if(map[s[begin&#43;&#43;]]&#43;&#43;==0) counter&#43;&#43;; //make it invalid  } } return d==INT_MAX? &amp;#34;&amp;#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="对算法笔试题的总结">
+    <meta name="twitter:description" content="算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&amp;lt;int&amp;gt; map(128,0); for(auto c: t) map[c]&#43;&#43;; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&amp;lt;s.size()){ if(map[s[end&#43;&#43;]]--&amp;gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&amp;lt;d) d=end-(head=begin); if(map[s[begin&#43;&#43;]]&#43;&#43;==0) counter&#43;&#43;; //make it invalid  } } return d==INT_MAX? &amp;#34;&amp;#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="对算法笔试题的总结">
+  <meta property="og:description" content="算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&amp;lt;int&amp;gt; map(128,0); for(auto c: t) map[c]&#43;&#43;; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&amp;lt;s.size()){ if(map[s[end&#43;&#43;]]--&amp;gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&amp;lt;d) d=end-(head=begin); if(map[s[begin&#43;&#43;]]&#43;&#43;==0) counter&#43;&#43;; //make it invalid  } } return d==INT_MAX? &amp;#34;&amp;#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.">
+  <meta property="og:url" content="https://yangzhanghavefun.github.io/yzzhan/post/alg/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.51">
+
+
+<link rel="canonical" href="https://yangzhanghavefun.github.io/yzzhan/post/alg/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Yzzhan Tech Repo">
+<meta name="msapplication-tooltip" content="Yzzhan Tech Repo">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://yangzhanghavefun.github.io/yzzhan/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://yangzhanghavefun.github.io/yzzhan/icons/icon-152x152.png">
+<link rel="manifest" href="https://yangzhanghavefun.github.io/yzzhan/manifest.json">
+
+
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css" as="style">
+
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" as="image">
+<link rel="preload" href="https://yangzhanghavefun.github.io/yzzhan/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://yangzhanghavefun.github.io/yzzhan/styles/main.min.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://yangzhanghavefun.github.io/yzzhan/images/avatar.png" alt="Avatar">
+  
+  <h2 class="title">Yzzhan Tech Repo</h2>
+  
+  <p class="subtitle">~ Keep Simple &amp; Stupid ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/">Home</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/categories/">Categories</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/tags/">Tags</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/links/">Links</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/about/">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:yzzhan@student.unimelb.edu.au" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/YangZhangHaveFun" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//weibo.com/%e5%88%b9%e9%82%a3%e7%81%ac%e8%a1%8c%e5%b9%b4" title="Weibo" aria-label="Weibo">
+            <span class="icon icon-weibo" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="https://yangzhanghavefun.github.io/yzzhan/images/qrcode.jpg" title="Wechat" aria-label="Wechat">
+            <span class="icon icon-wechat" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">对算法笔试题的总结</h1>
+      <p class="post-meta">@Yang Zhang · Aug 29, 2019 · 6 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.</p>
+
+<h3 id="数组问题-array-related">数组问题(Array Related)</h3>
+
+<h4 id="对撞指针">对撞指针</h4>
+
+<h4 id="滑动窗口">滑动窗口</h4>
+
+<h4 id="寻找和为定值的多个数">寻找和为定值的多个数</h4>
+
+<h3 id="字符串问题-string-related">字符串问题(String Related)</h3>
+
+<h4 id="子串问题">子串问题</h4>
+
+<p>子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">    string <span style="color:#a6e22e">minWindow</span><span style="color:#f92672">(</span>string s<span style="color:#f92672">,</span> string t<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>128<span style="color:#f92672">,</span>0<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>auto c: t<span style="color:#f92672">)</span> map<span style="color:#f92672">[</span>c<span style="color:#f92672">]++;</span>
+            <span style="color:#66d9ef">int</span> counter<span style="color:#f92672">=</span>t<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">(),</span> begin<span style="color:#f92672">=</span>0<span style="color:#f92672">,</span> end<span style="color:#f92672">=</span>0<span style="color:#f92672">,</span> d<span style="color:#f92672">=</span>INT_MAX<span style="color:#f92672">,</span> head<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>end<span style="color:#f92672">&lt;</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()){</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>map<span style="color:#f92672">[</span>s<span style="color:#f92672">[</span>end<span style="color:#f92672">++]]--&gt;</span>0<span style="color:#f92672">)</span> counter<span style="color:#f92672">--;</span> <span style="color:#75715e">//in t
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>counter<span style="color:#f92672">==</span>0<span style="color:#f92672">){</span> <span style="color:#75715e">//valid
+</span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>end<span style="color:#f92672">-</span>begin<span style="color:#f92672">&lt;</span>d<span style="color:#f92672">)</span>  d<span style="color:#f92672">=</span>end<span style="color:#f92672">-(</span>head<span style="color:#f92672">=</span>begin<span style="color:#f92672">);</span>
+                    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>map<span style="color:#f92672">[</span>s<span style="color:#f92672">[</span>begin<span style="color:#f92672">++]]++==</span>0<span style="color:#f92672">)</span> counter<span style="color:#f92672">++;</span>  <span style="color:#75715e">//make it invalid
+</span><span style="color:#75715e"></span>                <span style="color:#f92672">}</span>  
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> d<span style="color:#f92672">==</span>INT_MAX<span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">:</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">substr</span><span style="color:#f92672">(</span>head<span style="color:#f92672">,</span> d<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span></code></pre></div>
+<p>思路为构建一个128长度的数组(ASCII)来记录出现的次数. 首先把target的频率加入到数组中. 然后把遍历source, 直到counter为0时,证明当前子串包括了target所有的字符. 然后开始修剪部分.</p>
+
+<p>从头开始判断头部的字符可不可以丢掉. 当前数组的状态应该为: target中有的字符, 对应位置数值是0. source中有但target中没有的字符, 对应数值是负数. 两方都没有的字符, 对应数值应该是0. 所以要做的事情有两个:</p>
+
+<ol>
+<li>尝试更新最小字符串的长度.</li>
+<li>去除首个字符, 使其刚好不能构成包含所有target字符的子串.</li>
+</ol>
+
+<p>第二步理解了挺久的. 总的来说就是想要找到新的满足条件的子串必须在后面的字符中先找到第一个在target里的字符, 然后删除掉之前的字符,就是构成新的字符串. 这里代码编写的反了过来, 先把第一个字符删除, 然后看有没有新的可以替代他.</p>
+
+<p>最终我们可以得到想要的子串. 通过这个例子我们可以找到解答子串问题的通用模版</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findSubstring</span><span style="color:#f92672">(</span>string s<span style="color:#f92672">){</span>
+        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>128<span style="color:#f92672">,</span>0<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">int</span> counter<span style="color:#f92672">;</span> <span style="color:#75715e">// check whether the substring is valid
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> begin<span style="color:#f92672">=</span>0<span style="color:#f92672">,</span> end<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span> <span style="color:#75715e">//two pointers, one point to tail and one  head
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> d<span style="color:#f92672">;</span> <span style="color:#75715e">//the length of substring
+</span><span style="color:#75715e"></span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e">/* initialize the hash map here */</span> <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>end<span style="color:#f92672">&lt;</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()){</span>
+
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>map<span style="color:#f92672">[</span>s<span style="color:#f92672">[</span>end<span style="color:#f92672">++]]--</span> <span style="color:#f92672">?){</span>  <span style="color:#75715e">/* modify counter here */</span> <span style="color:#f92672">}</span>
+
+            <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span><span style="color:#75715e">/* counter condition */</span><span style="color:#f92672">){</span> 
+                 
+                 <span style="color:#75715e">/* update d here if finding minimum*/</span>
+
+                <span style="color:#75715e">//increase begin to make it invalid/valid again
+</span><span style="color:#75715e"></span>                
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>map<span style="color:#f92672">[</span>s<span style="color:#f92672">[</span>begin<span style="color:#f92672">++]]++</span> <span style="color:#f92672">?){</span> <span style="color:#75715e">/*modify counter here*/</span> <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>  
+
+            <span style="color:#75715e">/* update d here if finding maximum*/</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> d<span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span></code></pre></div>
+<h3 id="动态规划">动态规划</h3>
+
+<p>动态规划属于算法题里较难的一部分,但是多加练习以后也能摸索出一些规律. 找出dp数组中的定义状态数组和状态转移方程是最关键的部分, 动态规划的几类标志性问题需要总结归纳一下.</p>
+
+<ul>
+<li>0-1背包问题</li>
+<li>最长递增子序列</li>
+<li>最长公共子序列</li>
+<li>最短编辑距离</li>
+<li>格子取数</li>
+<li>交替字符串</li>
+</ul>
+
+<h4 id="0-1背包问题">0-1背包问题</h4>
+
+<p>题目为: 有一个容量为C的背包, 有0..n-1个物品, 每个物品重量为w(i), 价值为v(i), 求可容的最大价值的问题.</p>
+
+<p>此类有容量限制的问题, 一般定义容量为状态, 具体的来说就是当容量为i时,它的最大价值应该为dp(i). 因此我们可以找到转化方程为(当前容量为i, 决定是否放入背包第j个物品)max(dp(i), dp(i- w(j))+ v(j))</p>
+
+<p>值得注意的是, 这里状态的变化取决于两个变量. 因此dp的数组应该是二维的.</p>
+
+<h5 id="相关的0-1背包问题">相关的0-1背包问题</h5>
+
+<h6 id="当背包内的物品可以选择多次时">当背包内的物品可以选择多次时</h6>
+
+<h4 id="最长上升子序列问题-lis">最长上升子序列问题(LIS)</h4>
+
+<p>题目为: 给定一个数组, 找到最长的上升子序列.</p>
+
+<p>首先, 序列与子串不同, 序列无需连续性, 因此无法通过遍历一次数组就找出问题的答案. 此时可以定义我们的状态为 dp(i)就是数组0..i区间里最长上升子序列的长度. 则转移方程就是把当前i位置的数值和每个之前的数值进行比较, 找出既上升又最大的那个. dp(i) = max(dp(i), dp(j)+1)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lengthOfLIS</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;</span> 2<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">return</span> n<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> dp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>n<span style="color:#f92672">];</span>
+        Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">fill</span><span style="color:#f92672">(</span>dp<span style="color:#f92672">,</span> 1<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> j <span style="color:#f92672">&lt;</span> i<span style="color:#f92672">;</span> j<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> nums<span style="color:#f92672">[</span>j<span style="color:#f92672">])</span>
+                    dp<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>dp<span style="color:#f92672">[</span>j<span style="color:#f92672">]+</span>1<span style="color:#f92672">,</span> dp<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">(</span>dp<span style="color:#f92672">).</span><span style="color:#a6e22e">max</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getAsInt</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p>拓展一下, 上升可以变化为任意比较性的条件, 所需要做的就是改变dp更新的condition.</p>
+
+<h4 id="最长公共子序列-lcs">最长公共子序列(LCS)</h4>
+
+<p>题目为: 给两个字符串String a, String b, 找到最长公共子序列的长度.</p>
+
+<p>分析此题的状态应该为a的前i个字符与b的前j个字符最长的公共子序列的长度, 因为最长的长度同时受这两个字符串的影响. 转移方程为 当a的第i个元素与b的第j个元素相同时, dp(i)(j) = max(dp(i-1)(j-1)+1, dp(i-1)(j), dp(i)(j-1)). 否则 dp(i)(j) = max(dp(i-1)(j), dp(i)(j-1))</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">longestCommonSubsequence</span><span style="color:#f92672">(</span>String text1<span style="color:#f92672">,</span> String text2<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> arr1 <span style="color:#f92672">=</span> text1<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> arr2 <span style="color:#f92672">=</span> text2<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">();</span>
+
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> dp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>arr1<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">+</span>1<span style="color:#f92672">][</span>arr2<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">+</span>1<span style="color:#f92672">];</span>
+
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> arr1<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> j <span style="color:#f92672">&lt;=</span> arr2<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> j<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>arr1<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> arr2<span style="color:#f92672">[</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">])</span>
+                    dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>dp<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">][</span>j<span style="color:#f92672">],</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">],</span> dp<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">][</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">]+</span>1<span style="color:#f92672">));</span>
+                <span style="color:#66d9ef">else</span>
+                    dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>dp<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">][</span>j<span style="color:#f92672">],</span>dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">]);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> dp<span style="color:#f92672">[</span>arr1<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">][</span>arr2<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<p>拓展一下, 相同的方式可能有所区别, 例如LeetCode 139号问题, 当单词匹配才算相同.</p>
+
+<h4 id="最短编辑距离">最短编辑距离</h4>
+
+<p>题目: 给定一个源串和目标串，能够对源串进行如下操作：1. 在给定位置上插入一个字符 2.替换任意字符 3.删除任意字符  写一个程序，返回最小操作数，使得对源串进行这些操作后等于目标串，源串和目标串的长度都小于2000。</p>
+
+<p>首先定义状态, 假如令dp(i)(j) 表示源串S(0…i) 和目标串T(0…j)的最短编辑距离. 转移方程可以对S(i)和T(j)进行比较然后转移状态.
+dp(i)(j) =min{
+    dp(i-1)(j) + 1 , S(i)不在T(0…j)中
+    dp(i-1)(j-1) + <sup>1</sup>&frasl;<sub>0</sub> , S(i)在T(j)
+    dp(i)(j-1) + 1 , S(i)在T(0…j-1)中
+}</p>
+
+<h4 id="格子取数">格子取数</h4>
+
+<p>题目: 在二维数组的左上方走到右下方, 只可以向下向右走,求最小的消耗.</p>
+
+<p>首先也是定义状态, 令dp(i)(j)为从左上角走到二维数组中grid(i-1)(j-1)的最小消耗. 转移方程与最小编辑距离类似,上方的值和左方的值中小的那个加上当前值则为当前的最优解.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minPathSum</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> grid<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span> outSize <span style="color:#f92672">=</span> grid<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> innerSize <span style="color:#f92672">=</span> grid<span style="color:#f92672">[</span>0<span style="color:#f92672">].</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>outSize <span style="color:#f92672">==</span> 1<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">return</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">stream</span><span style="color:#f92672">(</span>grid<span style="color:#f92672">[</span>0<span style="color:#f92672">]).</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">();</span>
+
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> dp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>outSize<span style="color:#f92672">+</span>1<span style="color:#f92672">][</span>innerSize<span style="color:#f92672">+</span>1<span style="color:#f92672">];</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> innerSize<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            dp<span style="color:#f92672">[</span>0<span style="color:#f92672">][</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0x7fff<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> outSize<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0x7fff<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        dp<span style="color:#f92672">[</span>0<span style="color:#f92672">][</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> outSize<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> j <span style="color:#f92672">&lt;=</span> innerSize<span style="color:#f92672">;</span> j<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+                dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">min</span><span style="color:#f92672">(</span>dp<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">][</span>j<span style="color:#f92672">]+</span> grid<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">][</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">],</span> dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">]+</span> grid<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">][</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">]);</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> dp<span style="color:#f92672">[</span>outSize<span style="color:#f92672">][</span>innerSize<span style="color:#f92672">];</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<h4 id="交替字符串">交替字符串</h4>
+
+<p>题目: 输入三个字符串s1、s2和s3，判断第三个字符串s3是否由前两个字符串s1和s2交错而成，即不改变s1和s2中各个字符原有的相对顺序，例如当s1 = “aabcc”，s2 = “dbbca”，s3 = “aadbbcbcac”时，则输出true，但如果s3=“accabdbbca”，则输出false。</p>
+
+<p>状态为dp(i)(j)代表s3(0&hellip;i+j-1)是否由s1(0&hellip;i-1)和s2(0&hellip;j-1)的字符组成.</p>
+
+<p>状态转移方程为</p>
+
+<ul>
+<li>如果s1当前字符（即s1(i-1)）等于s3当前字符（即s3(i+j-1)），而且dp(i-1)(j)为真，那么可以取s1当前字符而忽略s2的情况，dp(i)(j)返回真；</li>
+<li>如果s2当前字符等于s3当前字符，并且dp(i)(j-1)为真，那么可以取s2而忽略s1的情况，dp(i)(j)返回真，其它情况，dp(i)(j)返回假</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isInterleave</span><span style="color:#f92672">(</span>String s1<span style="color:#f92672">,</span> String s2<span style="color:#f92672">,</span> String s3<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s1<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(),</span> m <span style="color:#f92672">=</span> s2<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(),</span> s <span style="color:#f92672">=</span> s3<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">();</span>
+
+        <span style="color:#75715e">//如果长度不一致，则s3不可能由s1和s2交错组成
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>n <span style="color:#f92672">+</span> m <span style="color:#f92672">!=</span> s<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[][]</span>dp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>n <span style="color:#f92672">+</span> 1<span style="color:#f92672">][</span>m <span style="color:#f92672">+</span> 1<span style="color:#f92672">];</span>
+
+        <span style="color:#75715e">//在初始化边界时，我们认为空串可以由空串组成，因此dp[0][0]赋值为true。
+</span><span style="color:#75715e"></span>        dp<span style="color:#f92672">[</span>0<span style="color:#f92672">][</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span> i<span style="color:#f92672">++){</span>
+            <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> j <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span> j<span style="color:#f92672">++){</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span> dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">||</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">-</span> 1 <span style="color:#f92672">&gt;=</span> 0 <span style="color:#f92672">&amp;&amp;</span> dp<span style="color:#f92672">[</span>i <span style="color:#f92672">-</span> 1<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">true</span> <span style="color:#f92672">&amp;&amp;</span>
+                    <span style="color:#75715e">//取s1字符
+</span><span style="color:#75715e"></span>                    s1<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">==</span> s3<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i <span style="color:#f92672">+</span> j <span style="color:#f92672">-</span> 1<span style="color:#f92672">))</span> <span style="color:#f92672">||</span>
+
+                    <span style="color:#f92672">(</span>j <span style="color:#f92672">-</span> 1 <span style="color:#f92672">&gt;=</span> 0 <span style="color:#f92672">&amp;&amp;</span> dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">true</span> <span style="color:#f92672">&amp;&amp;</span>
+                    <span style="color:#75715e">//取s2字符
+</span><span style="color:#75715e"></span>                    s2<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>j <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">==</span> s3<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i <span style="color:#f92672">+</span> j <span style="color:#f92672">-</span> 1<span style="color:#f92672">))</span> <span style="color:#f92672">)</span>
+
+                    dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">else</span>
+                    dp<span style="color:#f92672">[</span>i<span style="color:#f92672">][</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> dp<span style="color:#f92672">[</span>n<span style="color:#f92672">][</span>m<span style="color:#f92672">];</span>
+    <span style="color:#f92672">}</span></code></pre></div>
+<h3 id="递归回溯法">递归回溯法</h3>
+
+<p>其实基本所有的动态规划问题都可以用回溯法来解决, 只不过一个思路是从上到下, 一个思路是从下到上. 但是动态规划的局限之处是不能存储状态变化过程, 要存储的话需要得到最后结果以后回推就比较繁琐. 这时候用回溯法个人认为是一个更好的思路. 尤其解决排列和组合问题, 因为这两类问题都需要穷举(O(2^n)),因而递归的局限之处可以被遮盖. 话不多说开始总结.</p>
+
+<h4 id="排列">排列</h4>
+
+<p>题:(N0. 46) 给一个数组, 返回所有排列的可能</p>
+
+<p>排列问题的关键是有序, 在代码中的表现是即使遍历到后面的index, 也需要考虑前面的元素. 这时需要纳入考虑范围的点是要排除那些已经考虑在内的点, 因此我们需要引入一个数组去记录当前的已经包括的数.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.LinkedList<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> ArrayList<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> res<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> used<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">permute</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        res <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;();</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>nums <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+
+        used <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+        LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+        generatePermutation<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> p<span style="color:#f92672">);</span>
+
+        <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">// p中保存了一个有index-1个元素的排列。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">generatePermutation</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> index<span style="color:#f92672">,</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> p<span style="color:#f92672">){</span>
+
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>index <span style="color:#f92672">==</span> nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">){</span>
+            res<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">((</span>LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;)</span>p<span style="color:#f92672">.</span><span style="color:#a6e22e">clone</span><span style="color:#f92672">());</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">;</span> i <span style="color:#f92672">++)</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(!</span>used<span style="color:#f92672">[</span>i<span style="color:#f92672">]){</span>
+                used<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+                p<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+                generatePermutation<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span> index <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> p <span style="color:#f92672">);</span>
+                p<span style="color:#f92672">.</span><span style="color:#a6e22e">removeLast</span><span style="color:#f92672">();</span>
+                used<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printList</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> list<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Integer e: list<span style="color:#f92672">)</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span>e <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>1<span style="color:#f92672">,</span> 2<span style="color:#f92672">,</span> 3<span style="color:#f92672">};</span>
+        List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> res <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Solution<span style="color:#f92672">()).</span><span style="color:#a6e22e">permute</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> list: res<span style="color:#f92672">)</span>
+            printList<span style="color:#f92672">(</span>list<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="排列问题拓展-数组有重复数">排列问题拓展 &ndash; 数组有重复数</h4>
+
+<p>当数组包含了重复的值时, 需要考虑更多的情况. 这时除了需要考虑当前的元素, 还需要考虑他前面的数值是否与当前元素相同. 因为如果相同的话, 就可以忽略当前节点, 因为前面一定已经分析了当前情况</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">permuteUnique</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> res <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;();</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">==</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">==</span>0<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> used <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+        List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> list <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+        Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">);</span>
+        dfs<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span> used<span style="color:#f92672">,</span> list<span style="color:#f92672">,</span> res<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> used<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> list<span style="color:#f92672">,</span> List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> res<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>list<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()==</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">){</span>
+            res<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;(</span>list<span style="color:#f92672">));</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">++){</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>used<span style="color:#f92672">[</span>i<span style="color:#f92672">])</span> <span style="color:#66d9ef">continue</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i<span style="color:#f92672">&gt;</span>0 <span style="color:#f92672">&amp;&amp;</span>nums<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">]==</span>nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>used<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">])</span> <span style="color:#66d9ef">continue</span><span style="color:#f92672">;</span>
+            used<span style="color:#f92672">[</span>i<span style="color:#f92672">]=</span><span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+            list<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+            dfs<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>used<span style="color:#f92672">,</span>list<span style="color:#f92672">,</span>res<span style="color:#f92672">);</span>
+            used<span style="color:#f92672">[</span>i<span style="color:#f92672">]=</span><span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            list<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>list<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()-</span>1<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="组合">组合</h4>
+
+<p>在组合问题中, 顺序是不重要的.</p>
+
+<p>题:(No. 77) 给两个整数 n,k, 求1..n这n个数字中选出k个数字的所有组合.</p>
+
+<p>在不断递归的时候, 我们当我们需要取第i个数的时候, 我们只需要考虑剩下i+1..n的组合, 前面的数无需考虑因为我们不前面的组合已经被考虑过了.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.LinkedList<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/// 77. Combinations
+</span><span style="color:#75715e">/// https://leetcode.com/problems/combinations/description/
+</span><span style="color:#75715e">/// 时间复杂度: O(n^k)
+</span><span style="color:#75715e">/// 空间复杂度: O(k)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> ArrayList<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> res<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">combine</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> k<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        res <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;();</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;=</span> 0 <span style="color:#f92672">||</span> k <span style="color:#f92672">&lt;=</span> 0 <span style="color:#f92672">||</span> k <span style="color:#f92672">&gt;</span> n<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+
+        LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> c <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+        generateCombinations<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> k<span style="color:#f92672">,</span> 1<span style="color:#f92672">,</span> c<span style="color:#f92672">);</span>
+
+        <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">// 求解C(n,k), 当前已经找到的组合存储在c中, 需要从start开始搜索新的元素
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">generateCombinations</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> k<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> start<span style="color:#f92672">,</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> c<span style="color:#f92672">){</span>
+
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>c<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">==</span> k<span style="color:#f92672">){</span>
+            res<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">((</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;)</span>c<span style="color:#f92672">.</span><span style="color:#a6e22e">clone</span><span style="color:#f92672">());</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> start <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> n <span style="color:#f92672">;</span> i <span style="color:#f92672">++){</span>
+            c<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
+            generateCombinations<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> k<span style="color:#f92672">,</span> i <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> c<span style="color:#f92672">);</span>
+            c<span style="color:#f92672">.</span><span style="color:#a6e22e">removeLast</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printList</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> list<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Integer e: list<span style="color:#f92672">)</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span>e <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;&gt;</span> res <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Solution<span style="color:#f92672">()).</span><span style="color:#a6e22e">combine</span><span style="color:#f92672">(</span>4<span style="color:#f92672">,</span> 2<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> list: res<span style="color:#f92672">)</span>
+            printList<span style="color:#f92672">(</span>list<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>练习题: No.39, No.40, No.216, No.78, No.90, No.401</p>
+
+<h4 id="二维数组-n皇后问题">二维数组 - N皇后问题</h4>
+
+<p>N皇后问题其实有很多思路, 最简单的一个就是,首先保证每一行只有一个皇后, 然后判断接下来行里皇后的摆位. 其中判断的条件是皇后不可以与已经存在的皇后同行同列同对角线, 同行已经保证不可能, 因此我们需要三个数组去存储同列, 同对角线的皇后所在位置.</p>
+
+<blockquote>
+<p>同对角线判断方法: 角度偏移45度的对角线上的数: 横纵坐标加起来是一个定值.  角度偏移-45度的对角线上的数: 横纵坐标减起来是一个定值. 对角线的个数有2*n-1个.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#f92672">import</span> java.util.Arrays<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.LinkedList<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.ArrayList<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/// 51. N-Queens
+</span><span style="color:#75715e">/// https://leetcode.com/problems/n-queens/description/
+</span><span style="color:#75715e">/// 时间复杂度: O(n^n)
+</span><span style="color:#75715e">/// 空间复杂度: O(n)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> col<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> dia1<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> dia2<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> ArrayList<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span> res<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span> <span style="color:#a6e22e">solveNQueens</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        res <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;();</span>
+        col <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>n<span style="color:#f92672">];</span>
+        dia1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>2 <span style="color:#f92672">*</span> n <span style="color:#f92672">-</span> 1<span style="color:#f92672">];</span>
+        dia2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>2 <span style="color:#f92672">*</span> n <span style="color:#f92672">-</span> 1<span style="color:#f92672">];</span>
+
+        LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> row <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;();</span>
+        putQueen<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> row<span style="color:#f92672">);</span>
+
+        <span style="color:#66d9ef">return</span> res<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">// 尝试在一个n皇后问题中, 摆放第index行的皇后位置
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">putQueen</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> index<span style="color:#f92672">,</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> row<span style="color:#f92672">){</span>
+
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>index <span style="color:#f92672">==</span> n<span style="color:#f92672">){</span>
+            res<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>generateBoard<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> row<span style="color:#f92672">));</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">;</span> i <span style="color:#f92672">++)</span>
+            <span style="color:#75715e">// 尝试将第index行的皇后摆放在第i列
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(!</span>col<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>dia1<span style="color:#f92672">[</span>index <span style="color:#f92672">+</span> i<span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>dia2<span style="color:#f92672">[</span>index <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> n <span style="color:#f92672">-</span> 1<span style="color:#f92672">]){</span>
+                row<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
+                col<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+                dia1<span style="color:#f92672">[</span>index <span style="color:#f92672">+</span> i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+                dia2<span style="color:#f92672">[</span>index <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> n <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+                putQueen<span style="color:#f92672">(</span>n<span style="color:#f92672">,</span> index <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> row<span style="color:#f92672">);</span>
+                col<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+                dia1<span style="color:#f92672">[</span>index <span style="color:#f92672">+</span> i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+                dia2<span style="color:#f92672">[</span>index <span style="color:#f92672">-</span> i <span style="color:#f92672">+</span> n <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+                row<span style="color:#f92672">.</span><span style="color:#a6e22e">removeLast</span><span style="color:#f92672">();</span>
+            <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">generateBoard</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> LinkedList<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> row<span style="color:#f92672">){</span>
+
+        <span style="color:#66d9ef">assert</span> row<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">==</span> n<span style="color:#f92672">;</span>
+
+        ArrayList<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> board <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;();</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0 <span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">;</span> i <span style="color:#f92672">++){</span>
+            <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> charArray <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">[</span>n<span style="color:#f92672">];</span>
+            Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">fill</span><span style="color:#f92672">(</span>charArray<span style="color:#f92672">,</span> <span style="color:#e6db74">&#39;.&#39;</span><span style="color:#f92672">);</span>
+            charArray<span style="color:#f92672">[</span>row<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Q&#39;</span><span style="color:#f92672">;</span>
+            board<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> String<span style="color:#f92672">(</span>charArray<span style="color:#f92672">));</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> board<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printBoard</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> board<span style="color:#f92672">){</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>String s: board<span style="color:#f92672">)</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>s<span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> 4<span style="color:#f92672">;</span>
+        List<span style="color:#f92672">&lt;</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;&gt;</span> res <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Solution<span style="color:#f92672">()).</span><span style="color:#a6e22e">solveNQueens</span><span style="color:#f92672">(</span>n<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> board: res<span style="color:#f92672">)</span>
+            printBoard<span style="color:#f92672">(</span>board<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/java"><span class="tag">Java</span></a></li>
+        
+          <li><a href="https://yangzhanghavefun.github.io/yzzhan/tags/algorithm"><span class="tag">Algorithm</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 Yzzhan Tech Repo</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://yangzhanghavefun.github.io/yzzhan/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

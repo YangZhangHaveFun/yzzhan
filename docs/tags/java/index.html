@@ -214,6 +214,34 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/interviewrecord/" class="post-link">Java面试记录</a></h3>
+    <p class="post-meta">@Yang Zhang · Sep 5, 2019 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary"> 阿里一面 </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/interviewrecord/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/alg/" class="post-link">对算法笔试题的总结</a></h3>
+    <p class="post-meta">@Yang Zhang · Aug 29, 2019 · 6 min read</p>
+  </header>
+  
+  <p class="post-summary">算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&lt;int&gt; map(128,0); for(auto c: t) map[c]&#43;&#43;; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&lt;s.size()){ if(map[s[end&#43;&#43;]]--&gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&lt;d) d=end-(head=begin); if(map[s[begin&#43;&#43;]]&#43;&#43;==0) counter&#43;&#43;; //make it invalid  } } return d==INT_MAX? &#34;&#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/alg/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/springframework/" class="post-link">Spring Analysis</a></h3>
     <p class="post-meta">@Yang Zhang · Jul 29, 2019 · 1 min read</p>
   </header>
@@ -340,36 +368,6 @@ Liskov替换原则(Liskov-Substituion Principle): 其核心思想是：子类必
 接口隔离原则(Interface-Segregation Principle): 其核心思想是：使用多个小的专门的接口，而不要使用一个大的总接口。 具体而言，接口隔离原则体现在：接口应该是内聚的，应该避免“胖”接口。一个类对另外一个类的依赖应该建立在最小的接口上，不要强迫依赖不用的方法，这是一种接口污染。 接口有效地将细节和抽象隔离，体现了对抽象编程的一切好处，接口隔离强调接口的单一性。而胖接口存在明显的弊端，会导致实现的类型必须完全实现接口的所有方法、属性等；而某些时候，实现类型并非需要所有的接口定义，在设计上这是“浪费”，而且在实施上这会带来潜在的问题，对胖接口的修改将导致一连串的客户端程序需要修改，有时候这是一种灾难。在这种情况下，将胖接口分解为多个特点的定制化方法，使得客户端仅仅依赖于它们的实际调用的方法，从而解除了客户端不会依赖于它们不用的方法。 分离的手段主要有以下两种：1、委托分离，通过增加一个新的类型来委托客户的请求，隔离客户和接口的直接依赖，但是会增加系统的开销。2、多重继承分离，通过接口多继承来实现客户的需求，这种方式是较好的。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/javashiyi/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/" class="post-link">Java面试的知识储备</a></h3>
-    <p class="post-meta">@Yang Zhang · Mar 16, 2019 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">#Content 1. Difference between Hashtable and HashMap
-1.Difference between Hashtable and HashMap  ### 作者不一样。。。  Hashtable阵容
-* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter HashMap阵容
-* @author Arthur van Hoff * @author Josh Bloch * @author Neal Gafter * @author Doug Lea Doug Lea大神写了util.concurrent包。 并著有并发编程圣经Concurrent Programming in Java: Design Principles and Patterns 他的个人主页 http://g.oswego.edu/ Josh Bloch 著有Effective Java, Arthur vanHoff最早任职于硅谷的SunMicrosystems公司，从事Java程序语言的早期开发工作 Neal Gafter是Java SE 4和5语言增强的主要设计者和实现者</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/java-interview-preparation/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/" class="post-link">HashMap 源码解析</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">Construction An instance of has two parameters that affect its performance: initial capacity and load factor.
- capacity is the number of buckets in the hash table, and the initial capacity is simply the capacity at the time the hash table is created. load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased.  When the number of entries in the hash table exceeds the product of the load factor and the current capacity, the hash table is rehashed (that is, internal data structures are rebuilt) so that the hash table has approximately twice the number of buckets.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/">Read More →</a>
   </footer>
 </article>
 

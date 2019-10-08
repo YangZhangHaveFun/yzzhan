@@ -223,3 +223,261 @@ dp(i)(j) =min{
         return dp[n][m];
     }
 ```
+
+### 递归回溯法
+其实基本所有的动态规划问题都可以用回溯法来解决, 只不过一个思路是从上到下, 一个思路是从下到上. 但是动态规划的局限之处是不能存储状态变化过程, 要存储的话需要得到最后结果以后回推就比较繁琐. 这时候用回溯法个人认为是一个更好的思路. 尤其解决排列和组合问题, 因为这两类问题都需要穷举(O(2^n)),因而递归的局限之处可以被遮盖. 话不多说开始总结.
+
+#### 排列
+
+题:(N0. 46) 给一个数组, 返回所有排列的可能
+
+排列问题的关键是有序, 在代码中的表现是即使遍历到后面的index, 也需要考虑前面的元素. 这时需要纳入考虑范围的点是要排除那些已经考虑在内的点, 因此我们需要引入一个数组去记录当前的已经包括的数.
+
+```java
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class Solution {
+
+    private ArrayList<List<Integer>> res;
+    private boolean[] used;
+
+    public List<List<Integer>> permute(int[] nums) {
+
+        res = new ArrayList<List<Integer>>();
+        if(nums == null || nums.length == 0)
+            return res;
+
+        used = new boolean[nums.length];
+        LinkedList<Integer> p = new LinkedList<Integer>();
+        generatePermutation(nums, 0, p);
+
+        return res;
+    }
+
+    // p中保存了一个有index-1个元素的排列。
+    // 向这个排列的末尾添加第index个元素, 获得一个有index个元素的排列
+    private void generatePermutation(int[] nums, int index, LinkedList<Integer> p){
+
+        if(index == nums.length){
+            res.add((LinkedList<Integer>)p.clone());
+            return;
+        }
+
+        for(int i = 0 ; i < nums.length ; i ++)
+            if(!used[i]){
+                used[i] = true;
+                p.addLast(nums[i]);
+                generatePermutation(nums, index + 1, p );
+                p.removeLast();
+                used[i] = false;
+            }
+
+        return;
+    }
+
+    private static void printList(List<Integer> list){
+        for(Integer e: list)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        int[] nums = {1, 2, 3};
+        List<List<Integer>> res = (new Solution()).permute(nums);
+        for(List<Integer> list: res)
+            printList(list);
+    }
+}
+```
+
+#### 排列问题拓展 -- 数组有重复数
+当数组包含了重复的值时, 需要考虑更多的情况. 这时除了需要考虑当前的元素, 还需要考虑他前面的数值是否与当前元素相同. 因为如果相同的话, 就可以忽略当前节点, 因为前面一定已经分析了当前情况
+```Java
+public class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if(nums==null || nums.length==0) return res;
+        boolean[] used = new boolean[nums.length];
+        List<Integer> list = new ArrayList<Integer>();
+        Arrays.sort(nums);
+        dfs(nums, used, list, res);
+        return res;
+    }
+
+    public void dfs(int[] nums, boolean[] used, List<Integer> list, List<List<Integer>> res){
+        if(list.size()==nums.length){
+            res.add(new ArrayList<Integer>(list));
+            return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(used[i]) continue;
+            if(i>0 &&nums[i-1]==nums[i] && !used[i-1]) continue;
+            used[i]=true;
+            list.add(nums[i]);
+            dfs(nums,used,list,res);
+            used[i]=false;
+            list.remove(list.size()-1);
+        }
+    }
+}
+```
+
+#### 组合
+在组合问题中, 顺序是不重要的.
+
+题:(No. 77) 给两个整数 n,k, 求1..n这n个数字中选出k个数字的所有组合.
+
+在不断递归的时候, 我们当我们需要取第i个数的时候, 我们只需要考虑剩下i+1..n的组合, 前面的数无需考虑因为我们不前面的组合已经被考虑过了.
+
+```Java
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+/// 77. Combinations
+/// https://leetcode.com/problems/combinations/description/
+/// 时间复杂度: O(n^k)
+/// 空间复杂度: O(k)
+public class Solution {
+
+    private ArrayList<List<Integer>> res;
+
+    public List<List<Integer>> combine(int n, int k) {
+
+        res = new ArrayList<List<Integer>>();
+        if(n <= 0 || k <= 0 || k > n)
+            return res;
+
+        LinkedList<Integer> c = new LinkedList<Integer>();
+        generateCombinations(n, k, 1, c);
+
+        return res;
+    }
+
+    // 求解C(n,k), 当前已经找到的组合存储在c中, 需要从start开始搜索新的元素
+    private void generateCombinations(int n, int k, int start, LinkedList<Integer> c){
+
+        if(c.size() == k){
+            res.add((List<Integer>)c.clone());
+            return;
+        }
+
+        for(int i = start ; i <= n ; i ++){
+            c.addLast(i);
+            generateCombinations(n, k, i + 1, c);
+            c.removeLast();
+        }
+
+        return;
+    }
+
+    private static void printList(List<Integer> list){
+        for(Integer e: list)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        List<List<Integer>> res = (new Solution()).combine(4, 2);
+        for(List<Integer> list: res)
+            printList(list);
+    }
+}
+```
+
+练习题: No.39, No.40, No.216, No.78, No.90, No.401
+
+#### 二维数组 - N皇后问题
+
+N皇后问题其实有很多思路, 最简单的一个就是,首先保证每一行只有一个皇后, 然后判断接下来行里皇后的摆位. 其中判断的条件是皇后不可以与已经存在的皇后同行同列同对角线, 同行已经保证不可能, 因此我们需要三个数组去存储同列, 同对角线的皇后所在位置.
+
+> 同对角线判断方法: 角度偏移45度的对角线上的数: 横纵坐标加起来是一个定值.  角度偏移-45度的对角线上的数: 横纵坐标减起来是一个定值. 对角线的个数有2*n-1个.
+
+```Java
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
+
+/// 51. N-Queens
+/// https://leetcode.com/problems/n-queens/description/
+/// 时间复杂度: O(n^n)
+/// 空间复杂度: O(n)
+public class Solution {
+
+    private boolean[] col;
+    private boolean[] dia1;
+    private boolean[] dia2;
+    private ArrayList<List<String>> res;
+
+    public List<List<String>> solveNQueens(int n) {
+
+        res = new ArrayList<List<String>>();
+        col = new boolean[n];
+        dia1 = new boolean[2 * n - 1];
+        dia2 = new boolean[2 * n - 1];
+
+        LinkedList<Integer> row = new LinkedList<Integer>();
+        putQueen(n, 0, row);
+
+        return res;
+    }
+
+    // 尝试在一个n皇后问题中, 摆放第index行的皇后位置
+    private void putQueen(int n, int index, LinkedList<Integer> row){
+
+        if(index == n){
+            res.add(generateBoard(n, row));
+            return;
+        }
+
+        for(int i = 0 ; i < n ; i ++)
+            // 尝试将第index行的皇后摆放在第i列
+            if(!col[i] && !dia1[index + i] && !dia2[index - i + n - 1]){
+                row.addLast(i);
+                col[i] = true;
+                dia1[index + i] = true;
+                dia2[index - i + n - 1] = true;
+                putQueen(n, index + 1, row);
+                col[i] = false;
+                dia1[index + i] = false;
+                dia2[index - i + n - 1] = false;
+                row.removeLast();
+            }
+
+        return;
+    }
+
+    private List<String> generateBoard(int n, LinkedList<Integer> row){
+
+        assert row.size() == n;
+
+        ArrayList<String> board = new ArrayList<String>();
+        for(int i = 0 ; i < n ; i ++){
+            char[] charArray = new char[n];
+            Arrays.fill(charArray, '.');
+            charArray[row.get(i)] = 'Q';
+            board.add(new String(charArray));
+        }
+        return board;
+    }
+
+    private static void printBoard(List<String> board){
+        for(String s: board)
+            System.out.println(s);
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+
+        int n = 4;
+        List<List<String>> res = (new Solution()).solveNQueens(n);
+        for(List<String> board: res)
+            printBoard(board);
+    }
+}
+```

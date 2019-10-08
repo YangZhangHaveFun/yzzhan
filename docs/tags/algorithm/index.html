@@ -214,6 +214,21 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/alg/" class="post-link">对算法笔试题的总结</a></h3>
+    <p class="post-meta">@Yang Zhang · Aug 29, 2019 · 6 min read</p>
+  </header>
+  
+  <p class="post-summary">算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&lt;int&gt; map(128,0); for(auto c: t) map[c]&#43;&#43;; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&lt;s.size()){ if(map[s[end&#43;&#43;]]--&gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&lt;d) d=end-(head=begin); if(map[s[begin&#43;&#43;]]&#43;&#43;==0) counter&#43;&#43;; //make it invalid  } } return d==INT_MAX? &#34;&#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/alg/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/" class="post-link">Detailed algorithm For Hash Function</a></h3>
     <p class="post-meta">@Yang Zhang · Jan 12, 2019 · 4 min read</p>
   </header>
@@ -222,6 +237,21 @@
  MD4 Family  MD5 SHA-1 SHA-3  SHA-3 Others  Properties of Hash Function SHA-1 Overview The general idea for SHA-1 is to transfer the message with any length into 160 bits.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/ai/" class="post-link">COMP-90054 AI Planning</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 3 min read</p>
+  </header>
+  
+  <p class="post-summary">Markov Decision Processes  Classical Planning tools can produce solutions quickly in large search space; but assume:
+ Deterministic events Environments change only as result of an action Perfect knowledge (omniscience) Single actor (omniscience)   Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.
+MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/ai/">Read More →</a>
   </footer>
 </article>
 

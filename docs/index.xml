@@ -33,6 +33,26 @@ For any issues, you could email via yzzhan@student.unimelb.edu.au.</description>
     </item>
     
     <item>
+      <title>Java面试记录</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/interviewrecord/</link>
+      <pubDate>Thu, 05 Sep 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/interviewrecord/</guid>
+      <description> 阿里一面 </description>
+    </item>
+    
+    <item>
+      <title>对算法笔试题的总结</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/alg/</link>
+      <pubDate>Thu, 29 Aug 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/alg/</guid>
+      <description>算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&amp;lt;int&amp;gt; map(128,0); for(auto c: t) map[c]++; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&amp;lt;s.size()){ if(map[s[end++]]--&amp;gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&amp;lt;d) d=end-(head=begin); if(map[s[begin++]]++==0) counter++; //make it invalid  } } return d==INT_MAX? &amp;#34;&amp;#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.</description>
+    </item>
+    
+    <item>
       <title>Spring Analysis</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/springframework/</link>
       <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
@@ -369,6 +389,17 @@ Follow the following steps:
     </item>
     
     <item>
+      <title>COMP-90054 AI Planning</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/ai/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/ai/</guid>
+      <description>Markov Decision Processes  Classical Planning tools can produce solutions quickly in large search space; but assume:
+ Deterministic events Environments change only as result of an action Perfect knowledge (omniscience) Single actor (omniscience)   Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.
+MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.</description>
+    </item>
+    
+    <item>
       <title>HashMap 源码解析</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -388,6 +419,16 @@ Follow the following steps:
     </item>
     
     <item>
+      <title>Learning Kubernates</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/kube/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/kube/</guid>
+      <description>就这样，一旦“程序”被执行起来，它就从磁盘上的二进制文件，变&amp;hellip;
+极客时间版权所有: https://time.geekbang.org/column/article/14642</description>
+    </item>
+    
+    <item>
       <title>Modelling Complex System(SWEN90005)</title>
       <link>https://yangzhanghavefun.github.io/yzzhan/post/swen90005/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -396,6 +437,15 @@ Follow the following steps:
       <description>Concurrency Concurrent programming needs to handle two types of difficulties.
  Communication: Process generally need to communicate with each other, either by accessing shared data, or by message passing. Synchronization: Process may need to synchronize certain events, such as &amp;ldquo;P must not reach point P until after Q has reached point Q&amp;rdquo;.  Here are two solutions to solve the difficulites.
  Shared memory: utilising the concept of monitor. Message Passing: based on Hoare&amp;rsquo;s idea of Communication Sequential Processes(CSP)  Shared Memorry &amp;mdash; Java The processors go wrong because each falsely assumes to have exclusive access to memorry in its read-change-write cycle.</description>
+    </item>
+    
+    <item>
+      <title>SWEN-30006 Software Modelling and Design</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/swen30006/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/swen30006/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -421,6 +471,39 @@ Follow the following steps:
 迪米特原则 一个对象应该对其他对象保持最少的了解. 又叫最少知道原则 - 尽量降低类与类之间的耦合
 创建型 简单工厂模式 工厂模式 定义一个创建对象的接口但让实现这个接口的类来决定实例化哪个类, 工厂方法让类的实例化推迟到子类中进行
  适用场景:  创建对象需要大量重复的代码 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节 一个类通过子类来制定创建对象  优点:  用户只需要关心所需要产品对应的工厂,无须关心创建细节 加入新产品符合开闭原则,提高可扩展性  缺点:  类的个数容易过多, 增加复杂度 增加了系统的抽象性和理解难度   ###抽象工厂 客户端(应用层)不依赖于产品类实例如何被创建,实现等细节</description>
+    </item>
+    
+    <item>
+      <title>面试问题归纳</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/interview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/interview/</guid>
+      <description>UserId为什么不用自增键及主键策略 主键不应修改 对于数据库来说，主键其实是可以修改的，只要不和其他主键冲突就可以。但是，对于应用来说，如果一条记录要修改主键，那就会出大问题。
+因为主键的第二个作用是让其他表的外键引用自己，从而实现关系结构。一旦某个表的主键发生了变化，就会导致所有引用了该表的数据必须全部修改外键。很多Web应用的数据库并不是强约束（仅仅引用主键但并没有设置外键约束），修改主键会导致数据完整性直接被破坏。
+业务字段不可用于主键 所有涉及到业务的字段，无论它看上去是否唯一，都决不能用作主键。例如，用户表的Email字段是唯一的，但是，如果用它作主键，就会导致其他表到处引用Email字段，从而泄露用户信息。
+此外，修改Email实际上是一个业务操作，这个操作就直接违反了上一条原则。
+那么，主键应该使用哪个字段呢？
+主键必须使用单独的，完全没有业务含义的字段，也就是主键本身除了唯一标识和不可修改这两个责任外，主键没有任何业务含义。
+类似的，看上去唯一的用户名、身份证号等，也不能用作主键。对这些唯一字段，应该加上unique索引约束。
+主键应该用什么类型 主键应该使用整数还是字符串？（用浮点数的请自觉充值智商）
+我强烈建议使用字符串。
+为什么？
+我们先看使用整数的问题。
+使用整数有两个选择：数据库自增和自己生成。
+自己生成其实也是自增，无非就是把上次使用的值保存到某个地方，下次使用的时候继续自增。常见的做法是用一个单独的表存储上次用的最大值。这种方式实现复杂，可靠性低，还不如数据库自增。
+数据库自增最大的问题还不在于数据库单点造成无法水平切分，因为绝大部分公司还撑不到业务需要分库的情况就倒闭了。
+自增主键最大的问题是把公司业务的关键运营数据完全暴露给了竞争对手和VC。举个例子，用户表采用自增主键，只需要每周一早上去注册一个用户，把上周注册的ID和本周注册的ID一比，立刻就知道了该公司一周的新增用户数量。如果网站声称新增了10万用户，但ID却只增加了1千，就只能呵呵了。
+因为主键的本质是保证唯一记录，并不要求主键是连续的。实际上不连续的更好，这样既避免了运营数据泄露，也给黑客预测ID制造了障碍，具有更高的安全性。
+用字符串主键就不存在这个问题。如果我们用一个UUID作为主键，即varchar(32)，除了占用的存储空间较多外，字符串主键具有不可预测性。
+有人觉得UUID完全随机，主键本身没有按时间递增，不利于直接主键排序。其实解决这个问题很简单。
+方法一，直接用时间戳+UUID构造一个主键，时间戳注意补0，这样生成的主键就是按时间排序的。这个方法简单粗暴，缺点是主键更长了。
+方法二，自定义一个算法，时间戳放高位，序列号放低位，还可以保留机器位，然后用base32编码，可以把长度控制在20个字符内。
+有人会问，根据方法二，构造包含时间戳和序列号的64位整数作为主键是否可行？
+理论上来说是可行的，因为时间戳0xffffffff可以表示到2100年。但是剩下的位不是ffffffff而是只有fffff，如果给机器分配ff作为标识，那么每秒只能最多生成0xfff+1=4096个主键，对一些大型应用不太够用。
+为啥64位整数除掉时间戳只能用后面的fffff位呢？这是因为JavaScript的Number类型是56位精度，它能表示的最大整数是0x1fffffffffffff，而我们迟早会用REST跟JavaScript打交道，所以要把64位整数的范围限制在0x1fffffffffffff内，否则与JavaScript交互就会出错。
+虽然理论上64位整数做时间戳+序列号的主键是没问题的，但是实践中是没法绕开与JavaScript交互的，综合考虑，字符串主键最可靠。
+ref from: https://www.liaoxuefeng.com/article/1100985514586848</description>
     </item>
     
   </channel>

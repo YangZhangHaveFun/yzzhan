@@ -226,6 +226,42 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/" class="post-link">实现高并发并深入理解asyncio内置包</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">Package Asynic 实现协程和io多路复用，python提供了一个内置包—asyncio去简化 回调&#43;事件循环(核心)&#43;select(poll,epoll)这个流程。
+在async包的内部，已经实现了事件循环，并且为了把generator和coroutine方法区分开，python引入了两个关键词 async和await
+-async用于方法开头，声明此方法为协程方法
+-await用于方法中，声明需要异步处理的地方，类似于生成器里的yield from
+-同时方法末尾可提供一个返回值。
+-在协程方法中不可以使用同步/阻塞的方法或函数(eg: time.sleep() —&gt; async.sleep())，否则会使异步编程无意义
+Adding tasks into loop  我们实例化loop —&gt; loop = asyncio.get_event_loop()
+ 然后列出需要异步实现的Tasks. 此时我们有两种实现方法。第一我们可以把我们的task转成Future object eg: ``python futures = [asyncio.ensure_future(get_html(&#34;www.baidu.com/{}&#34;.format(i))) for i in range(100)]
+  for future in futures: future.add_done_callback(callbakck)
+ 这个方法与线程池的实现方法和原理相同，在future object里存着返回的值，并用result()可以调出。并且，future object支持增加回调函数.当我们的回调函数需要输入参数时，我们需要用到包装函数partial ---- from functools import partial ```python for future in futures: future.add_done_callback(partial(callbakck, &#34;www.baidu.com&#34;))  或者用async.wait, async.gather包装
+task_group_1 = [get_html(&#34;www.bilibili.com/{}&#34;.format(i))for i in range(10)] task_group_2 = [get_html(&#34;www.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/asyncio/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/" class="post-link">如何在python环境实现并发和一些对并发的理解</a></h3>
+    <p class="post-meta">@Yang Zhang · Jan 16, 2019 · 2 min read</p>
+  </header>
+  
+  <p class="post-summary">概念： 并发，并行，同步，异步，阻塞， 非阻塞 并发的开发 — 回调 &#43; 事件循环 &#43; select(poll,epoll) import socket from urllib.parse import urlparse from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE selector = DefaultSelector() urls = [&#34;https://www.baidu.com&#34;, &#34;https://www.baidu.com&#34;] stop = False class Fetcher: def connected(self, key): selector.unregister(key.fd) self.client.send(&#34;GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n&#34;.format(self.path, self.host).encode(&#34;utf8&#34;)) # 当写入成功时，我们继续注册selector用以接受请求的回答 selector.register(self.client.fileno(), EVENT_READ, self.received) def received(self, key): d = self.client.recv(1024) if d: self.data &#43;= d else: selector.unregister(key.fd) data = self.data.decode(&#34;utf8&#34;) html_data = data.split(&#34;\r\n\r\n&#34;)[1] print(html_data) self.client.close() urls.remove(self.next_url) if not urls: global stop stop = True def get_url(self, url): self.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/coroutine/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hash_function/" class="post-link">Detailed algorithm For Hash Function</a></h3>
     <p class="post-meta">@Yang Zhang · Jan 12, 2019 · 4 min read</p>
   </header>
@@ -311,33 +347,6 @@ Follow the following steps:
 ▾ &lt;root&gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you’ll want any files that should reside at the root (such as CNAME) to be moved to static.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/migrate-from-jekyll/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/netty/" class="post-link">Java Netty框架源码分析</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">两个问题  服务端的socket在哪里启动  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel() configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).  在哪里accept连接  netty服务端的启动  创建服务端Channel  bind(): 用户代码接口 initAndRegister(): 初始化并注册 newChannel(): 创建服务端Channel  初始化服务端Channel 注册selector 端口绑定  创建服务端Channel  反射创建服务端channel. New Socket() 通过jdk创建底层jdk channel. 创建NioServerSocketConfig()用来配置TCP参数 AbstractNioChannel()  configure(false)配置channel为非阻塞 AbstractChannel() 创建id(唯一标识符), unsafe(底层方法), pipeline(逻辑链).   初始化服务端Channel  init() 初始化的入口  set ChannelOptions, ChannelAttrs set ChildOptions, ChildAtrrs config handler 配置服务端pipeline add ServerBootstrapAcceptor 用于接收到accept()的请求时分配一个nio的服务端的线程.   总的来说, 初始化的功能就是保存用户的配置, 并用其建立一个连接器.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/netty/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/" class="post-link">HashMap 源码解析</a></h3>
-    <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">Construction An instance of has two parameters that affect its performance: initial capacity and load factor.
- capacity is the number of buckets in the hash table, and the initial capacity is simply the capacity at the time the hash table is created. load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased.  When the number of entries in the hash table exceeds the product of the load factor and the current capacity, the hash table is rehashed (that is, internal data structures are rebuilt) so that the hash table has approximately twice the number of buckets.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://yangzhanghavefun.github.io/yzzhan/post/hashmap_sa/">Read More →</a>
   </footer>
 </article>
 

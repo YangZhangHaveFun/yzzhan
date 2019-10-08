@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Container on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/container/</link>
+    <description>Recent content in Container on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Learning Kubernates</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/kube/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/kube/</guid>
+      <description>就这样，一旦“程序”被执行起来，它就从磁盘上的二进制文件，变&amp;hellip;
+极客时间版权所有: https://time.geekbang.org/column/article/14642</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/categories/algorithm/</link>
+    <description>Recent content in Algorithm on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Thu, 29 Aug 2019 01:37:56 +0800</lastBuildDate>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>对算法笔试题的总结</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/alg/</link>
+      <pubDate>Thu, 29 Aug 2019 01:37:56 +0800</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/alg/</guid>
+      <description>算法笔试目前看来更多的是通过题目抽象出具体算法要求, 然后根据经验写出计算过程. 因此, 总结一些经典的方法和做过的题目还是很有必要的. 这篇博客用来拾遗用, 把做过的东西都捋一捋.
+数组问题(Array Related) 对撞指针 滑动窗口 寻找和为定值的多个数 字符串问题(String Related) 子串问题 子串问题最常见的有求最长子串, 最短子串等问题, 与sequence不同, 子串的特点是连续性, 所以最优解一定是遍历一次字符串后就可以得到答案, 复杂度应为O(n). 例如76. Minimum Window Substring(string s 中包含string t的最小子串)
+string minWindow(string s, string t) { vector&amp;lt;int&amp;gt; map(128,0); for(auto c: t) map[c]++; int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0; while(end&amp;lt;s.size()){ if(map[s[end++]]--&amp;gt;0) counter--; //in t  while(counter==0){ //valid  if(end-begin&amp;lt;d) d=end-(head=begin); if(map[s[begin++]]++==0) counter++; //make it invalid  } } return d==INT_MAX? &amp;#34;&amp;#34;:s.substr(head, d); } 思路为构建一个128长度的数组(ASCII)来记录出现的次数.</description>
+    </item>
+    
+  </channel>
+</rss>

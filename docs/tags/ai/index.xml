@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ai on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/ai/</link>
+    <description>Recent content in Ai on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>COMP-90054 AI Planning</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/ai/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/ai/</guid>
+      <description>Markov Decision Processes  Classical Planning tools can produce solutions quickly in large search space; but assume:
+ Deterministic events Environments change only as result of an action Perfect knowledge (omniscience) Single actor (omniscience)   Markov Decision Processes(MDPs) remove the assumption of deterministic events and instead assume that each action could have multiple outcomes, with each outcome associated with a probability.
+MDPs have been successfully applied to planning in many domains: robot navigation, planning which areas of a mine to dig for minerals, treatment for patients, maintainance scheduling on vehicles, and many others.</description>
+    </item>
+    
+  </channel>
+</rss>
