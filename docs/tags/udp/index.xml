@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Udp on Yzzhan Tech Repo</title>
+    <link>https://yangzhanghavefun.github.io/yzzhan/tags/udp/</link>
+    <description>Recent content in Udp on Yzzhan Tech Repo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    
+	<atom:link href="https://yangzhanghavefun.github.io/yzzhan/tags/udp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Network</title>
+      <link>https://yangzhanghavefun.github.io/yzzhan/post/network/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yangzhanghavefun.github.io/yzzhan/post/network/</guid>
+      <description>URI(Uniform Resource Identifier) 统一资源定位符, 使用它可以唯一地标记互联网上的资源.
+URL(Uniform Resource Locator) 统一资源定位符, 也就是俗称的&amp;rdquo;网址&amp;rdquo;. URL是URI的子集, 由于两者几乎相同因此没有很严格的区分.
+URI有三个主要部分: - 协议名: 即访问该该资源应当使用的协议 - 主机名: 即互联网的主机标记 - 路径: 即资源在主机上访问的配置
+DNS(Domain Name System) DNS用有意义的名字来作为IP地址的等价代替. 但想用使用TCP/IP协议来通信仍然要使用IP地址, 所以需要把域名做一个转换, &amp;ldquo;映射&amp;rdquo;到它真实的IP, 这就是域名解析.
+ 根DNS服务器 顶级DNS 权威DNS 本地DNS  代理 代理(Proxy)是HTTP协议中请求方和应答方中间的一个环节, 作为&amp;rdquo;中间站&amp;rdquo;, 即可以转发客户端的请求, 也可以转发服务器的应答.
+ 匿名代理: 完全隐匿了被代理的机器, 外界看到的只是代理服务器. 透明代理: 外界知道代理, 也知道客户端. 正向代理: 靠近客户端, 代表客户端向服务器发送请求. 反向代理: 靠近服务器端, 代表服务器相应客户端的请求.  代理的主要功能: - 负载均衡: 把访问请求均匀分散到多台机器, 实现访问集群化. - 内容缓存: 暂存上下行的数据,减轻后端的压力. - 安全防护: 隐匿IP, 使用WAF等工具抵御网络攻击, 保护被代理的机器. - 数据处理: 提供压缩, 加密等功能.</description>
+    </item>
+    
+  </channel>
+</rss>

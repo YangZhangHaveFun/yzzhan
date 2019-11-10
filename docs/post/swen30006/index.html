@@ -213,7 +213,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">SWEN-30006 Software Modelling and Design</h1>
-      <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 13 min read</p>
+      <p class="post-meta">@Yang Zhang · Jan 1, 0001 · 14 min read</p>
     </header>
     <article class="post-content">
 
@@ -605,11 +605,17 @@ of expertise in a particular domain.</dd>
 
 <p><strong>Solution</strong>: Assign a responsibility so that cohesion remains high. Use this to evaluate alternatives.</p>
 
+<p><strong>Function</strong>: A measure of how strongly (functionally) related and focussed the responsibilities of an element are</p>
+
 <p><strong>Contraindications</strong>: Lower cohesion is sometimes justified to meet nonfunctional requirements</p>
 
 <blockquote>
 <p>Note: Coupling and cohesion are fundamental design properties which are interdependent: both must be considered together.</p>
 </blockquote>
+
+<h4 id="relationship-between-cohension-and-coupling">Relationship between Cohension and Coupling</h4>
+
+<p><img src="https://yangzhanghavefun.github.io/yzzhan/media/posts/coco.PNG" alt="reactor model" /></p>
 
 <h3 id="grasp-patterns-the-other-four-patterns">GRASP PATTERNS(The other four patterns)</h3>
 
@@ -863,6 +869,32 @@ of expertise in a particular domain.</dd>
 <blockquote>
 <p>UML notation: An abstract class is shown with an italicised name,  abstract methods are also shown with italics</p>
 </blockquote>
+
+<h4 id="facade-design-pattern">Facade Design Pattern</h4>
+
+<p><strong>Problem</strong>:Require a common, unified interface to a disparate set of implementations or interfaces—such as within a subsystem—is required. There may be undesirable coupling to many things in the subsystem, or the implementation of the subsystem may change. What to do?</p>
+
+<p><strong>Solution</strong>: Define a single point of contact to the subsystem—a facade object that wraps the subsystem. This facade object presents a single unified interface and is responsible for collaborating with the subsystem components.</p>
+
+<h5 id="façade-vs-grasp-controller">Façade VS GRASP Controller</h5>
+
+<ul>
+<li><strong>Façade</strong> provides a simpler interface of a complex subsystem for a client class</li>
+<li><strong>Controller</strong> handles user inputs based on business logics and workflow</li>
+</ul>
+
+<h5 id="façade-vs-adapter">Façade VS Adapter</h5>
+
+<ul>
+<li><strong>Façade</strong> wraps access to <strong>a subsystem</strong> or system with a single object</li>
+<li><strong>Adaptor</strong> wraps <strong>each API with varying interface</strong> to provide a single interface</li>
+</ul>
+
+<h4 id="observer-design-pattern">Observer Design Pattern</h4>
+
+<p><strong>Problem</strong>: Different kinds of subscriber objects are interested in the state changes or events of a publisher object, and want to react in their own unique way when the publisher generates an event. Moreover, the publisher wants to maintain low coupling to the subscribers. What to do?</p>
+
+<p><strong>Solution</strong>: Define a “subscriber” or “listener” interface. Subscribers implement this interface. The publisher can dynamically register subscribers who are interested in an event and notify them when an event occurs.</p>
 </article>
     <footer class="post-footer">
       
@@ -879,7 +911,7 @@ of expertise in a particular domain.</dd>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>737339</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>737372</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
